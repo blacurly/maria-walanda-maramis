@@ -1,0 +1,28 @@
+/* Penyesuaian Dokumentasi & Lapor di dalam bingkai EduPuan */
+
+/* Pakai font yang dimuat Next.js, dan tinggi mengikuti isi */
+.dl-dalam-bingkai .dl-root {
+  --f-display: var(--font-poppins), system-ui, sans-serif;
+  --f-body: var(--font-inter), system-ui, sans-serif;
+  --f-mono: var(--font-mono), ui-monospace, monospace;
+  min-height: auto;
+}
+
+/* Judul tetap tampil, tapi tidak menempel di atas (agar tidak bertabrakan dengan Navbar) */
+.dl-dalam-bingkai .dl-topbar {
+  position: static;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 24px 20px 0;
+  border-bottom: 0;
+  background: transparent;
+}
+
+/* Tombol panah kembali disembunyikan: sudah ada baris Kembali di atas */
+.dl-dalam-bingkai .dl-backbtn {
+  display: none;
+}
+
+.dl-dalam-bingkai .dl-wrap {
+  padding-top: 12px;
+}
