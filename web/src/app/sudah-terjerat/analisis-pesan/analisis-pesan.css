@@ -1,0 +1,14 @@
+/* Penyesuaian Analisis Pesan di dalam bingkai EduPuan */
+
+/* Tombol panah kembali disembunyikan: sudah ada baris Kembali di atas */
+.ap-dalam-bingkai .app-back {
+  display: none;
+}
+
+/* Pakai font yang dimuat Next.js */
+.ap-dalam-bingkai .app-wrap {
+  font-family: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+.ap-dalam-bingkai .app-wrap h1 {
+  font-family: var(--font-poppins), system-ui, sans-serif;
+}
