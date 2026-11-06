@@ -156,9 +156,9 @@ export const ARTIKEL: Artikel[] = [
   },
   {
     slug: "alternatif-selain-pinjol",
-    judul: "Alternatif selain pinjol yang lebih aman",
+    judul: "Sebelum meminjam: pilihan yang tidak menambah utang",
     ringkasan:
-      "Sebelum mengunduh aplikasi pinjol, pertimbangkan pilihan lain yang biayanya lebih rendah dan risikonya lebih kecil.",
+      "Utang baru bukan satu-satunya jalan. Ini langkah-langkah tanpa pinjaman yang bisa kamu coba lebih dulu.",
     topik: "pinjaman",
     kategori: "Artikel",
     menit: 4,
@@ -168,32 +168,42 @@ export const ARTIKEL: Artikel[] = [
       {
         judul: "Mulai dari pertanyaan: butuh untuk apa?",
         paragraf: [
-          "Kebutuhan mendesak (biaya kesehatan, sekolah), modal usaha, dan kebutuhan konsumsi punya pilihan yang berbeda. Menjawab pertanyaan ini lebih dulu membantumu tidak meminjam lebih dari yang perlu.",
+          "Biaya sekolah atau kuliah, biaya kesehatan, tagihan rumah, dan kebutuhan sehari-hari punya jalan keluar yang berbeda. Menjawab pertanyaan ini lebih dulu membantumu menemukan pilihan yang tidak menambah beban utang.",
         ],
       },
       {
-        judul: "Pilihan yang bisa dipertimbangkan",
+        judul: "Minta keringanan langsung ke pihak yang ditagih",
         daftar: [
-          "Pinjam ke keluarga atau teman, dengan kesepakatan tertulis sederhana: jumlah, kapan dikembalikan, dan cara mencicil.",
-          "Koperasi simpan pinjam yang terdaftar resmi. Pastikan status koperasinya sebelum bergabung.",
-          "Pegadaian, yaitu gadai barang di lembaga yang diawasi OJK.",
-          "Kredit Usaha Rakyat (KUR) dari bank penyalur, kalau dananya untuk usaha.",
-          "Bantuan atau program sosial pemerintah sesuai kondisimu.",
-          "Minta keringanan atau perpanjangan waktu langsung ke pihak yang ditagih (sekolah, rumah sakit, pemilik kos) sebelum meminjam.",
+          "Sekolah atau kampus: tanyakan cicilan, penundaan, atau keringanan biaya pendidikan.",
+          "Rumah sakit atau klinik: tanyakan program keringanan dan apakah biayanya bisa ditanggung jaminan kesehatan.",
+          "Pemilik kos atau kontrakan: minta perpanjangan waktu pembayaran secara tertulis.",
         ],
       },
       {
-        judul: "Kalau tetap harus memakai pinjol",
+        judul: "Cek bantuan yang mungkin menjadi hakmu",
         daftar: [
-          "Pastikan berizin OJK.",
-          "Pinjam secukupnya, bukan sebanyak limit yang ditawarkan.",
-          "Jangan meminjam di pinjol lain untuk menutup pinjol sebelumnya (gali lubang tutup lubang).",
-          "Baca perjanjian sampai selesai sebelum menyetujui.",
+          "Program bantuan sosial pemerintah: kamu bisa mengecek kepesertaanmu di cekbansos.kemensos.go.id.",
+          "Beasiswa dan bantuan biaya pendidikan dari pemerintah, kampus, atau lembaga lain.",
+          "Bantuan dari lembaga sosial atau komunitas di daerahmu.",
+        ],
+      },
+      {
+        judul: "Atur ulang yang sudah ada",
+        daftar: [
+          "Catat semua pengeluaran sebulan terakhir dan tunda yang tidak mendesak.",
+          "Jual barang yang sudah tidak terpakai.",
+          "Cari penghasilan tambahan sementara sesuai kemampuanmu.",
+        ],
+      },
+      {
+        judul: "Kalau kamu masih mempertimbangkan pinjaman",
+        paragraf: [
+          "Pahami dulu biaya sebenarnya dan risikonya sebelum memutuskan apa pun. Keputusan yang diambil saat panik sering berujung pada utang yang lebih berat.",
         ],
       },
     ],
     dasarHukum: [],
-    fitur: { label: "Cari alternatif yang cocok untukmu", href: "/mau-pinjam/cari-alternatif" },
+    fitur: { label: "Cari alternatif yang sesuai kebutuhanmu", href: "/mau-pinjam/cari-alternatif" },
     sumber: [],
   },
   {
