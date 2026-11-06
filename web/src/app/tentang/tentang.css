@@ -1,0 +1,142 @@
+/* Gaya halaman Tentang */
+
+.ep-tentang {
+  --g: #04674b; --gd: #034d38; --gs: #e6f3ee; --mint: #f1f8f5;
+  --p: #7c5cd6; --pl: #b9a2f7; --ps: #f3effd;
+  --t: #1f2e28; --m: #5f7d72; --line: #e3ede9;
+  color: var(--t);
+  background: #fff;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.ep-tentang * { box-sizing: border-box; margin: 0; padding: 0; }
+.ep-tentang a { text-decoration: none; }
+.ep-tentang svg { display: inline-block; }
+
+.ep-tentang .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+.ep-tentang h1, .ep-tentang h2 {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+}
+.ep-tentang h2 { font-size: 40px; color: var(--gd); }
+.ep-tentang h4 { font-size: 17px; font-weight: 600; color: var(--t); margin-bottom: 6px; }
+.ep-tentang b { font-weight: 700; }
+.ep-tentang .eyebrow {
+  display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.14em;
+  color: var(--g); background: var(--gs); padding: 7px 14px; border-radius: 999px; margin-bottom: 18px;
+}
+.ep-tentang .lead { font-size: 18px; color: var(--m); max-width: 620px; }
+.ep-tentang section { padding: 96px 0; }
+.ep-tentang .tanpa-atas { padding-top: 0; }
+
+/* Hero */
+.ep-tentang .hero { background: linear-gradient(180deg, var(--mint), #fff); padding: 88px 0 72px; position: relative; overflow: hidden; }
+.ep-tentang .hero:after {
+  content: ""; position: absolute; right: -120px; top: -120px; width: 420px; height: 420px;
+  border-radius: 50%; background: radial-gradient(circle, #ddf0e7, transparent 70%);
+}
+.ep-tentang .hero-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 56px; align-items: center; position: relative; z-index: 1; }
+.ep-tentang .hero h1 { font-size: 56px; color: var(--gd); margin-bottom: 22px; }
+.ep-tentang .hero h1 em { font-style: normal; color: var(--g); background: linear-gradient(transparent 62%, #e4dafd 62%); }
+.ep-tentang .quote { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: 30px; box-shadow: 0 20px 50px rgba(4, 103, 75, 0.08); }
+.ep-tentang .quote p { font-family: var(--font-fraunces), Georgia, serif; font-size: 22px; line-height: 1.4; color: var(--gd); margin-bottom: 18px; }
+.ep-tentang .quote small { font-size: 14px; color: var(--m); }
+
+/* Kenapa kami ada */
+.ep-tentang .why { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.ep-tentang .why p { color: var(--m); font-size: 17px; margin-bottom: 16px; }
+.ep-tentang .why p b { color: var(--t); font-weight: 600; }
+.ep-tentang .facts { display: grid; gap: 14px; }
+.ep-tentang .fact { display: flex; gap: 16px; padding: 22px; border-radius: 18px; background: var(--mint); border: 1px solid var(--line); }
+.ep-tentang .fact .n { font-family: var(--font-fraunces), Georgia, serif; font-size: 28px; color: var(--p); line-height: 1; min-width: 36px; }
+.ep-tentang .fact p { font-size: 15.5px; margin: 0; color: var(--t); }
+
+/* Misi */
+.ep-tentang .mission { background: var(--g); color: #fff; border-radius: 32px; padding: 72px 64px; position: relative; overflow: hidden; }
+.ep-tentang .mission h2 { color: #fff; max-width: 900px; text-wrap: pretty; }
+.ep-tentang .mission .eyebrow { background: rgba(255, 255, 255, 0.12); color: #cfe6dc; }
+.ep-tentang .mgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
+.ep-tentang .m-card { background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 20px; padding: 26px; }
+.ep-tentang .m-card .k { font-size: 13px; font-weight: 600; color: var(--pl); letter-spacing: 0.08em; margin-bottom: 10px; }
+.ep-tentang .m-card h4 { color: #fff; font-size: 19px; }
+.ep-tentang .m-card p { color: #cfe6dc; font-size: 15px; }
+
+/* Alat */
+.ep-tentang .head { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 40px; }
+.ep-tentang .tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.ep-tentang .tool { display: block; border: 1px solid var(--line); border-radius: 20px; padding: 26px; transition: 0.2s; background: #fff; color: var(--t); }
+.ep-tentang .tool:hover { border-color: #bfdcd0; box-shadow: 0 12px 30px rgba(4, 103, 75, 0.08); transform: translateY(-2px); }
+.ep-tentang .ti, .ep-tentang .vi { width: 46px; height: 46px; border-radius: 14px; background: var(--gs); color: var(--g); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+.ep-tentang .ti svg, .ep-tentang .vi svg { width: 22px; height: 22px; }
+.ep-tentang .tool p, .ep-tentang .val p { font-size: 15px; color: var(--m); }
+.ep-tentang .ai { margin-top: 18px; display: flex; align-items: center; gap: 20px; padding: 24px 28px; border-radius: 20px; background: var(--ps); border: 1px solid #e4dafd; }
+.ep-tentang .ai img { display: block; flex-shrink: 0; }
+.ep-tentang .ai h4 { color: #4b3a8c; }
+.ep-tentang .ai p { font-size: 15px; color: #5b4e8a; }
+.ep-tentang .ai .btn { margin-left: auto; white-space: nowrap; }
+
+/* Prinsip */
+.ep-tentang .prinsip { background: #fbfdfc; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.ep-tentang .vgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.ep-tentang .val { display: flex; gap: 18px; padding: 26px; border-radius: 20px; background: var(--mint); }
+.ep-tentang .val .vi { background: #fff; margin: 0; flex-shrink: 0; }
+
+/* Nama & logo */
+.ep-tentang .name { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 56px; align-items: center; }
+.ep-tentang .word { background: var(--g); border-radius: 28px; padding: 44px 40px 36px; color: #fff; text-align: center; }
+.ep-tentang .lsym { display: block; margin: 0 auto 18px; }
+.ep-tentang .lwm { display: block; margin: 0 auto; max-width: 100%; }
+.ep-tentang .word ol { list-style: none; text-align: left; margin-top: 26px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, 0.15); color: #cfe6dc; font-size: 15px; }
+.ep-tentang .word li { margin-bottom: 8px; }
+.ep-tentang .word li b { color: #fff; }
+.ep-tentang .meaning { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+.ep-tentang .mi { display: flex; gap: 14px; padding: 18px; border-radius: 18px; background: var(--mint); border: 1px solid var(--line); }
+.ep-tentang .mi .ic { width: 42px; height: 42px; border-radius: 12px; background: #fff; color: var(--g); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ep-tentang .mi .ic svg { width: 22px; height: 22px; }
+.ep-tentang .mi h4 { font-size: 15.5px; margin-bottom: 3px; }
+.ep-tentang .mi p { font-size: 14px; margin: 0; line-height: 1.55; }
+.ep-tentang .name p { color: var(--m); font-size: 17px; margin-bottom: 16px; }
+.ep-tentang .name p b { color: var(--t); }
+
+/* Catatan & ajakan */
+.ep-tentang .note { border: 1px solid #f3ddb4; background: #fff8ea; border-radius: 20px; padding: 26px 30px; display: flex; gap: 18px; scroll-margin-top: 112px; }
+.ep-tentang .note .ni { width: 42px; height: 42px; border-radius: 12px; background: #fdecc8; color: #9a6200; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ep-tentang .note .ni svg { width: 20px; height: 20px; }
+.ep-tentang .note h4 { color: #7a4e00; }
+.ep-tentang .note p { font-size: 15px; color: #7a5a20; }
+.ep-tentang .contacts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.ep-tentang .contacts span { background: #fff; border: 1px solid #f3ddb4; border-radius: 999px; padding: 7px 14px; font-size: 13.5px; color: #7a4e00; }
+.ep-tentang .cta { margin-top: 56px; background: linear-gradient(120deg, var(--g), var(--gd)); border-radius: 28px; padding: 52px 56px; display: flex; align-items: center; gap: 32px; color: #fff; }
+.ep-tentang .cta h2 { color: #fff; font-size: 34px; margin-bottom: 8px; }
+.ep-tentang .cta p { color: #cfe6dc; }
+.ep-tentang .btns { margin-left: auto; display: flex; gap: 12px; flex-shrink: 0; }
+.ep-tentang .btn { display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 24px; border-radius: 999px; font-weight: 600; font-size: 15px; }
+.ep-tentang .btn svg { width: 18px; height: 18px; }
+.ep-tentang .b1 { background: #fff; color: var(--g); }
+.ep-tentang .b2 { border: 1.5px solid rgba(255, 255, 255, 0.4); color: #fff; }
+.ep-tentang .b3 { background: var(--p); color: #fff; }
+
+/* Tablet & HP */
+@media (max-width: 960px) {
+  .ep-tentang .hero-grid, .ep-tentang .why, .ep-tentang .name, .ep-tentang .meaning { grid-template-columns: minmax(0, 1fr); }
+  .ep-tentang .hero h1 { font-size: 40px; }
+  .ep-tentang h2 { font-size: 32px; }
+  .ep-tentang .mgrid, .ep-tentang .tgrid { grid-template-columns: 1fr 1fr; }
+  .ep-tentang .vgrid { grid-template-columns: 1fr; }
+  .ep-tentang .mission { padding: 48px 28px; }
+  .ep-tentang .cta { flex-direction: column; align-items: flex-start; }
+  .ep-tentang .btns { margin-left: 0; flex-wrap: wrap; }
+  .ep-tentang .head { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 560px) {
+  .ep-tentang .wrap { padding: 0 20px; }
+  .ep-tentang section { padding: 64px 0; }
+  .ep-tentang .tanpa-atas { padding-top: 0; }
+  .ep-tentang .mgrid, .ep-tentang .tgrid { grid-template-columns: 1fr; }
+  .ep-tentang .hero h1 { font-size: 34px; }
+  .ep-tentang .word { padding: 32px 22px; }
+  .ep-tentang .ai { flex-direction: column; align-items: flex-start; }
+  .ep-tentang .ai .btn { margin-left: 0; }
+}
