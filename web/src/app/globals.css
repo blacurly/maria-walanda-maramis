@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* 🟢 Warna EduPuan — dari Figma Make (src/index.css) */
+/* 🟢 Warna EduPuan */
 :root {
   --background: #f9fafb;
   --foreground: #111827;
@@ -19,7 +19,7 @@
   --radius: 12px;
 }
 
-/* 🟢 Menyambungkan warna di atas ke Tailwind — dari Figma Make
+/* 🟢 Menyambungkan warna di atas ke Tailwind 
    🟡 + font Inter dari layout.tsx */
 @theme inline {
   --color-background: var(--background);
@@ -43,7 +43,7 @@
   --font-sans: var(--font-inter);
 }
 
-/* 🟢 Gaya dasar seluruh halaman — dari Figma Make */
+/* 🟢 Gaya dasar seluruh halaman */
 body {
   background-color: var(--background);
   color: var(--foreground);

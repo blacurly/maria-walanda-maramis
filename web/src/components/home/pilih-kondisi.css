@@ -1,0 +1,153 @@
+/* Gaya bagian Pilih Kondisimu */
+
+.ep-kondisi {
+  background: #ffffff;
+  border-top: 1px solid #eef0ee;
+  padding: 48px 0;
+}
+
+.ep-kondisi .wrap {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.ep-kondisi .head {
+  margin-bottom: 44px;
+}
+
+.ep-kondisi .eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0d6e4b;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.ep-kondisi h2 {
+  font-weight: 800;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  color: #111827;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+
+.ep-kondisi .sub {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.ep-kondisi .grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* ── Kartu ── */
+.ep-kartu {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 28px 24px;
+  border-radius: 24px;
+  border: 1.5px solid var(--garis);
+  background: var(--latar);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s, transform 0.2s;
+  text-decoration: none;
+}
+
+.ep-kartu:hover {
+  box-shadow: 0 12px 32px var(--bayang);
+  transform: translateY(-3px);
+}
+
+.ep-kartu .ilus {
+  flex-shrink: 0;
+  width: 110px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ep-kartu .ilus img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  display: block;
+}
+
+.ep-kartu .isi {
+  flex: 1;
+  padding-top: 4px;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+
+.ep-kartu .no {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--aksen);
+  margin-bottom: 6px;
+}
+
+.ep-kartu .judul {
+  font-weight: 800;
+  font-size: 18px;
+  color: #111827;
+  margin-bottom: 10px;
+  line-height: 1.3;
+  white-space: pre-line;
+}
+
+.ep-kartu .desk {
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.ep-kartu .aksi {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.ep-kartu .aksi-teks {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--aksen);
+}
+
+.ep-kartu .panah {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--aksen);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ep-kartu .panah svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ── Tablet & HP ── */
+@media (max-width: 1023px) {
+  .ep-kondisi .wrap { padding: 0 24px; }
+}
+
+@media (max-width: 767px) {
+  .ep-kondisi .wrap { padding: 0 16px; }
+  .ep-kondisi .grid { grid-template-columns: 1fr; gap: 14px; }
+}
