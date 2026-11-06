@@ -10,8 +10,8 @@ export type VideoEdukasi = {
 };
 
 export const VIDEO_EDUKASI: VideoEdukasi[] = [
-  { youtubeId: "RjEDrg8KVVw", judul: "Jangan Keliru! Ini Bedanya Pinjol Legal dan Ilegal", kanal: "ISI NAMA KANAL", topik: "pinjaman" },
-  { youtubeId: "7e4uNm69yZI", judul: "Jangan Asal Pinjam! Ini Daftar Pinjol Resmi dari OJK", kanal: "ISI NAMA KANAL", topik: "pinjaman" },
-  { youtubeId: "bHG6kUItKfs", judul: "OJK Larang Warga Ikut Gerakan Gagal Bayar Pinjol, Ini Bahayanya", kanal: "ISI NAMA KANAL", topik: "penagihan" },
-  { youtubeId: "6twBUEpqRws", judul: "Ribuan Pinjol Ilegal Diblokir OJK", kanal: "ISI NAMA KANAL", topik: "hak-hukum" },
+  { youtubeId: "KuqRs4fsROM", judul: "Waspada! Ditransfer Uang dari Rekening Tak Dikenal, Bisa Jadi Modus Pinjol | Liputan 6 ", kanal: "Liputan6", topik: "penagihan" },
+  { youtubeId: "7e4uNm69yZI", judul: "Jangan Asal Pinjam! Ini Daftar Pinjol Resmi dari OJK", kanal: "Kompas.com", topik: "pinjaman" },
+  { youtubeId: "bHG6kUItKfs", judul: "OJK Larang Warga Ikut Gerakan Gagal Bayar Pinjol, Ini Bahayanya", kanal: "Kompas.com", topik: "penagihan" },
+  { youtubeId: "6twBUEpqRws", judul: "Ribuan Pinjol Ilegal Diblokir OJK", kanal: "IDX Channel Insight", topik: "hak-hukum" },
 ];
