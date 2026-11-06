@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import { LEGAL_PINJOL, ILEGAL_NAMES } from "@/data/dataPinjol"
+import { LEGAL_PINJOL, ILEGAL_NAMES, DATA_PINJOL_PER } from "@/data/dataPinjol"
 
 /* =============================================================================
    DOKUMENTASI & LAPOR — EduPuan
@@ -11,7 +11,7 @@ import { LEGAL_PINJOL, ILEGAL_NAMES } from "@/data/dataPinjol"
    ============================================================================= */
 
 // Samakan dengan tanggal update data di fitur Cek Legalitas setiap kali datanya diperbarui.
-const OJK_DATA_ASOF = "Oktober 2026"
+const OJK_DATA_ASOF = DATA_PINJOL_PER
 
 type Status = "legal" | "ilegal" | "tidak-tahu"
 type Entry = {

@@ -128,3 +128,6 @@ export const ILEGAL_NAMES: string[] = [
   "Pinjam Dana Tunai Online","Uang Cepat Pinjaman Duit Cair","Dana Cash Pinjaman Uang Tunai",
 ];
 
+
+// Bulan terakhir daftar di atas dicocokkan dengan data resmi OJK. Ubah di sini saja setiap kali data diperbarui.
+export const DATA_PINJOL_PER = "Oktober 2026";
