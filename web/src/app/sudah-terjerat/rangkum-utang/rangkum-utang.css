@@ -1,0 +1,23 @@
+/* Penyesuaian Rangkum Utang di dalam bingkai EduPuan */
+
+/* Sembunyikan header bawaan: sudah ada Navbar + baris Kembali */
+.ru-dalam-bingkai .ru-root > .topbar {
+  display: none;
+}
+
+/* Bagian yang "menempel" saat digulir harus berada di bawah Navbar */
+.ru-dalam-bingkai .ru-root {
+  --hdr: 92px;
+  --font: var(--font-inter), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+@media (max-width: 560px) {
+  .ru-dalam-bingkai .ru-root {
+    --hdr: 76px;
+  }
+}
+
+/* Sedikit jarak di atas karena header bawaan disembunyikan */
+.ru-dalam-bingkai .ru-root .wrap {
+  padding-top: 24px;
+}
