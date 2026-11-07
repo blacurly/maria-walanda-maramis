@@ -30,7 +30,7 @@ const KARTU = [
     gambar: "/ilustrasi/kartu-bingung-mulai.png",
     alt: "Bingung mulai dari mana",
     judul: "Bingung mulai\ndari mana?",
-    deskripsi: "Ceritakan situasimu, AI akan membantu mengarahkan langkah selanjutnya.",
+    deskripsi: "Ceritakan situasimu, Kami akan membantumu mengarahkan ke langkah selanjutnya.",
     aksi: "Ceritakan sekarang →",
     warna: { aksen: "#7c3aed", latar: "#faf5ff", garis: "#e9d5ff", bayang: "rgba(124,58,237,.10)" },
   },
