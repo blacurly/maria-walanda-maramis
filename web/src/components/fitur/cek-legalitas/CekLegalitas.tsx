@@ -2,8 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { DATA_PINJOL_PER } from "@/data/dataPinjol";
-import { cekNama, saranNama, type HasilCek } from "@/features/cek-legalitas/rules";
+import { cekNama, saranNama, namaSitus, type HasilCek, type Pinjol } from "@/features/cek-legalitas/rules";
 import {
   LINK_OJK_BERIZIN, CONTOH_NAMA, KONTAK_OJK, CIRI_BERIZIN, RISIKO_ILEGAL,
   LANGKAH_ILEGAL, LANGKAH_TIDAK_DITEMUKAN,
@@ -28,19 +27,25 @@ function Daftar({ isi, warna }: { isi: string[]; warna: "hijau" | "merah" | "abu
   );
 }
 
-export default function CekLegalitas() {
+type Props = {
+  daftar: Pinjol[];       // daftar pinjol dari database (atau data cadangan)
+  sumber: string[];       // sumber data, untuk ditampilkan
+  dariDatabase: boolean;  // false = database tidak bisa dihubungi, memakai cadangan
+};
+
+export default function CekLegalitas({ daftar, sumber, dariDatabase }: Props) {
   const [query, setQuery] = useState("");
   const [dicek, setDicek] = useState("");
   const [hasil, setHasil] = useState<HasilCek | null>(null);
   const [bukaSaran, setBukaSaran] = useState(false);
 
-  const saran = useMemo(() => saranNama(query), [query]);
+  const saran = useMemo(() => saranNama(query, daftar), [query, daftar]);
 
   function jalankanCek(nama: string) {
     if (!nama.trim()) return;
     setQuery(nama);
     setDicek(nama.trim());
-    setHasil(cekNama(nama));
+    setHasil(cekNama(nama, daftar));
     setBukaSaran(false);
   }
 
@@ -94,9 +99,9 @@ export default function CekLegalitas() {
                         }}
                         className="flex w-full items-center justify-between border-b border-gray-50 px-4 py-3 text-left last:border-0 hover:bg-gray-50"
                       >
-                        <span>
-                          <span className="block text-sm font-semibold text-gray-900">{s.nama}</span>
-                          {s.pt && <span className="block text-xs text-gray-400">{s.pt}</span>}
+                        <span className="min-w-0">
+                          <span className="block truncate text-sm font-semibold text-gray-900">{s.nama}</span>
+                          {s.nama_perusahaan && <span className="block truncate text-xs text-gray-400">{s.nama_perusahaan}</span>}
                         </span>
                         <span
                           className={`ml-3 flex-shrink-0 rounded-full px-2.5 py-1 text-xs font-bold ${
@@ -128,11 +133,13 @@ export default function CekLegalitas() {
             </div>
           </div>
 
-          <p className="mt-4 flex items-center gap-2 text-xs text-white/70">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400" />
-            Data per {DATA_PINJOL_PER} ·{" "}
+          <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-white/70">
+            <span className={`inline-block h-1.5 w-1.5 rounded-full ${dariDatabase ? "bg-emerald-400" : "bg-amber-400"}`} />
+            {!dariDatabase && <span>Data cadangan ·</span>}
+            <span>Sumber: {sumber.join(" · ")}</span>
+            <span>·</span>
             <a href={LINK_OJK_BERIZIN} target="_blank" rel="noopener noreferrer" className="underline hover:text-white">
-              Sumber data OJK
+              Cek daftar terbaru di OJK
             </a>
           </p>
         </div>
@@ -166,6 +173,17 @@ export default function CekLegalitas() {
         {/* Hasil: berizin */}
         {hasil?.status === "legal" && (
           <div className="max-w-3xl space-y-4">
+            {hasil.tiruan && (
+              <div role="alert" className="rounded-2xl border-2 border-red-200 bg-red-50 p-5">
+                <p className="mb-1 font-bold text-red-800">⚠️ Hati-hati: ada aplikasi tiruan dengan nama ini</p>
+                <p className="text-sm leading-relaxed text-red-900">
+                  Aplikasi bernama <strong>&ldquo;{hasil.tiruan.nama}&rdquo;</strong> di{" "}
+                  <strong>{namaSitus(hasil.tiruan.alamat)}</strong> tercatat <strong>ilegal</strong> oleh Satgas PASTI.
+                  Pastikan aplikasi yang kamu pakai berasal dari situs resmi di bawah atau dari Play Store/App Store,
+                  dengan nama perusahaan yang sama persis.
+                </p>
+              </div>
+            )}
             <div className={`${KARTU} p-6`}>
               <div className="mb-5 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
@@ -175,7 +193,12 @@ export default function CekLegalitas() {
                 <button onClick={ulangCek} aria-label="Tutup hasil" className="text-2xl text-gray-400 hover:text-gray-600">×</button>
               </div>
               <dl className="mb-5 space-y-2 text-sm">
-                {[["Nama aplikasi", hasil.nama], ["Perusahaan", hasil.pt], ["Status", "Berizin dan diawasi OJK"]].map(([l, v]) => (
+                {[
+                  ["Nama aplikasi", hasil.data.nama],
+                  ["Perusahaan", hasil.data.nama_perusahaan ?? "—"],
+                  ["Situs resmi", namaSitus(hasil.data.alamat) || "—"],
+                  ["Sumber", hasil.data.sumber],
+                ].map(([l, v]) => (
                   <div key={l} className="flex gap-3">
                     <dt className="w-28 flex-shrink-0 text-gray-400">{l}</dt>
                     <dd className="font-medium text-gray-800">{v}</dd>
@@ -214,10 +237,10 @@ export default function CekLegalitas() {
             </p>
             <p className="mb-4 text-sm text-gray-600">
               Mungkin maksudmu{" "}
-              <button onClick={() => jalankanCek(hasil.nama)} className="font-bold text-[#0d6e4b] underline">
-                {hasil.nama}
+              <button onClick={() => jalankanCek(hasil.data.nama)} className="font-bold text-[#0d6e4b] underline">
+                {hasil.data.nama}
               </button>{" "}
-              ({hasil.pt})?
+              ({hasil.data.nama_perusahaan})?
             </p>
             <p className="mb-5 rounded-xl bg-amber-50 p-3 text-sm text-amber-800">
               <strong>Hati-hati:</strong> nama yang <em>mirip</em> belum tentu aplikasi yang sama. Pinjol ilegal sering memakai nama yang menyerupai pinjol berizin. Cocokkan nama perusahaannya.
@@ -240,7 +263,7 @@ export default function CekLegalitas() {
               <button onClick={ulangCek} aria-label="Tutup hasil" className="text-2xl text-gray-400 hover:text-gray-600">×</button>
             </div>
             <p className="mb-5 text-sm text-gray-600">
-              <strong>{hasil.nama}</strong> ada di daftar pinjol ilegal yang kami himpun dari pengumuman Satgas PASTI (data per {DATA_PINJOL_PER}).
+              <strong>{hasil.data.nama}</strong> ada di daftar pinjol ilegal ({hasil.data.sumber}).
             </p>
             <div className="grid gap-6 sm:grid-cols-2">
               <div>

@@ -3,7 +3,7 @@
 export const LINK_OJK_BERIZIN =
   "https://www.ojk.go.id/id/kanal/iknb/financial-technology/Pages/Penyelenggara-Fintech-Lending-Berizin-dan-Terdaftar-di-OJK.aspx";
 
-export const CONTOH_NAMA = ["AdaKami", "Lucky Uang", "IndonesiaFintech"];
+   export const CONTOH_NAMA = ["AdaKami", "Indodana", "Uang Cepat"];
 
 export const KONTAK_OJK: { label: string; nilai: string; ket: string; href: string; tabBaru: boolean }[] = [
   { label: "WhatsApp Kontak OJK", nilai: "081 157 157 157", ket: "Kirim nama aplikasi untuk cek legalitas.", href: "https://wa.me/6281157157157", tabBaru: true },
