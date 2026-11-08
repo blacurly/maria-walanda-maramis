@@ -5,6 +5,7 @@ pesan user
   → [2] cari pasal parent-child (embedding + indeks)                  → tidak ada yang nyambung? ke [4]
   → [3] susun bahan bacaan berlabel sumber
   → [4] Gemini menjawab dengan system prompt + riwayat + bahan bacaan (+ catatan krisis bila perlu)
+  → [5] catat rekap ANONIM (topik/situasi/status/krisis/durasi) ke Supabase, hanya jika diaktifkan (statistik.py)
 """
 from __future__ import annotations
 
@@ -20,6 +21,7 @@ from .gemini import GeminiLLM, buat_client
 from .indeks import Indeks
 from .prompt import CATATAN_KRISIS, INSTRUKSI_TULIS_ULANG, KATA_KRISIS, LABEL_BAHAN, SYSTEM_PROMPT_PUAN
 from .retrieval import Pencari
+from .statistik import catat, pisahkan_label, teks_daftar_label
 
 log = logging.getLogger('puan_ai')
 
@@ -38,6 +40,8 @@ class HasilJawaban:
     sumber: list = field(default_factory=list)      # [{'id', 'label', 'peran'}]
     kueri: str = ''
     skor_tertinggi: float | None = None
+    topik: str = ''
+    situasi: str = ''
 
     def ke_dict(self):
         return self.__dict__.copy()
@@ -56,7 +60,7 @@ class PuanAI:
     def __init__(self, cfg: Pengaturan, llm: GeminiLLM, pencari: Pencari, kamus: dict):
         self.cfg, self.llm, self.pencari = cfg, llm, pencari
         teks_kamus = '\n'.join(f"- {santai.replace('|', ' / ')} → {hukum}" for santai, hukum in kamus.items())
-        self.instruksi_tulis_ulang = INSTRUKSI_TULIS_ULANG.format(kamus=teks_kamus)
+        self.instruksi_tulis_ulang = INSTRUKSI_TULIS_ULANG.format(kamus=teks_kamus) + teks_daftar_label()
 
     # ---------- cara membuat dari file di folder output ----------
     @classmethod
@@ -82,14 +86,19 @@ class PuanAI:
 
     # ---------- tahap 1+2: tulis ulang lalu cari ----------
     def ambil_konteks(self, pesan: str, riwayat=()):
-        kueri = self.tulis_ulang(pesan, riwayat)
+        # [G] baris LABEL dipisahkan dulu, supaya kueri yang dipakai mencari pasal tetap bersih
+        kueri, topik, situasi = pisahkan_label(self.tulis_ulang(pesan, riwayat))
         # [F] butuh uang / menimbang pinjam tanpa pertanyaan hukum: tidak perlu mencari pasal
         if 'BUTUH_DANA' in kueri:
-            return kueri, {'nyambung': False, 'skor_tertinggi': None, 'parents': [], 'butuh_dana': True}
+            return kueri, {'nyambung': False, 'skor_tertinggi': None, 'parents': [], 'butuh_dana': True,
+                           'topik': 'butuh_dana', 'situasi': 'butuh_dana'}
         if 'DI_LUAR_TOPIK' in kueri:
-            return kueri, {'nyambung': False, 'skor_tertinggi': None, 'parents': [], 'di_luar_topik': True}
+            return kueri, {'nyambung': False, 'skor_tertinggi': None, 'parents': [], 'di_luar_topik': True,
+                           'topik': 'di_luar_topik', 'situasi': 'di_luar_topik'}
         # pesan asli + kueri hukum dicari bersama: bahasa sehari-hari dan istilah hukum sama-sama terwakili
-        return kueri, self.pencari.cari(pesan + '\n' + kueri)
+        konteks = dict(self.pencari.cari(pesan + '\n' + kueri))
+        konteks['topik'], konteks['situasi'] = topik, situasi
+        return kueri, konteks
 
     # ---------- semua tahap ----------
     def jawab(self, pesan: str, riwayat=None) -> HasilJawaban:
@@ -119,6 +128,9 @@ class PuanAI:
                                  berpikir=self.cfg.berpikir_jawab)
         log.info('waktu: cari pasal %.1f dtk | susun jawaban %.1f dtk | total %.1f dtk',
                  t1 - t0, time.perf_counter() - t1, time.perf_counter() - t0)
+        topik, situasi = konteks.get('topik', 'lainnya'), konteks.get('situasi', 'lainnya')
+        # [G] rekap anonim: tanpa isi pesan. catat() tidak pernah melempar error.
+        catat(topik, situasi, status, krisis, int((time.perf_counter() - t0) * 1000))
         return HasilJawaban(jawaban=jawaban, status=status, krisis=krisis, kueri=kueri,
                             sumber=self.pencari.daftar_sumber(konteks) if status == 'pasal' else [],
-                            skor_tertinggi=konteks.get('skor_tertinggi'))
+                            skor_tertinggi=konteks.get('skor_tertinggi'), topik=topik, situasi=situasi)

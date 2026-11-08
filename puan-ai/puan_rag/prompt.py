@@ -9,13 +9,16 @@ ditandai [A]..[E] supaya mudah ditelusuri di dokumen keputusan.
 [F] Jalur BUTUH_DANA: pesan "butuh uang cepat / mau pinjam" tanpa pertanyaan hukum tertentu tidak lagi dianggap
 di luar topik. Pencarian pasal dilewati, Puan mengarahkan ke Cari Alternatif (tanpa utang), dan bila user tetap
 menimbang pinjam, ke Cek Legalitas dan Cek Penawaran. Puan tetap tidak merekomendasikan pinjaman apa pun.
+
+[G] Baris LABEL: langkah tulis ulang juga memberi label topik/situasi untuk rekap ANONIM (puan_rag/statistik.py).
+Daftar labelnya ditempel otomatis di akhir instruksi oleh chatbot.py. Isi pesan user tidak pernah disimpan.
 """
 
 INSTRUKSI_TULIS_ULANG = """Kamu bertugas mengubah pesan curhat pengguna aplikasi EduPuan menjadi KUERI PENCARIAN
 untuk mencari pasal di peraturan Indonesia tentang pinjaman online (pinjol), penagihan, data pribadi, dan pengaduan.
 
 Aturan:
-1. Tulis 1 kalimat kueri (maksimal 30 kata) dalam bahasa hukum Indonesia, berisi inti masalah hukumnya saja.
+1. Baris pertama: tulis 1 kalimat kueri (maksimal 30 kata) dalam bahasa hukum Indonesia, berisi inti masalah hukumnya saja.
 2. Buang emosi, sapaan, dan cerita yang tidak relevan; pertahankan fakta penting (siapa, berbuat apa, kepada siapa).
 3. Gunakan istilah hukum dari kamus di bawah bila cocok.
 4. JANGAN menjawab pertanyaan, JANGAN menambah fakta yang tidak ada di pesan.
@@ -28,6 +31,14 @@ Aturan:
    jasa keuangan, tulis persis: DI_LUAR_TOPIK
 7. Jika ada RIWAYAT PERCAKAPAN dan pesan terbaru adalah pertanyaan lanjutan (mis. "terus aku harus gimana?"),
    pakai riwayat untuk memahami konteksnya, tapi kueri tetap tentang pesan terbaru.
+8. [G] Baris kedua: tulis label dengan format persis  LABEL: topik/situasi
+   Pilih HANYA dari DAFTAR LABEL di bagian paling akhir. Pilih berdasarkan MAKNA dan konteks pesan, bukan sekadar kata
+   (contoh: "ditagih" karena bertanya aturan → tanya_aturan_penagihan; "ditelepon tiap jam" → ditagih_terus_menerus).
+   Jika tidak ada situasi yang cocok, pakai situasi lainnya. Jika baris pertama BUTUH_DANA atau DI_LUAR_TOPIK,
+   JANGAN tulis baris LABEL.
+   Contoh keluaran:
+   larangan penagih menghubungi pihak selain debitur, termasuk rekan kerja
+   LABEL: penagihan/menghubungi_orang_lain
 
 Kamus istilah (santai → hukum):
 {kamus}
