@@ -6,12 +6,36 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 
 // Tombol "Tanya Puan AI" + jendela chat yang melayang di pojok kanan bawah semua halaman.
 // Tampilan mengikuti prototype EduPuan; isinya tersambung ke /api/chat (Puan AI).
+// Percakapan disimpan sementara di sessionStorage: bertahan saat halaman di-refresh,
+// otomatis terhapus saat tab ditutup. Tidak dikirim atau disimpan di database EduPuan.
 
 type Pesan = { peran: "user" | "puan"; teks: string; krisis?: boolean };
 
 const BATAS_PESAN = 2000;
 const TINGGI_MIN = 40;
 const TINGGI_MAKS = 136;
+const KUNCI_SIMPAN = "edupuan.puan.percakapan.v1";
+const MAKS_DISIMPAN = 40; // pesan terakhir yang disimpan di tab ini
+
+// Membaca percakapan dari sessionStorage dan memastikan isinya berbentuk benar
+function bacaTersimpan(): Pesan[] {
+  try {
+    const mentah = sessionStorage.getItem(KUNCI_SIMPAN);
+    if (!mentah) return [];
+    const data: unknown = JSON.parse(mentah);
+    if (!Array.isArray(data)) return [];
+    return data
+      .filter(
+        (p): p is Pesan =>
+          typeof p === "object" && p !== null &&
+          (p.peran === "user" || p.peran === "puan") && typeof p.teks === "string",
+      )
+      .map((p) => ({ peran: p.peran, teks: p.teks.slice(0, 8000), krisis: p.krisis === true }))
+      .slice(-MAKS_DISIMPAN);
+  } catch {
+    return []; // sessionStorage tidak tersedia (mis. mode privat tertentu): chat tetap jalan tanpa disimpan
+  }
+}
 
 const SAPAAN =
   "Halo! 👋 Aku Puan, asisten EduPuan. Kamu bisa cerita atau tanya soal pinjaman online: penagihan, data pribadi, biaya, atau ke mana harus melapor. Aku jawab berdasarkan aturan OJK dan UU Pelindungan Data Pribadi.";
@@ -137,8 +161,37 @@ export default function PuanFab() {
   const [galat, setGalat] = useState<string | null>(null);
   const [pesanGagal, setPesanGagal] = useState<string | null>(null);
   const [detik, setDetik] = useState(0);
+  const [siap, setSiap] = useState(false); // true setelah percakapan tersimpan selesai dibaca
+  const [konfirmasiHapus, setKonfirmasiHapus] = useState(false);
   const daftarRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+
+  // Saat pertama dimuat: ambil percakapan yang tersimpan di tab ini
+  useEffect(() => {
+    setDaftar(bacaTersimpan());
+    setSiap(true);
+  }, []);
+
+  // Setiap percakapan berubah: simpan ke tab ini (atau hapus kalau kosong)
+  useEffect(() => {
+    if (!siap) return;
+    try {
+      if (daftar.length) sessionStorage.setItem(KUNCI_SIMPAN, JSON.stringify(daftar.slice(-MAKS_DISIMPAN)));
+      else sessionStorage.removeItem(KUNCI_SIMPAN);
+    } catch {
+      // penyimpanan penuh atau diblokir: abaikan, chat tetap berjalan
+    }
+  }, [daftar, siap]);
+
+  function hapusPercakapan() {
+    setDaftar([]);
+    setGalat(null);
+    setPesanGagal(null);
+    setKonfirmasiHapus(false);
+    try {
+      sessionStorage.removeItem(KUNCI_SIMPAN);
+    } catch {}
+  }
 
   // Fokus ke kolom ketik saat jendela dibuka
   useEffect(() => {
@@ -217,6 +270,18 @@ export default function PuanFab() {
               <p className="text-[13px] font-bold text-white">Tanya Puan AI</p>
               <p className="text-[11px] text-white/75">Asisten literasi pinjaman online EduPuan</p>
             </div>
+            {daftar.length > 0 && (
+              <button
+                type="button"
+                onClick={() => setKonfirmasiHapus(true)}
+                disabled={memuat}
+                aria-label="Hapus percakapan"
+                title="Hapus percakapan"
+                className="flex h-7 w-7 items-center justify-center rounded-full bg-white/15 text-sm text-white disabled:opacity-40"
+              >
+                🗑
+              </button>
+            )}
             <button
               type="button"
               onClick={() => setBuka(false)}
@@ -227,13 +292,29 @@ export default function PuanFab() {
             </button>
           </header>
 
+          {/* Konfirmasi hapus percakapan */}
+          {konfirmasiHapus && (
+            <div role="alertdialog" aria-label="Konfirmasi hapus percakapan" className="shrink-0 border-b border-red-100 bg-red-50 px-4 py-2.5 text-xs text-red-900">
+              <p className="font-semibold">Hapus semua percakapan di tab ini?</p>
+              <p className="mt-0.5 text-red-800/80">Percakapan yang dihapus tidak bisa dikembalikan.</p>
+              <div className="mt-2 flex gap-2">
+                <button type="button" onClick={hapusPercakapan} className="rounded-full bg-red-600 px-3 py-1 font-bold text-white">
+                  Ya, hapus
+                </button>
+                <button type="button" onClick={() => setKonfirmasiHapus(false)} className="rounded-full border border-red-300 bg-white px-3 py-1 font-bold text-red-700">
+                  Batal
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* Daftar pesan */}
           <div ref={daftarRef} aria-live="polite" className="flex min-h-0 flex-1 flex-col gap-2.5 overflow-y-auto px-3.5 pt-3.5">
             <div className="flex flex-col items-start gap-1.5">
               <div className="max-w-[85%] rounded-[16px_16px_16px_4px] bg-gray-100 px-[13px] py-[9px] text-[13px] leading-normal text-gray-900">
                 {SAPAAN}
               </div>
-              {daftar.length === 0 && (
+              {siap && daftar.length === 0 && (
                 <div className="flex max-w-[90%] flex-wrap gap-1.5">
                   {PILIHAN_CEPAT.map((p) => (
                     <button
@@ -363,7 +444,8 @@ export default function PuanFab() {
             </div>
             <p className="mt-1.5 text-[10px] leading-snug text-gray-400">
               Edukasi, bukan nasihat hukum final. Jangan tulis nomor KTP, rekening, atau kata sandi. Pesan diproses
-              layanan AI pihak ketiga (Google Gemini) dan tidak disimpan EduPuan.{" "}
+              layanan AI pihak ketiga (Google Gemini). Percakapan hanya tersimpan sementara di tab ini dan terhapus saat
+              tab ditutup, tidak disimpan di server EduPuan.{" "}
               <Link href="/kebijakan-privasi" onClick={() => setBuka(false)} className="underline hover:text-[#0d6e4b]">
                 Kebijakan Privasi
               </Link>
