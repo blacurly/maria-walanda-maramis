@@ -1,7 +1,7 @@
 """Puan AI: menyatukan semua tahap menjadi satu fungsi jawab(pesan, riwayat).
 
 pesan user
-  → [1] tulis ulang jadi kueri hukum (Gemini flash-lite + kamus)      → DI_LUAR_TOPIK? langsung ke [4]
+  → [1] tulis ulang jadi kueri hukum (Gemini flash-lite + kamus)      → DI_LUAR_TOPIK / BUTUH_DANA? langsung ke [4]
   → [2] cari pasal parent-child (embedding + indeks)                  → tidak ada yang nyambung? ke [4]
   → [3] susun bahan bacaan berlabel sumber
   → [4] Gemini menjawab dengan system prompt + riwayat + bahan bacaan (+ catatan krisis bila perlu)
@@ -33,7 +33,7 @@ class Pesan:
 @dataclass
 class HasilJawaban:
     jawaban: str
-    status: str                     # 'pasal' | 'di_luar_topik' | 'tidak_ada_pasal'
+    status: str                     # 'pasal' | 'di_luar_topik' | 'butuh_dana' | 'tidak_ada_pasal'
     krisis: bool
     sumber: list = field(default_factory=list)      # [{'id', 'label', 'peran'}]
     kueri: str = ''
@@ -83,6 +83,9 @@ class PuanAI:
     # ---------- tahap 1+2: tulis ulang lalu cari ----------
     def ambil_konteks(self, pesan: str, riwayat=()):
         kueri = self.tulis_ulang(pesan, riwayat)
+        # [F] butuh uang / menimbang pinjam tanpa pertanyaan hukum: tidak perlu mencari pasal
+        if 'BUTUH_DANA' in kueri:
+            return kueri, {'nyambung': False, 'skor_tertinggi': None, 'parents': [], 'butuh_dana': True}
         if 'DI_LUAR_TOPIK' in kueri:
             return kueri, {'nyambung': False, 'skor_tertinggi': None, 'parents': [], 'di_luar_topik': True}
         # pesan asli + kueri hukum dicari bersama: bahasa sehari-hari dan istilah hukum sama-sama terwakili
@@ -97,7 +100,12 @@ class PuanAI:
         if konteks['nyambung']:
             status, bahan = 'pasal', self.pencari.susun_bahan(konteks)
         else:
-            status = 'di_luar_topik' if konteks.get('di_luar_topik') else 'tidak_ada_pasal'
+            if konteks.get('butuh_dana'):
+                status = 'butuh_dana'
+            elif konteks.get('di_luar_topik'):
+                status = 'di_luar_topik'
+            else:
+                status = 'tidak_ada_pasal'
             bahan = LABEL_BAHAN[status]
         krisis = ada_tanda_krisis(pesan)
 

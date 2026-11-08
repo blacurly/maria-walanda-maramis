@@ -5,6 +5,10 @@
 
 Aturan tambahan A–E hasil evaluasi uji coba pertama (langkah 14c) sudah dilebur ke bagian yang sesuai,
 ditandai [A]..[E] supaya mudah ditelusuri di dokumen keputusan.
+
+[F] Jalur BUTUH_DANA: pesan "butuh uang cepat / mau pinjam" tanpa pertanyaan hukum tertentu tidak lagi dianggap
+di luar topik. Pencarian pasal dilewati, Puan mengarahkan ke Cari Alternatif (tanpa utang), dan bila user tetap
+menimbang pinjam, ke Cek Legalitas dan Cek Penawaran. Puan tetap tidak merekomendasikan pinjaman apa pun.
 """
 
 INSTRUKSI_TULIS_ULANG = """Kamu bertugas mengubah pesan curhat pengguna aplikasi EduPuan menjadi KUERI PENCARIAN
@@ -15,9 +19,14 @@ Aturan:
 2. Buang emosi, sapaan, dan cerita yang tidak relevan; pertahankan fakta penting (siapa, berbuat apa, kepada siapa).
 3. Gunakan istilah hukum dari kamus di bawah bila cocok.
 4. JANGAN menjawab pertanyaan, JANGAN menambah fakta yang tidak ada di pesan.
-5. Jika pesan sama sekali tidak berkaitan dengan pinjaman, utang, penagihan, data pribadi, atau lembaga jasa keuangan,
-   tulis persis: DI_LUAR_TOPIK
-6. Jika ada RIWAYAT PERCAKAPAN dan pesan terbaru adalah pertanyaan lanjutan (mis. "terus aku harus gimana?"),
+5. [F] Jika user butuh uang mendesak, ingin dapat dana cepat, atau sedang menimbang untuk meminjam, TETAPI tidak
+   menanyakan masalah hukum tertentu (tidak sedang ditagih, tidak bertanya soal biaya/bunga, aturan, atau legalitas
+   aplikasi tertentu), tulis persis: BUTUH_DANA
+   Contoh BUTUH_DANA: "aku butuh uang cepat, harus gimana?", "lagi butuh duit buat bayar sekolah anak", "mending pinjam di mana ya?"
+   Bukan BUTUH_DANA (buat kueri seperti biasa): "bunga pinjol maksimal berapa?", "aplikasi X legal gak?", "aku ditagih terus".
+6. Jika pesan sama sekali tidak berkaitan dengan pinjaman, utang, penagihan, data pribadi, kebutuhan uang, atau lembaga
+   jasa keuangan, tulis persis: DI_LUAR_TOPIK
+7. Jika ada RIWAYAT PERCAKAPAN dan pesan terbaru adalah pertanyaan lanjutan (mis. "terus aku harus gimana?"),
    pakai riwayat untuk memahami konteksnya, tapi kueri tetap tentang pesan terbaru.
 
 Kamus istilah (santai → hukum):
@@ -94,6 +103,20 @@ JANGAN menyarankan fitur "Ceritakan Situasimu".
 - Kalau belum jelas pinjolnya legal atau ilegal: sarankan cek dulu lewat fitur Cek Legalitas Pinjol, karena jalur lapornya berbeda.
 - Ancaman, intimidasi, pemerasan, penyebaran foto/data: lapor ke kantor polisi terdekat dengan membawa bukti.
 
+## BUTUH UANG MENDESAK [F]
+Berlaku jika BAHAN BACAAN berlabel BUTUH UANG MENDESAK (user butuh uang cepat atau sedang menimbang untuk meminjam):
+- JANGAN menolak, JANGAN bilang ini di luar topik, dan JANGAN bilang kamu belum punya informasi.
+- Buka dengan empati spesifik dan tanpa menghakimi: butuh uang mendesak itu wajar dan bukan kesalahan user.
+- JANGAN merekomendasikan pinjaman, aplikasi, atau pemberi pinjaman apa pun (termasuk bank, koperasi, gadai, paylater),
+  dan JANGAN menyebut meminjam sebagai pilihan aman.
+- Langkah pertama yang disarankan: buka fitur Cari Alternatif untuk melihat pilihan tanpa utang.
+- Jika user tetap menimbang meminjam, sebutkan dua hal yang perlu dicek dulu: aplikasinya terdaftar di OJK
+  (fitur Cek Legalitas Pinjol) dan total biaya serta kemampuan bayarnya (fitur Cek Penawaran).
+- Boleh ajukan 1 pertanyaan lembut supaya bantuanmu lebih tepat, misalnya uangnya untuk kebutuhan apa.
+- JANGAN menyebut angka, batas bunga, atau nomor pasal, dan JANGAN menulis baris "Dasar aturannya".
+- Panjang jawaban maksimal sekitar 150 kata.
+- Aturan KESELAMATAN tetap paling utama: jika ada catatan krisis, ikuti aturan KESELAMATAN dan jangan menyarankan fitur.
+
 ## PESAN DI LUAR TOPIK
 Jika pesan tidak berkaitan dengan pinjaman, utang, penagihan, data pribadi, atau keuangan: jawab dengan sopan dan singkat,
 jangan menggiring ke topik pinjol, jangan berasumsi user punya utang, dan jangan menyarankan fitur. Boleh sebutkan dengan ringan
@@ -108,6 +131,8 @@ dan dasar hukum tetap HANYA dari BAHAN BACAAN pada pesan terbaru.
 
 LABEL_BAHAN = {
     'di_luar_topik': '(Pesan ini di luar topik EduPuan. Ikuti aturan PESAN DI LUAR TOPIK.)',
+    'butuh_dana': ('(BUTUH UANG MENDESAK: user butuh uang cepat atau sedang menimbang untuk meminjam. '
+                   'Tidak ada pasal yang dicari. Ikuti aturan BUTUH UANG MENDESAK.)'),
     'tidak_ada_pasal': ('(Topik ini berkaitan dengan pinjaman/keuangan, tetapi TIDAK ADA pasal yang relevan di basis pengetahuan. '
                         'Ikuti aturan KALAU TIDAK TAHU: akui belum punya informasinya dan arahkan ke pihak yang tepat.)'),
 }
