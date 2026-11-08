@@ -97,7 +97,11 @@ Pelajaran:
 
 ### 3.4 Yang BELUM diuji (harus dijalankan di Colab, notebook bagian D–E)
 
-- [ ] Versi **pecah huruf** vs biasa (`evaluasi.py --pecah 0 1`)
+- [x] Versi **pecah huruf** vs biasa (`evaluasi.py --pecah 0 1`), diuji 8 Nov 2026 di laptop (Gemini, 8/3):
+      biasa Kena 87,5% · MRR 0,78 · Lintas ≥1 60% · Lintas semua 40% · bahan 1.326 kata;
+      pecah huruf Kena 90,0% · MRR 0,79 · Lintas ≥1 70% · Lintas semua 40% · bahan 1.260 kata.
+      **Keputusan: pakai pecah huruf (`PUAN_PECAH_HURUF=1`).** Lebih baik di semua ukuran, bahan lebih ringkas;
+      contoh nyata: "dc nagih ke kantor" kini menemukan POJK 22/2023 Pasal 62 ayat (2) huruf e.
 - [ ] **e5** vs Gemini, termasuk kalibrasi ambang e5 (ambang 0,80 di config masih tebakan sementara)
 - [ ] **Uji jawaban lengkap** 15 soal (`uji_jawaban.py`) dengan system prompt versi baru (lihat bagian 4)
 - [ ] Percakapan lanjutan dengan riwayat (fitur baru)
