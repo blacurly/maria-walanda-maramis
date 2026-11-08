@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import PageBar from "@/components/layout/PageBar";
 import Footer from "@/components/layout/Footer";
+import PuanFab from "@/components/fitur/puan-chat/PuanFab";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -28,6 +29,7 @@ export default function RootLayout({
         <PageBar />
         <div className="flex-1">{children}</div>
         <Footer />
+        <PuanFab />
       </body>
     </html>
   );
