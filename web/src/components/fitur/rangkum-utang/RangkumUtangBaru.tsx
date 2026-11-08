@@ -2,8 +2,11 @@
 // @ts-nocheck
 /*
  * Fitur EduPuan: Rangkum Semua Utang
- * File ini lengkap dan berdiri sendiri: aturan prioritas, tampilan, dan gaya.
+ * File ini lengkap dan berdiri sendiri: aturan, tampilan, dan gaya.
  * JANGAN diubah lewat prompt AI. Aturan di dalamnya sudah diuji sesuai spesifikasi.
+ * Tambahan: tombol "Unduh rangkuman (PDF)" (viewReport + printReport + CSS @media print).
+ * Tambahan: daftar diurutkan menurut pilihan pengguna (jatuh tempo / nominal), BUKAN urutan bayar.
+ * Label tenggat tampil netral (LABEL_TAMPIL). Bagian DebtLogic TIDAK diubah.
  */
 "use client";
 
@@ -231,6 +234,33 @@ const CSS = `.ru-root {
 
 .ru-root ol { list-style: decimal; } .ru-root ul { list-style: disc; } .ru-root [hidden] { display: none !important; } .ru-root svg { display: inline-block; } .ru-root button { background: none; } .ru-root .btn-primary { background: var(--brand); } .ru-root .btn-danger-solid { background: var(--handle); } .ru-root .filter { background: var(--surface); } .ru-root .filter[aria-pressed="true"] { background: var(--brand); } .ru-root .back { background: var(--surface); } .ru-root .back:hover { background: var(--surface-2); } .ru-root .btn-ghost:hover { background: var(--surface-2); }
 .ru-root { min-height: 100vh; margin: 0; -webkit-font-smoothing: antialiased; text-align: left; }
+
+/* ===== Laporan cetak / PDF (hanya muncul saat dicetak) ===== */
+.ru-root .ru-print { display: none; }
+.ru-root .print-hint { margin-top: 2px; }
+@media print {
+  @page { size: A4; margin: 14mm; }
+  body > *:not(:has(.ru-root)) { display: none !important; }
+  body { background: #fff !important; }
+  .ru-root { background: #fff; min-height: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .ru-root .topbar, .ru-root .wrap, .ru-root .toast { display: none !important; }
+  .ru-root .ru-print { display: block !important; font-size: 12px; line-height: 1.5; color: var(--ink); }
+  .ru-print .p-head { border-bottom: 2px solid var(--brand); padding-bottom: 8px; margin-bottom: 14px; }
+  .ru-print .p-brand { font-size: 20px; font-weight: 700; color: var(--brand); }
+  .ru-print h1 { font-size: 20px; margin-top: 2px; }
+  .ru-print h2 { font-size: 14px; margin: 18px 0 8px; }
+  .ru-print .p-demo { background: var(--violet-soft); padding: 8px 10px; border-radius: 8px; margin-bottom: 10px; }
+  .ru-print table { width: 100%; border-collapse: collapse; }
+  .ru-print th, .ru-print td { text-align: left; padding: 6px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .ru-print th { color: var(--ink-2); font-weight: 600; font-size: 11px; }
+  .ru-print td.r, .ru-print th.r { text-align: right; white-space: nowrap; }
+  .ru-print .p-debt { break-inside: avoid; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin-bottom: 10px; }
+  .ru-print .p-debt h3 { font-size: 13px; }
+  .ru-print .p-debt ol { margin: 6px 0 0; padding-left: 18px; }
+  .ru-print .p-debt li { margin-bottom: 4px; }
+  .ru-print .chip { font-size: 10.5px; padding: 1px 8px; }
+  .ru-print .p-foot { margin-top: 16px; font-size: 10.5px; color: var(--ink-2); display: grid; gap: 4px; }
+}
 `;
 
 const MARKUP = `<header class="topbar"><div class="top">
@@ -248,7 +278,8 @@ const MARKUP = `<header class="topbar"><div class="top">
     <p>Data tagihanmu hanya tersimpan di browser ini. Data tidak dikirim ke server atau layanan AI, tidak ikut pindah ke perangkat lain, dan bisa hilang jika riwayat browser dibersihkan. EduPuan tidak pernah meminta NIK, kata sandi, PIN, OTP, atau akses ke akun pinjamanmu.</p>
   </footer>
 </div>
-<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>`;
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<div id="printReport" class="ru-print" aria-hidden="true"></div>`;
 
 /* ===== Aturan (sama persis dengan logic.js yang lulus 33 uji) ===== */
 /* ===== Logika Rangkum Semua Utang (berbasis aturan, tanpa AI) =====
@@ -468,7 +499,9 @@ function mountRangkumUtang(root, onExit) {
   var cleanups = [];
   function on(t, ev, fn) { t.addEventListener(ev, fn); cleanups.push(function () { t.removeEventListener(ev, fn); }); }
   var KEY = 'edupuan.rangkumUtang.v1';
-  var state = { debts: [], demo: false, view: 'home', id: null, filter: 'all', confirmDelete: false, today: L.todayKey() };
+  // Label status yang tampil ke pengguna (lebih sederhana dari L.STATUS)
+  var STATUS_TAMPIL = { checked: 'Ya, sudah pasti', unverified: 'Belum yakin', disputed: 'Aku tidak setuju' };
+  var state = { debts: [], demo: false, view: 'home', id: null, filter: 'all', sort: 'due', confirmDelete: false, today: L.todayKey() };
   var app = $('app');
 
   /* ---------- Penyimpanan lokal ---------- */
@@ -502,8 +535,33 @@ function mountRangkumUtang(root, onExit) {
   }
 
   /* ---------- Komponen ---------- */
+  // Label tenggat yang tampil ke pengguna: hanya menjelaskan waktu, tidak menyuruh membayar.
+  // Warna (key) tetap dari DebtLogic.
+  var LABEL_TAMPIL = {
+    overdue: 'Lewat jatuh tempo', today: 'Jatuh tempo hari ini', d1_3: 'Jatuh tempo 1–3 hari',
+    d4_7: 'Jatuh tempo 4–7 hari', later: 'Jatuh tempo > 7 hari', unknown: 'Tanggal belum diketahui'
+  };
+  var URUTAN = {
+    due: 'Jatuh tempo terdekat',
+    besar: 'Nominal terbesar',
+    kecil: 'Nominal terkecil'
+  };
+  // Mengurutkan daftar HANYA berdasarkan pilihan pengguna. Ini bukan saran urutan pembayaran.
+  function urutkan(debts) {
+    return debts.slice().sort(function (a, b) {
+      if (state.sort === 'besar' && a.amount !== b.amount) return b.amount - a.amount;
+      if (state.sort === 'kecil' && a.amount !== b.amount) return a.amount - b.amount;
+      if (a.dueDate !== b.dueDate) {
+        if (!a.dueDate) return 1;
+        if (!b.dueDate) return -1;
+        return a.dueDate < b.dueDate ? -1 : 1;
+      }
+      return a.provider.localeCompare(b.provider, 'id');
+    });
+  }
+
   function chips(a) {
-    var h = '<span class="chip ' + a.label.key + '">' + esc(a.label.text) + '</span>';
+    var h = '<span class="chip ' + a.label.key + '">' + esc(LABEL_TAMPIL[a.bucket]) + '</span>';
     if (a.verify) h += '<span class="chip verify">Perlu verifikasi</span>';
     return h;
   }
@@ -593,11 +651,11 @@ function mountRangkumUtang(root, onExit) {
     input.focus();
   }
 
-  function debtCard(d, i) {
+  function debtCard(d) {
     var a = L.assess(d, state.today);
     var legal = providerLegalStatus(d.provider);
     return '<article class="debt ' + a.label.key + '">' +
-      '<div class="debt-head"><div><div class="rank">#' + (i + 1) + ' · ' + legalStatusHtml(legal, false, false) + '</div><div class="debt-name">' + esc(d.provider) + '</div></div>' +
+      '<div class="debt-head"><div><div class="rank">' + legalStatusHtml(legal, false, false) + '</div><div class="debt-name">' + esc(d.provider) + '</div></div>' +
       '<div class="debt-amt">' + rp(d.amount) + '</div></div>' +
       '<div class="row">' + chips(a) + '</div>' +
       '<p class="small"><b>' + esc(L.formatDate(d.dueDate)) + '</b> <span class="muted">· ' + esc(L.dueText(d, state.today)) + '</span></p>' +
@@ -623,7 +681,7 @@ function mountRangkumUtang(root, onExit) {
       '<div class="steps">' +
       '<div class="step"><div><h3>Tambahkan satu utang dulu</h3><p>Cukup nama penyedia, nominal tagihan saat ini, tanggal jatuh tempo, dan status tagihannya. Utang lain bisa ditambah kapan saja.</p></div></div>' +
       '<div class="step"><div><h3>Lihat rangkuman</h3><p>Total tagihan, yang sudah jatuh tempo, dan yang segera jatuh tempo dalam 7 hari.</p></div></div>' +
-      '<div class="step"><div><h3>Periksa prioritas dan langkah berikutnya</h3><p>Setiap tagihan diberi label berdasarkan aturan yang jelas, lengkap dengan alasannya. Label ini membantu menentukan mana yang perlu ditangani dulu, bukan urutan bayar yang pasti.</p></div></div>' +
+      '<div class="step"><div><h3>Cek tenggat dan langkah berikutnya</h3><p>Setiap tagihan diberi keterangan tenggat dan langkah yang bisa kamu lakukan. EduPuan tidak menentukan tagihan mana yang harus dibayar lebih dulu.</p></div></div>' +
       '</div>' +
       (has ? '' : '<p class="small muted">Ingin melihat contohnya dulu? <button class="btn-link btn" data-act="demo" type="button">Coba dengan data contoh</button></p>') +
       '</section></div>';
@@ -633,11 +691,11 @@ function mountRangkumUtang(root, onExit) {
   function viewSummary() {
     if (!state.debts.length) {
       return '<section class="view hero"><h1>Rangkuman Utang</h1>' +
-        '<div class="empty"><h2>Belum ada tagihan yang dicatat</h2><p class="muted">Tambahkan tagihan pertamamu untuk melihat total, tenggat, dan prioritas penanganan.</p>' +
+        '<div class="empty"><h2>Belum ada tagihan yang dicatat</h2><p class="muted">Tambahkan tagihan pertamamu untuk melihat total dan tenggat semua tagihanmu.</p>' +
         '<button class="btn btn-primary" data-act="add" type="button">Tambah Utang</button></div></section>';
     }
     var s = L.summarize(state.debts, state.today);
-    var sorted = L.sortDebts(state.debts, state.today);
+    var sorted = urutkan(state.debts);
     var shown = sorted.filter(function (d) {
       var b = L.timeBucket(d, state.today);
       if (state.filter === 'overdue') return b === 'overdue';
@@ -647,7 +705,10 @@ function mountRangkumUtang(root, onExit) {
     });
 
     var h = '<section class="view">' +
-      '<div class="hero" style="padding-bottom:0"><span class="eyebrow">Per ' + esc(L.formatDate(state.today)) + '</span><h1>Rangkuman Utangmu</h1></div>' +
+      '<div class="hero" style="padding-bottom:0"><span class="eyebrow">Per ' + esc(L.formatDate(state.today)) + '</span>' +
+      '<div class="row" style="justify-content:space-between"><h1>Rangkuman Utangmu</h1>' +
+      '<button class="btn btn-ghost btn-sm" data-act="print" type="button">📄 Unduh rangkuman (PDF)</button></div>' +
+      '<p class="small muted print-hint">Unduh untuk menyimpan salinan di perangkatmu. Di jendela yang muncul, pilih &quot;Simpan sebagai PDF&quot;.</p></div>' +
       '<div class="two sum-two"><aside class="side">' +
       '<div class="stats">' +
       '<div class="stat stat-total"><span class="eyebrow">Total tagihan tercatat</span><div class="big num">' + rp(s.total) + '</div>' +
@@ -672,19 +733,22 @@ function mountRangkumUtang(root, onExit) {
 
     var listHtml = '<section class="section main-sec">' +
       '<div class="mini-total" aria-hidden="true"><span>Total tercatat <b class="num">' + rp(s.total) + '</b></span><span class="muted">' + s.count + ' tagihan' + (s.overdue.count ? ' · ' + s.overdue.count + ' lewat tempo' : '') + '</span></div>' +
-      '<div class="row" style="justify-content:space-between"><h2>Prioritas penanganan</h2>' +
+      '<div class="row" style="justify-content:space-between"><h2>Daftar tagihan</h2>' +
       '<button class="btn btn-primary btn-sm" data-act="add" type="button">+ Tambah Utang</button></div>' +
+      '<div class="row small"><label for="f-sort" class="muted">Urutkan berdasarkan</label>' +
+      '<select id="f-sort" style="width:auto;min-height:36px;padding:4px 10px">' +
+      Object.keys(URUTAN).map(function (k) { return '<option value="' + k + '"' + (state.sort === k ? ' selected' : '') + '>' + URUTAN[k] + '</option>'; }).join('') +
+      '</select></div>' +
       '<div class="filters" role="group" aria-label="Saring daftar">' +
       [['all', 'Semua (' + s.count + ')'], ['overdue', 'Sudah jatuh tempo (' + s.overdue.count + ')'], ['soon', '≤ 7 hari (' + s.soon.count + ')'], ['verify', 'Perlu verifikasi (' + s.verifyCount + ')']]
         .map(function (f) { return '<button class="filter" type="button" data-act="filter" data-f="' + f[0] + '" aria-pressed="' + (state.filter === f[0]) + '">' + f[1] + '</button>'; }).join('') +
       '</div>' +
-      '<details class="guide"><summary>Bagaimana urutan ini disusun?</summary><ol>' +
-      '<li>Tagihan yang sudah lewat atau jatuh tempo hari ini ada di atas, lalu 1–3 hari, 4–7 hari, lebih dari 7 hari, dan terakhir yang tanggalnya belum diketahui.</li>' +
-      '<li>Dalam kelompok yang sama, tagihan yang perlu diverifikasi ditaruh lebih atas karena perlu <b>diperiksa</b> dulu, bukan karena harus dibayar dulu.</li>' +
-      '<li>Nominal besar, bunga tinggi, atau tekanan dari penagih tidak otomatis menaikkan prioritas.</li>' +
-      '<li>Urutan ini membantu menentukan mana yang perlu ditangani lebih dulu. Ini bukan urutan pembayaran yang pasti benar, karena keputusan bayar juga bergantung pada dana yang benar-benar kamu punya dan ketentuan tiap penyedia.</li>' +
-      '</ol></details>' +
-      '<div class="list-scroll" id="listScroll" tabindex="0" role="region" aria-label="Daftar tagihan, ' + shown.length + ' item"><div class="list">' + (shown.length ? shown.map(function (d) { return debtCard(d, sorted.indexOf(d)); }).join('') : '<div class="empty"><p class="muted">Tidak ada tagihan di kelompok ini.</p><button class="btn btn-ghost btn-sm" data-act="filter" data-f="all" type="button">Tampilkan semua</button></div>') + '</div></div>' +
+      '<details class="guide"><summary>Tentang urutan daftar ini</summary><ul>' +
+      '<li>Daftar hanya diurutkan sesuai pilihanmu: jatuh tempo terdekat, nominal terbesar, atau nominal terkecil.</li>' +
+      '<li><b>Urutan ini bukan saran tagihan mana yang harus dibayar lebih dulu.</b> Tagihan di posisi teratas tidak berarti lebih penting untuk dibayar.</li>' +
+      '<li>Keputusan pembayaran bergantung pada dana yang kamu punya, isi perjanjian, dan hasil komunikasimu dengan tiap penyedia melalui kanal resminya.</li>' +
+      '</ul></details>' +
+      '<div class="list-scroll" id="listScroll" tabindex="0" role="region" aria-label="Daftar tagihan, ' + shown.length + ' item"><div class="list">' + (shown.length ? shown.map(function (d) { return debtCard(d); }).join('') : '<div class="empty"><p class="muted">Tidak ada tagihan di kelompok ini.</p><button class="btn btn-ghost btn-sm" data-act="filter" data-f="all" type="button">Tampilkan semua</button></div>') + '</div></div>' +
       '<p class="list-count small muted" id="listCount">Menampilkan ' + shown.length + ' dari ' + s.count + ' tagihan</p>' +
       '</section>';
 
@@ -695,7 +759,7 @@ function mountRangkumUtang(root, onExit) {
       '<li>Hubungi penyedia melalui kanal resmi untuk membahas opsi penyelesaian. Tidak ada jaminan permintaan disetujui, tapi menghubungi lebih awal memberi kamu informasi yang lebih jelas.</li>' +
       '<li>Simpan semua bukti komunikasi dan pembayaran.</li>' +
       '<li><b>Jangan mengambil pinjaman baru untuk menutup pinjaman lama.</b> Cara ini biasanya menambah beban, bukan menguranginya.</li>' +
-      '</ol><p class="small muted">EduPuan tidak menentukan urutan pembayaran yang pasti untukmu, karena informasinya belum cukup. Keputusan tetap ada di tanganmu.</p></div></details>' +
+      '</ol><p class="small muted">EduPuan tidak menentukan tagihan mana yang harus dibayar lebih dulu. Keputusan tetap ada di tanganmu.</p></div></details>' +
       '<div class="row"><button class="btn btn-ghost btn-sm" data-act="wipe" type="button">Hapus semua data</button></div>' +
       (state.view === 'summary' && state.confirmDelete === 'all' ? '<div class="confirm"><p><b>Hapus semua ' + s.count + ' tagihan dari browser ini?</b> Tindakan ini tidak bisa dibatalkan.</p><div class="row"><button class="btn btn-danger-solid btn-sm" data-act="wipe-yes" type="button">Ya, hapus semua</button><button class="btn btn-ghost btn-sm" data-act="cancel-del" type="button">Batal</button></div></div>' : '') +
       '</section></aside><div class="main">' + listHtml + '</div></div></section>';
@@ -713,9 +777,11 @@ function mountRangkumUtang(root, onExit) {
     var dueUnknown = values ? !!values.dueUnknown : (editing && !d.dueDate);
     var statusVal = d.status || '';
 
-    var statusDesc = { checked: 'Nominal sudah cocok dengan rincian resmi', unverified: 'Nominal belum pasti atau belum dicek', disputed: 'Aku tidak setuju dengan jumlahnya' };
+    // Teks tampilan saja. Nilai yang disimpan tetap checked / unverified / disputed sesuai DebtLogic.
+    if (e.status) e = Object.assign({}, e, { status: 'Pilih salah satu jawaban.' });
+    var statusDesc = { checked: 'Sama dengan rincian resmi di aplikasi', unverified: 'Belum dicek, atau angkanya berbeda-beda', disputed: 'Menurutku jumlahnya tidak sesuai' };
     var statusOpts = Object.keys(L.STATUS).map(function (k) {
-      return '<label class="opt"><input type="radio" name="status" value="' + k + '"' + (statusVal === k ? ' checked' : '') + '><span>' + L.STATUS[k] + '<small>' + statusDesc[k] + '</small></span></label>';
+      return '<label class="opt"><input type="radio" name="status" value="' + k + '"' + (statusVal === k ? ' checked' : '') + '><span>' + STATUS_TAMPIL[k] + '<small>' + statusDesc[k] + '</small></span></label>';
     }).join('');
 
     return '<section class="view stack" style="padding-top:16px">' +
@@ -730,10 +796,9 @@ function mountRangkumUtang(root, onExit) {
       '<label class="check"><input type="checkbox" id="f-dueUnknown" name="dueUnknown"' + (dueUnknown ? ' checked' : '') + '> Belum tahu tanggalnya</label>' +
       '<p class="auto" id="autoStatus" aria-live="polite"></p>' + err('dueDate') + '</div>' +
       '</div><div class="stack">' +
-      '<fieldset class="field' + inv('status') + '" style="border:0;padding:0;margin:0"><legend class="legend">Status informasi tagihan</legend><div class="opts">' + statusOpts + '</div>' + err('status') + '</fieldset>' +
-      '<details class="more"' + (d.paid || d.note || d.collectionIssue || e.paid || e.note ? ' open' : '') + '><summary>Catatan tambahan (opsional)</summary><div class="stack">' +
-      '<div class="field' + inv('paid') + '"><label for="f-paid">Jumlah yang sudah dibayar</label><div class="prefix"><span>Rp</span><input type="text" inputmode="numeric" id="f-paid" name="paid" autocomplete="off" placeholder="0" value="' + esc(amt(d.paid)) + '"></div><p class="hint">Hanya catatan. Tidak dikurangkan dari total, karena nominal tagihan saat ini seharusnya sudah memperhitungkannya.</p>' + err('paid') + '</div>' +
-      '<div class="field' + inv('note') + '"><label for="f-note">Catatanmu</label><textarea id="f-note" name="note" maxlength="500" placeholder="Misalnya: nominal berbeda dengan aplikasi, sudah minta rincian tagihan, belum ada jawaban dari penyedia">' + esc(d.note) + '</textarea>' + err('note') + '</div>' +
+      '<fieldset class="field' + inv('status') + '" style="border:0;padding:0;margin:0"><legend class="legend">Apakah nominal tagihannya sudah pasti?</legend><div class="opts">' + statusOpts + '</div>' + err('status') + '</fieldset>' +
+      '<details class="more"' + (d.note || d.collectionIssue || e.note ? ' open' : '') + '><summary>Catatan tambahan (opsional)</summary><div class="stack">' +
+      '<div class="field' + inv('note') + '"><label for="f-note">Catatanmu</label><textarea id="f-note" name="note" maxlength="500" placeholder="Misalnya: sudah bayar Rp500.000 tanggal 1 Nov, nominal berbeda dengan aplikasi, sudah minta rincian tagihan">' + esc(d.note) + '</textarea>' + err('note') + '</div>' +
       '<label class="check"><input type="checkbox" id="f-issue" name="collectionIssue"' + (d.collectionIssue ? ' checked' : '') + '> Ada penagihan bermasalah, misalnya ancaman, intimidasi, atau penyebaran data pribadi</label>' +
       '</div></details>' +
       '</div></div>' +
@@ -781,20 +846,83 @@ function mountRangkumUtang(root, onExit) {
       '<div><dt>Status legalitas</dt><dd>' + legalStatusHtml(legal, false, true) + '</dd></div>' +
       '<div><dt>Nominal tagihan</dt><dd class="num">' + rp(d.amount) + '</dd></div>' +
       '<div><dt>Jatuh tempo</dt><dd>' + esc(L.formatDate(d.dueDate)) + ' <span class="muted" style="font-weight:500">· ' + esc(L.dueText(d, state.today)) + '</span></dd></div>' +
-      '<div><dt>Status verifikasi</dt><dd>' + esc(L.STATUS[d.status]) + '</dd></div>' +
-      (d.paid !== null && d.paid !== undefined ? '<div><dt>Sudah dibayar (catatan)</dt><dd class="num">' + rp(d.paid) + '</dd></div>' : '') +
+      '<div><dt>Nominal sudah pasti?</dt><dd>' + esc(STATUS_TAMPIL[d.status]) + '</dd></div>' +
       '<div><dt>Catatanmu</dt><dd style="font-weight:500">' + (d.note ? esc(d.note) : '<span class="muted">Tidak ada catatan</span>') + '</dd></div>' +
       '</dl></div>' +
       '<div class="row"><button class="btn btn-primary" data-act="edit" data-id="' + d.id + '" type="button">Edit</button><button class="btn btn-danger" data-act="del" type="button">Hapus</button><button class="btn btn-ghost" data-act="summary" type="button">Kembali ke rangkuman</button></div>' +
       (state.confirmDelete === true ? '<div class="confirm" role="alertdialog" aria-label="Konfirmasi hapus"><p><b>Hapus tagihan ' + esc(d.provider) + '?</b> Rangkuman akan langsung diperbarui. Tindakan ini tidak bisa dibatalkan.</p><div class="row"><button class="btn btn-danger-solid btn-sm" data-act="del-yes" type="button">Ya, hapus</button><button class="btn btn-ghost btn-sm" data-act="cancel-del" type="button">Batal</button></div></div>' : '') +
       '</aside><div class="main stack" style="gap:24px">' +
       '<div class="stack panel" style="gap:8px"><h2>Kenapa label ini?</h2><p>' + esc(a.reason) + '</p>' +
-      (a.label.key === 'handle' ? '<p class="small muted">"Segera tangani" berarti perlu segera diperiksa dan ditindaklanjuti, bukan perintah untuk langsung membayar.</p>' : '') + '</div>' +
+      '<p class="small muted">Keterangan ini hanya menjelaskan tenggat waktu. Ini bukan perintah atau saran untuk membayar tagihan ini lebih dulu.</p>' + '</div>' +
       '<div class="stack" style="gap:12px"><h2>Langkah berikutnya</h2><div class="steps">' +
       legalActions.concat(a.actions).map(function (x) { return '<div class="step"><div><h3>' + esc(x.title) + '</h3><p>' + esc(x.text) + '</p></div></div>'; }).join('') +
       '</div><p class="small muted">Penyedia tidak selalu menyetujui perpanjangan, restrukturisasi, atau penghapusan denda. Tanyakan pilihan yang tersedia melalui kanal resmi mereka.</p></div>' +
       '</div></div></section>';
   }
+
+  /* ---------- Laporan untuk dicetak / disimpan sebagai PDF ---------- */
+  // Memakai DebtLogic yang sama dengan tampilan layar, jadi isinya selalu cocok dengan rangkuman.
+  function viewReport() {
+    var s = L.summarize(state.debts, state.today);
+    var sorted = urutkan(state.debts);
+    var dibuat = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+
+    var h = '<div class="p-head"><div class="p-brand">EduPuan</div><h1>Rangkuman Utang</h1>' +
+      '<p class="muted">Per ' + esc(L.formatDate(state.today)) + ' · Dibuat ' + esc(dibuat) + '</p></div>';
+    if (state.demo) h += '<p class="p-demo"><b>Ini data contoh.</b> Angkanya bukan milikmu.</p>';
+
+    h += '<h2>Ringkasan</h2><table><tbody>' +
+      '<tr><td>Total tagihan tercatat (' + s.count + ' tagihan)</td><td class="r"><b>' + rp(s.total) + '</b></td></tr>' +
+      '<tr><td>Sudah jatuh tempo (' + s.overdue.count + ')</td><td class="r">' + rp(s.overdue.sum) + '</td></tr>' +
+      '<tr><td>Jatuh tempo hari ini (' + s.today.count + ')</td><td class="r">' + rp(s.today.sum) + '</td></tr>' +
+      '<tr><td>Jatuh tempo 1–3 hari (' + s.d1_3.count + ')</td><td class="r">' + rp(s.d1_3.sum) + '</td></tr>' +
+      '<tr><td>Jatuh tempo 4–7 hari (' + s.d4_7.count + ')</td><td class="r">' + rp(s.d4_7.sum) + '</td></tr>' +
+      '<tr><td>Lebih dari 7 hari (' + s.later.count + ')</td><td class="r">' + rp(s.later.sum) + '</td></tr>' +
+      '<tr><td>Tanggal belum diketahui (' + s.unknown.count + ')</td><td class="r">' + rp(s.unknown.sum) + '</td></tr>' +
+      '<tr><td>Perlu verifikasi</td><td class="r">' + s.verifyCount + ' tagihan' + (s.disputedCount ? ' (' + s.disputedCount + ' disengketakan)' : '') + '</td></tr>' +
+      '</tbody></table>';
+
+    h += '<h2>Daftar tagihan</h2><p class="small muted">Diurutkan berdasarkan: ' + esc(URUTAN[state.sort]).toLowerCase() + '. Urutan ini bukan saran urutan pembayaran.</p><table><thead><tr><th>No.</th><th>Penyedia</th><th>Jatuh tempo</th><th>Label</th><th class="r">Nominal</th></tr></thead><tbody>' +
+      sorted.map(function (d, i) {
+        var a = L.assess(d, state.today);
+        return '<tr><td>' + (i + 1) + '</td><td>' + esc(d.provider) + '</td><td>' + esc(L.formatDate(d.dueDate)) + '<br><span class="muted">' + esc(L.dueText(d, state.today)) + '</span></td>' +
+          '<td>' + chips(a) + '</td><td class="r">' + rp(d.amount) + '</td></tr>';
+      }).join('') + '</tbody></table>';
+
+    h += '<h2>Rincian dan langkah berikutnya</h2>' + sorted.map(function (d, i) {
+      var a = L.assess(d, state.today);
+      var legal = providerLegalStatus(d.provider);
+      var steps = [];
+      if (legal.key === 'illegal') steps.push({ title: 'Pinjaman terindikasi ilegal', text: 'Jangan transfer ke rekening pribadi penagih. Simpan semua bukti tagihan dan pesan, lalu laporkan melalui kanal resmi seperti Satgas PASTI atau OJK 157.' });
+      if (legal.key === 'unknown') steps.push({ title: 'Pastikan status legalitasnya', text: 'Nama ini tidak ada di data EduPuan. Cek langsung di ojk.go.id atau tanyakan ke WA OJK 081-157-157-157.' });
+      steps = steps.concat(a.actions);
+      return '<div class="p-debt"><div class="row" style="justify-content:space-between"><h3>' + esc(d.provider) + '</h3><b>' + rp(d.amount) + '</b></div>' +
+        '<div class="row small" style="gap:6px"><span class="muted">Status legalitas:</span>' + legalStatusHtml(legal, false, true) + '</div>' +
+        '<p class="small">Nominal sudah pasti? ' + esc(STATUS_TAMPIL[d.status]) + '</p>' +
+        '<p class="small" style="margin-top:4px">' + esc(a.reason) + '</p>' +
+        (d.note ? '<p class="small muted" style="margin-top:4px">Catatanmu: ' + esc(d.note) + '</p>' : '') +
+        '<ol>' + steps.map(function (x) { return '<li><b>' + esc(x.title) + '.</b> ' + esc(x.text) + '</li>'; }).join('') + '</ol></div>';
+    }).join('');
+
+    h += '<div class="p-foot">' +
+      '<p>Urutan daftar hanya mengikuti pilihan pengurutan (jatuh tempo atau nominal). EduPuan tidak menentukan tagihan mana yang harus dibayar lebih dulu. Keputusan bayar bergantung pada dana yang kamu punya dan ketentuan tiap penyedia.</p>' +
+      '<p>Jangan mengambil pinjaman baru untuk menutup pinjaman lama. Butuh bantuan? Kontak OJK 157 atau WhatsApp 081-157-157-157.</p>' +
+      '<p>Dokumen ini dibuat di perangkatmu dari data yang kamu masukkan sendiri. EduPuan tidak menyimpan data ini di server. Simpan file ini di tempat yang aman karena berisi data keuanganmu. Ini bukan nasihat hukum atau keuangan.</p>' +
+      '</div>';
+    return h;
+  }
+
+  var titleBeforePrint = null;
+  function printReport() {
+    if (!state.debts.length) { toast('Belum ada tagihan untuk diunduh.'); return; }
+    $('printReport').innerHTML = viewReport();
+    if (titleBeforePrint === null) titleBeforePrint = document.title;
+    document.title = 'EduPuan - Rangkuman Utang - ' + state.today;
+    setTimeout(function () { window.print(); }, 50);
+  }
+  on(window, 'afterprint', function () {
+    if (titleBeforePrint !== null) { document.title = titleBeforePrint; titleBeforePrint = null; }
+  });
 
   // Tanda "masih ada tagihan di bawah" pada area gulir daftar
   function wireList() {
@@ -827,7 +955,7 @@ function mountRangkumUtang(root, onExit) {
     return [
       { id: uid(), provider: 'Pinjaman A (contoh)', type: 'pinjol', amount: 1500000, dueDate: addDays(-4), status: 'checked', paid: null, note: '', collectionIssue: false },
       { id: uid(), provider: 'Paylater B (contoh)', type: 'paylater', amount: 750000, dueDate: addDays(2), status: 'checked', paid: null, note: '', collectionIssue: false },
-      { id: uid(), provider: 'Pinjaman C (contoh)', type: 'pinjol', amount: 2000000, dueDate: addDays(0), status: 'disputed', paid: 500000, note: 'Nominal di aplikasi berbeda dengan pesan penagih. Sudah minta rincian tertulis.', collectionIssue: true }
+      { id: uid(), provider: 'Pinjaman C (contoh)', type: 'pinjol', amount: 2000000, dueDate: addDays(0), status: 'disputed', paid: null, note: 'Sudah bayar Rp500.000. Nominal di aplikasi berbeda dengan pesan penagih. Sudah minta rincian tertulis.', collectionIssue: true }
     ];
   }
 
@@ -859,11 +987,29 @@ function mountRangkumUtang(root, onExit) {
     else if (act === 'wipe-yes') { state.debts = []; state.demo = false; save(); toast('Semua data dihapus dari browser ini.'); go('home'); }
     else if (act === 'demo') { state.debts = demoData(); state.demo = true; save(); go('summary'); }
     else if (act === 'pick-provider') { pickProvider(b.getAttribute('data-name')); }
+    else if (act === 'print') { printReport(); }
   });
   on($('clearDemo'), 'click', function () { state.debts = []; state.demo = false; save(); toast('Data contoh dihapus.'); go('home'); });
 
-  on(root, 'change', function (ev) { if (ev.target.id === 'f-dueUnknown' || ev.target.id === 'f-due') updateAutoStatus(); });
+  on(root, 'change', function (ev) {
+    if (ev.target.id === 'f-dueUnknown' || ev.target.id === 'f-due') updateAutoStatus();
+    if (ev.target.id === 'f-sort') { state.sort = ev.target.value; render(); var sel = $('f-sort'); if (sel) sel.focus(); }
+  });
+  // Titik pemisah ribuan otomatis saat mengetik nominal (5000000 -> 5.000.000).
+  // Posisi kursor dijaga supaya tidak meloncat ke akhir saat mengedit di tengah angka.
+  function formatRibuan(el) {
+    var pos = el.selectionStart == null ? el.value.length : el.selectionStart;
+    var angkaSebelumKursor = el.value.slice(0, pos).replace(/\D/g, '').length;
+    var angka = el.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '');
+    var hasil = angka.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    el.value = hasil;
+    var i = 0, terlewati = 0;
+    while (i < hasil.length && terlewati < angkaSebelumKursor) { if (hasil[i] !== '.') terlewati++; i++; }
+    try { el.setSelectionRange(i, i); } catch (e) {}
+  }
+
   on(root, 'input', function (ev) {
+    if (ev.target.id === 'f-amount') formatRibuan(ev.target);
     if (ev.target.id === 'f-due') updateAutoStatus();
     if (ev.target.id === 'f-provider') {
       providerDropOpen = true;
@@ -959,7 +1105,7 @@ export default function RangkumUtangBaru({ onBack }: { onBack?: () => void }) {
     el.innerHTML = MARKUP;
     const unmount = mountRangkumUtang(el, backRef.current ? () => backRef.current && backRef.current() : null);
     return () => { unmount(); el.innerHTML = ""; };
-  });
+  }, []); // [] = pasang sekali saja saat halaman dibuka, supaya isian formulir tidak ter-reset
 
   return (
     <>
