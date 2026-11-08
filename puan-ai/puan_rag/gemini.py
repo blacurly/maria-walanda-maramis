@@ -57,7 +57,14 @@ class GeminiLLM:
         from google.genai import types
         config = types.GenerateContentConfig(system_instruction=sistem, temperature=suhu)
         for m in [model] + [c for c in self.model_cadangan if c != model]:
-            hasil = coba_berulang(self.client.models.generate_content, m, model=m, contents=contents, config=config)
+            try:
+                hasil = coba_berulang(self.client.models.generate_content, m, model=m, contents=contents, config=config)
+            except Exception as e:  # noqa: BLE001
+                if m == model:
+                    raise
+                # model cadangan bermasalah (mis. 404 nama model tidak tersedia): lewati, coba cadangan berikutnya
+                log.warning('model cadangan %s tidak bisa dipakai (%s), dilewati', m, str(e)[:80])
+                continue
             if hasil is not None:
                 if m != model:
                     log.warning('dijawab oleh model cadangan: %s', m)

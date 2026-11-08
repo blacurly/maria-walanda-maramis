@@ -47,7 +47,7 @@ class Pengaturan:
     model_e5: str = 'intfloat/multilingual-e5-small'
     model_tulis_ulang: str = field(default_factory=lambda: os.getenv('PUAN_MODEL_TULIS_ULANG', 'gemini-3.1-flash-lite'))
     model_jawab: str = field(default_factory=lambda: os.getenv('PUAN_MODEL_JAWAB', 'gemini-3.6-flash'))
-    model_cadangan: tuple = ('gemini-flash-latest', 'gemini-3.1-flash-lite')
+    model_cadangan: tuple = ('gemini-3.1-flash-lite',)   # 'gemini-flash-latest' tidak tersedia di API v1 (404)
     suhu_jawab: float = 0.4
 
     # ---- Percakapan ----
