@@ -1,0 +1,11 @@
+.venv/
+.pytest_cache/
+.env
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+# hasil buatan script (bisa dibuat ulang); knowledge_base*.json & indeks boleh di-commit kalau tim ingin server tidak perlu embed ulang
+output/cache_*.json
+output/hasil_*.xlsx
+output/uji_jawaban*.xlsx
+data/bersih/*_mentah.txt

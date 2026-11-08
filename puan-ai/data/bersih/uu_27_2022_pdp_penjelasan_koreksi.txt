@@ -1,0 +1,108 @@
+PENJELASAN
+ATAS
+UNDANG-UNDANG REPUBLIK INDONESIA
+NOMOR 27 TAHUN 2022
+TENTANG
+PELINDUNGAN DATA PRIBADI
+
+II. PASAL DEMI PASAL
+(Hanya pasal terpilih yang penjelasannya substantif. Pasal terpilih lainnya: Cukup jelas.)
+
+Pasal 3
+Huruf a
+Yang dimaksud dengan "asas pelindungan" adalah bahwa setiap pemrosesan Data Pribadi dilakukan dengan memberikan pelindungan kepada Subjek Data Pribadi atas Data Pribadinya dan Data Pribadi tersebut agar tidak disalahgunakan.
+Huruf b
+Yang dimaksud dengan "asas kepastian hukum" adalah bahwa setiap pemrosesan Data Pribadi dilakukan berdasarkan landasan hukum untuk mewujudkan Pelindungan Data Pribadi serta segala sesuatu yang mendukung penyelenggaraannya sehingga mendapatkan pengakuan hukum di dalam dan di luar pengadilan.
+Huruf c
+Yang dimaksud dengan "asas kepentingan umum" adalah bahwa dalam menegakkan Pelindungan Data Pribadi harus memperhatikan kepentingan umum atau masyarakat secara luas. Kepentingan umum tersebut antara lain kepentingan penyelenggaraan negara dan pertahanan dan keamanan nasional.
+Huruf d
+Yang dimaksud dengan "asas kemanfaatan" adalah bahwa pengaturan Pelindungan Data Pribadi harus bermanfaat bagi kepentingan nasional, khususnya dalam mewujudkan cita-cita kesejahteraan umum.
+Huruf e
+Yang dimaksud dengan "asas kehati-hatian" adalah bahwa para pihak yang terkait dengan pemrosesan dan pengawasan Data Pribadi harus memperhatikan segenap aspek yang berpotensi mendatangkan kerugian.
+Huruf f
+Yang dimaksud dengan "asas keseimbangan" adalah sebagai upaya Pelindungan Data Pribadi untuk menyeimbangkan antara hak atas Data Pribadi di satu pihak dengan hak negara yang sah berdasarkan kepentingan umum.
+Huruf g
+Yang dimaksud dengan "asas pertanggungjawaban" adalah bahwa semua pihak yang terkait dengan pemrosesan dan pengawasan Data Pribadi bertindak secara bertanggung jawab sehingga mampu menjamin keseimbangan hak dan kewajiban para pihak yang terkait termasuk Subjek Data Pribadi.
+Huruf h
+Yang dimaksud dengan "asas kerahasiaan" adalah bahwa Data Pribadi terlindungi dari pihak yang tidak berhak dan/atau dari kegiatan pemrosesan Data Pribadi yang tidak sah.
+
+Pasal 4
+Ayat (1)
+Huruf a
+Data Pribadi yang bersifat spesifik merupakan Data Pribadi yang apabila dalam pemrosesannya dapat mengakibatkan dampak lebih besar kepada Subjek Data Pribadi, antara lain tindakan diskriminasi dan kerugian yang lebih besar Subjek Data Pribadi.
+Ayat (2)
+Huruf a
+Yang dimaksud dengan "data dan informasi kesehatan" adalah catatan atau keterangan individu yang berkaitan dengan kesehatan fisik, kesehatan mental, dan/atau pelayanan kesehatan.
+Huruf b
+Yang dimaksud dengan "data biometrik" adalah data yang berkaitan dengan fisik, fisiologis, atau karakteristik perilaku individu yang memungkinkan identifikasi unik terhadap individu, seperti gambar wajah atau data daktiloskopi. Data biometrik juga menjelaskan pada sifat keunikan dan/atau karakteristik seseorang yang harus dijaga dan dirawat, termasuk namun tidak terbatas pada rekam sidik jari, retina mata, dan sampel DNA.
+Huruf c
+Yang dimaksud dengan "data genetika" adalah semua data jenis apapun mengenai karakteristik suatu individu yang diwariskan atau diperoleh selama perkembangan prenatal awal.
+Huruf d
+Yang dimaksud dengan "catatan kejahatan" merupakan catatan tertulis tentang seseorang yang pernah melakukan perbuatan melawan hukum atau melanggar hukum atau sedang dalam proses peradilan atas perbuatan yang dilakukan, antara lain catatan kepolisian dan pencantuman dalam daftar pencegahan atau penangkalan.
+Huruf f
+Yang dimaksud dengan "data keuangan pribadi" adalah termasuk namun tidak terbatas kepada data jumlah simpanan pada bank termasuk tabungan, deposito, dan data kartu kredit.
+Ayat (3)
+Huruf f
+Yang dimaksud dengan "Data Pribadi yang dikombinasikan untuk mengidentifikasi seseorang" antara lain nomor telepon seluler dan IP Address.
+
+Pasal 7
+Hak untuk memperoleh salinan Data Pribadi dilakukan secara gratis, kecuali untuk kondisi tertentu yang memang membutuhkan biaya.
+
+Pasal 10
+Ayat (1)
+Yang dimaksud dengan "pemrofilan" adalah kegiatan mengidentifikasi seseorang termasuk namun tidak terbatas pada riwayat pekerjaan, kondisi ekonomi, kesehatan, preferensi pribadi, minat, keandalan, perilaku, lokasi, atau pergerakan Subjek Data Pribadi secara elektronik.
+
+Pasal 15
+Ayat (1)
+Huruf b
+Yang dimaksud dengan "kepentingan proses penegakan hukum" adalah kepentingan yang berkaitan dengan upaya atau langkah dalam rangka menjalankan atau menegakkan aturan hukum berdasarkan ketentuan peraturan perundang-undangan antara lain proses penyelidikan, penyidikan, dan penuntutan.
+Huruf c
+Yang dimaksud dengan "kepentingan umum dalam rangka penyelenggaraan negara" antara lain penyelenggaraan administrasi kependudukan, jaminan sosial, perpajakan, kepabeanan, dan pelayanan perizinan berusaha terintegrasi secara elektronik.
+Huruf d
+Yang dimaksud dengan "sektor jasa keuangan" adalah perbankan, pasar modal, asuransi, lembaga pembiayaan, dana pensiun, regulasi berbasis teknologi, teknologi finansial, dan teknologi yang berbasis lainnya yang berada dalam pengawasan Bank Indonesia, Otoritas Jasa Keuangan, dan Lembaga Penjamin Simpanan.
+
+Pasal 16
+Ayat (1)
+Huruf e
+Yang dimaksud dengan "penampilan" adalah perbuatan memperlihatkan Data Pribadi untuk tujuan tertentu dan pihak-pihak tertentu.
+Yang dimaksud dengan "pengumuman" adalah pemberitahuan sebuah Informasi yang ditujukan kepada orang banyak dan bersifat umum.
+Yang dimaksud dengan "transfer" adalah perpindahan, pengiriman, dan/atau penggandaan Data Pribadi baik secara elektronik maupun nonelektronik dari Pengendali Data Pribadi kepada pihak lain.
+
+Pasal 20
+Ayat (2)
+Huruf d
+Yang dimaksud dengan "kepentingan vital Subjek Data Pribadi" adalah terkait dengan keberlangsungan hidup dari Subjek Data Pribadi misalnya ketika pemrosesan Data Pribadi diperlukan untuk tindakan perawatan medis serius.
+
+Pasal 21
+Ayat (1)
+Huruf e
+Yang dimaksud dengan "rincian mengenai Informasi yang dikumpulkan" adalah daftar Informasi mengenai Data Pribadi Subjek Data Pribadi, baik berupa Data Pribadi yang bersifat umum maupun Data Pribadi yang bersifat spesifik, yang dikumpulkan oleh Pengendali Data Pribadi dalam rangka pemrosesan Data Pribadi.
+Huruf f
+Yang dimaksud dengan "jangka waktu pemrosesan Data Pribadi" adalah rentang waktu dimulainya hingga selesainya serangkaian kegiatan pemrosesan Data Pribadi sesuai dengan tujuan pemrosesan Data Pribadi.
+
+Pasal 22
+Ayat (4)
+Huruf c
+Yang dimaksud dengan "bahasa" adalah Bahasa Indonesia.
+
+Pasal 44
+Ayat (1)
+Yang dimaksud dengan "memusnahkan" adalah tindakan untuk menghilangkan, melenyapkan, atau menghancurkan Data Pribadi sehingga tidak lagi dapat digunakan untuk mengidentifikasi Subjek Data Pribadi.
+
+Pasal 46
+Ayat (1)
+Yang dimaksud dengan "kegagalan Pelindungan Data Pribadi" adalah kegagalan melindungi Data Pribadi seseorang dalam hal kerahasiaan, integritas, dan ketersediaan Data Pribadi, termasuk pelanggaran keamanan, baik yang disengaja maupun tidak disengaja, yang mengarah pada perusakan, kehilangan, perubahan, pengungkapan, atau akses yang tidak sah terhadap Data Pribadi yang dikirim, disimpan, atau diproses.
+Ayat (3)
+Yang dimaksud dengan "dalam hal tertentu" antara lain jika kegagalan Pelindungan Data Pribadi mengganggu pelayanan publik dan/atau berdampak serius terhadap kepentingan masyarakat.
+
+Pasal 57
+Ayat (3)
+Yang dimaksud dengan "pendapatan" adalah arus masuk bruto dari manfaat ekonomi yang timbul dari aktivitas normal entitas selama periode jika arus masuk tersebut mengakibatkan kenaikan ekuitas yang tidak berasal dari kontribusi penanam modal.
+
+Pasal 59
+Huruf d
+Yang dimaksud dengan "fasilitasi penyelesaian sengketa di luar pengadilan" adalah pemberian sarana penyelesaian sengketa melalui prosedur yang disepakati para pihak, yakni penyelesaian di luar pengadilan dengan cara konsultasi, arbitrase, negosiasi, mediasi, konsiliasi, atau penilaian ahli sesuai dengan ketentuan peraturan perundang-undangan.
+
+Pasal 60
+Huruf a
+Dalam hal perumusan dan penetapan kebijakan Pelindungan Data Pribadi, lembaga melibatkan organisasi usaha sesuai dengan ketentuan peraturan perundang-undangan.

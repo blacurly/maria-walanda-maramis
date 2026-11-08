@@ -1,0 +1,1506 @@
+I. KETENTUAN UMUM
+Dalam Surat Edaran Otoritas Jasa Keuangan ini, yang dimaksud
+dengan:
+1. Layanan Pendanaan Bersama Berbasis Teknologi Informasi yang
+selanjutnya disingkat LPBBTI adalah penyelenggaraan layanan jasa
+keuangan untuk mempertemukan pemberi dana dengan penerima
+dana dalam melakukan pendanaan baik secara konvensional
+maupun berdasarkan prinsip syariah secara langsung melalui
+sistem elektronik dengan menggunakan internet.
+2. Penyelenggara LPBBTI yang selanjutnya disebut Penyelenggara
+adalah badan hukum Indonesia yang menyediakan, mengelola, dan
+mengoperasikan LPBBTI.
+3. Prinsip Syariah adalah prinsip hukum Islam berdasarkan fatwa
+dan/atau pernyataan kesesuaian syariah yang dikeluarkan oleh
+lembaga yang memiliki kewenangan dalam penetapan fatwa di
+bidang syariah.
+4. Sistem Elektronik adalah serangkaian perangkat dan prosedur
+elektronik yang berfungsi mempersiapkan, mengumpulkan,
+mengolah, menganalisis, menyimpan, menampilkan,
+mengumumkan, mengirimkan, dan/atau menyebarkan informasi
+elektronik di bidang layanan jasa keuangan.
+5. Teknologi Informasi adalah suatu teknik untuk mengumpulkan,
+menyiapkan, menyimpan, memproses, mengumumkan,
+menganalisis, dan/atau menyebarkan informasi di bidang layanan
+jasa keuangan.
+6. Pendanaan adalah penyaluran dana dari pemberi dana kepada
+penerima dana dengan suatu janji yang akan dibayarkan atau
+
+dikembalikan sesuai dengan jangka waktu tertentu dalam transaksi
+LPBBTI.
+7. Dewan Pengawas Syariah yang selanjutnya disingkat DPS adalah
+pihak yang memiliki tugas dan fungsi pengawasan terhadap
+penyelenggaraan kegiatan Penyelenggara agar sesuai dengan
+Prinsip Syariah.
+8. Penerima Dana adalah orang perseorangan, badan hukum,
+dan/atau badan usaha yang menerima Pendanaan.
+9. Pemberi Dana adalah orang perseorangan, badan hukum, dan/atau
+badan usaha yang memberikan Pendanaan.
+10. Pengguna LPBBTI yang selanjutnya disebut Pengguna adalah
+Pemberi Dana dan Penerima Dana.
+11. Data Pribadi adalah data tentang orang perseorangan yang
+teridentifikasi atau dapat diidentifikasi secara tersendiri atau
+dikombinasi dengan informasi lainnya baik secara langsung
+maupun tidak langsung melalui Sistem Elektronik atau
+nonelektronik.
+12. Rapat Umum Pemberi Dana adalah rapat umum yang
+diselenggarakan atas inisiatif Penyelenggara, Pemberi Dana,
+dan/atau Penerima Dana dalam rangka keterbukaan, pengawasan,
+dan pengambilan keputusan tertentu.
+13. Escrow Account adalah rekening giro di bank atas nama
+Penyelenggara yang merupakan titipan dan digunakan untuk
+tujuan tertentu yaitu penerimaan dan pengeluaran dana dari dan
+kepada Pengguna.
+14. Virtual Account adalah nomor identifikasi Pengguna yang termasuk
+dalam atau bagian dari Escrow Account, dan dibuat oleh bank,
+dengan tujuan untuk mengidentifikasi suatu rekening tertentu.
+
+II. KEGIATAN USAHA PENYELENGGARA LPBBTI
+1. Kegiatan usaha Penyelenggara terdiri atas:
+a. penyediaan;
+b. pengelolaan; dan
+c. pengoperasian,
+LPBBTI.
+2. Selain melakukan kegiatan usaha sebagaimana dimaksud pada
+angka 1, Penyelenggara dapat melakukan kegiatan lain, meliputi:
+a. mitra distribusi atas surat berharga negara untuk mendukung
+program pemerintah;
+b. kerja sama layanan informatif; dan/atau
+c. kegiatan lain setelah mendapat persetujuan Otoritas Jasa
+Keuangan.
+3. Kegiatan usaha penyediaan sebagaimana dimaksud pada angka 1
+huruf a yaitu Penyelenggara menyediakan Sistem Elektronik yang
+mempertemukan Pemberi Dana dan Penerima Dana dalam
+melakukan transaksi Pendanaan secara langsung serta
+menyediakan fasilitas lainnya dalam rangka penyelenggaraan
+kegiatan usaha antara lain:
+a. penyediaan:
+1. Escrow Account; dan
+2. Virtual Acount atau payment gateway;
+b. penyediaan analisis risiko Pendanaan yang diajukan oleh
+Penerima Dana;
+c. penyediaan verifikasi identitas Pengguna dan keaslian
+dokumen;
+
+d. penyediaan fasilitas pengalihan risiko Pendanaan;
+e. penyediaan fasilitas pengalihan risiko atas objek jaminan, jika
+ada objek jaminan;
+f. penyediaan sarana pengaduan; dan
+g. penyediaan informasi terkait Pendanaan bagi Pengguna.
+4. Kegiatan usaha pengelolaan sebagaimana dimaksud pada angka 1
+huruf b yaitu Penyelenggara melakukan kegiatan:
+a. verifikasi identitas Pengguna;
+b. pemrosesan data Pengguna dan Data Pribadi lainnya sesuai
+dengan kegiatan penyelenggaraan usaha;
+c. penyaluran dana dari Pemberi Dana kepada Penerima Dana;
+d. pembayaran Pendanaan dari Penerima Dana kepada Pemberi
+Dana; dan
+e. penagihan kepada Penerima Dana.
+5. Kegiatan usaha pengoperasian sebagaimana dimaksud pada angka
+1 huruf c yaitu Penyelenggara mengoperasikan secara penuh Sistem
+Elektronik yang dimiliki.
+6. Kegiatan lain setelah mendapatkan persetujuan Otoritas Jasa
+Keuangan sebagaimana dimaksud pada angka 2 huruf c meliputi:
+a. kegiatan yang dilakukan dalam rangka penugasan pemerintah;
+b. pengembangan layanan Pendanaan yang meningkatkan risiko
+Penyelenggara; dan/atau
+c. kerja sama dengan pihak lain dalam rangka perolehan bisnis.
+7. Kegiatan lain sebagaimana dimaksud pada angka 6 adalah kegiatan
+yang masih berkaitan dengan kegiatan usaha LPBBTI dan tidak
+bertentangan dengan peraturan perundang-undangan lain.
+8. Kerja sama dengan pihak lain dalam rangka perolehan bisnis
+sebagaimana dimaksud pada angka 6 huruf c dilakukan dengan
+memenuhi ketentuan:
+a. dituangkan dalam perjanjian kerja sama tertulis;
+b. tidak bertujuan untuk melakukan penguasaan pasar; dan
+c. tidak memiliki benturan kepentingan dengan pihak yang
+melakukan kerja sama dengan Penyelenggara.
+9. Permohonan persetujuan kegiatan lain dengan kriteria kerja sama
+dalam rangka perolehan bisnis sebagaimana dimaksud pada angka
+6 huruf c dilakukan 1 (satu) kali apabila skema dan produk kerja
+sama tidak berbeda meskipun pihak yang melakukan kerja sama
+berbeda.
+
+III. KEGIATAN USAHA BERDASARKAN PRINSIP SYARIAH
+1. Penyelenggara berdasarkan Prinsip Syariah harus memenuhi
+Prinsip Syariah dalam melaksanakan kegiatan usaha.
+2. Kegiatan usaha berdasarkan Prinsip Syariah wajib menggunakan
+akad:
+a. al-bai';
+b. ijarah;
+c. mudharabah;
+d. musyarakah;
+e. wakalah;
+f. wakalah bi al ujrah; dan
+g. qardh.
+3. Pemenuhan Prinsip Syariah dalam penggunaan akad sebagaimana
+dimaksud pada angka 1 wajib didukung:
+
+a. fatwa dan/atau pernyataan kesesuaian syariah yang
+dikeluarkan oleh lembaga yang memiliki kewenangan dalam
+penetapan fatwa di bidang syariah; dan
+b. opini dari DPS atas penggunaan akad tertentu untuk
+pelaksanaan kegiatan usaha dalam hal fatwa dan/atau
+pernyataan kesesuaian syariah sebagaimana dimaksud pada
+huruf a belum dikeluarkan.
+4. DPS melakukan analisis dan evaluasi pemenuhan dan penerapan
+Prinsip Syariah paling sedikit meliputi:
+a. kegiatan penyaluran Pendanaan;
+b. prosedur operasional standar;
+c. praktik pemasaran Pendanaan syariah; dan
+d. penerapan akuntansi.
+5. Evaluasi pemenuhan dan penerapan Prinsip Syariah sebagaimana
+dimaksud pada angka 4 dilakukan secara berkala setiap bulan
+dalam bentuk laporan tertulis dan dilaporkan kepada direksi.
+
+IV. PENGGUNAAN TENAGA KERJA ALIH DAYA
+1. Penyelenggara dapat menyerahkan sebagian pelaksanaan
+pekerjaan kepada pihak ketiga dengan perjanjian alih daya.
+2. Bentuk perjanjian alih daya sebagaimana dimaksud pada angka 1
+dilakukan Penyelenggara melalui perjanjian:
+a. pemborongan pekerjaan; dan/atau
+b. penyediaan jasa tenaga kerja.
+3. Penyelenggara dilarang untuk mengalihdayakan pekerjaan yang
+menjalankan fungsi:
+a. penilaian kelayakan Pendanaan; dan/atau
+b. operasional Teknologi Informasi.
+4. Pekerjaan berkenaan dengan penilaian kelayakan Pendanaan
+sebagaimana dimaksud pada angka 3 huruf a adalah bagian dari
+struktur organisasi Penyelenggara yang menjalankan fungsi untuk
+melakukan penilaian kelayakan Pendanaan.
+5. Dalam menjalankan fungsi sebagaimana dimaksud pada angka 3
+huruf a, Penyelenggara dapat bekerja sama dengan lembaga
+pengelola informasi perkreditan untuk menambah referensi data
+dalam melakukan penilaian kelayakan Pendanaan.
+6. Sifat kerja sama sebagaimana dimaksud pada angka 5 hanya terkait
+dengan penyediaan data penilaian Pendanaan dan tidak terkait
+dengan penyediaan penilaian kelayakan Pendanaan akhir pada
+Sistem Elektronik milik Penyelenggara.
+7. Operasional Teknologi Informasi sebagaimana dimaksud pada
+angka 3 huruf b meliputi:
+a. aktivitas pengelolaan akses Pengguna; dan
+b. pengelolaan pangkalan data.
+8. Penyelenggara dapat melakukan aktivitas alih daya untuk
+pengembangan Teknologi Informasi.
+9. Dalam hal Penyelenggara melakukan aktivitas alih daya untuk
+pengembangan Teknologi Informasi sebagaimana dimaksud pada
+angka 8, Penyelenggara wajib memenuhi persyaratan:
+a. kode sumber aplikasi dan akses server production dimiliki oleh
+Penyelenggara;
+b. pengembangan Teknologi Informasi dikerjakan atas nama
+Penyelenggara; dan
+c. pengembangan Teknologi Informasi tidak dilaksanakan dalam
+tahapan deployment dan maintenance production.
+
+10. Penyelenggara dilarang menyerahkan sebagian pekerjaan kepada
+pihak ketiga sebagaimana dimaksud pada angka 1 selain kepada
+pihak ketiga yang memenuhi ketentuan:
+a. pihak ketiga berbentuk badan hukum di Indonesia;
+b. pihak ketiga terdaftar pada asosiasi perusahaan sejenis pihak
+ketiga;
+c. tidak memengaruhi reputasi Penyelenggara; dan
+d. dilaksanakan sesuai dengan ketentuan peraturan perundang-
+undangan di bidang ketenagakerjaan.
+11. Penyelenggara wajib bertanggung jawab atas pelaksanaan kegiatan
+yang diserahkan kepada pihak ketiga.
+
+V. RAPAT UMUM PEMBERI DANA
+1. Rapat Umum Pemberi Dana sebagaimana dimaksud dalam Romawi
+I angka 12 diselenggarakan apabila diperlukan oleh Penyelenggara,
+Pemberi Dana, dan/atau Penerima Dana.
+2. Penyelenggara wajib menyusun pedoman penyelenggaraan Rapat
+Umum Pemberi Dana.
+3. Pedoman penyelenggaraan Rapat Umum Pemberi Dana
+sebagaimana dimaksud pada angka 2 paling sedikit memuat:
+a. tata cara pelaksanaan, paling sedikit memuat:
+1) Pemberi Dana berhak menghadiri Rapat Umum Pemberi
+Dana dan menggunakan hak suaranya;
+2) Penerima Dana dapat menghadiri Rapat Umum Pemberi
+Dana dalam hal diperlukan;
+3) Rapat Umum Pemberi Dana dapat diselenggarakan
+melalui mekanisme pertemuan tatap muka secara
+langsung maupun pertemuan tatap muka secara
+elektronik;
+4) pemberitahuan dan pemanggilan terlebih dahulu dengan
+jangka waktu yang memadai kepada Pemberi Dana
+dan/atau Penerima Dana atas rencana pelaksanaan
+Rapat Umum Pemberi Dana; dan
+5) penyampaian informasi agenda Rapat Umum Pemberi
+Dana kepada peserta Rapat Umum Pemberi Dana;
+b. mekanisme, paling sedikit memuat:
+1) Rapat Umum Pemberi Dana dipimpin oleh pemimpin
+rapat;
+2) tahapan pelaksanaan Rapat Umum Pemberi Dana; dan
+3) penetapan pengambilan keputusan Rapat Umum Pemberi
+Dana yang adil;
+c. panduan Rapat Umum Pemberi Dana, paling sedikit memuat:
+1) tata cara pengajuan Rapat Umum Pemberi Dana oleh
+Penyelenggara, Penerima Dana, dan/atau Pemberi Dana;
+2) dokumentasi pelaksanaan dan hasil keputusan Rapat
+Umum Pemberi Dana;
+3) biaya pelaksanaan Rapat Umum Pemberi Dana yang
+merupakan tanggung jawab Penyelenggara; dan
+4) pemilihan dan penetapan pimpinan Rapat Umum Pemberi
+Dana.
+4. Pedoman penyelenggaraan Rapat Umum Pemberi Dana
+sebagaimana dimaksud pada angka 2 disusun dengan
+memperhatikan kompleksitas dan kemampuan Penyelenggara.
+
+5. Penyelenggara wajib menyelenggarakan Rapat Umum Pemberi Dana
+berdasarkan pedoman penyelenggaraan Rapat Umum Pemberi
+Dana yang telah ditetapkan.
+
+VI. INFORMASI DAN PERINGATAN PADA SISTEM ELEKTRONIK
+PENYELENGGARA
+1. Sistem Elektronik yang digunakan oleh Penyelenggara wajib paling
+sedikit memuat:
+a. nama Penyelenggara;
+b. logo;
+c. nama Sistem Elektronik;
+d. profil seluruh direksi, dewan komisaris, DPS, dan pemegang
+saham Penyelenggara;
+e. kinerja Pendanaan; dan
+f. informasi bahwa Penyelenggara berizin dan diawasi oleh
+Otoritas Jasa Keuangan.
+2. Penyelenggara wajib mencantumkan peringatan mengenai risiko
+kegiatan usaha LPBBTI dalam Sistem Elektronik Penyelenggara.
+3. Peringatan mengenai risiko kegiatan usaha LPBBTI sebagaimana
+dimaksud pada angka 2 wajib ditampilkan dalam halaman
+antarmuka situs web atau aplikasi yang dimiliki Penyelenggara
+yang dapat terlihat secara jelas oleh Pengguna.
+4. Penyelenggara wajib memastikan Pemberi Dana memahami seluruh
+risiko sebelum memberikan Pendanaan.
+5. Selain kepada Pemberi Dana, Penyelenggara juga harus
+memastikan Penerima Dana memahami seluruh risiko sebelum
+menerima Pendanaan.
+6. Untuk memastikan Pemberi Dana memahami seluruh risiko
+sebelum menyalurkan Pendanaan sebagaimana dimaksud pada
+angka 4, Penyelenggara meminta Pemberi Dana untuk mengisi
+pernyataan pemahaman Pemberi Dana sebagaimana tercantum
+dalam Lampiran yang merupakan bagian tidak terpisahkan dari
+Surat Edaran Otoritas Jasa Keuangan ini.
+7. Selain kepada Pemberi Dana, Penyelenggara harus meminta
+Penerima Dana untuk mengisi pernyataan pemahaman Penerima
+Dana sebagaimana tercantum dalam Lampiran yang merupakan
+bagian tidak terpisahkan dari Surat Edaran Otoritas Jasa Keuangan
+ini, dalam rangka memastikan Penerima Dana memahami seluruh
+risiko sebelum menerima Pendanaan.
+
+VII. PENGELOLAAN DATA DAN INFORMASI
+1. Penyelenggara dalam menjalankan kegiatan usaha hanya dapat
+mengakses kamera, lokasi, dan mikrofon pada gawai milik
+Pengguna.
+2. Penyelenggara tidak diperkenankan untuk menyebarkan seluruh
+data dan informasi pribadi Pengguna kepada pihak lainnya.
+3. Ketentuan sebagaimana dimaksud pada angka 2 dikecualikan
+dalam hal:
+a. terdapat persetujuan tertulis dari Pengguna; dan/atau
+b. terdapat pengecualian oleh ketentuan peraturan perundang-
+undangan.
+4. Dalam hal Pengguna memberikan persetujuan tertulis sebagaimana
+dimaksud pada angka 3 huruf a, Penyelenggara dapat memberikan
+data dan/atau informasi pribadi Pengguna dan memastikan pihak
+
+lain dimaksud tidak memberikan dan/atau menggunakan data
+dan/atau informasi pribadi Pengguna untuk tujuan selain yang
+disepakati antara Penyelenggara dengan pihak lainnya.
+5. Penyelenggara memastikan bahwa Pengguna mengetahui tujuan
+penggunaan data dan informasi serta risiko yang melekat atas
+persetujuan tertulis yang diberikan oleh Pengguna.
+6. Persetujuan tertulis dari Pengguna sebagaimana dimaksud pada
+angka 5 dinyatakan dalam bentuk suatu pernyataan dan
+persetujuan serta didokumentasikan oleh Penyelenggara.
+7. Data dan informasi pribadi Pengguna sebagaimana dimaksud pada
+angka 2 harus diamankan melalui metode yang dapat memastikan
+proses pembacaan data dan informasi dilakukan oleh pihak yang
+terotorisasi.
+8. Data dan informasi pribadi Pengguna yang diperoleh dan
+dimanfaatkan oleh Penyelenggara harus memenuhi kriteria sebagai
+berikut:
+a. penyampaian batasan pemanfaatan data dan informasi kepada
+Pengguna;
+b. penyampaian setiap perubahan tujuan pemanfaatan data dan
+informasi kepada Pengguna, jika ada; dan
+c. media dan metode yang digunakan dalam memperoleh serta
+pemanfaatan data dan informasi terjamin kerahasiaan,
+keamanan, dan keutuhannya.
+9. Penyelenggara harus menjaga kerahasiaan, keamanan, keutuhan,
+dan ketersediaan:
+a. data dan informasi pribadi Pengguna;
+b. data transaksi; dan
+c. data keuangan,
+yang dikelolanya sejak data diperoleh hingga data tersebut dihapus
+dan/atau dimusnahkan.
+10. Data dan informasi pribadi Pengguna yang dihapus dan/atau
+dimusnahkan oleh Penyelenggara harus memenuhi kriteria sebagai
+berikut:
+a. memenuhi aspek retensi berdasarkan ketentuan peraturan
+perundang-undangan dan kepentingan audit serta
+pemeriksaan dari otoritas pengawas dan pengatur sektor; dan
+b. memastikan tidak ada data dan informasi yang tertinggal serta
+dapat dimanfaatkan kembali.
+11. Penyelenggara harus memberitahukan penghapusan dan/atau
+pemusnahan Data Pribadi kepada Pengguna dengan mengacu pada
+ketentuan peraturan perundang-undangan.
+12. Penyelenggara harus melakukan pencegahan adanya akses yang
+tidak sah terhadap data dan informasi.
+
+VIII. KONFIRMASI PENGGUNAAN KONTAK DARURAT
+1. Penggunaan kontak darurat hanya ditujukan untuk melakukan
+konfirmasi atas keberadaan dari Penerima Dana dan bukan
+digunakan untuk melakukan penagihan Pendanaan kepada pemilik
+data kontak darurat.
+
+2. Penyelenggara harus melakukan konfirmasi dan memperoleh
+persetujuan dari pemilik data kontak darurat untuk penggunaan
+kontak darurat.
+3. Konfirmasi sebagaimana dimaksud pada angka 2 dilakukan dengan
+menjelaskan hal:
+a. mengonfirmasi data kontak darurat yang diajukan oleh
+Penerima Dana;
+b. mengonfirmasi hubungan antara pemilik data kontak darurat
+dengan Penerima Dana yang mengajukan kontak darurat;
+c. menjelaskan terkait apa yang dimaksud dengan kontak
+darurat kepada pemilik data kontak darurat; dan
+d. menjelaskan risiko yang akan melekat ketika menyetujui
+untuk menjadi kontak darurat.
+4. Penyelenggara mendokumentasikan konfirmasi dan persetujuan
+yang diberikan oleh pemilik data kontak darurat.
+
+IX. PEMBERI DANA DAN PENERIMA DANA
+1. Pemberi Dana dapat berasal dari dalam dan/atau luar negeri.
+2. Pemberi Dana terdiri atas:
+a. Pemberi Dana profesional yang meliputi:
+1) warga negara Indonesia yang memenuhi kriteria sebagai
+berikut:
+a) berusia paling rendah 18 (delapan belas) tahun atau
+sudah menikah; dan
+b) memiliki penghasilan bruto lebih besar dari
+Rp500.000.000,00 (lima ratus juta rupiah) per tahun,
+dengan Pendanaan paling banyak 20% (dua puluh
+persen) dari penghasilan per tahun pada 1 (satu)
+Penyelenggara;
+2) warga negara asing;
+3) badan hukum Indonesia;
+4) badan hukum asing;
+5) badan usaha Indonesia;
+6) badan usaha asing; dan/atau
+7) lembaga internasional.
+b. Pemberi Dana nonprofesional, yaitu warga negara Indonesia
+yang memenuhi kriteria sebagai berikut:
+1) berusia paling rendah 18 (delapan belas) tahun atau
+sudah menikah; dan
+2) memiliki penghasilan bruto lebih kecil atau sama dengan
+Rp500.000.000,00 (lima ratus juta rupiah) per tahun,
+dengan Pendanaan paling banyak 10% (sepuluh persen)
+dari penghasilan per tahun pada 1 (satu) Penyelenggara.
+3. Rasio outstanding Pendanaan Pemberi Dana nonprofesional
+sebagaimana dimaksud pada angka 2 huruf b terhadap outstanding
+Pendanaan seluruh Pemberi Dana paling besar 20% (dua puluh
+persen).
+Berikut simulasi perhitungan rasio outstanding:
+Pada tanggal 31 Mei 2025, Penyelenggara memiliki total posisi akhir
+(outstanding) Pendanaan dari seluruh Pemberi Dana sebesar
+Rp50.000.000.000,00 (lima puluh miliar rupiah) dan total
+Pendanaan oleh Pemberi Dana nonprofesional sebesar
+Rp8.000.000.000,00 (delapan miliar rupiah). Oleh karena itu, rasio
+outstanding Pendanaan Pemberi Dana nonprofesional = total
+Pendanaan oleh Pemberi Dana nonprofesional / total posisi akhir
+
+(outstanding) Pendanaan x 100% = Rp8.000.000.000,00 (delapan
+miliar rupiah) / Rp50.000.000.000,00 (lima puluh miliar rupiah) x
+100% (seratus persen) = 16% (enam belas persen).
+Berdasarkan perhitungan di atas, rasio outstanding sebesar 16%
+memenuhi batas sebesar 20% (dua puluh persen).
+4. Penyelenggara dilarang melakukan Pendanaan selain kepada
+Penerima Dana yang berdomisili di wilayah hukum Negara
+Kesatuan Republik Indonesia.
+5. Penerima Dana sebagaimana dimaksud pada angka 4 terdiri atas:
+a. warga negara Indonesia;
+b. badan hukum Indonesia; dan/atau
+c. badan usaha Indonesia.
+6. Warga negara Indonesia Penerima Dana sebagaimana dimaksud
+pada angka 5 huruf a harus memenuhi kriteria sebagai berikut:
+a. berusia paling rendah 18 (delapan belas) tahun atau sudah
+menikah;
+b. memiliki penghasilan bruto secara rata-rata paling sedikit
+sebesar Rp3.000.000,00 (tiga juta rupiah) per bulan yang
+didukung dengan bukti yang valid pendukung informasi
+penghasilan antara lain slip gaji atau mutasi rekening
+Penerima Dana; dan
+c. menggunakan gawai milik sendiri dalam proses Pendanaan.
+7. Penyelenggara memastikan kebenaran bukti penghasilan
+sebagaimana dimaksud pada angka 6.
+
+X. BATAS MAKSIMUM PENDANAAN KEPADA PENERIMA DANA
+1. Batas maksimum Pendanaan konsumtif dan produktif kepada
+setiap Penerima Dana sebesar Rp2.000.000.000,00 (dua miliar
+rupiah).
+2. Penyelenggara dapat memberikan Pendanaan produktif melebihi
+batasan maksimum sebagaimana dimaksud pada angka 1 sampai
+dengan Rp5.000.000.000,00 (lima miliar rupiah) sepanjang
+memenuhi ketentuan:
+a. memiliki kualitas Pendanaan macet maksimal 5% (lima persen)
+dalam kurun waktu 6 (enam) bulan terakhir; dan
+b. tidak sedang dalam pengenaan sanksi pembatasan kegiatan
+usaha atau pembekuan kegiatan usaha sebagian atau
+seluruhnya dari Otoritas Jasa Keuangan.
+3. Dalam hal Penyelenggara memberikan Pendanaan kepada beberapa
+Penerima Dana yang memiliki:
+a. 1 (satu) sumber penghasilan atau arus kas (cash flow) yang
+sama untuk membayar fasilitas Pendanaan yang diperoleh;
+atau
+b. hubungan afiliasi,
+jumlah total Pendanaan kepada seluruh Penerima Dana dimaksud
+harus memenuhi ketentuan batas maksimum Pendanaan
+sebagaimana dimaksud pada angka 1 atau angka 2.
+4. Yang dimaksud dengan hubungan afiliasi sebagaimana dimaksud
+pada angka 3 huruf b adalah:
+a. ketika Penerima Dana merupakan badan usaha atau badan
+hukum yang memiliki:
+1) hubungan keluarga karena perkawinan atau keturunan
+sampai derajat kedua, baik secara horizontal maupun
+vertikal dengan pegawai, anggota direksi, anggota dewan
+
+komisaris, anggota DPS, dan/atau pemegang saham
+badan hukum;
+2) hubungan keluarga karena perkawinan atau keturunan
+sampai derajat kedua, baik secara horizontal maupun
+vertikal dengan pegawai, anggota direksi, anggota dewan
+komisaris, dan/atau anggota DPS badan usaha;
+3) hubungan dengan badan usaha atau badan hukum
+karena adanya kesamaan satu atau lebih anggota direksi
+atau dewan komisaris;
+4) hubungan pengendalian dengan badan usaha atau badan
+hukum baik langsung maupun tidak langsung;
+5) hubungan kepemilikan saham dalam badan hukum
+sebesar 20% (dua puluh persen) atau lebih;
+6) hubungan kepemilikan dalam badan usaha sebesar 20%
+(dua puluh persen) atau lebih; dan/atau
+7) hubungan antara 2 (dua) badan usaha atau badan hukum
+yang dikendalikan, baik langsung maupun tidak
+langsung, oleh pihak yang sama.
+b. ketika Penerima Dana yang merupakan orang perseorangan:
+1) memiliki hubungan keluarga karena perkawinan atau
+keturunan sampai derajat kedua, baik secara horizontal
+maupun vertikal;
+2) pegawai yang dipekerjakan secara langsung oleh Penerima
+Dana; dan/atau
+c. pihak selain huruf a dan huruf b yang bertindak untuk
+kepentingan Penerima Dana lain.
+
+XI. MEKANISME PENYALURAN DAN PELUNASAN PENDANAAN
+1. Sebelum calon Pengguna mendaftar kepada Penyelenggara,
+Penyelenggara menampilkan hal yang perlu diperhatikan pada
+Sistem Elektronik Penyelenggara paling sedikit:
+a. LPBBTI adalah penyelenggaraan layanan jasa keuangan untuk
+mempertemukan Pemberi Dana dengan Penerima Dana dalam
+melakukan Pendanaan baik secara konvensional maupun
+berdasarkan Prinsip Syariah secara langsung melalui Sistem
+Elektronik dengan menggunakan internet;
+b. kegiatan usaha LPBBTI tunduk kepada seluruh ketentuan
+peraturan perundang-undangan yang terkait dengan LPBBTI;
+c. Penyelenggara adalah badan hukum Indonesia yang
+menyediakan, mengelola, dan mengoperasikan LPBBTI;
+d. Penyelenggara hanya dapat mengakses, memperoleh,
+menyimpan, mengelola, memproses, dan/atau menggunakan
+Data Pribadi Pengguna setelah mendapatkan persetujuan dari
+Pengguna;
+e. Penyelenggara hanya dapat mengakses kamera, lokasi, dan
+mikrofon pada gawai milik Pengguna;
+f. Pengguna harus memahami transaksi dan isi perjanjian
+LPBBTI, termasuk batas maksimum fasilitas Pendanaan
+disesuaikan dengan kemampuan Pengguna dalam melakukan
+transaksi;
+g. Pemberi Dana harus melakukan hal-hal diantaranya:
+1) memperhitungkan seluruh risiko Pendanaan dalam
+transaksi LPBBTl;
+2) melakukan langkah mitigasi risiko yang diperlukan; dan
+
+3) menandatangani pernyataan telah memahami kinerja dan
+risiko Penerima Dana, sebagaimana tercantum dalam
+Lampiran yang merupakan bagian tidak terpisahkan dari
+Surat Edaran Otoritas Jasa Keuangan ini;
+h. Penyelenggara harus memastikan tidak terjadi kesalahan yang
+menimbulkan kerugian bagi Pengguna;
+i. Pengguna menjamin keaslian seluruh dokumen yang
+disampaikan. Atas setiap pemalsuan dokumen atau tindak
+pidana lain yang dilakukan oleh Pengguna, Penyelenggara
+dapat melakukan upaya hukum termasuk memproses
+tindakan yang dimaksud kepada pihak yang berwenang;
+j. Penyelenggara tidak mengenakan biaya apa pun kepada
+Pengguna atas pelayanan pengaduan;
+k. Penyelenggara menyampaikan prosedur penyelesaian dan
+penagihan kepada Pemberi Dana dan Penerima Dana dalam
+hal terjadi wanprestasi Pendanaan yang dilakukan oleh
+Penerima Dana; dan
+l. hal lain yang perlu diperhatikan terkait karakteristik produk
+yang dimiliki oleh Penyelenggara.
+2. Dalam melakukan Pendanaan, Penyelenggara harus memastikan
+bahwa Pengguna memahami hal yang perlu diperhatikan
+sebagaimana dimaksud pada angka 1.
+3. Mekanisme pengajuan permohonan penyaluran dan penerimaan
+Pendanaan sebagai berikut:
+a. calon Pengguna harus terlebih dahulu terdaftar di
+Penyelenggara;
+b. calon Pengguna yang telah terdaftar di Penyelenggara
+mengajukan:
+1) permohonan penyaluran Pendanaan, dalam hal Pengguna
+adalah calon Pemberi Dana; atau
+2) permohonan penerimaan Pendanaan, dalam hal
+Pengguna adalah calon Penerima Dana,
+melalui Sistem Elektronik Penyelenggara;
+c. Penyelenggara melaksanakan analisis atas permohonan
+penyaluran Pendanaan sebagaimana dimaksud dalam huruf b
+angka 1), dilakukan dengan cara paling sedikit:
+1) melakukan verifikasi atas keaslian dokumen yang
+disampaikan sesuai dengan prosedur operasional standar
+Penyelenggara;
+2) melakukan klarifikasi dan konfirmasi baik melalui tatap
+muka secara langsung, tatap muka secara elektronik,
+dan/atau tidak tatap muka secara elektronik kepada
+calon Pemberi Dana sebagaimana diatur dalam Peraturan
+Otoritas Jasa Keuangan mengenai penerapan program
+anti pencucian uang, pencegahan pendanaan terorisme,
+dan pencegahan pendanaan proliferasi senjata pemusnah
+massal di sektor jasa keuangan; dan
+3) analisis calon Pemberi Dana;
+d. dokumen yang disampaikan calon Pemberi Dana sebagaimana
+dimaksud dalam huruf c angka 1) paling sedikit terdiri dari:
+1) bagi calon Pemberi Dana yang merupakan warga negara
+Indonesia dan warga negara asing paling sedikit:
+a) kartu tanda penduduk bagi warga negara Indonesia
+atau nomor paspor bagi warga negara asing;
+b) nomor pokok wajib pajak, jika ada;
+
+c) swafoto; dan
+d) dokumen yang memuat informasi terkait nomor
+rekening dan nama pemilik rekening;
+2) bagi calon Pemberi Dana yang merupakan badan hukum,
+badan usaha, dan lembaga internasional paling sedikit
+terdiri dari:
+a) kartu tanda penduduk dari pemilik/anggota direksi
+warga negara Indonesia atau nomor paspor dari
+pemilik/anggota direksi warga negara asing;
+b) nomor induk berusaha atau yang dianggap setara;
+c) nomor pokok wajib pajak, kecuali bagi lembaga
+internasional;
+d) dokumen khusus bagi:
+(1) badan hukum;
+(a) akta pendirian;
+(b) perubahan anggaran dasar terakhir; dan
+(c) surat:
+i. persetujuan atau penerimaan
+pemberitahuan dari instansi yang
+berwenang; atau
+ii. surat pengesahan dari instansi yang
+berwenang bagi badan hukum
+perseroan perorangan;
+(2) badan usaha yang tidak berbadan hukum:
+(a) dokumen pendirian beserta perubahan
+terakhir; dan
+(b) dokumen yang menunjukkan pendaftaran
+atau pengesahan badan usaha dari instansi
+terkait; atau
+(3) lembaga internasional:
+(a) dokumen pendirian; dan
+(b) dokumen yang menunjukkan anggaran
+dasar atau yang setara;
+e) laporan yang dapat menunjukkan transaksi
+operasional dan laba rugi terakhir; dan
+f) dokumen pendukung lainnya;
+e. analisis calon Pemberi Dana sebagaimana dimaksud dalam
+huruf c angka 3) yaitu analisis identitas;
+f. analisis identitas sebagaimana dimaksud dalam huruf e paling
+sedikit terdiri dari:
+1) jenis Pemberi Dana;
+a) warga negara Indonesia dan warga negara asing; atau
+b) badan hukum, badan usaha, dan lembaga
+internasional;
+2) data orang perseorangan;
+a) nama lengkap Pemberi Dana termasuk nama alias,
+jika ada;
+b) nomor induk kependudukan bagi warga negara
+Indonesia atau nomor paspor bagi warga negara
+asing;
+c) nomor pokok wajib pajak, jika ada;
+d) nomor telepon;
+e) kewarganegaraan;
+f) tempat lahir;
+g) tanggal lahir;
+
+h) jenis kelamin;
+i) status perkawinan;
+j) nama gadis ibu kandung;
+k) pekerjaan;
+l) alamat dan nomor telepon tempat kerja, jika ada;
+m) penghasilan;
+n) sumber penghasilan;
+o) alamat tempat tinggal sesuai dokumen identitas; dan
+p) alamat domisili lengkap;
+3) data badan usaha (termasuk badan hukum dan lembaga
+internasional):
+a) nomor induk berusaha atau sejenisnya;
+b) nomor pokok wajib pajak kecuali untuk lembaga
+internasional;
+c) bidang usaha;
+d) nomor telepon;
+e) alamat domisili lengkap;
+f) tempat dan tanggal pendirian;
+g) bentuk badan usaha;
+h) penghasilan;
+i) sumber dana; dan
+j) identitas pemilik/direktur:
+(1) nama lengkap termasuk nama alias, jika ada;
+(2) nomor induk kependudukan bagi warga negara
+Indonesia atau nomor paspor bagi warga negara
+asing;
+(3) nomor pokok wajib pajak, jika ada;
+(4) nomor telepon;
+(5) alamat tempat tinggal sesuai dokumen identitas;
+dan
+(6) alamat domisili lengkap.
+g. Penyelenggara melaksanakan penilaian skor kredit (credit
+scoring) dalam menyalurkan Pendanaan, dilakukan dengan
+cara paling sedikit:
+1) melakukan verifikasi atas kebenaran dokumen yang
+disampaikan oleh calon Penerima Dana sesuai dengan
+pedoman penilaian skor kredit (credit scoring);
+2) melakukan klarifikasi dan konfirmasi baik melalui tatap
+muka secara langsung, tatap muka secara elektronik,
+dan/atau tidak tatap muka secara elektronik kepada
+calon Penerima Dana sebagaimana diatur dalam
+Peraturan Otoritas Jasa Keuangan mengenai penerapan
+program anti pencucian uang, pencegahan pendanaan
+terorisme, dan pencegahan pendanaan proliferasi senjata
+pemusnah massal di sektor jasa keuangan;
+3) melakukan pengolahan data dari pihak lain yang relevan
+dengan kebutuhan penilaian skor kredit (credit scoring);
+dan
+4) analisis calon Penerima Dana;
+h. dokumen yang disampaikan calon Penerima Dana
+sebagaimana dimaksud pada huruf g angka 1) paling sedikit
+terdiri dari:
+1) bagi calon Penerima Dana yang merupakan warga negara
+Indonesia paling sedikit:
+a) kartu tanda penduduk bagi warga negara Indonesia;
+
+b) nomor pokok wajib pajak, jika ada;
+c) swafoto;
+d) dokumen yang memuat informasi terkait nomor
+rekening dan nama pemilik rekening (jika
+diperlukan); dan
+e) bukti pendukung informasi penghasilan Penerima
+Dana antara lain slip gaji atau mutasi rekening; atau
+2) bagi calon Penerima Dana yang merupakan badan usaha
+(termasuk badan hukum) paling sedikit:
+a) nomor induk kependudukan atau yang dianggap
+setara dari pemilik/anggota direksi;
+b) nomor induk berusaha atau yang dianggap setara;
+c) nomor pokok wajib pajak;
+d) dokumen khusus bagi:
+(1) badan hukum:
+(a) akta pendirian;
+(b) perubahan anggaran dasar terakhir; dan
+(c) surat:
+i. persetujuan atau penerimaan
+pemberitahuan dari instansi yang
+berwenang; atau
+ii. surat pengesahan dari instansi yang
+berwenang bagi badan hukum
+perseroan perorangan;
+(2) badan usaha yang tidak berbadan hukum:
+(a) dokumen pendirian beserta perubahan
+terakhir; dan
+(b) dokumen yang menunjukkan pendaftaran
+atau pengesahan badan usaha dari instansi
+terkait;
+e) laporan yang dapat menunjukkan transaksi
+operasional dan laba rugi terakhir; dan
+f) dokumen pendukung lainnya;
+i. analisis calon Penerima Dana sebagaimana dimaksud dalam
+huruf g angka 4) meliputi analisis identitas serta kelayakan
+dan kemampuan;
+j. analisis identitas sebagaimana dimaksud dalam huruf i paling
+sedikit terdiri dari:
+1) nama lengkap Penerima Dana termasuk nama alias, jika
+ada;
+2) jenis Penerima Dana;
+a) orang perseorangan; atau
+b) badan usaha (termasuk badan hukum);
+3) data orang perseorangan paling sedikit:
+a) nomor induk kependudukan atau yang dianggap
+setara;
+b) nomor pokok wajib pajak (jika diperlukan);
+c) nomor telepon;
+d) tempat lahir;
+e) tanggal lahir;
+f) jenis kelamin;
+g) status perkawinan;
+h) nama gadis ibu kandung;
+i) pendidikan terakhir;
+j) pekerjaan;
+
+k) alamat dan nomor telepon tempat kerja, jika ada;
+l) penghasilan;
+m) sumber penghasilan; dan
+n) alamat tempat tinggal sesuai dokumen identitas dan
+alamat tempat tinggal lain, jika ada;
+4) data badan usaha (termasuk badan hukum) paling
+sedikit:
+a) nomor induk berusaha atau sejenisnya;
+b) nomor pokok wajib pajak;
+c) bidang usaha;
+d) nomor telepon;
+e) alamat domisili lengkap;
+f) penghasilan badan usaha; dan
+g) identitas pemilik/direktur:
+(1) nama lengkap termasuk nama alias, jika ada;
+(2) nomor induk kependudukan atau yang
+dianggap setara;
+(3) nomor pokok wajib pajak;
+(4) nomor telepon; dan
+(5) alamat tempat tinggal sesuai dokumen identitas
+dan alamat tempat tinggal lain, jika ada; dan
+5) kontak darurat, jika ada; dan
+k. Penyelenggara harus memastikan bahwa Penerima Dana tidak
+menerima Pendanaan melalui lebih dari 3 (tiga) Penyelenggara,
+termasuk Penyelenggara yang bersangkutan.
+4. Setelah Penyelenggara melakukan analisis calon Penerima Dana,
+Penyelenggara menentukan kelayakan calon Penerima Dana dan
+menyampaikan informasi kepada calon Penerima Dana bahwa:
+a. dalam hal calon Penerima Dana dinyatakan layak,
+Penyelenggara menyampaikan hasil penilaian beserta tenor
+dan manfaat ekonomi dari Pendanaan yang diajukannya; atau
+b. dalam hal calon Penerima Dana dinyatakan tidak layak,
+Penyelenggara menyampaikan ketidaklayakan kepada calon
+Penerima Dana dan disertai dengan alasan penolakannya.
+5. Permohonan penerimaan Pendanaan sebagaimana dimaksud pada
+angka 3 huruf b angka 2) dan hasil penilaian calon Penerima Dana
+yang dinyatakan layak sebagaimana angka 4 huruf a, ditampilkan
+pada Sistem Elektronik Penyelenggara.
+6. Pelaksanaan kegiatan Pendanaan dilakukan dengan cara:
+a. Calon Pemberi Dana memilih calon Penerima Dana pada
+Sistem Elektronik Penyelenggara.
+b. Calon Pengguna menandatangani perjanjian LPBBTI dengan
+menggunakan tanda tangan elektronik.
+c. Pemberi Dana menyalurkan Pendanaan melalui Virtual Account
+atau payment gateway ke Escrow Account Penyelenggara
+untuk diteruskan kepada Penerima Dana.
+d. Dalam hal Pemberi Dana menggunakan rekening dana khusus,
+seluruh dana tetap harus dikirim menggunakan Virtual
+Account atau payment gateway untuk kemudian diteruskan
+kepada Escrow Account milik Penyelenggara.
+e. Penyelenggara memberikan notifikasi penyaluran dan
+penerimaan Pendanaan kepada Pengguna melalui Sistem
+Elektronik dan/atau media elektronik lainnya.
+f. Dalam pelaksanaan kegiatan Pendanaan, Penyelenggara harus
+memperhatikan hal-hal sebagai berikut:
+
+1) untuk kepentingan pelindungan konsumen dan
+masyarakat, setiap Penyelenggara tidak diperkenankan
+melakukan Pendanaan yang tidak sehat.
+2) Pendanaan yang tidak sehat sebagaimana dimaksud pada
+angka 1) antara lain:
+a) Pendanaan yang mengenakan syarat, ketentuan,
+manfaat ekonomi, dan/atau denda keterlambatan
+yang mengandung unsur tipu muslihat;
+b) Pendanaan yang tidak memperhatikan kemampuan
+membayar kembali (repayment capacity) Penerima
+Dana;
+c) Pendanaan yang diberikan dengan syarat, ketentuan,
+manfaat ekonomi, dan/atau denda keterlambatan
+yang tidak wajar;
+d) Pendanaan yang diterima Penerima Dana lebih dari 3
+(tiga) Penyelenggara; atau
+e) Pendanaan yang ditujukan untuk kegiatan terkait
+judi online dan tindak pidana lainnya.
+g. Penyelenggara memperhatikan adanya objek jaminan
+tambahan bagi Pendanaan produktif lebih dari
+Rp2.000.000.000,00 (dua miliar rupiah).
+h. Dalam hal tidak terdapat objek jaminan tambahan
+sebagaimana dimaksud pada huruf g, Pemberi Dana berhak
+meminta informasi/data yang dibutuhkan mengenai calon
+Penerima Dana kepada Penyelenggara.
+i. Penyelenggara wajib memastikan Pemberi Dana memahami
+seluruh risiko sebelum memberikan Pendanaan.
+j. Selain kepada Pemberi Dana, Penyelenggara juga harus
+memastikan Penerima Dana memahami seluruh risiko
+sebelum menerima Pendanaan.
+k. Untuk memastikan Pemberi Dana memahami seluruh risiko
+sebelum memberikan Pendanaan sebagaimana dimaksud pada
+huruf j, Penyelenggara meminta Pemberi Dana untuk mengisi
+pernyataan pemahaman Pemberi Dana sebagaimana
+tercantum dalam Lampiran yang merupakan bagian tidak
+terpisahkan dari Surat Edaran Otoritas Jasa Keuangan ini.
+l. Selain kepada Pemberi Dana, Penyelenggara harus meminta
+Penerima Dana untuk mengisi pernyataan pemahaman
+Penerima Dana sebagaimana tercantum dalam Lampiran yang
+merupakan bagian tidak terpisahkan dari Surat Edaran
+Otoritas Jasa Keuangan ini, dalam rangka memastikan
+Penerima Dana memahami seluruh risiko sebelum menerima
+Pendanaan.
+7. Dalam rangka pembayaran angsuran dan/atau pelunasan
+Pendanaan, Penerima Dana melakukan pembayaran melalui Virtual
+Account atau payment gateway untuk ditempatkan pada Escrow
+Account Penyelenggara dan diteruskan kepada Pemberi Dana.
+8. Pembayaran pelunasan angsuran dan/atau Pendanaan melalui
+penagihan oleh pihak lain dilakukan sesuai dengan cara
+sebagaimana dimaksud pada angka 7.
+
+XII. KERJA SAMA DALAM RANGKA PENYALURAN PENDANAAN
+1. Dalam rangka penyaluran Pendanaan, Penyelenggara dapat
+melakukan kerja sama dengan mitra.
+
+2. Mitra adalah pihak lain yang bekerja sama dengan Penyelenggara
+dalam rangka mendukung penyaluran Pendanaan.
+3. Kerja sama penyaluran Pendanaan melalui mitra dilakukan dalam
+rangka:
+a. penyerahan barang dan/atau jasa; dan
+b. melakukan edukasi kepada Penerima Dana.
+4. Dalam melakukan kerja sama sebagaimana dimaksud pada angka
+3, Penyelenggara paling sedikit harus:
+a. melakukan asesmen terhadap mitra sebelum bekerja sama;
+b. menjelaskan kepada Pemberi Dana terkait mekanisme kerja
+sama dan potensi risiko kerja sama dimaksud; dan
+c. memberikan pernyataan bahwa mitra tidak boleh melakukan
+pengelolaan dana. Dalam hal terjadi pengelolaan Pendanaan
+oleh mitra, Penyelenggara bertanggung jawab atas risiko dan
+kerugian atas pengelolaan Pendanaan oleh mitra.
+5. Pencairan Pendanaan disalurkan secara langsung kepada Penerima
+Dana.
+6. Penerima Dana melakukan pembayaran melalui Virtual Account
+atau payment gateway untuk ditempatkan pada Escrow Account
+Penyelenggara dan diteruskan kepada Pemberi Dana.
+7. Mitra tidak dapat melakukan kegiatan mewakili atau
+mengatasnamakan Penerima Dana.
+8. Penyelenggara menyampaikan laporan bulanan kepada Otoritas
+Jasa Keuangan atas kerja sama yang dilakukan dengan mitra,
+paling sedikit mencakup:
+a. nama mitra;
+b. alamat mitra;
+c. skema kerja sama;
+d. jumlah Penerima Dana; dan
+e. jumlah Pendanaan yang disalurkan.
+9. Laporan bulanan sebagaimana dimaksud pada angka 8
+disampaikan dalam bentuk data elektronik melalui surat elektronik
+yang ditetapkan Otoritas Jasa Keuangan dan ditujukan kepada
+Departemen Pengawasan Lembaga Keuangan Mikro dan Lembaga
+Jasa Keuangan lainnya.
+
+XIII. PENILAIAN SKOR KREDIT (CREDIT SCORING)
+1. Penilaian skor kredit (credit scoring) sebagaimana dimaksud dalam
+Romawi XI angka 3 huruf g harus memperhatikan kelayakan dan
+kemampuan calon Penerima Dana untuk memenuhi kewajiban
+pembayaran Pendanaan yaitu watak (character) dan kemampuan
+membayar kembali (repayment capacity). Selain itu, Penyelenggara
+dapat memperhatikan pula aspek lainnya seperti modal (capital),
+prospek ekonomi (condition of economy), dan/atau objek jaminan
+(collateral).
+2. Penilaian terhadap kemampuan membayar kembali (repayment
+capacity) sebagaimana dimaksud pada angka 1 untuk Pendanaan
+konsumtif antara lain dilakukan dengan menelaah perbandingan
+antara jumlah pembayaran pokok dan manfaat ekonomi yang
+dibayarkan oleh Penerima Dana dengan penghasilan Penerima
+Dana yang ditetapkan paling tinggi sebesar:
+a. 40% (empat puluh persen) pada tahun 2025; dan
+b. 30% (tiga puluh persen) sejak tahun 2026.
+Yang dimaksud dengan jumlah pembayaran pokok dan manfaat
+ekonomi adalah seluruh jumlah pembayaran pokok dan manfaat
+
+ekonomi yang dibayarkan Penerima Dana kepada seluruh kreditur,
+terdiri dari Penyelenggara, bank, perusahaan pembiayaan,
+perusahaan modal ventura, perusahaan pergadaian, dan lembaga
+jasa keuangan lainnya.
+Penghasilan Penerima Dana diketahui dari bukti yang valid
+pendukung informasi penghasilan antara lain slip gaji atau mutasi
+rekening Penerima Dana.
+3. Dalam rangka penilaian skor kredit (credit scoring), Penyelenggara
+dapat memanfaatkan data dari:
+a. internal Penyelenggara;
+b. penyedia jasa pengelola informasi yang telah terdaftar atau
+berizin dari otoritas terkait;
+c. lembaga pemerintahan atau badan usaha milik negara atau
+badan usaha milik daerah; dan/atau
+d. lembaga lainnya yang telah terdaftar atau berizin dari otoritas
+terkait.
+4. Pemanfaatan data sebagaimana dimaksud pada angka 3
+dilaksanakan dengan memenuhi ketentuan peraturan perundang-
+undangan mengenai pelindungan Data Pribadi.
+5. Metode penilaian skor kredit (credit scoring) sebagaimana dimaksud
+pada angka 1 menggunakan:
+a. metodologi tradisional yaitu metode penilaian skor kredit
+(credit scoring) yang menggunakan data historis kredit individu
+atau perusahaan untuk menentukan kelayakan kredit.
+Proses ini melibatkan analisis data seperti riwayat
+pembayaran, jumlah pinjaman yang dimiliki, durasi pinjaman,
+dan berbagai faktor lainnya yang berhubungan dengan
+perilaku kredit masa lalu; dan/atau
+b. metodologi machine learning yaitu metode penilaian skor kredit
+(credit scoring) yang menggunakan algoritma machine learning
+untuk menganalisis data dan memprediksi kelayakan kredit
+calon debitur.
+6. Penyelenggara dapat menggunakan sistem machine learning
+sebagaimana dimaksud pada angka 5 huruf b secara mandiri atau
+kerja sama dengan pihak ketiga.
+7. Penyelenggara harus menyampaikan pedoman penilaian skor kredit
+(credit scoring) paling sedikit 1 (satu) kali dan pada saat terjadi
+perubahan kepada Otoritas Jasa Keuangan paling lambat 10
+(sepuluh) hari kerja sejak dilakukan perubahan.
+
+XIV. BATAS MAKSIMUM MANFAAT EKONOMI
+1. Penyelenggara wajib memenuhi ketentuan batas maksimum
+manfaat ekonomi Pendanaan dalam memfasilitasi Pendanaan.
+2. Manfaat ekonomi yang dikenakan oleh Penyelenggara adalah
+tingkat imbal hasil, termasuk:
+a. bunga/margin/bagi hasil;
+b. biaya administrasi/biaya komisi/fee platform/ujrah yang
+setara dengan biaya dimaksud; dan
+c. biaya lainnya, selain denda keterlambatan, biaya tanda tangan
+elektronik yang telah diamankan dengan sertifikat elektronik,
+dan pajak.
+3. Batas maksimum manfaat ekonomi sebagaimana dimaksud pada
+angka 2 ditetapkan berdasarkan jenis Pendanaan, yaitu:
+
+a. untuk Pendanaan produktif, yaitu:
+1) nilai Pendanaan paling tinggi Rp50.000.000,00 (lima
+puluh juta rupiah):
+a) sebesar 0,275% (nol koma dua tujuh lima persen) per
+hari kalender dari nilai Pendanaan yang tercantum
+dalam perjanjian Pendanaan untuk tenor sampai
+dengan 6 (enam) bulan; dan
+b) sebesar 0,1% (nol koma satu persen) per hari
+kalender dari nilai Pendanaan yang tercantum dalam
+perjanjian Pendanaan untuk tenor di atas 6 (enam)
+bulan.
+2) nilai Pendanaan lebih besar dari Rp50.000.000,00 (lima
+puluh juta rupiah) sebesar 0,1% (nol koma satu persen)
+per hari kalender dari nilai Pendanaan yang tercantum
+dalam perjanjian Pendanaan, baik untuk tenor sampai
+dengan 6 (enam) bulan maupun tenor di atas 6 (enam)
+bulan.
+b. untuk Pendanaan konsumtif, yaitu:
+1) sebesar 0,3% (nol koma tiga persen) per hari kalender dari
+nilai Pendanaan yang tercantum dalam perjanjian
+Pendanaan untuk tenor sampai dengan 6 (enam) bulan;
+dan
+2) sebesar 0,2% (nol koma dua persen) per hari kalender dari
+nilai Pendanaan yang tercantum dalam perjanjian
+Pendanaan untuk tenor di atas 6 (enam) bulan.
+Berikut simulasi perhitungan batas maksimum manfaat ekonomi:
+1) Pendanaan produktif
+Penerima Dana A mengajukan Pendanaan kepada
+Penyelenggara Z pada tanggal 5 Januari 2025 dengan rincian
+sebagai berikut:
+a) batas maksimum manfaat ekonomi sebagaimana huruf a
+angka 1) sebesar 0,275% (nol koma dua tujuh lima persen)
+per hari kalender dari nilai Pendanaan yang tercantum
+dalam perjanjian Pendanaan untuk tenor sampai dengan
+6 (enam) bulan;
+b) Pendanaan yang disalurkan sebagaimana dalam
+perjanjian Pendanaan Rp50.000.000,00 (lima puluh juta
+rupiah);
+c) tenor 5 (lima) bulan;
+d) bunga/margin/bagi hasil Rp1.000.000,00 (satu juta
+rupiah);
+e) biaya administrasi/biaya komisi/fee platform/ujrah
+Rp200.000,00 (dua ratus ribu rupiah);
+f) biaya lainnya Rp50.000,00 (lima puluh ribu rupiah);
+g) total manfaat ekonomi = bunga/margin/bagi hasil + biaya
+administrasi/biaya komisi/fee platform/ujrah + biaya
+lainnya = Rp1.000.000,00 (satu juta rupiah) +
+Rp200.000,00 (dua ratus ribu rupiah) + Rp50.000,00
+(lima puluh ribu rupiah) = Rp1.250.000,00 (satu juta dua
+ratus lima puluh ribu rupiah);
+h) persentase manfaat ekonomi = total manfaat ekonomi /
+(Pendanaan yang disalurkan sebagaimana dalam
+perjanjian Pendanaan x tenor) = Rp1.250.000,00 (satu
+juta dua ratus lima puluh rupiah) / [Rp50.000.000,00
+
+(lima puluh juta rupiah) x 150 (seratus lima puluh)] x
+100% (seratus persen) = 0,017% (nol koma nol satu tujuh
+persen).
+Berdasarkan perhitungan di atas, besar manfaat ekonomi
+sebesar 0,017% (nol koma nol satu tujuh persen) memenuhi
+batas maksimum manfaat ekonomi yaitu 0,275% (nol koma
+dua tujuh lima persen) per hari kalender dari nilai Pendanaan
+yang tercantum dalam perjanjian Pendanaan.
+2) Pendanaan konsumtif
+Penerima Dana B mengajukan Pendanaan kepada
+Penyelenggara Y pada tanggal 10 Agustus 2025 dengan rincian
+sebagai berikut:
+a) batas maksimum manfaat ekonomi sebagaimana huruf b
+angka 2) sebesar 0,2% (nol koma dua persen) per hari
+kalender dari nilai Pendanaan yang tercantum dalam
+perjanjian Pendanaan;
+b) Pendanaan yang disalurkan sebagaimana dalam
+perjanjian Pendanaan Rp150.000.000,00 (seratus lima
+puluh juta rupiah);
+c) tenor 7 (tujuh) bulan;
+d) bunga/margin/bagi hasil Rp2.000.000,00 (dua juta
+rupiah);
+e) biaya administrasi/biaya komisi/fee platform/ujrah
+Rp300.000,00 (tiga ratus ribu rupiah);
+f) biaya lainnya Rp50.000,00 (lima puluh ribu rupiah);
+g) total manfaat ekonomi = bunga/margin/bagi hasil + biaya
+administrasi/biaya komisi/fee platform/ujrah + biaya
+lainnya = Rp2.000.000,00 (dua juta rupiah) +
+Rp300.000,00 (tiga ratus ribu rupiah) + Rp50.000,00 (lima
+puluh ribu rupiah) = Rp2.350.000,00 (dua juta tiga ratus
+lima puluh ribu rupiah);
+h) persentase manfaat ekonomi = total manfaat ekonomi /
+(Pendanaan yang disalurkan sebagaimana dalam
+perjanjian Pendanaan x tenor) = Rp2.350.000,00 (dua juta
+tiga ratus lima puluh ribu rupiah) / [Rp150.000.000,00
+(seratus lima puluh juta rupiah) x 210 (dua ratus sepuluh
+puluh)] x 100% (seratus persen) = 0,007% (nol koma nol
+nol tujuh persen).
+Berdasarkan perhitungan di atas, besar manfaat ekonomi
+sebesar 0,007% (nol koma nol nol tujuh persen) memenuhi
+batas maksimum manfaat ekonomi yaitu 0,2% (nol koma dua
+persen) per hari kalender dari nilai Pendanaan yang tercantum
+dalam perjanjian Pendanaan.
+4. Batas maksimum denda keterlambatan sebagaimana dimaksud
+pada angka 2 huruf c ditetapkan berdasarkan jenis Pendanaan,
+yaitu:
+a. untuk Pendanaan produktif, yaitu:
+1) nilai Pendanaan paling tinggi Rp50.000.000,00 (lima
+puluh juta rupiah):
+a) sebesar 0,275% (nol koma dua tujuh lima persen) per
+hari kalender dari nilai Pendanaan yang tercantum
+dalam perjanjian Pendanaan untuk tenor sampai
+dengan 6 (enam) bulan; dan
+b) sebesar 0,1% (nol koma satu persen) per hari
+kalender dari nilai Pendanaan yang tercantum dalam
+
+perjanjian Pendanaan untuk tenor di atas 6 (enam)
+bulan.
+2) nilai Pendanaan lebih besar dari Rp50.000.000,00 (lima
+puluh juta rupiah) sebesar 0,1% (nol koma satu persen)
+per hari kalender dari nilai Pendanaan yang tercantum
+dalam perjanjian Pendanaan, baik untuk tenor sampai
+dengan 6 (enam) bulan maupun tenor di atas 6 (enam)
+bulan.
+b. untuk Pendanaan konsumtif, yaitu:
+1) sebesar 0,3% (nol koma tiga persen) per hari kalender dari
+nilai Pendanaan yang tercantum dalam perjanjian
+Pendanaan untuk tenor sampai dengan 6 (enam) bulan;
+dan
+2) sebesar 0,2% (nol koma dua persen) per hari kalender dari
+nilai Pendanaan yang tercantum dalam perjanjian
+Pendanaan untuk tenor di atas 6 (enam) bulan.
+5. Seluruh manfaat ekonomi dan denda keterlambatan yang dapat
+dikenakan kepada Pengguna tidak melebihi 100% (seratus persen)
+dari nilai Pendanaan yang tercantum dalam perjanjian Pendanaan.
+6. Denda keterlambatan bagi Pendanaan berdasarkan Prinsip Syariah
+tidak dapat diakui sebagai pendapatan (off balance sheet) dan harus
+dikategorikan sebagai dana kebajikan sesuai fatwa dan/atau
+pernyataan kesesuaian syariah dari lembaga yang memiliki
+kewenangan dalam penetapan fatwa di bidang syariah.
+7. Penetapan batas maksimum manfaat ekonomi dan denda
+keterlambatan sebagaimana dimaksud pada angka 3 dan angka 4
+dapat dilakukan evaluasi secara berkala sesuai kebijakan yang
+ditetapkan oleh Otoritas Jasa Keuangan dengan
+mempertimbangkan antara lain kondisi perekonomian dan
+perkembangan industri LPBBTI.
+
+XV. FASILITAS MITIGASI RISIKO BAGI PENGGUNA
+1. Penyelenggara wajib melakukan mitigasi risiko paling sedikit
+berupa:
+a. analisis risiko Pendanaan yang diajukan oleh Penerima Dana;
+b. verifikasi identitas Pengguna dan keaslian dokumen; dan
+c. penagihan atas Pendanaan yang disalurkan secara optimal.
+2. Selain melakukan mitigasi risiko sebagaimana dimaksud pada
+angka 1, Penyelenggara dapat memfasilitasi:
+a. pengalihan risiko Pendanaan dalam hal terdapat permintaan
+dari Pemberi Dana;
+b. pengalihan risiko atas objek jaminan, jika ada objek jaminan;
+dan/atau
+c. mitigasi risiko lain untuk pelindungan Pemberi Dana dengan
+persetujuan Otoritas Jasa Keuangan.
+3. Mitigasi risiko lain untuk pelindungan Pemberi Dana sebagaimana
+dimaksud pada angka 2 huruf c disampaikan kepada Otoritas Jasa
+Keuangan dengan cakupan paling sedikit:
+a. deskripsi mitigasi risiko lain yang dilakukan;
+b. pedoman mitigasi risiko; dan
+c. mekanisme penyelesaian hak dan kewajiban para pihak.
+4. Analisis risiko Pendanaan sebagaimana dimaksud pada angka 1
+huruf a:
+
+a. dilakukan pada saat Penerima Dana mengajukan permohonan
+Pendanaan dengan cara melakukan pemrosesan data yang
+diterima pada saat Penerima Dana mengajukan pendaftaran
+dan/atau berdasarkan data lain yang dimiliki Penyelenggara;
+dan
+b. digunakan untuk menilai kelayakan Penerima Dana untuk
+memenuhi kewajiban Pendanaan.
+5. Pengalihan risiko Pendanaan sebagaimana dimaksud pada angka 2
+huruf a dapat dilakukan melalui mekanisme asuransi kredit atau
+penjaminan kredit.
+6. Dalam hal Penyelenggara memfasilitasi mitigasi risiko Pendanaan
+dalam bentuk asuransi kredit dan/atau penjaminan kredit,
+Penyelenggara wajib menggunakan perusahaan asuransi atau
+lembaga penjamin yang memenuhi ketentuan sebagai berikut:
+a. telah mendapatkan izin usaha dari Otoritas Jasa Keuangan;
+dan
+b. tidak dalam pengenaan sanksi administratif berupa
+pembatasan kegiatan usaha atau pembekuan kegiatan usaha
+dari Otoritas Jasa Keuangan.
+7. Penyelenggara dalam bekerja sama dengan perusahaan asuransi
+atau lembaga penjamin harus memenuhi ketentuan sebagai
+berikut:
+a. kerja sama dilakukan dengan paling sedikit 2 (dua)
+perusahaan asuransi dan/atau lembaga penjamin atau paling
+sedikit 1 (satu) konsorsium perusahaan asuransi atau
+konsorsium lembaga penjamin; dan
+b. Penyelenggara hanya bersifat sebagai penyedia fasilitas kerja
+sama bagi Pemberi Dana.
+8. Kerja sama sebagaimana dimaksud pada angka 7 dituangkan dalam
+suatu perjanjian tertulis.
+9. Perjanjian tertulis sebagaimana dimaksud pada angka 8 harus
+menggunakan bahasa Indonesia atau bahasa Indonesia
+berdampingan dengan bahasa asing.
+10. Dalam hal Penyelenggara memfasilitasi mitigasi risiko Pendanaan
+dalam bentuk asuransi kredit sebagaimana dimaksud pada angka
+5 dilarang menggunakan mekanisme asuransi yang membatasi nilai
+klaim asuransi sebesar persentase dari nilai premi.
+11. Penggunaan asuransi atau penjaminan sebagaimana dimaksud
+pada angka 5 merupakan kesepakatan antara Pemberi Dana
+dengan perusahaan asuransi atau lembaga penjamin.
+12. Dalam menggunakan asuransi kredit atau penjaminan kredit
+sebagaimana dimaksud pada angka 11, Pemberi Dana bertindak
+sebagai tertanggung atau penerima jaminan.
+13. Dalam hal pembayaran klaim, perusahaan asuransi atau
+perusahaan penjaminan langsung membayarkan klaim kepada
+Pemberi Dana dan/atau penerima manfaat.
+14. Dalam hal pembayaran klaim telah dibayarkan oleh perusahaan
+asuransi atau lembaga penjamin sebagaimana dimaksud pada
+angka 13, Penyelenggara harus memastikan bahwa informasi
+pembayaran klaim disampaikan kepada Pemberi Dana.
+15. Dalam rangka pengalihan risiko atas objek jaminan sebagaimana
+dimaksud pada angka 2 huruf b, Penyelenggara dapat:
+a. mengasuransikan objek jaminan; dan/atau
+
+b. melakukan kerja sama dengan pihak lain yang memiliki
+kewenangan untuk menampung atau menyimpan objek
+jaminan berdasarkan ketentuan peraturan perundang-
+undangan.
+
+XVI. TINGKAT KUALITAS PENDANAAN
+1. Penyelenggara melakukan penilaian kualitas Pendanaan.
+2. Kualitas Pendanaan sebagaimana dimaksud pada angka 1 terdiri
+atas:
+a. lancar;
+b. dalam perhatian khusus;
+c. kurang lancar;
+d. diragukan; dan
+e. macet.
+3. Kualitas Pendanaan sebagaimana dimaksud pada angka 1
+dikategorikan sebagai berikut:
+a. lancar apabila tidak terdapat keterlambatan pembayaran
+pokok dan/atau manfaat ekonomi Pendanaan;
+b. dalam perhatian khusus apabila terdapat keterlambatan
+pembayaran pokok dan/atau manfaat ekonomi Pendanaan
+yang telah melampaui jatuh tempo sampai dengan 30 (tiga
+puluh) hari kalender;
+c. kurang lancar apabila terdapat keterlambatan pembayaran
+pokok dan/atau manfaat ekonomi Pendanaan yang telah
+melampaui jatuh tempo 30 (tiga puluh) hari kalender sampai
+dengan 60 (enam puluh) hari kalender;
+d. diragukan apabila terdapat keterlambatan pembayaran pokok
+dan/atau manfaat ekonomi Pendanaan yang telah melampaui
+jatuh tempo 60 (enam puluh) hari kalender sampai dengan 90
+(sembilan puluh) hari kalender; dan
+e. macet apabila terdapat keterlambatan pembayaran pokok
+dan/atau manfaat ekonomi Pendanaan yang telah melampaui
+jatuh tempo 90 (sembilan puluh) hari kalender.
+4. Dalam hal terdapat penyimpangan penyaluran Pendanaan oleh
+Penyelenggara, Penyelenggara harus menurunkan kualitas
+Pendanaan menjadi macet. Penyimpangan penyaluran Pendanaan
+antara lain Pendanaan yang disalurkan dengan identitas palsu atau
+identitas pihak lain yang tidak menikmati Pendanaan tersebut.
+5. Penyelenggara harus menetapkan kualitas Pendanaan yang sama
+terhadap 1 (satu) Penerima Dana dengan lebih dari 1 (satu)
+Pendanaan.
+6. Dalam menetapkan kualitas Pendanaan yang sama terhadap 1
+(satu) Penerima Dana sebagaimana dimaksud pada angka 5,
+Penyelenggara harus menggunakan kualitas Pendanaan yang
+paling rendah.
+7. Penyelenggara dapat menetapkan kualitas Pendanaan yang berbeda
+terhadap lebih dari 1 (satu) Pendanaan yang dimiliki oleh 1 (satu)
+Penerima Dana, dalam hal:
+a. Pendanaan yang memiliki kualitas paling rendah telah dihapus
+buku;
+
+b. total nilai Pendanaan kurang dari Rp2.000.000.000,00 (dua
+miliar rupiah); dan/atau
+c. sumber pembayaran kembali fasilitas Pendanaan berasal dari
+sumber penghasilan atau cashflow yang berbeda.
+
+XVII. PUBLIKASI KINERJA PENDANAAN
+1. Penyelenggara harus memublikasikan kinerja Pendanaan pada
+halaman utama situs web, aplikasi, dan/atau Sistem Elektronik
+milik Penyelenggara yang memuat informasi paling sedikit:
+a. nilai Pendanaan yang tersalurkan;
+b. jumlah Pemberi Dana;
+c. jumlah Penerima Dana; dan
+d. tingkat kualitas Pendanaan.
+2. Informasi sebagaimana dimaksud pada angka 1 huruf a sampai
+dengan huruf c disampaikan:
+a. sejak melakukan kegiatan usaha;
+b. pada tahun berjalan; dan
+c. pada posisi akhir.
+3. Publikasi tingkat kualitas Pendanaan sebagaimana dimaksud
+pada angka 1 huruf d dilakukan dengan menampilkan seluruh
+tingkat keberhasilan bayar atas Pendanaan yang difasilitasi oleh
+Penyelenggara berdasarkan tingkat kualitas Pendanaan LPBBTI.
+4. Tingkat kualitas Pendanaan sebagaimana dimaksud pada angka 3
+ditampilkan dengan rincian sebagai berikut:
+a. ditulis dengan menggunakan format:
+1) lancar = xx,xx%;
+2) dalam perhatian khusus = xx,xx%;
+3) kurang lancar = xx,xx%;
+4) diragukan = xx,xx%; dan
+5) macet = xx,xx%,
+termasuk penjelasan mengenai tingkat kualitas Pendanaan
+sebagai berikut:
+a) lancar adalah tingkat kualitas Pendanaan apabila tidak
+terdapat keterlambatan pembayaran pokok dan/atau
+manfaat ekonomi Pendanaan;
+b) dalam perhatian khusus adalah tingkat kualitas
+Pendanaan apabila terdapat keterlambatan
+pembayaran pokok dan/atau manfaat ekonomi
+Pendanaan yang telah melampaui jatuh tempo sampai
+dengan 30 (tiga puluh) hari kalender;
+c) kurang lancar adalah tingkat kualitas pendanaan
+apabila terdapat keterlambatan pembayaran pokok
+dan/atau manfaat ekonomi Pendanaan yang telah
+melampaui jatuh tempo 30 (tiga puluh) hari kalender
+sampai dengan 60 (enam puluh) hari kalender;
+d) diragukan adalah tingkat kualitas Pendanaan apabila
+terdapat keterlambatan pembayaran pokok dan/atau
+manfaat ekonomi Pendanaan yang telah melampaui
+jatuh tempo 60 (enam puluh) hari kalender sampai
+dengan 90 (sembilan puluh) hari kalender; dan
+e) macet adalah tingkat kualitas Pendanaan apabila
+terdapat keterlambatan pembayaran pokok dan/atau
+manfaat ekonomi Pendanaan yang telah melampaui
+jatuh tempo 90 (sembilan puluh) hari kalender.
+
+b. ditempatkan pada layar utama pada bagian kanan atas
+seluruh situs web, aplikasi, dan/atau Sistem Elektronik
+Penyelenggara; dan
+c. ditempatkan pada posisi yang mudah dilihat dan dapat
+dibaca secara jelas.
+5. Perhitungan yang digunakan untuk menentukan tingkat kualitas
+Pendanaan adalah sebagai berikut:
+a. lancar
+Posisi akhir pembayaran tepat waktu
+= X 100 %
+Total posisi akhir
+b. dalam perhatian khusus
+Posisi akhir pembayaran 1 − 30 hari kalender
+= X 100 %
+Total posisi akhir
+c. kurang Lancar
+Posisi akhir pembayaran 31 − 60 hari kalender
+= X 100 %
+Total posisi akhir
+d. diragukan
+Posisi akhir pembayaran 61 − 90 hari hari kalender
+= X 100 %
+Total posisi akhir
+e. macet
+Posisi akhir pembayaran di atas 90 hari hari kalender
+= X 100 %
+Total posisi akhir
+6. Tingkat kualitas Pendanaan sebagaimana dimaksud pada angka 4
+dapat diperbaiki dalam hal:
+a. Penerima Dana telah melakukan pembayaran secara penuh
+atas seluruh Pendanaan yang diterima serta atas kewajiban
+pembayaran yang timbul dari Pendanaan tersebut;
+b. Pemberi Dana telah menerima pembayaran dari perusahaan
+asuransi atau perusahaan penjaminan atas klaim
+tanggungan dan/atau jaminan yang diajukan; atau
+c. Pemberi Dana telah melakukan hapus buku atas Pendanaan
+yang disalurkan.
+7. Perbaikan tingkat kualitas Pendanaan sebagaimana dimaksud
+pada angka 6 huruf c dikecualikan dalam hal terdapat
+penyimpangan penyaluran Pendanaan oleh Penyelenggara, sampai
+dengan Pendanaan tersebut berhasil dibayarkan kembali kepada
+Pemberi Dana.
+8. Informasi kinerja Pendanaan sebagaimana dimaksud pada angka
+1 dilakukan pengkinian paling sedikit 1 (satu) kali dalam
+seminggu.
+9. Informasi nominal dan persentase Pendanaan yang telah dihapus
+buku disampaikan kepada Pemberi Dana melalui Sistem
+Elektronik, paling sedikit 1 (satu) kali dalam seminggu.
+
+XVIII. PELAPORAN PENYELESAIAN HAK DAN KEWAJIBAN
+1. Penyelenggara menyusun laporan penyelesaian hak dan kewajiban
+dalam hal:
+a. Penyelenggara melakukan konversi dari Penyelenggara
+konvensional menjadi Penyelenggara berdasarkan Prinsip
+Syariah;
+b. penutupan unit usaha syariah;
+c. Penyelenggara tidak dapat melanjutkan kegiatan
+operasionalnya; atau
+
+d. Penyelenggara dinyatakan pailit.
+2. Penyelesaian hak dan kewajiban Penyelenggara kepada Pengguna
+sebagaimana dimaksud pada angka 1 dilakukan dengan cara:
+a. pengalihan posisi akhir total Pendanaan yang belum dilunasi;
+b. portofolio dialihkan kepada Penyelenggara dengan prinsip
+penyelenggaraan usaha yang sejenis; dan/atau
+c. mekanisme lain yang disepakati oleh Pengguna.
+3. Penyelesaian hak dan kewajiban Penyelenggara melakukan
+konversi sebagaimana dimaksud pada angka 1 huruf a dan
+melakukan penutupan unit usaha syariah sebagaimana dimaksud
+pada angka 1 huruf b dilakukan dengan persetujuan Pengguna.
+4. Dalam hal Pengguna tidak memberikan persetujuan sebagaimana
+dimaksud pada angka 3 maka penyelesaian hak dan kewajiban
+Penyelenggara kepada Pengguna tetap diselesaikan melalui
+mekanisme yang disepakati oleh Pengguna.
+5. Mekanisme lain yang disepakati oleh Pengguna sebagaimana
+dimaksud pada angka 2 huruf c dapat dilakukan dengan cara
+Penyelenggara mempertemukan Pemberi Dana dan Penerima Dana
+yang selanjutnya kedua pihak dapat menyepakati penyelesaian
+perjanjian Pendanaan, sesuai dengan ketentuan peraturan
+perundang-undangan.
+6. Penyelesaian hak dan kewajiban Penyelenggara kepada Pengguna
+sebagaimana dimaksud pada angka 3 dituliskan dalam perjanjian
+LPBBTI.
+7. Laporan penyelesaian hak dan kewajiban sebagaimana dimaksud
+pada angka 1 dilakukan dengan mengacu pada ketentuan
+mengenai permohonan perizinan, permohonan persetujuan, dan
+pelaporan secara elektronik bagi Penyelenggara.
+
+XIX. PERJANJIAN
+1. Penyelenggara memenuhi keseimbangan, keadilan, dan kewajaran
+dalam membuat perjanjian tertulis.
+2. Perjanjian sebagaimana dimaksud pada angka 1 dilaksanakan
+sesuai dengan ketentuan peraturan perundang-undangan yang
+mengatur mengenai pelindungan konsumen dan masyarakat di
+sektor jasa keuangan.
+
+XX. KETENTUAN LAIN-LAIN
+1. Dalam rangka pelindungan kepada Pengguna dan masyarakat,
+Penyelenggara yang tidak dapat memenuhi ketentuan ekuitas
+minimum paling sedikit Rp12.500.000.000,00 (dua belas miliar
+lima ratus juta rupiah) sebagaimana diatur dalam peraturan
+perundang-undangan mengenai LPBBTI dikenakan sanksi
+administratif sesuai ketentuan.
+2. Bagi Penyelenggara yang masih memiliki prospek usaha (viable),
+dalam rangka upaya penyehatan dan/atau pemenuhan ekuitas
+minimum sebagaimana dimaksud pada angka 1 dapat dilakukan
+penggabungan atau peleburan.
+3. Penyelenggara yang memenuhi kriteria status pengawasan intensif
+atau pengawasan khusus, dapat tidak ditetapkan dalam status
+pengawasan intensif atau status pengawasan khusus dalam jangka
+waktu tertentu oleh Otoritas Jasa Keuangan dalam hal:
+
+a. dalam proses penggabungan, peleburan, atau
+pengambilalihan; dan/atau
+b. dalam proses penambahan modal disetor yang paling sedikit
+telah tercatat dalam kriteria dana setoran modal,
+sebagaimana diatur dalam ketentuan peraturan perundang-
+undangan yang mengatur mengenai pengawasan, penetapan status
+pengawasan, dan tindak lanjut pengawasan lembaga pembiayaan,
+perusahaan modal ventura, lembaga keuangan mikro, dan lembaga
+jasa keuangan lainnya.
+4. Penyelenggara yang dikenakan sanksi pembatasan kegiatan usaha
+dan/atau tidak dapat disehatkan dapat mengalihkan portofolio
+Pendanaan kepada Penyelenggara lain atau lembaga yang dibentuk
+khusus.
+5. Mekanisme pengalihan portofolio Pendanaan sebagaimana
+dimaksud pada angka 4 harus dicantumkan dalam perjanjian
+antara Penerima Dana dan Pemberi Dana.
+6. Mekanisme pengalihan portofolio Pendanaan dalam perjanjian
+antara Penerima Dana dan Pemberi Dana sebagaimana dimaksud
+pada angka 5 mengatur paling sedikit:
+a. penyampaian pemberitahuan kepada Pengguna; dan
+b. permohonan konfirmasi persetujuan/penolakan Penerima
+Dana atas pengalihan portofolio Pendanaan kepada
+Penyelenggara lain atau lembaga lain yang dibentuk khusus.
+7. Dalam hal Penerima Dana tidak memberikan konfirmasi
+persetujuan atau penolakan atas pilihan pengalihan portofolio
+Pendanaan kepada Penyelenggara lain atau lembaga yang dibentuk
+khusus dalam jangka waktu yang ditetapkan oleh Penyelenggara,
+Penerima Dana dianggap setuju atas pengalihan portofolio
+Pendanaan yang dilakukan oleh Penyelenggara.
+8. Penyelenggara harus melakukan penagihan secara mandiri atau
+dengan menunjuk pihak lain.
+9. Penagihan sebagaimana dimaksud pada angka 7 dilaksanakan
+sesuai dengan ketentuan peraturan perundang-undangan yang
+mengatur mengenai pelindungan konsumen dan masyarakat di
+sektor jasa keuangan.
+10. Dalam hal Penyelenggara tidak melakukan penagihan sebagaimana
+dimaksud pada angka 9, Penyelenggara dikenai sanksi administratif
+sesuai dengan ketentuan peraturan perundang-undangan yang
+mengatur mengenai pelindungan konsumen dan masyarakat di
+sektor jasa keuangan, diantaranya pemberhentian pengurus.
+
+XXI. KETENTUAN PERALIHAN
+1. Kewajiban pemenuhan:
+a. usia minimum Pengguna;
+b. penghasilan minimum Penerima Dana; dan
+c. pernyataan pemahaman Pengguna memahami seluruh risiko,
+sebagaimana dimaksud dalam romawi IX angka 2 huruf a, huruf b
+dan angka 6 serta romawi XI angka 6 huruf k dan huruf l mulai
+berlaku paling lambat 1 Januari 2026 terhadap:
+1) Pemberi Dana dan Penerima Dana yang melakukan Pendanaan
+baru; atau
+
+2) Pemberi Dana dan Penerima Dana yang melakukan
+perpanjangan Pendanaan.
+2. Rasio outstanding Pemberi Dana nonprofessional sebagaimana
+dimaksud dalam romawi IX angka 3 mulai berlaku paling lambat 1
+Januari 2027.
+3. Adanya objek jaminan tambahan sebagaimana dimaksud dalam
+romawi romawi XI angka 6 huruf g mulai berlaku paling lambat 1
+(satu) tahun sejak Surat Edaran Otoritas Jasa Keuangan ini
+ditetapkan.
+4. Perjanjian Pendanaan yang telah ditandatangani sebelum Surat
+Edaran Otoritas Jasa Keuangan ini mulai berlaku, dinyatakan tetap
+berlaku sampai dengan berakhirnya perjanjian Pendanaan.
+5. Dalam hal perjanjian Pendanaan yang telah ditandatangani
+sebelum Surat Edaran Otoritas Jasa Keuangan ini mulai berlaku
+diperlukan perubahan setelah berlakunya Surat Edaran Otoritas
+Jasa Keuangan ini, perubahan atas perjanjian Pendanaan tersebut
+harus memenuhi ketentuan dalam Surat Edaran Otoritas Jasa
+Keuangan ini.
+6. Perjanjian antara Penerima Dana dan Pemberi Dana yang telah
+berlaku sebelum Surat Edaran Otoritas Jasa Keuangan ini berlaku,
+harus menyesuaikan dengan ketentuan sebagaimana dimaksud
+dalam romawi XX angka 5 dan angka 6 paling lambat 6 (enam)
+bulan sejak Surat Edaran Otoritas Jasa Keuangan ini berlaku.
+
+XXII. PENUTUP
+1. Pada saat Surat Edaran Otoritas Jasa Keuangan ini mulai berlaku,
+Surat Edaran Otoritas Jasa Keuangan Nomor 19/SEOJK.06/2023
+tentang Penyelenggaraan Layanan Pendanaan Bersama Berbasis
+Teknologi Informasi, dicabut dan dinyatakan tidak berlaku.
+2. Ketentuan dalam Surat Edaran Otoritas Jasa Keuangan ini mulai
+berlaku pada tanggal ditetapkan.
+
+Ditetapkan di Jakarta
+pada tanggal 31 Juli 2025
+
+KEPALA EKSEKUTIF PENGAWAS LEMBAGA
+PEMBIAYAAN, PERUSAHAAN MODAL
+VENTURA, LEMBAGA KEUANGAN MIKRO,
+DAN LEMBAGA JASA KEUANGAN LAINNYA
+OTORITAS JASA KEUANGAN
+REPUBLIK INDONESIA,
+
+ttd
+
+AGUSMAN
+
+Salinan ini sesuai dengan aslinya
+Kepala Direktorat Pengembangan Hukum
+Departemen Hukum
+
+ttd
+
+Aat Windradi

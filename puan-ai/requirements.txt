@@ -1,0 +1,9 @@
+# Inti Puan AI (embedding Gemini). Cukup ini untuk Colab maupun server FastAPI.
+google-genai>=1.0
+numpy>=1.26
+pandas>=2.0
+openpyxl>=3.1
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.6
+python-dotenv>=1.0

@@ -1,0 +1,4 @@
+# Tambahan KHUSUS untuk model embedding multilingual-e5-small (berjalan lokal).
+# Ukurannya besar (torch ~1 GB lebih) -> pertimbangkan kapasitas server sebelum deploy.
+-r requirements.txt
+sentence-transformers>=3.0

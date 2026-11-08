@@ -1,0 +1,2531 @@
+PENJELASAN
+ATAS
+PERATURAN OTORITAS JASA KEUANGAN
+REPUBLIK INDONESIA
+NOMOR 40 TAHUN 2024
+TENTANG
+LAYANAN PENDANAAN BERSAMA BERBASIS TEKNOLOGI INFORMASI
+
+I. UMUM
+Dengan berlakunya Undang-Undang Nomor 4 Tahun 2023 tentang
+Pengembangan dan Penguatan Sektor Keuangan merupakan salah satu
+tonggak penting dalam sejarah sektor keuangan Indonesia, termasuk
+bagi industri LPBBTI. Undang-Undang Nomor 4 Tahun 2023 tentang
+Pengembangan dan Penguatan Sektor Keuangan memberikan landasan
+hukum bagi kegiatan LPBBTI, antara lain diaturnya ruang lingkup
+kegiatan LPBBTI, bentuk badan hukum, kepemilikan, sumber dana
+penyertaan, izin usaha, dan penyelenggaraan usaha. Undang-Undang
+Nomor 4 Tahun 2023 tentang Pengembangan dan Penguatan Sektor
+Keuangan juga mengamanatkan ketentuan dalam Pasal 106 ayat (6),
+Pasal 111 ayat (2), Pasal 112 ayat (3), Pasal 113 ayat (4), Pasal 114 ayat
+(3), Pasal 115 ayat (5), Pasal 116 ayat (3), Pasal 121 ayat (2), Pasal 122
+ayat (3), Pasal 123 ayat (2), Pasal 124 ayat (2), Pasal 125 ayat (4), Pasal
+128 ayat (4), Pasal 252 ayat (4), Pasal 269, Pasal 270 ayat (3), dan Pasal
+282 ayat (3) untuk diatur lebih lanjut dalam Peraturan Otoritas Jasa
+Keuangan yang mengatur LPBBTI.
+Model bisnis LPBBTI yang berbeda dengan sektor jasa keuangan
+lainnya, di mana Penyelenggara hanya bertindak sebagai perantara, dan
+tidak dapat berperan sebagai pihak yang mengumpulkan dana pihak
+ketiga atau turut mengambil risiko atas peminjaman dana yang
+diberikan oleh Pemberi Dana kepada Penerima Dana, memiliki risiko
+yang cukup tinggi. Selain itu, model bisnis LPBBTI yang menggunakan
+pemanfaataan Teknologi Informasi secara kompleks tersebut juga turut
+menyumbangkan eksposur risiko yang cukup tinggi.
+Pengaturan LPBBTI saat ini diatur dalam Peraturan Otoritas Jasa
+Keuangan Nomor 10/POJK.05/2022 tentang Layanan Pendanaan
+Bersama Berbasis Teknologi Informasi. Dalam perkembangannya,
+Peraturan Otoritas Jasa Keuangan Nomor 10/POJK.05/2022 tentang
+Layanan Pendanaan Bersama Berbasis Teknologi Informasi perlu
+dilakukan penyesuaian dalam rangka menindaklanjuti amanat
+pengaturan Undang-Undang Nomor 4 Tahun 2023 tentang
+Pengembangan dan Penguatan Sektor Keuangan, harmonisasi dengan
+Undang-Undang Nomor 1 Tahun 2024 tentang Perubahan Kedua atas
+Undang-Undang 11 Tahun 2008 tentang Informasi dan Transaksi
+Elektronik, dan penguatan pengaturan antara lain mengenai
+penyesuaian batas maksimum Pendanaan, penyesuaian ketentuan
+mekanisme pemberian persetujuan atas perubahan kepemilikan,
+pengaturan credit scoring, pengaturan mengenai transparansi hapus
+buku, dan mekanisme pengawasan.
+
+II. PASAL DEMI PASAL
+
+Pasal 1
+Cukup jelas.
+
+Pasal 2
+Cukup jelas.
+
+Pasal 3
+Cukup jelas.
+
+Pasal 4
+Cukup jelas.
+
+Pasal 5
+Ayat (1)
+Contoh larangan menjadi PSP pada lebih dari 1 (satu)
+Penyelenggara konvensional atau 1 (satu) Penyelenggara
+berdasarkan Prinsip Syariah:
+1. A merupakan PSP pada PT X yang merupakan
+Penyelenggara konvensional. A tidak dapat menjadi PSP
+pada Penyelenggara konvensional lainnya;
+2. B merupakan PSP pada PT Y yang merupakan
+Penyelenggara berdasarkan Prinsip Syariah. B tidak dapat
+menjadi PSP pada Penyelenggara berdasarkan Prinsip
+Syariah lainnya;
+3. A merupakan PSP pada PT X yang merupakan
+Penyelenggara konvensional dapat menjadi PSP pada PT Y
+yang merupakan Penyelenggara berdasarkan Prinsip
+Syariah; dan
+4. A merupakan PSP pada PT X yang merupakan
+Penyelenggara berdasarkan Prinsip Syariah dapat menjadi
+PSP pada PT Y yang merupakan Penyelenggara
+konvensional.
+Ayat (2)
+Cukup jelas.
+
+Pasal 6
+Cukup jelas.
+
+Pasal 7
+Cukup jelas.
+
+Pasal 8
+Ayat (1)
+Huruf a
+Yang dimaksud dengan pinjaman adalah pinjaman
+berupa uang yang menyebabkan penerima pinjaman
+memiliki kewajiban untuk mengembalikan sejumlah nilai
+tertentu.
+Contoh:
+a. pinjaman dari bank;
+b. pinjaman dari badan usaha dan/atau lembaga; dan
+c. pinjaman dari sumber lain.
+Huruf b
+Cukup jelas.
+
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+Ayat (7)
+Cukup jelas.
+
+Pasal 9
+Ayat (1)
+Pengenaan sanksi administratif mempertimbangkan antara
+lain:
+a. dampak pelanggaran ketentuan terhadap kerugian
+konsumen, kondisi Penyelenggara, dan sektor jasa
+keuangan;
+b. kompleksitas pelanggaran ketentuan;
+c. kondisi keuangan Penyelenggara; dan/atau
+d. pelanggaran ketentuan yang berulang.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+Ayat (7)
+Cukup jelas.
+Ayat (8)
+Cukup jelas.
+
+Pasal 10
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Yang dimaksud dengan “pemaparan Sistem Elektronik” adalah
+pemaparan terkait Sistem Elektronik yang dimiliki oleh
+Penyelenggara, alur Pendanaan baik dari Pemberi Dana dan
+Penerima Dana, keandalan Sistem Elektronik, dan
+pengintegrasian sistem Elektronik dengan sistem jaringan
+komunikasi data Otoritas Jasa Keuangan.
+Ayat (5)
+Cukup jelas.
+
+Ayat (6)
+Cukup jelas.
+Ayat (7)
+Yang dimaksud dengan “kelengkapan dokumen” adalah
+dokumen telah lengkap serta memenuhi syarat dan ketentuan
+dalam Peraturan Otoritas Jasa Keuangan ini.
+Ayat (8)
+Cukup jelas.
+Ayat (9)
+Cukup jelas.
+Ayat (10)
+Cukup jelas.
+Ayat (11)
+Cukup jelas.
+Ayat (12)
+Cukup jelas.
+
+Pasal 11
+Ayat (1)
+Yang dimaksud dengan “instansi yang berwenang” adalah
+kementerian yang membidangi komunikasi dan digital.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Yang dimaksud dengan “sejak tanggal” adalah perhitungan
+waktu dimulai pada saat tanggal yang ditentukan. Contoh:
+apabila Penyelenggara terdaftar pada tanggal 5 Juni, maka
+tanggal dimaksud diperhitungkan.
+Ayat (5)
+Cukup jelas.
+
+Pasal 12
+Cukup jelas
+
+Pasal 13
+Ayat (1)
+Lihat penjelasan Pasal 9 ayat (1).
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+
+Pasal 14
+Cukup jelas.
+
+Pasal 15
+Cukup jelas.
+
+Pasal 16
+Cukup jelas.
+
+Pasal 17
+Cukup jelas.
+
+Pasal 18
+Cukup jelas.
+
+Pasal 19
+Ayat (1)
+Lihat penjelasan Pasal 9 ayat (1).
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+
+Pasal 20
+Cukup jelas.
+
+Pasal 21
+Cukup jelas.
+
+Pasal 22
+Cukup jelas.
+
+Pasal 23
+Cukup jelas.
+
+Pasal 24
+Cukup jelas.
+
+Pasal 25
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Huruf a
+Cukup jelas.
+Huruf b
+Pengalaman dalam bidang keuangan syariah atau LPBBTI
+berdasarkan Prinsip Syariah dibuktikan dengan surat
+keputusan kepegawaian atau surat penugasan.
+Huruf c
+Cukup jelas.
+
+Pasal 26
+Cukup jelas.
+
+Pasal 27
+Cukup jelas.
+
+Pasal 28
+Cukup jelas.
+
+Pasal 29
+Cukup jelas.
+
+Pasal 30
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Huruf a
+Cukup jelas.
+Huruf b
+Sebagai contoh bentuk lain yang diperkenankan
+berdasarkan ketentuan peraturan perundang-undangan
+dan sesuai standar akuntansi keuangan syariah yaitu
+pengakuan aset yang dimiliki UUS sebelumnya sebagai
+Modal Disetor Penyelenggara berdasarkan Prinsip Syariah
+yang dibuktikan dengan laporan posisi keuangan
+penutupan UUS dan laporan posisi keuangan pembukaan
+Penyelenggara berdasarkan Prinsip Syariah. Aset UUS
+yang dapat diakui sebagai Modal Disetor paling rendah
+sebesar Ekuitas UUS.
+
+Pasal 31
+Cukup jelas.
+
+Pasal 32
+Cukup jelas.
+
+Pasal 33
+Cukup jelas.
+
+Pasal 34
+Cukup jelas.
+
+Pasal 35
+Cukup jelas.
+
+Pasal 36
+Cukup jelas.
+
+Pasal 37
+Cukup jelas.
+
+Pasal 38
+Cukup jelas.
+
+Pasal 39
+Cukup jelas.
+
+Pasal 40
+Cukup jelas.
+
+Pasal 41
+Cukup jelas.
+
+Pasal 42
+Cukup jelas.
+
+Pasal 43
+Cukup jelas.
+
+Pasal 44
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Yang dimaksud dengan “para pihak dan pemangku
+kepentingan terkait lainnya” adalah para pihak diluar
+Penyelenggara dan Pengguna yang terdampak akibat dari
+penutupan UUS.
+Ayat (5)
+Cukup jelas.
+
+Pasal 45
+Cukup jelas.
+
+Pasal 46
+Cukup jelas.
+
+Pasal 47
+Cukup jelas.
+
+Pasal 48
+Ayat (1)
+Lihat penjelasan Pasal 9 ayat (1).
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+
+Pasal 49
+Cukup jelas.
+
+Pasal 50
+Cukup jelas.
+
+Pasal 51
+Ayat (1)
+Yang dimaksud dengan “sertifikat kompetensi kerja” mengacu
+kepada Kerangka Kualifikasi Nasional Indonesia yang berlaku
+di bidang teknologi finansial.
+
+Yang dimaksud dengan “lembaga sertifikasi profesi” adalah
+lembaga sertifikasi profesi yang terakreditasi oleh Badan
+Nasional Sertifikasi Profesi dan terdaftar di Otoritas Jasa
+Keuangan.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+
+Pasal 52
+Ayat (1)
+Contoh Sistem Elektronik yang digunakan oleh Penyelenggara
+berupa situs web dan aplikasi mobile.
+Ayat (2)
+Keahlian dapat dibuktikan antara lain dengan sertifikat
+kompetensi di bidang Teknologi Informasi.
+
+Pasal 53
+Cukup jelas.
+
+Pasal 54
+Cukup jelas.
+
+Pasal 55
+Ayat (1)
+Huruf a
+Cukup jelas.
+Huruf b
+Tenaga ahli dengan level 1 (satu) tingkat di bawah Direksi
+merupakan pejabat fungsional.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+Ayat (7)
+Cukup jelas.
+Ayat (8)
+Cukup jelas.
+Ayat (9)
+Cukup jelas.
+
+Pasal 56
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+
+Ayat (4)
+Huruf a
+Pengguna dikenal dengan user.
+Huruf b
+Pengelolaan pangkalan data biasa dikenal dengan
+database.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Huruf a
+Kode sumber biasa dikenal dengan source code.
+Huruf b
+Cukup jelas.
+Huruf c
+Yang dimaksud “deployment” adalah proses implementasi
+atau penerapan Teknologi Informasi ke dalam lingkungan
+atau sistem yang dapat diakses oleh pengguna akhir.
+Yang dimaksud “maintenance production” adalah proses
+pemeliharan Teknologi Informasi untuk menjaga agar
+Teknologi Informasi berjalan sesuai dengan kondisi yang
+tepat.
+Ayat (7)
+Huruf a
+Cukup jelas.
+Huruf b
+Yang dimaksud dengan “terdaftar pada asosiasi
+perusahaan sejenis pihak ketiga” adalah asosiasi yang
+diakui berdasarkan hukum Indonesia atau diakui secara
+internasional ketika tidak terdapat asosiasi sejenis di
+Indonesia.
+Huruf c
+Cukup jelas.
+Huruf d
+Cukup jelas.
+Ayat (8)
+Cukup jelas.
+
+Pasal 57
+Ayat (1)
+Lihat penjelasan Pasal 9 ayat (1).
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+
+Pasal 58
+Ayat (1)
+Yang dimaksud dengan pengambilalihan adalah perbuatan
+hukum yang dilakukan oleh badan hukum atau orang
+perseorangan untuk mengambil alih saham Penyelenggara
+yang mengakibatkan beralihnya pengendalian atas
+Penyelenggara.
+
+Struktur kepemilikan Penyelenggara LPBBTI dideskripsikan
+sebagai berikut:
+1. Penyelenggara LPBBTI sahamnya dimiliki oleh:
+a. BHI A sebesar 40%
+b. WNI B sebesar 40%
+c. BHI C sebesar 20%
+2. BHI A sahamnya dimilik oleh:
+d. Perseroan terbatas D sebesar 99%
+e. WNA E sebesar 1%
+Yang dimaksud ‘perubahan kepemilikan yang mengakibatkan
+terjadinya pengambilalihan yang meliputi perubahan PSP’
+digambarkan pada ‘Kondisi D’. BHI A yang merupakan PSP dari
+Penyelenggara LPBBTI melakukan perubahan kepemilikan
+dengan BHI Z yang mengakibatkan perubahan PSP dari yang
+semula BHI A berubah menjadi BHI Z. Terjadinya ‘Kondisi D’
+tersebut memerlukan persetujuan Otoritas Jasa Keuangan.
+Yang dimaksud ‘perubahan kepemilikan yang mengakibatkan
+terjadinya pengambilalihan yang meliputi perubahan
+pemegang saham pengendali dari PSP’ digambarkan pada
+‘Kondisi A’. Perseroan Terbatas D yang merupakan pemegang
+saham pengendali dari PSP BHI A melakukan perubahan
+kepemilikan dengan Perseroan Terbatas X yang
+mengakibatkan pemegang saham pengendali dari PSP BHI A
+yang semula Perseroan Terbatas D berubah menjadi Perseroan
+Terbatas X. Terjadinya ‘Kondisi A’ tersebut memerlukan
+persetujuan Otoritas Jasa Keuangan.
+
+Ayat (2)
+
+Yang dimaksud “perubahan kepemilikan yang mengakibatkan
+perubahan pemegang saham selain PSP pada Penyelenggara
+yang bukan merupakan perusahaan terbuka” digambarkan
+pada Kondisi C. BHI C yang bukan merupakan PSP dan bukan
+perusahaan terbuka melakukan perubahan kepemilikan
+dengan BHI Y yang mengakibatkan pemegang saham yang
+semula BHI C berubah menjadi BHI Y. Terjadinya ‘Kondisi C’
+tersebut memerlukan pelaporan kepada Otoritas Jasa
+Keuangan.
+Yang dimaksud ‘perubahan kepemilikan yang mengakibatkan
+perubahan pemegang saham selain pemegang saham
+pengendali dari PSP pada Penyelenggara yang bukan
+merupakan perusahaan terbuka’ digambarkan pada ‘Kondisi
+B’. WNA E yang merupakan pemegang saham selain pemegang
+saham pengendali dari PSP BHI A melakukan perubahan
+kepemilikan dengan Perseroan Terbatas Y yang bukan
+merupakan perusahaan terbuka yang mengakibatkan
+pemegang saham selain pemegang saham pengendali dari PSP
+berubah dari WNA E menjadi Perseroan Terbatas Y. Terjadinya
+‘Kondisi B’ tersebut memerlukan pelaporan kepada Otoritas
+Jasa Keuangan.
+Ayat (3)
+Yang dimaksud dengan dalam rangka penyehatan
+Penyelenggara adalah perubahan kepemilikan yang dilakukan
+dalam rangka pemenuhan ketentuan mengenai permodalan
+Penyelenggara yang masih memiliki prospek usaha (viable).
+Yang dimaksud dengan perubahan PSP adalah perubahan
+porsi kepemilikan saham atau struktur pemegang saham
+sebagai akibat dari jual beli saham baik secara langsung
+maupun melalui penawaran umum yang mengakibatkan
+adanya perubahan PSP.
+Ayat (4)
+Yang dimaksud dengan “saham bonus” adalah saham yang
+dibagikan secara cuma-cuma kepada pemegang saham
+berdasarkan jumlah saham yang dimiliki. Saham bonus terdiri
+dari dua, yaitu:
+
+a. yang merupakan dividen saham, berasal dari kapitalisasi
+saldo laba; dan
+b. yang bukan merupakan dividen saham, berasal dari
+kapitalisasi:
+1. agio saham; dan/atau
+2. unsur Ekuitas lainnya.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+Ayat (7)
+Cukup jelas.
+Ayat (8)
+Cukup jelas.
+
+Pasal 59
+Cukup jelas.
+
+Pasal 60
+Cukup jelas.
+
+Pasal 61
+Cukup jelas.
+
+Pasal 62
+Cukup jelas.
+
+Pasal 63
+Cukup jelas.
+
+Pasal 64
+Ayat (1)
+Lihat penjelasan Pasal 9 ayat (1).
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+
+Pasal 65
+Cukup jelas.
+
+Pasal 66
+Cukup jelas.
+
+Pasal 67
+Cukup jelas.
+
+Pasal 68
+Ayat (1)
+Lihat penjelasan Pasal 9 ayat (1).
+
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+
+Pasal 69
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Yang dimaksud dengan “prinsip Pendanaan yang sejenis”
+adalah:
+a. Penyelenggara konvensional melakukan Penggabungan
+atau Peleburan, dengan Penyelenggara konvensional; atau
+b. Penyelenggara dengan Prinsip Syariah melakukan
+Penggabungan atau Peleburan, dengan Penyelenggara
+dengan Prinsip Syariah.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+Ayat (7)
+Cukup jelas.
+
+Pasal 70
+Cukup jelas.
+
+Pasal 71
+Cukup jelas.
+
+Pasal 72
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Mengumumkan Penggabungan atau Peleburan kepada
+masyarakat dapat dilakukan melalui surat kabar, media cetak,
+media elektronik, atau situs web Penyelenggara.
+
+Pasal 73
+Cukup jelas.
+
+Pasal 74
+Cukup jelas.
+
+Pasal 75
+Cukup jelas.
+
+Pasal 76
+Cukup jelas.
+
+Pasal 77
+Cukup jelas.
+
+Pasal 78
+Cukup jelas.
+
+Pasal 79
+Ayat (1)
+Lihat penjelasan Pasal 9 ayat (1).
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+
+Pasal 80
+Cukup jelas.
+
+Pasal 81
+Cukup jelas.
+
+Pasal 82
+Cukup jelas.
+
+Pasal 83
+Cukup jelas.
+
+Pasal 84
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Huruf a
+Cukup jelas.
+Huruf b
+Cukup jelas.
+Huruf c
+Cukup jelas.
+Huruf d
+Yang dimaksud dengan tugas lainnya antara lain Asosiasi
+turut serta melakukan upaya tertentu dalam rangka
+pengembangan, penguatan, dan penyehatan industri
+LPBBTI dan/atau diminta untuk turut menyebarluaskan
+informasi dari Otoritas Jasa Keuangan kepada seluruh
+anggota Asosiasi.
+
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+Ayat (7)
+Cukup jelas.
+
+Pasal 85
+Laporan tahunan yang disampaikan kepada Otoritas Jasa
+Keuangan antara lain memuat pelaksanaan tugas Asosiasi dan
+laporan keuangan yang telah diaudit oleh kantor akuntan publik
+yang telah terdaftar di Otoritas Jasa Keuangan.
+
+Pasal 86
+Ayat (1)
+Yang dimaksud dengan pengurus adalah ketua, wakil ketua,
+sekretaris jenderal, bendahara, ketua klaster, dan ketua
+bidang Asosiasi.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Yang dimaksud dengan ‘direktur eksekutif Asosiasi’ adalah
+pihak yang menjalankan pengelolaan Asosiasi secara penuh.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+
+Pasal 87
+Ayat (1)
+Lihat penjelasan Pasal 9 ayat (1).
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+
+Pasal 88
+Ayat (1)
+Lihat penjelasan Pasal 9 ayat (1).
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+
+Ayat (5)
+Cukup jelas.
+
+Pasal 89
+Cukup jelas.
+
+Pasal 90
+Cukup jelas.
+
+Pasal 91
+Cukup jelas.
+
+Pasal 92
+Cukup jelas.
+
+Pasal 93
+Cukup jelas.
+
+Pasal 94
+Cukup jelas.
+
+Pasal 95
+Cukup jelas.
+
+Pasal 96
+Cukup jelas.
+
+Pasal 97
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Penetapan batas waktu penyusunan Neraca Penutupan
+dilakukan dengan mempertimbangkan antara lain lokasi
+kantor, kondisi aset, dan kompleksitas permasalahan
+Penyelenggara.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+Ayat (7)
+Cukup jelas.
+Ayat (8)
+Cukup jelas.
+
+Pasal 98
+Cukup jelas.
+
+Pasal 99
+Cukup jelas.
+
+Pasal 100
+Ayat (1)
+Huruf a
+Ketentuan ini dapat dilakukan dengan memenuhi salah
+satu kondisi sebagai berikut:
+1. RUPS tidak dapat diselenggarakan;
+2. RUPS dapat diselenggarakan namun tidak berhasil
+memutuskan Pembubaran dan tidak berhasil
+membentuk Tim Likuidasi; atau
+3. RUPS dapat diselenggarakan dan berhasil
+memutuskan Pembubaran namun tidak berhasil
+membentuk Tim Likuidasi.
+Huruf b
+Cukup jelas.
+Huruf c
+Cukup jelas.
+Huruf d
+Cukup jelas.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+
+Pasal 101
+Cukup jelas.
+
+Pasal 102
+Cukup jelas.
+
+Pasal 103
+Cukup jelas.
+
+Pasal 104
+Huruf a
+Cukup jelas.
+Huruf b
+Cukup jelas.
+Huruf c
+Cukup jelas.
+Huruf d
+Cukup jelas.
+Huruf e
+Yang dimaksud dengan “pihak lain” antara lain konsultan
+aktuaria, penilai, dan advokat/pengacara/konsultan hukum.
+Huruf f
+Cukup jelas.
+Huruf g
+Cukup jelas.
+Huruf h
+Cukup jelas.
+Huruf i
+Cukup jelas.
+
+Pasal 105
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+Ayat (7)
+Cukup jelas.
+Ayat (8)
+Cukup jelas.
+Ayat (9)
+Cukup jelas.
+Ayat (10)
+Cukup jelas.
+Ayat (11)
+Cukup jelas.
+Ayat (12)
+Huruf a
+Cukup jelas.
+Huruf b
+Contoh langkah penyelesaian lain adalah kesepakatan
+antara pemegang saham dengan Tim Likuidasi untuk
+menyelesaikan aset yang bermasalah dan kewajiban yang
+harus dipenuhi dalam jangka waktu tertentu.
+
+Pasal 106
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Mempertimbangkan “efektifitas dan efisiensi” antara lain
+mempertimbangkan jumlah kreditur dan jumlah aset.
+Ayat (4)
+Cukup jelas.
+
+Pasal 107
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Yang dimaksud “hubungan perkawinan, hubungan keluarga
+semenda, atau hubungan keluarga sedarah ke atas, ke bawah,
+dan ke samping sampai derajat pertama” yaitu:
+a. suami atau istri;
+b. orang tua dan anak;
+
+c. orang tua dari suami atau istri;
+d. suami atau istri dari anak;
+e. saudara kandung/tiri; atau
+f. saudara kandung/tiri dari suami/istri.
+
+Pasal 108
+Cukup jelas.
+
+Pasal 109
+Cukup jelas.
+
+Pasal 110
+Cukup jelas.
+
+Pasal 111
+Cukup jelas.
+
+Pasal 112
+Cukup jelas.
+
+Pasal 113
+Cukup jelas.
+
+Pasal 114
+Cukup jelas.
+
+Pasal 115
+Cukup jelas.
+
+Pasal 116
+Cukup jelas.
+
+Pasal 117
+Cukup jelas.
+
+Pasal 118
+Cukup jelas.
+
+Pasal 119
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Yang dimaksud dengan “pihak lain” antara lain aktuaris dan
+penilai yang terdaftar di Otoritas Jasa Keuangan.
+
+Pasal 120
+Cukup jelas.
+
+Pasal 121
+Cukup jelas.
+
+Pasal 122
+Cukup jelas.
+
+Pasal 123
+Cukup jelas.
+
+Pasal 124
+Cukup jelas.
+
+Pasal 125
+Cukup jelas.
+
+Pasal 126
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Yang dimaksud dengan “mekanisme dan persyaratan Likuidasi
+yang berbeda” yaitu mekanisme dan persyaratan Likuidasi
+yang sederhana.
+
+Pasal 127
+Ayat (1)
+Lihat penjelasan Pasal 9 ayat (1).
+Ayat (2)
+Lihat penjelasan Pasal 9 ayat (1).
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+Ayat (7)
+Cukup jelas.
+Ayat (8)
+Cukup jelas.
+
+Pasal 128
+Cukup jelas.
+
+Pasal 129
+Cukup jelas.
+
+Pasal 130
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Huruf a
+Cukup jelas.
+Huruf b
+Cukup jelas.
+
+Huruf c
+Yang dimaksud ‘kegiatan lain setelah mendapat
+persetujuan Otoritas Jasa Keuangan’ adalah kegiatan
+usaha yang masih berkaitan dengan kegiatan usaha
+LPBBTI dan tidak bertentangan dengan peraturan
+perundang-undangan lain.
+Contoh:
+Penyelenggara LPBBTI menyelenggarakan kegiatan lain
+berupa kerja sama pemberian data Pengguna (referal)
+kepada lembaga jasa keuangan.
+Ayat (3)
+Cukup jelas.
+
+Pasal 131
+Cukup jelas.
+
+Pasal 132
+Cukup jelas.
+
+Pasal 133
+Ayat (1)
+Huruf a
+Yang dimaksud dengan “al-bai'” adalah akad antara
+penjual dan pembeli yang mengakibatkan berpindahnya
+kepemilikan obyek yang dipertukarkan (barang dan
+harga).
+Huruf b
+Yang dimaksud dengan “ijarah” adalah akad pemindahan
+hak guna (manfaat) atas suatu barang atau jasa dalam
+waktu tertentu dengan pembayaran ujrah atau upah.
+Huruf c
+Yang dimaksud dengan “mudharabah” adalah akad kerja
+sama suatu usaha antara pemilik modal (shahibu al-maal)
+yang menyediakan seluruh modal dengan pengelola
+('amil/mudharib) dan keuntungan usaha dibagi di antara
+mereka sesuai nisbah yang disepakati dalam akad,
+sedangkan kerugian ditanggung oleh pemilik modal.
+Huruf d
+Yang dimaksud dengan “musyarakah” adalah akad kerja
+sama antara dua pihak atau lebih untuk suatu usaha
+tertentu di mana setiap pihak memberikan kontribusi
+dana/modal usaha (ra's al-mal) dengan ketentuan bahwa
+keuntungan dibagi sesuai nisbah yang disepakati atau
+secara proporsional, sedangkan kerugian ditanggung oleh
+para pihak secara proporsional.
+Huruf e
+Yang dimaksud dengan “wakalah” adalah akad
+pelimpahan kuasa dari pemberi kuasa (muwakkil) kepada
+penerima kuasa (wakil) untuk melakukan perbuatan
+hukum tertentu yang boleh diwakilkan.
+Huruf f
+Yang dimaksud dengan “wakalah bi al ujrah” adalah akad
+wakalah yang disertai dengan imbalan berupa ujrah (fee).
+Huruf g
+Yang dimaksud dengan “qardh” adalah akad pinjaman
+dari pemberi pinjaman dengan ketentuan bahwa
+
+penerima pinjaman wajib mengembalikan uang yang
+diterimanya sesuai dengan waktu dan cara yang
+disepakati.
+
+Pasal 134
+Yang dimaksud dengan “adl” adalah menempatkan sesuatu hanya
+pada tempatnya, dan memberikan sesuatu hanya pada yang berhak
+serta memperlakukan sesuatu sesuai posisinya.
+Yang dimaksud dengan “tawazun” adalah keseimbangan aspek
+material dan spiritual, aspek privat dan, publik, sektor keuangan
+dan sektor riil, bisnis dan sosial, dan keseimbangan aspek
+pemanfaatan dan kelestarian.
+Yang dimaksud dengan “maslahah” adalah segala bentuk kebaikan
+yang berdimensi duniawi dan ukhrawi, material dan spiritual serta
+individual dan kolektif serta harus memenuhi 3 (tiga) unsur yakni
+kepatuhan syariah/halal, bermanfaat dan membawa kebaikan
+(thoyib) dalam semua aspek secara keseluruhan yang tidak
+menimbulkan kemudaratan.
+Yang dimaksud dengan “alamiyah” adalah segala bentuk kegiatan
+yang dapat dilakukan oleh, dengan, dan untuk semua pihak yang
+berkepentingan tanpa membedakan suku, agama, ras dan
+golongan, sesuai dengan semangat kerahmatan semesta (rahmatan
+lil alamin).
+Yang dimaksud dengan “gharar” adalah transaksi yang objeknya
+tidak jelas, tidak dimiliki, tidak diketahui keberadaannya, atau
+tidak dapat diserahkan pada saat transaksi dilakukan kecuali
+diatur lain dalam syariah.
+Yang dimaksud dengan “maysir” adalah transaksi yang bersifat
+spekulatif yang tidak terkait langsung dengan produktivitas di
+sektor riil.
+Yang dimaksud dengan “riba” adalah pemastian penambahan
+pendapatan secara tidak sah (bathil) antara lain dalam transaksi
+pertukaran barang sejenis yang tidak sama kualitas, kuantitas, dan
+waktu penyerahan (fadhl), atau dalam transaksi pinjam-
+meminjam yang mempersyaratkan nasabah penerima fasilitas
+mengembalikan dana yang diterima melebihi pokok pinjaman
+karena berjalannya waktu (nasiah).
+Yang dimaksud dengan “zhulm” adalah transaksi yang
+menimbulkan ketidakadilan bagi pihak lainnya.
+Yang dimaksud dengan “risywah” adalah pemberian suap dalam
+bentuk uang, fasilitas, atau bentuk lainnya yang melanggar hukum
+sebagai upaya mendapatkan fasilitas atau kemudahan dalam suatu
+transaksi.
+Yang dimaksud dengan “tadlis” adalah tindakan menyembunyikan
+kecacatan objek akad yang dilakukan oleh penjual untuk
+mengelabui pembeli seolah-olah objek akad tersebut tidak cacat.
+Yang dimaksud dengan ‘dharar’ adalah tindakan yang dapat
+menimbulkan bahaya atau kerugian pihak lain.
+Yang dimaksud dengan “objek haram” adalah suatu barang atau
+jasa yang diharamkan dalam syariah.
+
+Pasal 135
+Cukup jelas.
+
+Pasal 136
+Ayat (1)
+Huruf a
+Yang dimaksud dengan “Pendanaan produktif” adalah
+Pendanaan untuk usaha yang menghasilkan barang
+dan/atau jasa, termasuk usaha yang memberikan nilai
+tambah dan peningkatkan pendapatan bagi Penerima
+Dana.
+Pendanaan produktif antara lain invoice financing,
+pengadaan barang pesanan (purchase order), pengadaan
+barang untuk jualan secara daring (seller online), fasilitas
+modal usaha, atau Pendanaan proyek.
+Huruf b
+Yang dimaksud dengan “Pendanaan konsumtif” adalah
+Pendanaan barang dan/atau jasa yang diperlukan oleh
+Penerima Dana untuk pemakaian/konsumsi dan bukan
+untuk keperluan usaha atau aktivitas produktif dalam
+jangka waktu yang diperjanjikan.
+Ayat (2)
+Huruf a
+Yang dimaksud dengan “pemberian jaminan” adalah penjual
+piutang menanggung risiko tidak tertagihnya sebagian atau
+seluruh piutang yang dilakukan anjak piutang.
+Huruf b
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+
+Pasal 137
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Huruf a
+Pemenuhan batas maksimum Pendanaan kepada setiap
+penerima dana dilakukan dengan memperhatikan
+ketentuan dan persyaratan bagi Penerima Dana dan
+Penyelenggara yang diatur dalam Peraturan Otoritas Jasa
+Keuangan ini
+Huruf b
+Yang dimaksud dengan “afiliasi” adalah:
+a. ketika Pemberi Dana merupakan perusahaan yang
+memiliki:
+1. hubungan keluarga karena perkawinan atau
+keturunan sampai derajat kedua, baik secara
+horizontal maupun vertikal dengan pegawai,
+anggota direksi, anggota dewan komisaris,
+anggota dewan pengawas syariah, dan/atau
+pemegang saham perusahaan;
+2. hubungan dengan perusahaan karena adanya
+kesamaan satu atau lebih anggota direksi atau
+dewan komisaris;
+3. hubungan pengendalian dengan perusahaan
+baik langsung maupun tidak langsung;
+
+4. hubungan kepemilikan saham dalam
+perusahaan sebesar 20% (dua puluh persen)
+atau lebih; dan/atau
+5. hubungan antara 2 (dua) perusahaan yang
+dikendalikan, baik langsung maupun tidak
+langsung, oleh pihak yang sama.
+b. ketika Pemberi Dana merupakan perseorangan yang
+memiliki:
+1. hubungan keluarga karena perkawinan atau
+keturunan sampai derajat kedua, baik secara
+horizontal maupun vertikal;
+2. pegawai yang dipekerjakan secara langsung oleh
+Pemberi Dana; dan/atau
+3. pihak selain huruf a dan huruf b yang bertindak
+untuk kepentingan Pemberi Dana lain.
+Ayat (3)
+Yang dimaksud dengan “batas maksimum Pendanaan
+konsumtif dan produktif kepada setiap Penerima Dana” adalah
+batas maksimum total Pendanaan yang belum dilunasi oleh
+setiap Penerima Dana dalam satu Penyelenggara, mencakup
+total Pendanaan baik produktif maupun konsumtif.
+Contoh:
+A merupakan Penerima Dana di Penyelenggara ABCD, tidak
+dapat mengajukan permohonan Pendanaan baru apabila total
+Pendanaan baik produktif maupun konsumtif yang belum
+dilunasi A sudah mencapai Rp2.000.000.000 (dua miliar
+rupiah), apabila A sudah melunasi sebagian atau seluruh
+pinjaman, maka A baru dapat mengajukan permohonan
+Pendanaan baru kembali sampai dengan total Pendanaan baik
+produktif maupun konsumtif yang belum dilunasi A mencapai
+Rp2.000.000.000 (dua miliar rupiah).
+Ayat (4)
+Pemberian Pendanaan produktif melebihi batasan maksimum
+Rp2.000.000.000,00 (dua miliar rupiah) sampai dengan
+Rp5.000.000.000 (lima miliar rupiah) dapat diberikan bagi:
+a. Penerima Dana yang telah menerima Pendanaan
+sebelumnya, baik Pendanaan produktif dan/atau
+konsumtif dengan batasan maksimum
+Rp2.000.000.000,00 (dua miliar rupiah), yang
+mendapatkan tambahan fasilitas Pendanaan produktif
+baru; atau
+b. Penerima Dana yang belum pernah menerima Pendanaan
+dari Penyelenggara, namun diberikan Pendanaan
+produktif.
+Contoh:
+a. B merupakan Penerima Dana di Penyelenggara ABCD, B
+telah menerima total Pendanaan baik produktif maupun
+konsumtif yang belum dilunasi B sudah mencapai
+Rp1.500.000.000 (satu miliar lima ratus juta rupiah). B
+dapat diberikan tambahan Pendanaan produktif baru
+kembali sampai dengan total Pendanaan baik produktif
+maupun konsumtif yang belum dilunasi B mencapai
+Rp5.000.000.000 (lima miliar rupiah).
+b. B merupakan Penerima Dana di Penyelenggara ABCD, B
+belum pernah mendapatkan Pendanaan baik produktif
+maupun konsumtif sebelumnya, B dapat diberikan
+
+Pendanaan produktif sampai dengan total Pendanaan
+yang belum dilunasi B Rp5.000.000.000 (lima miliar
+rupiah).
+Ayat (5)
+Yang dimaksud dengan “25% (dua puluh lima persen) dari
+posisi akhir (outstanding) Pendanaan pada akhir bulan”
+ditentukan berdasarkan informasi posisi akhir (outstanding)
+Pendanaan masing-masing Pemberi Dana pada akhir bulan
+dibandingkan dengan total posisi akhir (outstanding)
+Pendanaan Penyelenggara.
+Sebagai contoh, pada tanggal 30 April 2024, Penyelenggara
+LPBBTI DEF memiliki total posisi akhir (outstanding)
+Rp50.000.000.000,00 (lima puluh miliar rupiah).
+Penyelenggara memiliki 4 (empat) Pemberi Dana, yaitu Pemberi
+Dana A, Pemberi Dana B, Pemberi Dana C, dan Pemberi Dana
+D. Tidak ada Pemberi Dana yang merupakan lembaga jasa
+keuangan yang diawasi oleh Otoritas Jasa Keuangan.
+Penyelenggara LPBBTI DEF wajib memastikan bahwa pada
+tanggal 30 April 2024 posisi akhir (outstanding) Pendanaan
+masing-masing Pemberi Dana A, Pemberi Dana B, Pemberi
+Dana C, dan Pemberi Dana D tidak melebihi 25% x
+Rp50.000.000.000,00 (lima puluh miliar rupiah), yaitu sebesar
+Rp12.500.000.000,00 (dua belas miliar lima ratus juta rupiah).
+Ayat (6)
+Batas maksimum Pendanaan bagi pelaku usaha jasa keuangan
+yang diawasi Otoritas Jasa Keuangan diterapkan dengan tetap
+mengikuti ketentuan peraturan perundang-undangan bagi
+pelaku usaha jasa keuangan tersebut.
+Ayat (7)
+Cukup jelas.
+Ayat (8)
+Cukup jelas.
+
+Pasal 138
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Huruf a
+Cukup jelas.
+Huruf b
+Cukup jelas.
+Huruf c
+Badan hukum Indonesia tidak termasuk pemerintah atau
+lembaga pemerintah seperti kementerian, badan layanan
+umum, dan/atau lembaga pengelola dana bergulir.
+Huruf d.
+Cukup jelas.
+Huruf e
+Cukup jelas.
+Huruf f
+Cukup jelas.
+Huruf g
+Cukup jelas.
+
+Pasal 139
+Cukup jelas.
+
+Pasal 140
+Cukup jelas.
+
+Pasal 141
+Cukup jelas.
+
+Pasal 142
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Yang dimaksud dengan dapat terlihat secara jelas oleh
+Pengguna adalah peringatan mengenai risiko kegiatan usaha
+LPBBTI ditampilkan dalam format jendela munculan (pop-up)
+pada Sistem Elektronik dengan waktu yang cukup yang
+disesuaikan dengan kebijakan masing-masing Penyelenggara.
+Ayat (7)
+Cukup jelas.
+Ayat (8)
+Cukup jelas.
+Ayat (9)
+Cukup jelas.
+Ayat (10)
+Cukup jelas.
+Ayat (11)
+Cukup jelas.
+Ayat (12)
+Cukup jelas.
+
+Pasal 143
+Cukup jelas.
+
+Pasal 144
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Huruf a
+Cukup jelas.
+Huruf b
+Cukup jelas.
+Huruf c
+Cukup jelas.
+Huruf d
+Cukup jelas.
+Huruf e
+Cukup jelas.
+
+Huruf f
+Cukup jelas.
+Huruf g
+Cukup jelas.
+Huruf h
+Cukup jelas.
+Huruf i
+Cukup jelas.
+Huruf j
+Cukup jelas.
+Huruf k
+Yang dimaksud dengan “penggunaan Data Pribadi” antara
+lain persetujuan penggunaan Data Pribadi dari Pemberi
+Dana dan cakupan penggunaan data oleh Penyelenggara.
+Huruf l
+Yang dimaksud dengan “mekanisme penagihan
+Pendanaan” adalah penagihan oleh Penyelenggara dan
+pengalihan penagihan kepada pihak ketiga.
+Huruf m
+Yang dimaksud dengan “mitigasi risiko dalam hal terjadi
+Pendanaan macet” adalah penyelesaian Pendanaan macet
+yang dapat dilakukan oleh Pemberi Dana yang terdiri dari
+penagihan oleh Penyelenggara, pengalihan penagihan
+kepada pihak ketiga, dan klaim asuransi atau
+penjaminan.
+Huruf n
+Cukup jelas.
+Huruf o
+Contoh Penyelenggara yang tidak dapat melanjutkan
+kegiatan operasionalnya yaitu:
+a. Penyelenggara telah mengembalikan tanda berizin ke
+Otoritas Jasa Keuangan;
+b. Otoritas Jasa Keuangan telah mencabut izin usaha
+Penyelenggara; dan
+c. Penyelenggara sedang melakukan konversi dari
+penyelenggaraan LPBBTI secara konvensional
+menjadi penyelenggaraan LPBBTI berdasarkan
+Prinsip Syariah.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Huruf a
+Yang dimaksud dengan “posisi akhir Pendanaan” antara
+lain jumlah sisa Pendanaan yang belum dibayar.
+Huruf b
+Cukup jelas.
+Huruf c
+Cukup jelas.
+Huruf d
+Cukup jelas.
+
+Ayat (6)
+Penyampaian perjanjian dilakukan dengan menyediakan
+bagian khusus pada Sistem Elektronik yang digunakan oleh
+Penyelenggara. Contoh situs web atau aplikasi mobile yang
+memberikan akses kepada Pemberi Dana untuk dapat melihat
+kembali perjanjian yang telah ditandatangani.
+
+Pasal 145
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Huruf a
+Cukup jelas.
+Huruf b
+Cukup jelas.
+Huruf c
+Identitas para pihak hanya mencakup:
+a. nama para pihak dan Nomor Induk Kependudukan
+(NIK) atau yang dianggap setara, bagi para pihak
+yang merupakan orang perseorangan; atau
+b. nama para pihak dan Nomor Induk Berusaha (NIB)
+atau yang dianggap setara, bagi para pihak yang
+merupakan badan usaha.
+Huruf d
+Cukup jelas.
+Huruf e
+Cukup jelas.
+Huruf f
+Cukup jelas.
+Huruf g
+Cukup jelas.
+Huruf h
+Cukup jelas.
+Huruf i
+Cukup jelas.
+Huruf j
+Cukup jelas.
+Huruf k
+Cukup jelas.
+Huruf l
+Cukup jelas.
+Huruf m
+Cukup jelas.
+Huruf n
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+
+Pasal 146
+Yang dimaksud dengan “memastikan Pengguna telah membaca dan
+memahami isi dari perjanjian” adalah dengan menyediakan fasilitas
+yang memastikan bahwa Pengguna telah membaca dan memahami
+isi perjanjian sebelum perjanjian tersebut ditandatangani.
+Contoh:
+Sebelum Pengguna menyetujui perjanjian di Sistem Elektronik
+Penyelenggara terdapat notifikasi “Apakah Pengguna telah
+membaca dan memahami isi perjanjian?” yang disampaikan ke
+Pengguna.
+
+Pasal 147
+Cukup jelas.
+
+Pasal 148
+Ayat (1)
+Huruf a
+Dalam melakukan analisis risiko Pendanaan yang akan
+difasilitasi, Penyelenggara dapat melakukan secara
+mandiri maupun bekerja sama dengan pihak lain, seperti
+penyedia pengelolaan perkreditan atau data.
+Yang dimaksud “analisis risiko Pendanaan” antara lain
+Penyelenggara melakukan scoring/penilaian terhadap
+calon Penerima Dana yang mengajukan Pendanaan. Calon
+Penerima Dana yang memenuhi kriteria untuk menerima
+dana disajikan kepada calon Pemberi Dana untuk
+dipilih/diberikan Pendanaan. Posisi semua calon
+Penerima Dana adalah setara atau semuanya layak
+didanai.
+Penyelenggara dilarang mengarahkan calon Pemberi Dana
+untuk memilih sebagian calon Penerima Dana yang
+memenuhi kriteria (layak). Penyelenggara membebaskan
+(tanpa memberikan masukan/ saran/ arahan) calon
+Pemberi Dana untuk memilih calon Penerima Dana yang
+disajikan oleh Penyelenggara.
+Contoh:
+Dari 5 (lima) orang calon Penerima Dana yang
+mengajukan, hanya 4 (empat) orang yang memenuhi
+kriteria berdasarkan scoring/penilaian Penyelenggara
+untuk didanai (dengan hasil scoring/penilaian yang
+berbeda atau sama). Penyelenggara menyajikan hasil
+scoring/penilaian atas 4 (empat) orang kepada calon
+Pemberi Dana untuk dipilih/didanai.
+Penyelenggara dilarang memberikan
+masukan/saran/arahan agar calon Pemberi Dana
+memberikan dana ke orang tertentu di antara 4 (empat)
+orang tersebut.
+Huruf b
+Dalam melakukan verifikasi identitas Pengguna,
+Penyelenggara bekerja sama dengan penyelenggara
+sertifikasi elektronik.
+Dalam hal memastikan keaslian dokumen, Penyelenggara
+dapat melakukan pemeriksaan terhadap kebenaran dan
+keaslian dokumen yang disampaikan baik oleh Penerima
+Dana maupun Pemberi Dana, termasuk dalam hal
+terdapat agunan dalam proses yang dimaksud.
+
+Huruf c
+Dalam memfasilitasi Pemberi Dana untuk melakukan
+penagihan hingga Pendanaan terbayarkan, Penyelenggara
+dapat melakukan penagihan secara mandiri sampai
+dengan Pendanaan terbayarkan atau mengalihkan kepada
+pihak ketiga untuk melakukan penagihan. Selain itu,
+Penyelenggara juga dapat mewakili Pemberi Dana untuk
+melakukan tindakan dalam rangka melakukan penagihan
+atau penyelesaian pembayaran kepada Penerima Dana
+baik di dalam maupun di luar pengadilan.
+Ayat (2)
+Huruf a
+Dalam rangka pengalihan risiko Pendanaan, dapat
+dilakukan melalui pengalihan atas risiko yang timbul atas
+Pendanaan yang dilakukan oleh Pemberi Dana.
+Huruf b
+Yang dimaksud dengan “pengalihan risiko atas objek
+jaminan” adalah mengasuransikan objek jaminan.
+Mitigasi risiko lain yang dapat dilakukan oleh
+Penyelenggara antara lain ketika terdapat agunan dalam
+perjanjian Pendanaan antara Pemberi Dana dan Penerima
+Dana, Penyelenggara melakukan kerja sama dengan pihak
+lain yang memiliki kewenangan untuk menampung atau
+menyimpan objek jaminan berdasarkan ketentuan
+peraturan perundang-undangan.
+Huruf c
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+Ayat (7)
+Cukup jelas.
+Ayat (8)
+Cukup jelas.
+
+Pasal 149
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Otoritas Jasa Keuangan menetapkan batas minimum usia
+calon Penerima Dana dan batas minimum penghasilan
+calon Penerima Dana, antara lain untuk:
+a. menjaga persaingan usaha yang sehat
+b. menjaga pertumbuhan industri yang sehat;
+c. menjaga kepentingan publik; dan/atau
+d. mendukung kebijakan nasional.
+Ayat (3)
+Cukup jelas.
+
+Pasal 150
+Cukup jelas.
+
+Pasal 151
+Cukup jelas.
+
+Pasal 152
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Yang dimaksud dengan efektivitas Penilaian skor kredit (credit
+scoring) dalam mitigasi risiko dapat diketahui dari
+perkembangan kualitas Pendanaan macet).
+Ayat (3)
+Evaluasi efektivitas penilaian skor kredit (credit scoring)
+dilakukan dengan cara antara lain back testing, kecukupan
+data, analisis model, atau analisis kesalahan.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+
+Pasal 153
+Ayat (1)
+Yang dimaksud dengan “menggunakan Escrow Account dan
+Virtual Account atau payment gateway untuk LPBBTI” adalah
+seluruh kegiatan Pendanaan antara Pengguna bukan melalui
+rekening Penyelenggara melainkan menggunakan Escrow
+Account dan Virtual Account atau payment gateway.
+Ayat (2)
+Yang dimaksud dengan “rekening dana khusus” adalah
+rekening pada bank yang khusus digunakan untuk transaksi
+LPBBTI.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+Ayat (7)
+Cukup jelas.
+Ayat (8)
+Cukup jelas.
+Ayat (9)
+Cukup jelas.
+
+Pasal 154
+Cukup jelas.
+
+Pasal 155
+Cukup Jelas.
+
+Pasal 156
+Ayat (1)
+Yang dimaksud dengan “lembaga nonkeuangan” antara lain
+pemanfaatan data kependudukan, penyelenggara pusat data,
+kemitraan, dan lainnya.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+huruf (a)
+Yang dimaksud dengan “layanan informatif” adalah
+layanan yang hanya terbatas pada penyediaan informasi
+dalam Sistem Elektronik Penyelenggara tanpa ada
+interaksi lebih lanjut dan tidak diikuti eksekusi transaksi
+keuangan, termasuk penyediaan informasi calon
+Penerima Dana kepada lembaga jasa keuangan melalui
+model bisnis referral.
+Contoh:
+Perusahaan perasuransian melakukan kerja sama
+layanan informatif dengan Penyelenggara dengan cara
+pemasangan iklan, ketika Pengguna melakukan klik pada
+iklan yang dimaksud, Pengguna akan diarahkan menuju
+situs web milik perusahaan perasuransian tanpa diikuti
+eksekusi transaksi keuangan.
+Huruf b
+Cukup jelas.
+Huruf c
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Yang dimaksud dengan “bertanggung jawab penuh” adalah
+Penyelenggara bertanggung jawab penuh atas segala dampak
+yang ditimbulkan dari kerjasama dengan pihak lain sepanjang
+pihak lain dimaksud bertindak sesuai dengan perjanjian kerja
+sama.
+Ayat (7)
+Cukup jelas.
+
+Pasal 157
+Ayat (1)
+Yang dimaksud dengan “kerja sama pertukaran data” adalah
+kerja sama dengan penyelenggara layanan pendukung
+berbasis teknologi informasi dalam rangka pertukaran data.
+Contoh penyelenggara layanan pendukung berbasis teknologi
+informasi antara lain lembaga pengelola informasi perkreditan,
+penyelenggara alternatif credit scoring berbasis telekomunikasi
+atau penyelenggara e-commerce.
+Yang dimaksud dengan “data” adalah data yang dibutuhkan
+dalam proses credit scoring, antara lain Data Pribadi dan data
+transaksi
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+
+Pasal 158
+Huruf a
+Cukup jelas.
+
+Huruf b
+Cukup jelas.
+Huruf c
+Yang dimaksud dengan “Pendanaan secara otomatis“ adalah
+Pendanaan yang menggunakan skema dimana Pemberi Dana
+menyerahkan dananya kepada Penyelenggara untuk
+disalurkan kepada Penerima Dana tanpa ada interaksi atau
+keterlibatan Pemberi dana atas Pendanaan yang dilakukan.
+Huruf d
+Cukup jelas.
+Huruf e
+Cukup jelas.
+Huruf f
+Yang dimaksud dengan “memberikan jaminan dalam segala
+bentuknya” adalah memberikan kepastian pemenuhan
+kewajiban finansial Penerima Dana kepada Pemberi Dana
+dengan cara penjaminan sebagaimana diatur dalam peraturan
+perundang-undangan mengenai penjaminan ataupun dengan
+cara lain, antara lain:
+a. Penyelenggara bekerja sama dengan pihak lain/terafiliasi
+untuk melakukan praktik penjaminan;
+b. Penyelenggara dilarang melakukan praktik pemberian
+jaminan atas pinjaman macet dengan skema pengalihan
+piutang (buy back); dan/atau
+c. Penyelenggara dilarang melakukan transaksi jaminan
+pembayaran kembali (repayment warranty).
+Huruf g
+Yang dimaksud dengan “surat utang” adalah surat berharga
+bersifat utang jangka pendek atau jangka panjang yang
+diterbitkan Penyelenggara kepada pihak lain, antara lain,
+berupa surat sanggup bayar (promissory note), medium term
+notes (MTN), atau obligasi.
+Huruf h
+Yang dimaksud dengan “pinjaman” adalah pinjaman berupa
+uang yang menyebabkan Penyelenggara memiliki kewajiban
+untuk mengembalikan sejumlah nilai tertentu, antara lain:
+a. pinjaman dari bank;
+b. pinjaman dari pemegang saham; dan
+c. pinjaman dari sumber lain.
+Huruf i
+Yang dimaksud dengan “dilarang memberikan rekomendasi
+kepada Pengguna” adalah Penyelenggara dilarang
+mengarahkan calon Pemberi Dana untuk memilih sebagian
+calon Penerima Dana yang memenuhi kriteria. Penyelenggara
+membebaskan tanpa memberikan masukan/saran/arahan
+
+kepada calon Pemberi Dana untuk memilih calon Penerima
+Dana yang disajikan oleh Penyelenggara.
+Contoh:
+Dari 5 (lima) orang calon Penerima Dana yang mengajukan,
+hanya 4 (empat) orang yang memenuhi kriteria berdasarkan
+scoring/penilaian Penyelenggara untuk didanai dengan hasil
+scoring/penilaian yang berbeda atau sama. Penyelenggara
+menyajikan hasil scoring/penilaian atas 4 (empat) orang
+kepada calon Pemberi Dana untuk dipilih/didanai.
+Penyelenggara dilarang memberikan masukan/saran/arahan
+agar calon Pemberi Dana memberikan dana ke orang tertentu
+di antara 4 (empat) orang tersebut.
+Penjelasan di atas tidak termasuk ke dalam kategori pemberian
+rekomendasi sebagaimana dimaksud dalam huruf i, karena
+aktivitas yang dilakukan oleh Penyelenggara termasuk ke
+dalam kegiatan pokok penyelenggaraan LPPBTI.
+Huruf j
+Cukup jelas.
+Huruf k
+Yang dimaksud dengan “melakukan penawaran layanan baik
+secara langsung maupun tidak langsung” adalah penawaran
+yang dilakukan oleh Penyelenggara baik yang dilakukan secara
+mandiri maupun melalui kerja sama tertentu dengan pihak
+lainnya untuk melakukan penawaran produk Penyelenggara
+melalui sarana maupun fasilitas yang dimilikinya.
+Huruf l
+Cukup jelas.
+Huruf m
+Contoh “melakukan tindakan yang menyebabkan atau
+memaksa lembaga jasa keuangan lain” antara lain
+Penyelenggara melakukan kerja sama dengan Bank
+Perkreditan Rakyat, Penyelenggara harus memperhatikan
+wilayah operasional dari Bank Perkreditan Rakyat sesuai
+ketentuan peraturan perundang-undangan.
+Huruf n
+Cukup jelas.
+Huruf o
+Penjelasan:
+Contoh larangan penggunaan pihak ketiga untuk mengelola
+dana dari Pemberi Dana:
+Penyelenggara XYZ menyerahkan pengelolaan dana dari
+Pemberi Dana ke perusahaan ABC atau pihak terkait lain
+untuk diteruskan kepada Penerima Dana berdasarkan syarat
+dan ketentuan tertentu.
+Huruf p
+Yang dimaksud dengan Pendanaan tidak sehat adalah praktik
+pemberian pinjaman yang mengenakan syarat, ketentuan,
+bunga, dan/atau biaya-biaya yang tidak wajar bagi Penerima
+Pinjaman, atau yang tidak memperhatikan kemampuan
+membayar kembali Penerima Pinjaman.
+Contoh Pendanaan tidak sehat antara lain:
+a. penetapan syarat, ketentuan, atau biaya (termasuk biaya
+atau denda keterlambatan) yang mengandung unsur tipu
+muslihat;
+
+b. penetapan syarat, ketentuan, bunga, dan/atau biaya-
+biaya yang tidak memperhatikan kemampuan Penerima
+Pinjaman untuk mengembalikan pinjaman; atau
+c. pinjaman kepada usaha kecil dan menengah, pinjaman
+mikro, pinjaman konsumen, pinjaman harian, dan/atau
+bentuk pinjaman lainnya yang mengenakan syarat,
+ketentuan, bunga, dan biaya-biaya (termasuk biaya atau
+denda keterlambatan) yang tidak wajar.
+
+Pasal 159
+Ayat (1)
+Lihat penjelasan Pasal 9 ayat (1).
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+
+Pasal 160
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Yang dimaksud dengan “dimiliki, dikuasai, dan dikendalikan”
+termasuk kemampuan untuk mengembangkan, mengubah,
+dan menghapus Sistem Elektronik.
+Ayat (3)
+Yang dimaksud dengan “terdaftar” adalah Sistem Elektronik
+terdaftar di otoritas yang membawahi bidang komunikasi dan
+digital.
+Ayat (4)
+Cukup jelas.
+
+Pasal 161
+Cukup jelas.
+
+Pasal 162
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Yang dimaksud dengan “keperluan lainnya” adalah
+penggunaan rekam jejak audit selain untuk keperluan
+pengawasan, penegakan hukum, penyelesaian sengketa,
+verifikasi, dan pengujian.
+Contoh pemeriksaan untuk memperoleh sertifikasi dari
+organisasi standarisasi internasional (ISO).
+Ayat (4)
+Cukup jelas.
+
+Pasal 163
+Cukup jelas.
+
+Pasal 164
+Ayat (1)
+Yang dimaksud dengan “persetujuan” adalah persetujuan dari
+Pengguna secara tertulis atau dalam bentuk lain sesuai dengan
+ketentuan yang berlaku.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Yang dimaksud dengan “permohonan secara tertulis” yaitu
+permohonan melalui surat, surat elektronik (e-mail), atau
+saluran lain dalam Sistem Elektronik yang disediakan oleh
+Penyelenggara.
+
+Pasal 165
+Cukup jelas.
+
+Pasal 166
+Ayat (1)
+Lihat penjelasan Pasal 9 ayat (1).
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+
+Pasal 167
+Cukup jelas.
+
+Pasal 168
+Cukup jelas.
+
+Pasal 169
+Cukup jelas.
+
+Pasal 170
+Cukup jelas.
+
+Pasal 171
+Cukup jelas.
+
+Pasal 172
+Cukup jelas.
+
+Pasal 173
+Cukup jelas.
+
+Pasal 174
+Cukup jelas.
+
+Pasal 175
+Cukup jelas.
+
+Pasal 176
+Cukup jelas.
+
+Pasal 177
+Cukup jelas.
+
+Pasal 178
+Ayat (1)
+Lihat penjelasan Pasal 9 ayat (1).
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+
+Pasal 179
+Cukup jelas.
+
+Pasal 180
+Cukup jelas.
+
+Pasal 181
+Cukup jelas.
+
+Pasal 182
+Cukup jelas.
+
+Pasal 183
+Cukup jelas.
+
+Pasal 184
+Cukup jelas.
+
+Pasal 185
+Cukup jelas.
+
+Pasal 186
+Ayat (1)
+Yang dimaksud dengan “perubahan model bisnis” adalah
+perubahan atau penambahan model bisnis yang memiliki
+perbedaan signifikan dengan model bisnis yang dijalankan oleh
+Penyelenggara.
+
+Contoh:
+Penyelenggara X merupakan platform yang menyediakan
+layanan Pendanaan konsumtif, apabila ingin membuka
+layanan Pendanaan produktif, maka Penyelenggara
+melaporkan ke Otoritas Jasa Keuangan.
+Penyelenggara X bergerak dalam menyalurkan Pendanaan
+pertanian, apabila Penyelenggara bermaksud untuk
+melakukan penyaluran Pendanaan bagi pegawai
+berpenghasilan tetap, maka Penyelenggara melaporkan ke
+Otoritas Jasa Keuangan.
+Penyelenggara X yang sebelumnya melakukan penyaluran
+Pendanaan bagi pegawai berpenghasilan tetap pada suatu
+perusahaan, ketika ingin melakukan penyaluran Pendanaan
+secara umum, maka Penyelenggara melaporkan ke Otoritas
+Jasa Keuangan.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+
+Pasal 187
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Yang dimaksud dengan “keadaan kahar” antara lain
+kebakaran, kerusuhan massa, perang, konflik bersenjata,
+sabotase, serta bencana alam seperti banjir dan gempa bumi
+yang mengganggu kegiatan operasional Penyelenggara.
+Ayat (5)
+Huruf a
+Cukup jelas.
+Huruf b
+Yang dimaksud dengan “informasi transaksi Pendanaan”
+meliputi informasi terkait pengajuan Pendanaan dan
+pemberian Pendanaan, termasuk posisi akhir total
+Pendanaan yang belum dilunasi, jumlah transaksi, dan
+jumlah penyaluran.
+Huruf c
+Yang dimaksud dengan “informasi kualitas Pendanaan”
+adalah informasi mengenai pembayaran Pendanaan yang
+terdiri dari tanggal jatuh tempo, status pembayaran,
+denda, dan nilai pembayaran.
+Ayat (6)
+Cukup jelas.
+
+Pasal 188
+Ayat (1)
+Laporan insidental merupakan laporan yang tidak diatur
+dalam Peraturan Otoritas Jasa Keuangan dan harus segera
+dilaporkan.
+
+Laporan insidental antara lain laporan yang disebabkan
+adanya tindakan fraud, antara lain, laporan pelaksanaan audit
+internal, dan laporan pelaksanaan edukasi.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Yang dimaksud dengan ”kriteria signifikansi tertentu” adalah
+penentuan nilai transaksi yang memiliki dampak cukup besar
+terhadap kondisi keuangan Penyelenggara, yang ditetapkan
+antara lain, berdasarkan pertimbangan.
+Berdasarkan pertimbangan, antara lain, materialitas relatif,
+risiko, dan kebutuhan pengguna laporan keuangan.
+Ayat (4)
+Laporan lain selain laporan insidental antara lain laporan
+terkait dengan pemilik manfaat.
+
+Pasal 189
+Ayat (1)
+Yang dimaksud dengan “benar” adalah sesuai dengan kondisi
+yang sebenarnya pada lembaga jasa keuangan dan tidak
+mengandung informasi atau fakta material yang tidak benar.
+Yang dimaksud dengan “lengkap” adalah memuat semua
+unsur laporan dan tidak menghilangkan informasi atau fakta
+material.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+Ayat (7)
+Cukup jelas.
+Ayat (8)
+Cukup jelas.
+Ayat (9)
+Cukup jelas.
+Ayat (10)
+Cukup jelas.
+Ayat (11)
+Cukup jelas.
+
+Pasal 190
+Ayat (1)
+Yang dimaksud dengan hal audit utama adalah hal yang
+menurut pertimbangan profesional auditor merupakan hal
+yang paling signifikan dalam audit atas laporan keuangan
+periode kini.
+Ayat (2)
+Huruf a
+Cukup jelas.
+
+Huruf b
+Kondisi yang memiliki konsekuensi merugikan
+kepentingan publik yang melebihi dari manfaatnya antara
+lain dapat menimbulkan perubahan harga saham yang
+signifikan atau menimbulkan rush.
+
+Pasal 191
+Ayat (1)
+Lihat penjelasan Pasal 9 ayat (1).
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+Ayat (7)
+Cukup jelas.
+Ayat (8)
+Cukup jelas.
+Ayat (9)
+Cukup jelas.
+Ayat (10)
+Cukup jelas.
+
+Pasal 192
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Huruf a
+Keterbukaan (transparancy) mencakup keterbukaan
+dalam proses pengambilan keputusan dan keterbukaan
+dalam pengungkapan dan penyediaan informasi yang
+relevan dan mudah diakses oleh pemangku kepentingan.
+Huruf b
+Akuntabilitas (accountability) mencakup kejelasan fungsi
+dan pelaksanaan pertanggungjawaban.
+Huruf c
+Tanggung jawab (Responsibility) mencakup kesesuaian
+pengelolaan dengan ketentuan peraturan-perundang-
+undangan dan nilai etika serta standar, prinsip, dan
+praktik.
+Huruf d
+Kemandirian mencakup keadaan yang dikelola secara
+mandiri dan profesional serta bebas dari benturan
+kepentingan dan pengaruh atau tekanan dari pihak
+manapun yang tidak sesuai dengan ketentuan peraturan
+perundang-undangan dan nilai etika serta standar,
+prinsip, dan praktik.
+Huruf e
+Kewajaran (fairness) mencakup kesetaraan,
+keseimbangan, dan keadilan di dalam memenuhi hak
+pemangku kepentingan yang timbul berdasarkan
+
+perjanjian, ketentuan peraturan perundang-undangan,
+dan nilai etika serta standar, prinsip, dan praktik.
+Ayat (3)
+Huruf a
+Yang dimaksud dengan “pemangku kepentingan” adalah
+pihak yang memiliki kepentingan terhadap Penyelenggara,
+baik langsung maupun tidak langsung, antara lain
+Pengguna, anggota/pemegang saham, karyawan,
+penyedia barang dan jasa, dan/atau pemerintah.
+Huruf b
+Cukup jelas.
+Huruf c
+Cukup jelas.
+Huruf d
+Cukup jelas.
+Huruf e
+Cukup jelas.
+Ayat (4)
+Huruf a
+Cukup jelas.
+Huruf b
+Cukup jelas.
+Huruf c
+Yang dimaksud dengan “benturan kepentingan” keadaan
+dimana terdapat konflik antara kepentingan ekonomis
+Penyelenggara dan kepentingan ekonomis pribadi
+pemegang saham, anggota Direksi, anggota Dewan
+Komisaris, dan/atau anggota DPS, serta pegawai
+Penyelenggara.
+Huruf d
+Cukup jelas
+Huruf e
+Cukup jelas
+Huruf f
+Cukup jelas
+Huruf g
+Cukup jelas
+Huruf h
+Cukup jelas
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+
+Pasal 193
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Tindakan tertentu untuk meningkatkan penerapan tata kelola
+perusahaan yang baik antara lain:
+a. menambah atau mengurangi jumlah anggota Direksi
+dan/atau anggota Dewan Komisaris dalam hal jumlah
+anggota Direksi dan/atau anggota Dewan Komisaris yang
+ada dinilai tidak efektif dan efisien; dan
+
+b. menambahkan informasi mengenai transparansi
+kepemilikan saham kurang dari 5% (lima persen) oleh
+anggota Direksi pada:
+1. Penyelenggara tempat anggota Direksi dimaksud
+menjabat dan/atau
+2. perusahaan lain yang berkedudukan di dalam dan di
+luar negeri,
+terhadap anggota Direksi yang terbukti melakukan
+pengendalian.
+Ayat (3)
+Cukup jelas.
+
+Pasal 194
+Cukup jelas.
+
+Pasal 195
+Cukup jelas.
+
+Pasal 196
+Cukup jelas.
+
+Pasal 197
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Yang dimaksud dengan “tingkat manajerial” adalah orang yang
+telah menduduki jabatan manajerial dan memiliki kewenangan
+untuk mengambil keputusan.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+Ayat (7)
+Cukup jelas.
+
+Pasal 198
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Contoh ketentuan larangan rangkap jabatan sebagai anggota
+DPS kecuali paling banyak pada 3 (tiga) lembaga keuangan
+syariah lainnya, yaitu:
+A merupakan anggota DPS dari Penyelenggara berdasarkan
+Prinsip Syariah O. A rangkap jabatan sebagai:
+a. anggota DPS pada perusahaan pembiayaan syariah P;
+b. anggota DPS pada perusahaan asuransi syariah Q;
+c. anggota DPS pada bank umum syariah R; dan
+d. anggota DPS pada bank pembiayaan rakyat syariah S.
+
+Pasal 199
+Ayat (1)
+Rapat Umum Pemberi Dana dilaksanakan dalam rangka
+pengambilan keputusan antara lain terkait perubahan
+perjanjian Pendanaan.
+Contoh:
+a. restrukturisasi pemberian dana;
+b. hapus buku pemberian dana; dan
+c. hapus tagih pemberian dana.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+
+Pasal 200
+Cukup jelas.
+
+Pasal 201
+Ayat (1)
+Lihat penjelasan Pasal 9 ayat (1).
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+
+Pasal 202
+Cukup jelas.
+
+Pasal 203
+Cukup jelas.
+
+Pasal 204
+Ayat (1)
+Lihat penjelasan Pasal 9 ayat (1).
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+
+Pasal 205
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Yang dimaksud dengan “bagian dari konglomerasi keuangan”
+adalah Penyelenggara yang merupakan bagian dari
+konglomerasi keuangan yang memenuhi kriteria sesuai dengan
+konglomerasi keuangan pada Peraturan Otoritas Jasa
+Keuangan mengenai konglomerasi keuangan
+
+Pasal 206
+Cukup jelas.
+
+Pasal 207
+Cukup jelas.
+
+Pasal 208
+Cukup jelas.
+
+Pasal 209
+Cukup jelas.
+
+Pasal 210
+Cukup jelas.
+
+Pasal 211
+Cukup jelas.
+
+Pasal 212
+Cukup jelas.
+
+Pasal 213
+Cukup jelas.
+
+Pasal 214
+Cukup jelas.
+
+Pasal 215
+Ayat (1)
+Yang dimaksud dengan pemilik manfaat (beneficial owner)
+adalah orang perseorangan yang berhak atas dan/atau
+menerima manfaat tertentu yang berkaitan dengan rekening
+nasabah, merupakan pemilik sebenarnya dari dana dan/atau
+efek yang ditempatkan pada penyedia jasa keuangan
+(ultimately own account), mengendalikan transaksi nasabah,
+memberikan kuasa untuk melakukan transaksi,
+mengendalikan korporasi atau perikatan lainnya (legal
+arrangement), dan/atau merupakan pengendali akhir dari
+transaksi yang dilakukan melalui badan hukum atau
+berdasarkan suatu perjanjian.
+Ayat (2)
+Cukup jelas.
+
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Yang dimaksud dengan pihak yang memenuhi syarat sebagai
+pemilik manfaat (beneficial owner) Penyelenggara adalah suatu
+pihak yang berdasarkan identifikasi dan verifikasi atas
+identitas yang dilakukan oleh Otoritas Jasa Keuangan dapat
+dibuktikan bahwa pihak dimaksud memiliki kemampuan
+mengendalikan Penyelenggara atau perikatan lainnya (legal
+arrangement) seperti penunjukan Direksi dan/atau Dewan
+Komisaris, meskipun pihak dimaksud tidak dilihat dari
+struktur kepemilikan.
+
+Pasal 216
+Ayat (1)
+Lihat penjelasan Pasal 9 ayat (1).
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+
+Pasal 217
+Pemberian persetujuan atau kebijakan yang berbeda dimaksudkan
+antara lain untuk:
+a. mendukung kebijakan nasional;
+b. menjaga kepentingan publik;
+c. menjaga pertumbuhan industri; dan/atau
+d. menjaga persaingan usaha yang sehat.
+Contoh kondisi yang memerlukan pertimbangan tertentu adalah
+kejadian luar biasa yang selanjutnya disingkat KLB dapat
+mengakibatkan terjadinya peningkatan kesakitan dan kematian
+yang besar, yang juga berdampak pada ekonomi dan sosial,
+sehingga membutuhkan perhatian dan penanganan oleh semua
+pihak terkait serta diatur dalam ketentuan lain atas pertimbangan
+dalam menghadapi kemungkinan KLB.
+
+Pasal 218
+Ayat (1)
+Otoritas Jasa Keuangan berwenang meminta Penyelenggara
+untuk menyampaikan rencana pemenuhan antara lain
+apabila:
+a. apabila pelanggaran dimaksud memiliki dampak
+signifikan terhadap kondisi keuangan Penyelenggara.
+b. Pemenuhan atas pelanggaran dimaksud memerlukan
+jangka waktu tertentu.
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+
+Ayat (4)
+Cukup jelas.
+
+Pasal 219
+Ayat (1)
+Lihat penjelasan Pasal 9 ayat (1).
+Ayat (2)
+Cukup jelas.
+Ayat (3)
+Cukup jelas.
+Ayat (4)
+Cukup jelas.
+Ayat (5)
+Cukup jelas.
+Ayat (6)
+Cukup jelas.
+
+Pasal 220
+Cukup jelas.
+
+Pasal 221
+Cukup jelas.
+
+Pasal 222
+Cukup jelas.
+
+Pasal 223
+Cukup jelas.
+
+Pasal 224
+Cukup jelas.
+
+Pasal 225
+Cukup jelas.
+
+Pasal 226
+Cukup jelas.
+
+Pasal 227
+Ayat (1)
+Cukup jelas.
+Ayat (2)
+Perubahan atau perpanjangan terhadap perjanjian antara lain
+terdapat perubahan pada manfaat ekonomi Pendanaan maka
+perubahan tersebut harus memenuhi ketentuan dalam
+Peraturan Otoritas Jasa Keuangan ini.
+
+Pasal 228
+Cukup jelas.
+
+Pasal 229
+Cukup jelas.
+
+Pasal 230
+Cukup jelas.
+
+Pasal 231
+Cukup jelas.
+
+Pasal 232
+Cukup jelas.
+
+Pasal 233
+Cukup jelas.
+
+Pasal 234
+Cukup jelas.
+
+Pasal 235
+Cukup jelas.
+
+Pasal 236
+Cukup jelas.
+
+Pasal 237
+Cukup jelas.
+
+TAMBAHAN LEMBARAN NEGARA REPUBLIK INDONESIA NOMOR 121/OJK
