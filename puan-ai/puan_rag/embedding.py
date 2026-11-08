@@ -29,13 +29,13 @@ class EmbedderGemini:
     def __init__(self, client, model='gemini-embedding-001', dimensi=768, ukuran_kelompok=50):
         self.client, self.model, self.dimensi, self.ukuran_kelompok = client, model, dimensi, ukuran_kelompok
 
-    def _embed(self, teks, tugas):
+    def _embed(self, teks, tugas, percobaan=5, jeda=60):
         from google.genai import types
         hasil = []
         for mulai in range(0, len(teks), self.ukuran_kelompok):
             kelompok = teks[mulai:mulai + self.ukuran_kelompok]
             # kuota per menit embedding sering habis saat membuat ratusan vektor -> jeda lebih panjang (60 dtk)
-            r = coba_berulang(self.client.models.embed_content, 'embedding Gemini', percobaan=5, jeda=60,
+            r = coba_berulang(self.client.models.embed_content, 'embedding Gemini', percobaan=percobaan, jeda=jeda,
                               model=self.model, contents=kelompok,
                               config=types.EmbedContentConfig(task_type=tugas, output_dimensionality=self.dimensi))
             if r is None:
@@ -50,7 +50,8 @@ class EmbedderGemini:
         return self._embed(list(teks), 'RETRIEVAL_DOCUMENT')
 
     def embed_kueri(self, teks):
-        return self._embed(list(teks), 'RETRIEVAL_QUERY')
+        # kueri user: pakai jeda pendek (PUAN_PERCOBAAN/PUAN_JEDA) supaya user tidak menunggu lama
+        return self._embed(list(teks), 'RETRIEVAL_QUERY', percobaan=None, jeda=None)
 
 
 class EmbedderE5:

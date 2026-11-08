@@ -77,12 +77,19 @@ def test_riwayat_ikut_terkirim(puan):
 
 
 def test_api(puan):
+    import os
+
     from fastapi.testclient import TestClient
 
     import api.main as M
     M.PuanAI.dari_folder = staticmethod(lambda cfg=None: puan)
+    # kalau .env berisi PUAN_API_KEY, kirim kunci yang sama seperti yang dilakukan Next.js
+    kunci = os.getenv('PUAN_API_KEY', '')
+    header = {'X-Puan-Key': kunci}
     with TestClient(M.app) as c:
         assert c.get('/health').json()['status'] == 'ok'
-        r = c.post('/chat', json={'pesan': 'bunga pinjol maksimal berapa?'})
+        r = c.post('/chat', json={'pesan': 'bunga pinjol maksimal berapa?'}, headers=header)
         assert r.status_code == 200 and set(r.json()) >= {'jawaban', 'status', 'krisis', 'sumber'}
-        assert c.post('/chat', json={'pesan': ''}).status_code == 422
+        assert c.post('/chat', json={'pesan': ''}, headers=header).status_code == 422
+        if kunci:   # kunci salah harus ditolak
+            assert c.post('/chat', json={'pesan': 'halo'}, headers={'X-Puan-Key': 'salah'}).status_code == 401

@@ -35,6 +35,11 @@ try:
 except ImportError:
     pass
 
+# Server web: saat Gemini sibuk, coba 2 kali saja dengan jeda singkat (2 detik) supaya user tidak menunggu lama.
+# Script di Colab/laptop tidak membaca baris ini, jadi tetap memakai jeda panjang.
+os.environ.setdefault('PUAN_PERCOBAAN', '2')
+os.environ.setdefault('PUAN_JEDA', '2')
+
 from puan_rag import Pengaturan, Pesan, PuanAI  # noqa: E402
 from puan_rag.gemini import GeminiSibuk  # noqa: E402
 

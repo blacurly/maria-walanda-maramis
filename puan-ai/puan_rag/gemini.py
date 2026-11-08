@@ -23,14 +23,23 @@ def buat_client(api_key: str | None = None):
     return genai.Client(api_key=kunci)
 
 
-def coba_berulang(fungsi, keterangan, percobaan=3, jeda=10, **argumen):
-    """Jalankan fungsi; kalau server sibuk, tunggu (10, 20, 30 detik) lalu coba lagi. Error lain langsung dilempar."""
+def coba_berulang(fungsi, keterangan, percobaan=None, jeda=None, **argumen):
+    """Jalankan fungsi; kalau server sibuk, tunggu lalu coba lagi. Error lain langsung dilempar.
+
+    Bawaan: 3 percobaan, jeda 10 lalu 20 detik (cocok untuk script di Colab/laptop).
+    Server web memakai PUAN_PERCOBAAN dan PUAN_JEDA yang lebih pendek (diatur di api/main.py),
+    supaya user tidak menunggu lama saat Gemini sibuk.
+    """
+    percobaan = percobaan or int(os.getenv('PUAN_PERCOBAAN', '3'))
+    jeda = jeda or int(os.getenv('PUAN_JEDA', '10'))
     for ke in range(percobaan):
         try:
             return fungsi(**argumen)
         except Exception as e:  # noqa: BLE001 - SDK melempar beberapa jenis error
             if not any(t in str(e) for t in TANDA_SIBUK):
                 raise
+            if ke == percobaan - 1:      # percobaan terakhir: tidak perlu menunggu lagi
+                break
             tunggu = jeda * (ke + 1)
             log.warning('%s sibuk (%s), coba lagi dalam %s detik...', keterangan, str(e)[:60], tunggu)
             time.sleep(tunggu)
