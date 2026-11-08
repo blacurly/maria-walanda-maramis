@@ -3,8 +3,9 @@
 /**
  * EduPuan — Halaman "Cek Penawaran"
  * Semua perhitungan ada di @/features/cek-penawaran/hitung.ts — JANGAN menghitung di file ini.
+ * Tombol "Unduh hasil (PDF)" memakai jendela cetak browser (window.print). Tidak ada data yang dikirim ke server.
  */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   hitung, teksVonis, langkahHitung, simulasiTelat, simulasiGaliLubang,
@@ -46,12 +47,24 @@ const tile: React.CSSProperties = { background: C.bg, borderRadius: 12, padding:
 const pill = (on: boolean): React.CSSProperties => ({ minHeight: 44, padding: "0 16px", borderRadius: 999, fontSize: 14, fontWeight: 600, border: `1px solid ${on ? C.green : C.line2}`, background: on ? C.green : C.white, color: on ? C.white : C.ink, cursor: "pointer", fontFamily: FONT_BODY });
 const seg = (on: boolean): React.CSSProperties => ({ minHeight: 46, padding: "0 18px", border: 0, fontSize: 15, fontWeight: 600, background: on ? C.green : C.white, color: on ? C.white : C.ink2, cursor: "pointer", fontFamily: FONT_BODY });
 
-/* ---------------- CSS kecil (input & tautan) ---------------- */
+/* ---------------- CSS kecil (input, tautan, dan tampilan cetak/PDF) ---------------- */
 const GLOBAL_CSS = `
 .ep-cek a{color:#12714B}.ep-cek a:hover{color:#0D4F35}
 .ep-cek .ep-in{width:100%;box-sizing:border-box;height:48px;border:1px solid #CBD6D0;border-radius:12px;padding:0 14px;font:500 16px var(--font-jakarta),sans-serif;color:#14211B;background:#fff}
 .ep-cek .ep-in:focus{outline:2px solid #12714B;outline-offset:1px;border-color:#12714B}
 .ep-cek button{font-family:var(--font-jakarta),sans-serif;cursor:pointer}
+.ep-cek .ep-hanya-cetak{display:none}
+@media print{
+  @page{size:A4;margin:14mm}
+  body>*:not(:has(.ep-cek)){display:none!important}
+  body{background:#fff!important}
+  .ep-cek{background:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .ep-cek .ep-noprint,.ep-cek form{display:none!important}
+  .ep-cek .ep-hanya-cetak{display:block!important}
+  .ep-cek .ep-wadah{padding:0!important;max-width:none!important;gap:16px!important}
+  .ep-cek .ep-kartu{break-inside:avoid}
+  .ep-cek a{text-decoration:none;color:inherit}
+}
 `;
 
 /* ---------------- komponen kecil ---------------- */
@@ -84,7 +97,7 @@ function TemuanList(props: { items: Temuan[]; showAll: boolean; mode: "ojk" | "e
         let ch = props.mode === "data" ? CHIP_DATA : CHIP[c.st];
         if (props.mode === "edu" && c.st === "merah") ch = ["Berisiko", "#B42318", "#FFFFFF"];
         return (
-          <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start", padding: "10px 0", borderBottom: "1px solid #F3F5F4" }}>
+          <div key={i} className="ep-kartu" style={{ display: "flex", gap: 12, alignItems: "flex-start", padding: "10px 0", borderBottom: "1px solid #F3F5F4" }}>
             <span style={{ flexShrink: 0, minWidth: 78, textAlign: "center", fontSize: 11, fontWeight: 700, letterSpacing: 0.4, padding: "5px 8px", borderRadius: 6, textTransform: "uppercase", background: ch[1], color: ch[2] }}>{ch[0]}</span>
             <div style={{ display: "flex", flexDirection: "column", gap: 3, minWidth: 0 }}>
               <strong style={{ fontSize: 14 }}>{c.title}</strong>
@@ -117,6 +130,22 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
   const [showCalc, setShowCalc] = useState(false);
   const [lateSel, setLateSel] = useState<number | "c">(30);
   const [lateCustom, setLateCustom] = useState(0);
+  const [cetak, setCetak] = useState(false);
+
+  // Saat tombol "Unduh hasil (PDF)" diklik: buka semua bagian, ganti judul tab (jadi nama file PDF), lalu buka jendela cetak.
+  useEffect(() => {
+    if (!cetak) return;
+    const judulLama = document.title;
+    document.title = "EduPuan - Hasil Cek Penawaran - " + new Date().toISOString().slice(0, 10);
+    const selesai = () => setCetak(false);
+    window.addEventListener("afterprint", selesai);
+    const jeda = setTimeout(() => window.print(), 100);
+    return () => {
+      clearTimeout(jeda);
+      window.removeEventListener("afterprint", selesai);
+      document.title = judulLama;
+    };
+  }, [cetak]);
 
   const set = (o: Partial<InputPenawaran>) => { setS((prev) => ({ ...prev, ...o })); setScen(null); };
   const pickScen = (id: number) => { setS(inputSkenario(id)); setScen(id); setShowAll(false); setShowCalc(false); setLateSel(30); setLateCustom(0); };
@@ -130,6 +159,9 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
   const late = simulasiTelat(s, h, lateDays);
   const gali = simulasiGaliLubang(s);
   const isUtang = h.ok && !produktif && s.tujuan === "utang";
+  const tampilSemua = showAll || cetak;
+  const tampilHitung = showCalc || cetak;
+  const tanggalCetak = cetak ? new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }) : "";
 
   // bar biaya per hari
   const scale = Math.max(h.mePct, h.batas) * 1.15;
@@ -160,15 +192,38 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
   ];
   const tujuanList: [Tujuan, string][] = [["harian", "Kebutuhan sehari-hari"], ["pendidikan", "Pendidikan"], ["kesehatan", "Kesehatan / darurat"], ["utang", "Membayar utang lain"]];
 
+  // tabel "Angka yang kamu masukkan" (hanya muncul di PDF)
+  const tujuanLabel = produktif ? "Usaha" : (tujuanList.find(([k]) => k === s.tujuan)?.[1] ?? "-");
+  const dataMasukan: [string, string][] = [
+    ["Jumlah pinjaman tertulis", rp(s.p)],
+    ["Uang yang masuk ke rekening", rp(s.d)],
+    ["Total yang harus dikembalikan", rp(s.t)],
+    ["Masa pinjaman", s.ten + " " + s.unit],
+    ["Jenis / tujuan", (produktif ? "Produktif" : "Konsumtif") + " · " + tujuanLabel],
+    ["Denda per hari di kontrak", s.dendaStr ? (dRp ? "Rp" + s.dendaStr + " per hari" : s.dendaStr + "% per hari") : "Tidak diisi"],
+    ["Pinjaman aktif di aplikasi lain", s.apps === 3 ? "3 atau lebih" : s.apps === 0 ? "Tidak ada" : String(s.apps)],
+  ];
+  if (!s.skip) {
+    dataMasukan.push(["Penghasilan bersih per bulan", rp(s.inc)]);
+    dataMasukan.push(["Pengeluaran wajib per bulan", rp(s.wajib)]);
+    dataMasukan.push(["Cicilan / utang lain per bulan", rp(s.lainCicil)]);
+  }
+
   return (
     <div className="ep-cek" style={{ minHeight: "100%", background: C.bg, fontFamily: FONT_BODY, color: C.ink }}>
       <style>{GLOBAL_CSS}</style>
 
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "36px 24px 64px", display: "flex", flexDirection: "column", gap: 26 }}>
+      <div className="ep-wadah" style={{ maxWidth: 1280, margin: "0 auto", padding: "36px 24px 64px", display: "flex", flexDirection: "column", gap: 26 }}>
+        {/* Kepala dokumen — hanya muncul di PDF */}
+        <div className="ep-hanya-cetak" style={{ borderBottom: `2px solid ${C.green}`, paddingBottom: 10 }}>
+          <div style={{ fontFamily: FONT_HEAD, fontSize: 20, fontWeight: 800, color: C.green }}>EduPuan</div>
+          <div style={{ fontSize: 12, color: C.muted, marginTop: 4 }}>Hasil Cek Penawaran · Dibuat {tanggalCetak}</div>
+        </div>
+
         {/* Judul */}
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           <h1 style={{ margin: 0, fontFamily: FONT_HEAD, fontSize: "clamp(28px, 4vw, 40px)", fontWeight: 800, letterSpacing: -0.5 }}>Cek Penawaran Pinjaman</h1>
-          <p style={{ margin: 0, color: C.muted, fontSize: 16, lineHeight: 1.6, maxWidth: 780 }}>Masukkan angka dari penawaran yang kamu terima. Kami periksa biayanya terhadap batas yang ditetapkan OJK, lalu menambahkan peringatan berdasarkan kondisi keuanganmu. Hasilnya bukan rekomendasi untuk meminjam.</p>
+          <p className="ep-noprint" style={{ margin: 0, color: C.muted, fontSize: 16, lineHeight: 1.6, maxWidth: 780 }}>Masukkan angka dari penawaran yang kamu terima. Kami periksa biayanya terhadap batas yang ditetapkan OJK, lalu menambahkan peringatan berdasarkan kondisi keuanganmu. Hasilnya bukan rekomendasi untuk meminjam.</p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 4 }}>
             <span style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 600, padding: "6px 12px", borderRadius: 999, background: "#FDECEA", color: "#9A1B12" }}><span style={{ width: 8, height: 8, borderRadius: 99, background: "#B42318" }} />Aturan OJK = batas resmi</span>
             <span style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 600, padding: "6px 12px", borderRadius: 999, background: "#FFF4D6", color: "#6B4400" }}><span style={{ width: 8, height: 8, borderRadius: 99, background: "#C98A00" }} />Rekomendasi EduPuan = peringatan tambahan, bukan aturan hukum</span>
@@ -177,7 +232,7 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
 
         {/* Skenario contoh — hanya tampil di mode demo */}
         {demo && (
-          <section aria-label="Skenario contoh" style={{ background: C.white, border: `1px solid ${C.line}`, borderRadius: 16, padding: "18px 20px", display: "flex", flexDirection: "column", gap: 12 }}>
+          <section className="ep-noprint" aria-label="Skenario contoh" style={{ background: C.white, border: `1px solid ${C.line}`, borderRadius: 16, padding: "18px 20px", display: "flex", flexDirection: "column", gap: 12 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: 8 }}>
               <strong style={{ fontSize: 15 }}>Coba skenario contoh</strong>
               <span style={{ fontSize: 13, color: C.muted }}>Klik untuk mengisi formulir, lalu ubah angkanya sesukamu</span>
@@ -329,8 +384,29 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
 
             {h.ok && (
               <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+                {/* Tombol unduh PDF */}
+                <div className="ep-noprint" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap", background: C.white, border: `1px solid ${C.line}`, borderRadius: 14, padding: "12px 16px" }}>
+                  <span style={{ fontSize: 13, color: C.muted, lineHeight: 1.5, flex: "1 1 220px" }}>Simpan hasil ini di perangkatmu. Di jendela yang muncul, pilih <strong>&quot;Simpan sebagai PDF&quot;</strong>.</span>
+                  <button type="button" onClick={() => setCetak(true)} style={{ minHeight: 44, padding: "0 16px", borderRadius: 10, border: 0, background: C.green, color: C.white, fontWeight: 700, fontSize: 14 }}>📄 Unduh hasil (PDF)</button>
+                </div>
+
+                {/* Angka yang dimasukkan — hanya muncul di PDF */}
+                <div className="ep-hanya-cetak ep-kartu" style={{ ...resultCard }}>
+                  <h3 style={h3}>Angka yang kamu masukkan</h3>
+                  <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+                    <tbody>
+                      {dataMasukan.map(([k, val]) => (
+                        <tr key={k}>
+                          <td style={{ padding: "6px 0", borderBottom: `1px solid ${C.soft}`, color: C.muted }}>{k}</td>
+                          <td style={{ padding: "6px 0", borderBottom: `1px solid ${C.soft}`, textAlign: "right", fontWeight: 600 }}>{val}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
                 {/* Kotak keputusan */}
-                <div style={{ background: v.bg, border: `1.5px solid ${v.bd}`, borderRadius: 18, padding: 24 }}>
+                <div className="ep-kartu" style={{ background: v.bg, border: `1.5px solid ${v.bd}`, borderRadius: 18, padding: 24 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 10 }}><span style={{ width: 14, height: 14, borderRadius: 99, background: v.fg }} /><span style={{ fontSize: 13, fontWeight: 700, letterSpacing: 1, color: v.fg }}>{v.tag}</span></div>
                   <h2 style={{ margin: "10px 0 8px", fontFamily: FONT_HEAD, fontSize: "clamp(22px, 3vw, 28px)", lineHeight: 1.25, color: v.fg }}>{v.title}</h2>
                   <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6 }}>{v.text}</p>
@@ -341,33 +417,33 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
                 <div style={{ ...resultCard, gap: 16 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
                     <h3 style={h3}>Temuan pemeriksaan</h3>
-                    <button type="button" onClick={() => setShowAll(!showAll)} style={ghostBtn}>{showAll ? "Sembunyikan yang lolos" : "Tampilkan semua pemeriksaan"}</button>
+                    <button type="button" className="ep-noprint" onClick={() => setShowAll(!showAll)} style={ghostBtn}>{showAll ? "Sembunyikan yang lolos" : "Tampilkan semua pemeriksaan"}</button>
                   </div>
                   <div style={{ border: "1.5px solid #F2B8B2", borderRadius: 14, overflow: "hidden" }}>
                     <div style={{ background: "#FDECEA", padding: "10px 14px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, flexWrap: "wrap" }}><strong style={{ fontSize: 13, letterSpacing: 0.8, color: "#9A1B12" }}>ATURAN OJK</strong><span style={{ fontSize: 12, color: "#9A1B12" }}>SEOJK 19/SEOJK.06/2025</span></div>
-                    <div style={{ padding: "6px 14px 10px", display: "flex", flexDirection: "column" }}><TemuanList items={h.ojk} showAll={showAll} mode="ojk" /></div>
+                    <div style={{ padding: "6px 14px 10px", display: "flex", flexDirection: "column" }}><TemuanList items={h.ojk} showAll={tampilSemua} mode="ojk" /></div>
                   </div>
                   <div style={{ border: "1.5px solid #E9C46A", borderRadius: 14, overflow: "hidden" }}>
                     <div style={{ background: "#FFF4D6", padding: "10px 14px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, flexWrap: "wrap" }}><strong style={{ fontSize: 13, letterSpacing: 0.8, color: "#6B4400" }}>REKOMENDASI EDUPUAN</strong><span style={{ fontSize: 12, color: "#6B4400" }}>Bukan batas resmi OJK</span></div>
-                    <div style={{ padding: "6px 14px 10px", display: "flex", flexDirection: "column" }}><TemuanList items={h.edu} showAll={showAll} mode="edu" /></div>
+                    <div style={{ padding: "6px 14px 10px", display: "flex", flexDirection: "column" }}><TemuanList items={h.edu} showAll={tampilSemua} mode="edu" /></div>
                   </div>
                   {h.data.length > 0 && (
                     <div style={{ border: `1.5px solid ${C.line2}`, borderRadius: 14, overflow: "hidden" }}>
                       <div style={{ background: C.soft, padding: "10px 14px" }}><strong style={{ fontSize: 13, letterSpacing: 0.8, color: C.ink2 }}>BELUM DAPAT DINILAI</strong></div>
-                      <div style={{ padding: "6px 14px 10px", display: "flex", flexDirection: "column" }}><TemuanList items={h.data} showAll={showAll} mode="data" /></div>
+                      <div style={{ padding: "6px 14px 10px", display: "flex", flexDirection: "column" }}><TemuanList items={h.data} showAll={tampilSemua} mode="data" /></div>
                     </div>
                   )}
                 </div>
 
                 {/* Peringatan bayar utang */}
                 {isUtang && (
-                  <div style={{ background: "#FFF4D6", border: "1px solid #E9C46A", borderRadius: 14, padding: "16px 18px", fontSize: 14, lineHeight: 1.6 }}>
+                  <div className="ep-kartu" style={{ background: "#FFF4D6", border: "1px solid #E9C46A", borderRadius: 14, padding: "16px 18px", fontSize: 14, lineHeight: 1.6 }}>
                     <strong>Perlu dipertimbangkan kembali.</strong> Pinjaman baru dipakai untuk membayar kewajiban lama. Pastikan pinjaman baru tidak membuat total kewajibanmu semakin berat. Sebelum itu, coba ajukan keringanan ke pemberi pinjaman yang lama. <Link href={TAUTAN.sudahTerjerat}>Ke panduan Sudah Terjerat →</Link>
                   </div>
                 )}
 
                 {/* Ringkasan uang */}
-                <div style={resultCard}>
+                <div className="ep-kartu" style={resultCard}>
                   <h3 style={h3}>Ringkasan uang</h3>
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 12 }}>
                     <div style={{ ...tile, padding: 14 }}><div style={{ fontSize: 13, color: C.muted }}>Dana yang diterima</div><div style={{ fontSize: 22, fontWeight: 700, marginTop: 4 }}>{rp(s.d)}</div></div>
@@ -378,7 +454,7 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
                 </div>
 
                 {/* Biaya per hari vs batas */}
-                <div style={resultCard}>
+                <div className="ep-kartu" style={resultCard}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
                     <h3 style={h3}>Biaya per hari vs batas OJK</h3>
                     <span style={{ fontSize: 13, color: C.muted }}>{h.kategori}</span>
@@ -388,8 +464,8 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
                     <div style={{ display: "grid", gridTemplateColumns: "110px minmax(0, 1fr) 70px", alignItems: "center", gap: 10 }}><span style={{ fontSize: 14, fontWeight: 600 }}>Batas OJK</span><div style={{ height: 16, background: C.soft, borderRadius: 99, overflow: "hidden" }}><div style={{ height: "100%", width: h.batas / scale * 100 + "%", background: C.ink2, borderRadius: 99 }} /></div><span style={{ fontSize: 14, fontWeight: 700, textAlign: "right" }}>{fb(h.batas)}</span></div>
                   </div>
                   <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: offerColor }}>{ratio > 1 ? "✕ Terindikasi melebihi batas maksimum manfaat ekonomi" : "✓ Tidak melebihi batas maksimum manfaat ekonomi yang diperiksa"}</p>
-                  <button type="button" onClick={() => setShowCalc(!showCalc)} style={{ ...ghostBtn, alignSelf: "flex-start" }}>{showCalc ? "Sembunyikan perhitungan" : "Lihat detail perhitungan"}</button>
-                  {showCalc && (
+                  <button type="button" className="ep-noprint" onClick={() => setShowCalc(!showCalc)} style={{ ...ghostBtn, alignSelf: "flex-start" }}>{showCalc ? "Sembunyikan perhitungan" : "Lihat detail perhitungan"}</button>
+                  {tampilHitung && (
                     <ol style={{ margin: 0, paddingLeft: 20, fontSize: 14, lineHeight: 1.6, display: "flex", flexDirection: "column", gap: 8 }}>
                       {langkahHitung(s, h).map((cs, i) => <li key={i}><strong>{cs.label}</strong><br /><span style={{ color: C.ink2 }}>{cs.val}</span></li>)}
                     </ol>
@@ -397,7 +473,7 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
                 </div>
 
                 {/* Kemampuan bayar */}
-                <div style={{ ...resultCard, gap: 12 }}>
+                <div className="ep-kartu" style={{ ...resultCard, gap: 12 }}>
                   <h3 style={h3}>Kemampuan bayar</h3>
                   {h.filled ? (
                     <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
@@ -417,10 +493,10 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
                 </div>
 
                 {/* Simulasi telat bayar */}
-                <div style={{ ...resultCard, gap: 12 }}>
+                <div className="ep-kartu" style={{ ...resultCard, gap: 12 }}>
                   <h3 style={h3}>Bagaimana jika saya terlambat membayar?</h3>
                   <p style={{ margin: 0, fontSize: 13, color: C.muted, lineHeight: 1.55 }}>Simulasi untuk edukasi. {late.basis}</p>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
+                  <div className="ep-noprint" style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
                     {([[7, "7 hari"], [14, "14 hari"], [30, "30 hari"], ["c", "Lainnya"]] as [number | "c", string][]).map(([k, label]) => (
                       <button key={String(k)} type="button" onClick={() => setLateSel(k)} style={pill(lateSel === k)}>{label}</button>
                     ))}
@@ -440,7 +516,7 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
 
                 {/* Gali lubang tutup lubang */}
                 {isUtang && (
-                  <div style={{ ...resultCard, gap: 12 }}>
+                  <div className="ep-kartu" style={{ ...resultCard, gap: 12 }}>
                     <h3 style={h3}>Simulasi gali lubang tutup lubang</h3>
                     <p style={{ margin: 0, fontSize: 13, color: C.muted }}>Kalau pinjaman ini nanti ditutup lagi dengan pinjaman baru berbiaya sama.</p>
                     <div style={{ overflowX: "auto" }}>
@@ -468,7 +544,7 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
                 )}
 
                 {/* Langkah berikutnya */}
-                <div style={{ ...resultCard, gap: 12 }}>
+                <div className="ep-noprint" style={{ ...resultCard, gap: 12 }}>
                   <h3 style={h3}>Langkah berikutnya</h3>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
                     {v.ctas.map((label, i) => (
@@ -484,6 +560,7 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
                 </div>
 
                 <p style={{ margin: 0, fontSize: 12, color: C.muted, lineHeight: 1.65 }}>Hasil ini perkiraan untuk membantumu mengenali risiko, berdasarkan angka yang kamu masukkan. EduPuan tidak menyarankan, menawarkan, atau bekerja sama dengan aplikasi pinjaman mana pun. Hasil ini bukan nasihat keuangan atau hukum, dan bukan pernyataan bahwa suatu aplikasi legal atau ilegal. Batas mengikuti SEOJK 19/SEOJK.06/2025 (berlaku 31 Juli 2025), Romawi IX, XI, XIII, dan XIV.</p>
+                <p className="ep-hanya-cetak" style={{ margin: 0, fontSize: 11, color: C.muted, lineHeight: 1.6 }}>Dokumen ini dibuat di perangkatmu dari angka yang kamu masukkan sendiri. Hitungannya dilakukan di browser, dan EduPuan tidak menyimpan angka-angka ini. Simpan file ini di tempat yang aman karena berisi data keuanganmu.</p>
               </div>
             )}
           </section>
