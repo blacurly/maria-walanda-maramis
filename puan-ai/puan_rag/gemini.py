@@ -53,12 +53,25 @@ class GeminiLLM:
         self.client = client
         self.model_cadangan = tuple(model_cadangan)
 
-    def tulis(self, model, contents, sistem=None, suhu=0.0) -> str:
+    def tulis(self, model, contents, sistem=None, suhu=0.0, berpikir=None) -> str:
         from google.genai import types
-        config = types.GenerateContentConfig(system_instruction=sistem, temperature=suhu)
+
+        def buat_config(dengan_berpikir: bool):
+            pikir = types.ThinkingConfig(thinking_level=berpikir) if (berpikir and dengan_berpikir) else None
+            return types.GenerateContentConfig(system_instruction=sistem, temperature=suhu, thinking_config=pikir)
+
         for m in [model] + [c for c in self.model_cadangan if c != model]:
             try:
-                hasil = coba_berulang(self.client.models.generate_content, m, model=m, contents=contents, config=config)
+                try:
+                    hasil = coba_berulang(self.client.models.generate_content, m, model=m, contents=contents,
+                                          config=buat_config(True))
+                except Exception as e:  # noqa: BLE001
+                    # model ini tidak mengenal pengaturan "berpikir" (400): ulangi tanpa pengaturan itu
+                    if not berpikir or not any(t in str(e) for t in ('400', 'INVALID_ARGUMENT')):
+                        raise
+                    log.warning('%s menolak pengaturan berpikir=%s, dicoba tanpa pengaturan itu', m, berpikir)
+                    hasil = coba_berulang(self.client.models.generate_content, m, model=m, contents=contents,
+                                          config=buat_config(False))
             except Exception as e:  # noqa: BLE001
                 if m == model:
                     raise

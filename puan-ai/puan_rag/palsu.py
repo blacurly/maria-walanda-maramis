@@ -37,7 +37,7 @@ class LLMPalsu:
     def __init__(self):
         self.panggilan = []
 
-    def tulis(self, model, contents, sistem=None, suhu=0.0):
+    def tulis(self, model, contents, sistem=None, suhu=0.0, berpikir=None):
         self.panggilan.append({'model': model, 'contents': contents, 'sistem': sistem})
         teks = contents if isinstance(contents, str) else contents[-1].parts[0].text
         if sistem and 'KUERI PENCARIAN' in sistem:                        # tahap tulis ulang

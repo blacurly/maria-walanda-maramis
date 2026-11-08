@@ -50,6 +50,11 @@ class Pengaturan:
     model_cadangan: tuple = ('gemini-3.1-flash-lite',)   # 'gemini-flash-latest' tidak tersedia di API v1 (404)
     suhu_jawab: float = 0.4
 
+    # ---- Kecepatan: seberapa lama Gemini "berpikir" sebelum menulis ----
+    # 'minimal' paling cepat; 'low' / 'medium' / 'high' makin lama tapi makin teliti; '' = bawaan model (paling lama).
+    berpikir_tulis_ulang: str = field(default_factory=lambda: os.getenv('PUAN_BERPIKIR_TULIS_ULANG', 'minimal'))
+    berpikir_jawab: str = field(default_factory=lambda: os.getenv('PUAN_BERPIKIR_JAWAB', 'low'))
+
     # ---- Percakapan ----
     maks_riwayat: int = 6     # berapa pesan terakhir (user + Puan) yang ikut dikirim ke Gemini
 

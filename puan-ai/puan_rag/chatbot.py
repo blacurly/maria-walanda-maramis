@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import logging
+import time
 from dataclasses import dataclass, field
 
 from . import knowledge_base as kbmod
@@ -76,7 +77,8 @@ class PuanAI:
         riwayat_user = [m for m in riwayat if m.peran == 'user'][-2:]          # cukup 2 pesan user terakhir
         if riwayat_user:
             isi = f'RIWAYAT PERCAKAPAN:\n{_teks_riwayat(riwayat_user)}\n\nPESAN TERBARU:\n{pesan}'
-        return self.llm.tulis(self.cfg.model_tulis_ulang, isi, sistem=self.instruksi_tulis_ulang, suhu=0)
+        return self.llm.tulis(self.cfg.model_tulis_ulang, isi, sistem=self.instruksi_tulis_ulang, suhu=0,
+                              berpikir=self.cfg.berpikir_tulis_ulang)
 
     # ---------- tahap 1+2: tulis ulang lalu cari ----------
     def ambil_konteks(self, pesan: str, riwayat=()):
@@ -89,7 +91,9 @@ class PuanAI:
     # ---------- semua tahap ----------
     def jawab(self, pesan: str, riwayat=None) -> HasilJawaban:
         riwayat = [m if isinstance(m, Pesan) else Pesan(**m) for m in (riwayat or [])][-self.cfg.maks_riwayat:]
+        t0 = time.perf_counter()
         kueri, konteks = self.ambil_konteks(pesan, riwayat)
+        t1 = time.perf_counter()
         if konteks['nyambung']:
             status, bahan = 'pasal', self.pencari.susun_bahan(konteks)
         else:
@@ -103,7 +107,10 @@ class PuanAI:
         isi_terbaru = f'PESAN USER:\n{pesan}\n\nBAHAN BACAAN:\n{bahan}' + (CATATAN_KRISIS if krisis else '')
         contents.append(types.Content(role='user', parts=[types.Part(text=isi_terbaru)]))
 
-        jawaban = self.llm.tulis(self.cfg.model_jawab, contents, sistem=SYSTEM_PROMPT_PUAN, suhu=self.cfg.suhu_jawab)
+        jawaban = self.llm.tulis(self.cfg.model_jawab, contents, sistem=SYSTEM_PROMPT_PUAN, suhu=self.cfg.suhu_jawab,
+                                 berpikir=self.cfg.berpikir_jawab)
+        log.info('waktu: cari pasal %.1f dtk | susun jawaban %.1f dtk | total %.1f dtk',
+                 t1 - t0, time.perf_counter() - t1, time.perf_counter() - t0)
         return HasilJawaban(jawaban=jawaban, status=status, krisis=krisis, kueri=kueri,
                             sumber=self.pencari.daftar_sumber(konteks) if status == 'pasal' else [],
                             skor_tertinggi=konteks.get('skor_tertinggi'))
