@@ -405,12 +405,19 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
                   </table>
                 </div>
 
-                {/* Kotak keputusan */}
-                <div className="ep-kartu" style={{ background: v.bg, border: `1.5px solid ${v.bd}`, borderRadius: 18, padding: 24 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}><span style={{ width: 14, height: 14, borderRadius: 99, background: v.fg }} /><span style={{ fontSize: 13, fontWeight: 700, letterSpacing: 1, color: v.fg }}>{v.tag}</span></div>
-                  <h2 style={{ margin: "10px 0 8px", fontFamily: FONT_HEAD, fontSize: "clamp(22px, 3vw, 28px)", lineHeight: 1.25, color: v.fg }}>{v.title}</h2>
-                  <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6 }}>{v.text}</p>
-                  <p style={{ margin: "10px 0 0", fontSize: 13, color: C.ink2 }}>{h.jumlah.merah} temuan merah · {h.jumlah.kuning} temuan kuning · {h.jumlah.lolos} pemeriksaan lolos</p>
+                {/* Kotak keputusan: disusun ke bawah (label → judul → deskripsi → jumlah temuan) */}
+                <div className="ep-kartu" style={{ background: v.bg, border: `1.5px solid ${v.bd}`, borderRadius: 18, padding: 24, display: "flex", flexDirection: "column", alignItems: "stretch", gap: 10 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <span style={{ width: 10, height: 10, borderRadius: 99, background: v.fg, flexShrink: 0 }} />
+                    <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", color: v.fg }}>{v.tag}</span>
+                  </div>
+                  <h2 style={{ margin: 0, fontFamily: FONT_HEAD, fontSize: "clamp(22px, 3vw, 28px)", lineHeight: 1.25, color: v.fg }}>{v.title}</h2>
+                  <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: C.ink, maxWidth: 680 }}>{v.text}</p>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 4 }}>
+                    <span style={{ fontSize: 12, fontWeight: 600, padding: "4px 10px", borderRadius: 999, background: "#FFFFFF", color: "#B42318", border: "1px solid #F2B8B2" }}>{h.jumlah.merah} temuan merah</span>
+                    <span style={{ fontSize: 12, fontWeight: 600, padding: "4px 10px", borderRadius: 999, background: "#FFFFFF", color: "#6B4400", border: "1px solid #E9C46A" }}>{h.jumlah.kuning} temuan kuning</span>
+                    <span style={{ fontSize: 12, fontWeight: 600, padding: "4px 10px", borderRadius: 999, background: "#FFFFFF", color: "#0E6B47", border: "1px solid #B7DEC9" }}>{h.jumlah.lolos} pemeriksaan lolos</span>
+                  </div>
                 </div>
 
                 {/* Temuan */}
