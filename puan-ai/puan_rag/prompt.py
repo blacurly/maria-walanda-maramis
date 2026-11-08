@@ -80,14 +80,18 @@ atau www.healing119.id), dan sarankan ke fasilitas kesehatan terdekat bila darur
 - Cek Penawaran: user mau pinjam dan bertanya bunga/biaya (hitung total biaya; jangan menyebut "aman").
 - Cari Alternatif: user butuh uang mendesak atau berniat pinjam — alternatif TANPA utang.
 - Rangkum Semua Utang: user punya beberapa pinjol atau bingung total utangnya.
+- Hak Saat Ditagih: user sedang ditagih dan ingin tahu apa yang boleh dan tidak boleh dilakukan penagih (cara, jam, tempat).
 - Baca & Analisis Pesan Penagih: user menerima chat/pesan dari penagih dan ingin tahu apakah melanggar.
 - Dokumentasi & Lapor: user mengalami penagihan kasar, ancaman, atau data disebar dan ingin melapor.
+- Beritahu Keluarga: user takut atau bingung cara menceritakan masalah utangnya kepada keluarga/pasangan.
 JANGAN menyarankan fitur "Ceritakan Situasimu".
 
 ## LEMBAGA BERWENANG (sarankan bila situasinya cocok)
 - Pinjol legal melanggar aturan: adukan dulu ke perusahaan pinjolnya; bila tidak selesai ke Kontak OJK 157
   (telepon 157, WhatsApp 081-157-157-157, email konsumen@ojk.go.id, portal kontak157.ojk.go.id).
-- Pinjol ilegal: Satgas PASTI lewat Kontak OJK 157 atau email satgaspasti@ojk.go.id.
+- Pinjol ilegal: JANGAN sarankan mengadu ke perusahaan pinjolnya. Langsung laporkan ke Satgas PASTI lewat Kontak OJK 157
+  atau email satgaspasti@ojk.go.id.
+- Kalau belum jelas pinjolnya legal atau ilegal: sarankan cek dulu lewat fitur Cek Legalitas Pinjol, karena jalur lapornya berbeda.
 - Ancaman, intimidasi, pemerasan, penyebaran foto/data: lapor ke kantor polisi terdekat dengan membawa bukti.
 
 ## PESAN DI LUAR TOPIK
@@ -110,5 +114,13 @@ LABEL_BAHAN = {
 
 CATATAN_KRISIS = '\n\n[CATATAN SISTEM: pesan ini mengandung tanda krisis. Terapkan aturan KESELAMATAN.]'
 
-KATA_KRISIS = ['bunuh diri', 'mengakhiri hidup', 'akhiri hidup', 'pengen mati', 'ingin mati', 'mau mati aja',
-               'gak mau hidup', 'nggak mau hidup', 'tidak mau hidup', 'menyakiti diri', 'lebih baik mati']
+KATA_KRISIS = [
+    # keinginan mati / bunuh diri
+    'bunuh diri', 'mengakhiri hidup', 'akhiri hidup', 'akhirin hidup', 'gantung diri', 'minum racun',
+    'pengen mati', 'pengin mati', 'pingin mati', 'ingin mati', 'mau mati aja', 'mending mati', 'lebih baik mati',
+    # tidak ingin hidup / ingin menghilang
+    'gak mau hidup', 'ga mau hidup', 'nggak mau hidup', 'tidak mau hidup', 'capek hidup', 'cape hidup', 'lelah hidup',
+    'gak kuat hidup', 'nggak kuat hidup', 'pengen ngilang', 'pengen menghilang', 'ingin menghilang', 'pengen udahan aja',
+    # menyakiti diri
+    'menyakiti diri', 'nyakitin diri', 'melukai diri',
+]
