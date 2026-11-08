@@ -363,7 +363,10 @@ export default function PuanFab() {
             </div>
             <p className="mt-1.5 text-[10px] leading-snug text-gray-400">
               Edukasi, bukan nasihat hukum final. Jangan tulis nomor KTP, rekening, atau kata sandi. Pesan diproses
-              layanan AI pihak ketiga (Google Gemini) dan tidak disimpan EduPuan.
+              layanan AI pihak ketiga (Google Gemini) dan tidak disimpan EduPuan.{" "}
+              <Link href="/kebijakan-privasi" onClick={() => setBuka(false)} className="underline hover:text-[#0d6e4b]">
+                Kebijakan Privasi
+              </Link>
             </p>
           </div>
         </section>
