@@ -9,7 +9,16 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 // Percakapan disimpan sementara di sessionStorage: bertahan saat halaman di-refresh,
 // otomatis terhapus saat tab ditutup. Tidak dikirim atau disimpan di database EduPuan.
 
-type Pesan = { peran: "user" | "puan"; teks: string; krisis?: boolean };
+// topik/situasi/status = label anonim dari Puan; nilai = penilaian user (1 membantu, -1 belum membantu)
+type Pesan = {
+  peran: "user" | "puan";
+  teks: string;
+  krisis?: boolean;
+  topik?: string;
+  situasi?: string;
+  status?: string;
+  nilai?: 1 | -1;
+};
 
 const BATAS_PESAN = 2000;
 const TINGGI_MIN = 40;
@@ -30,7 +39,15 @@ function bacaTersimpan(): Pesan[] {
           typeof p === "object" && p !== null &&
           (p.peran === "user" || p.peran === "puan") && typeof p.teks === "string",
       )
-      .map((p) => ({ peran: p.peran, teks: p.teks.slice(0, 8000), krisis: p.krisis === true }))
+      .map((p) => ({
+        peran: p.peran,
+        teks: p.teks.slice(0, 8000),
+        krisis: p.krisis === true,
+        topik: typeof p.topik === "string" ? p.topik : undefined,
+        situasi: typeof p.situasi === "string" ? p.situasi : undefined,
+        status: typeof p.status === "string" ? p.status : undefined,
+        nilai: p.nilai === 1 || p.nilai === -1 ? p.nilai : undefined,
+      }))
       .slice(-MAKS_DISIMPAN);
   } catch {
     return []; // sessionStorage tidak tersedia (mis. mode privat tertentu): chat tetap jalan tanpa disimpan
@@ -193,6 +210,19 @@ export default function PuanFab() {
     } catch {}
   }
 
+  // "Apakah jawaban ini membantu?": hanya nilai + label yang dikirim, tanpa isi chat.
+  // Tombol langsung berubah jadi ucapan terima kasih; kalau pengiriman gagal, pengguna tidak diganggu.
+  function nilaiJawaban(indeks: number, nilai: 1 | -1) {
+    const p = daftar[indeks];
+    if (!p || p.peran !== "puan" || p.nilai || !p.topik || !p.situasi || !p.status) return;
+    setDaftar((d) => d.map((m, i) => (i === indeks ? { ...m, nilai } : m)));
+    fetch("/api/umpan-balik", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nilai, topik: p.topik, situasi: p.situasi, status: p.status }),
+    }).catch(() => {});
+  }
+
   // Fokus ke kolom ketik saat jendela dibuka
   useEffect(() => {
     if (buka) setTimeout(() => inputRef.current?.focus(), 100);
@@ -245,7 +275,17 @@ export default function PuanFab() {
       });
       const data = await r.json().catch(() => ({}));
       if (!r.ok) throw new Error(typeof data.detail === "string" ? data.detail : "Maaf, ada gangguan. Coba lagi ya.");
-      setDaftar((d) => [...d, { peran: "puan", teks: String(data.jawaban ?? ""), krisis: data.krisis === true }]);
+      setDaftar((d) => [
+        ...d,
+        {
+          peran: "puan",
+          teks: String(data.jawaban ?? ""),
+          krisis: data.krisis === true,
+          topik: typeof data.topik === "string" ? data.topik : undefined,
+          situasi: typeof data.situasi === "string" ? data.situasi : undefined,
+          status: typeof data.status === "string" ? data.status : undefined,
+        },
+      ]);
     } catch (e) {
       // Pesan user dikeluarkan lagi supaya riwayat tetap rapi, lalu bisa dikirim ulang
       setDaftar((d) => d.slice(0, -1));
@@ -343,6 +383,35 @@ export default function PuanFab() {
                   <div className="max-w-[85%] rounded-[16px_16px_16px_4px] bg-gray-100 px-[13px] py-[9px] text-[13px] leading-normal text-gray-900 [overflow-wrap:anywhere]">
                     <IsiJawaban teks={p.teks} />
                   </div>
+                  {!p.krisis && p.topik && p.situasi && p.status && (
+                    <div className="flex items-center gap-1.5 text-[11px] text-gray-500">
+                      {p.nilai ? (
+                        <span>Terima kasih atas masukanmu.</span>
+                      ) : (
+                        <>
+                          <span>Apakah jawaban ini membantu?</span>
+                          <button
+                            type="button"
+                            onClick={() => nilaiJawaban(i, 1)}
+                            aria-label="Ya, membantu"
+                            title="Membantu"
+                            className="rounded-full border border-gray-200 bg-white px-2 py-0.5 hover:border-[#0d6e4b]"
+                          >
+                            👍
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => nilaiJawaban(i, -1)}
+                            aria-label="Belum membantu"
+                            title="Belum membantu"
+                            className="rounded-full border border-gray-200 bg-white px-2 py-0.5 hover:border-[#0d6e4b]"
+                          >
+                            👎
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  )}
                   {!p.krisis && fiturDisebut(p.teks).length > 0 && (
                     <div className="flex max-w-[90%] flex-col gap-1.5">
                       <p className="text-[11px] font-semibold text-gray-500">Buka fitur yang disarankan:</p>

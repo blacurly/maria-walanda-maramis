@@ -1,4 +1,4 @@
-"""Rekap ANONIM topik pertanyaan Puan AI ke tabel Supabase `statistik_puan`.
+"""Rekap ANONIM ke Supabase: topik pertanyaan (`statistik_puan`) dan umpan balik suka/tidak suka (`umpan_balik_puan`).
 
 Yang dicatat HANYA: topik, situasi, status, krisis, durasi_ms (waktu dicatat otomatis oleh database).
 TIDAK PERNAH mencatat isi pesan, nama, nomor HP, alamat IP, atau ID pengguna.
@@ -31,6 +31,9 @@ LABEL = {
     'lainnya': ['lainnya'],
 }
 
+TOPIK_KHUSUS = {'butuh_dana', 'di_luar_topik'}   # dipakai jalur khusus, topik = situasi
+STATUS_SAH = {'pasal', 'butuh_dana', 'di_luar_topik', 'tidak_ada_pasal'}
+
 _CARI_LABEL = re.compile(r'^\s*LABEL\s*:\s*([A-Za-z_]+)\s*/\s*([A-Za-z_]+)', re.MULTILINE)
 _BARIS_LABEL = re.compile(r'^\s*LABEL\s*:.*$', re.MULTILINE | re.IGNORECASE)
 
@@ -58,6 +61,15 @@ def pisahkan_label(keluaran: str) -> tuple[str, str, str]:
     return kueri, topik, situasi
 
 
+def label_sah(topik: str, situasi: str) -> tuple[str, str]:
+    """Memastikan pasangan topik/situasi ada di daftar. Yang tidak dikenal diganti 'lainnya'."""
+    if topik in TOPIK_KHUSUS and situasi == topik:
+        return topik, situasi
+    if topik in LABEL:
+        return topik, (situasi if situasi in LABEL[topik] else 'lainnya')
+    return 'lainnya', 'lainnya'
+
+
 def aktif() -> bool:
     return (os.environ.get('PUAN_CATAT_STATISTIK') == '1'
             and bool(os.environ.get('SUPABASE_URL'))
@@ -66,14 +78,27 @@ def aktif() -> bool:
 
 def catat(topik: str, situasi: str, status: str, krisis: bool, durasi_ms: int, batas_waktu: float = 2.0) -> bool:
     """Menulis 1 baris rekap anonim. Mengembalikan True jika berhasil. Tidak pernah melempar error."""
+    return _kirim('statistik_puan', {
+        'topik': topik, 'situasi': situasi, 'status': status,
+        'krisis': bool(krisis), 'durasi_ms': max(0, int(durasi_ms)),
+    }, batas_waktu)
+
+
+def catat_umpan_balik(nilai: int, topik: str, situasi: str, status: str, batas_waktu: float = 2.0) -> bool:
+    """Menulis 1 baris umpan balik (1 = membantu, -1 = belum membantu). Tanpa isi pertanyaan atau jawaban."""
+    if nilai not in (1, -1) or status not in STATUS_SAH:
+        return False
+    topik, situasi = label_sah(topik, situasi)
+    return _kirim('umpan_balik_puan', {'nilai': nilai, 'topik': topik, 'situasi': situasi, 'status': status}, batas_waktu)
+
+
+def _kirim(tabel: str, data: dict, batas_waktu: float) -> bool:
+    """Mengirim 1 baris ke tabel Supabase lewat REST API. Tidak pernah melempar error."""
     if not aktif():
         return False
     kunci = os.environ['SUPABASE_SECRET_KEY']
-    alamat = os.environ['SUPABASE_URL'].rstrip('/') + '/rest/v1/statistik_puan'
-    isi = json.dumps({
-        'topik': topik, 'situasi': situasi, 'status': status,
-        'krisis': bool(krisis), 'durasi_ms': max(0, int(durasi_ms)),
-    }).encode('utf-8')
+    alamat = os.environ['SUPABASE_URL'].rstrip('/') + '/rest/v1/' + tabel
+    isi = json.dumps(data).encode('utf-8')
     header = {'apikey': kunci, 'Content-Type': 'application/json', 'Prefer': 'return=minimal'}
     # Kunci baru (sb_secret_...) cukup di header apikey. Kunci lama (service_role, berbentuk JWT "eyJ...")
     # juga perlu dikirim di header Authorization supaya dikenali sebagai service_role.

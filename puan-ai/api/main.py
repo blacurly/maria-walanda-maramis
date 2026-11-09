@@ -6,7 +6,8 @@ Lalu buka http://localhost:8000/docs untuk mencoba langsung dari browser.
 
 Endpoint:
     GET  /health  -> cek layanan hidup + versi knowledge base yang dipakai
-    POST /chat    -> {pesan, riwayat} -> {jawaban, status, krisis, sumber}
+    POST /chat    -> {pesan, riwayat} -> {jawaban, status, krisis, sumber, topik, situasi}
+    POST /umpan-balik -> {nilai, topik, situasi, status} -> {ok}   (suka/tidak suka, ANONIM, tanpa isi chat)
 
 Environment variable:
     GEMINI_API_KEY     wajib
@@ -14,6 +15,7 @@ Environment variable:
     ALLOWED_ORIGINS    daftar origin web yang boleh memanggil langsung, dipisah koma (bawaan: http://localhost:3000)
     PUAN_EMBED         gemini | e5          PUAN_PECAH_HURUF  0 | 1
     PUAN_DEBUG         1 = sertakan kueri & skor di respons (jangan di produksi)
+    PUAN_CATAT_STATISTIK, SUPABASE_URL, SUPABASE_SECRET_KEY   rekap & umpan balik anonim (lihat puan_rag/statistik.py)
 """
 from __future__ import annotations
 
@@ -41,6 +43,7 @@ os.environ.setdefault('PUAN_PERCOBAAN', '2')
 os.environ.setdefault('PUAN_JEDA', '2')
 
 from puan_rag import Pengaturan, Pesan, PuanAI  # noqa: E402
+from puan_rag import statistik  # noqa: E402
 from puan_rag.gemini import GeminiSibuk  # noqa: E402
 
 log = logging.getLogger('puan_ai')
@@ -63,13 +66,25 @@ class Sumber(BaseModel):
     peran: str
 
 
+Status = Literal['pasal', 'butuh_dana', 'di_luar_topik', 'tidak_ada_pasal']
+
+
 class JawabanChat(BaseModel):
     jawaban: str
-    status: Literal['pasal', 'di_luar_topik', 'tidak_ada_pasal']
+    status: Status   # 'butuh_dana' wajib ada di sini (jalur [F]); kalau tidak, jawaban BUTUH_DANA gagal dikirim (error 500)
     krisis: bool = Field(description='true jika pesan mengandung tanda krisis: web sebaiknya menampilkan info Healing119')
     sumber: list[Sumber]
     kueri: str | None = None
     skor_tertinggi: float | None = None
+    topik: str | None = None      # label anonim [G], dipakai tombol suka/tidak suka di web
+    situasi: str | None = None
+
+
+class PermintaanUmpanBalik(BaseModel):
+    nilai: Literal[1, -1]
+    topik: str = Field(..., max_length=40)
+    situasi: str = Field(..., max_length=40)
+    status: Status
 
 
 # ------------------------------------------------------------------ siklus hidup
@@ -134,3 +149,9 @@ def chat(req: PermintaanChat, puan: PuanAI = Depends(ambil_puan)):
         data.pop('kueri', None)
         data.pop('skor_tertinggi', None)
     return data
+
+
+@app.post('/umpan-balik', dependencies=[Depends(cek_kunci)])
+def umpan_balik(req: PermintaanUmpanBalik):
+    # Hanya nilai + label yang diterima. Isi pertanyaan/jawaban memang tidak ada di bentuk data ini.
+    return {'ok': statistik.catat_umpan_balik(req.nilai, req.topik, req.situasi, req.status)}

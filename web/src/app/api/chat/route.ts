@@ -13,6 +13,11 @@ function galat(pesan: string, status: number) {
   return NextResponse.json({ detail: pesan }, { status });
 }
 
+// Label anonim dari server Puan (mis. "penagihan"). Hanya huruf kecil dan garis bawah yang diteruskan.
+function labelAman(nilai: unknown): string | undefined {
+  return typeof nilai === "string" && /^[a-z_]{1,40}$/.test(nilai) ? nilai : undefined;
+}
+
 function bersihkanRiwayat(riwayat: unknown): Pesan[] {
   if (!Array.isArray(riwayat)) return [];
   return riwayat
@@ -71,7 +76,14 @@ export async function POST(req: Request) {
 
     // Hanya kirim yang dipakai tampilan. Daftar "sumber" tidak ditampilkan karena bisa menyesatkan
     // (dasar hukum yang benar-benar dipakai sudah ditulis Puan di baris "Dasar aturannya").
-    return NextResponse.json({ jawaban: data.jawaban, status: data.status, krisis: data.krisis === true });
+    // topik & situasi = label anonim, dipakai tombol "Apakah jawaban ini membantu?".
+    return NextResponse.json({
+      jawaban: data.jawaban,
+      status: labelAman(data.status),
+      krisis: data.krisis === true,
+      topik: labelAman(data.topik),
+      situasi: labelAman(data.situasi),
+    });
   } catch (e) {
     if (e instanceof Error && e.name === "TimeoutError") {
       return galat("Puan butuh waktu terlalu lama untuk menjawab. Coba kirim lagi ya.", 504);
