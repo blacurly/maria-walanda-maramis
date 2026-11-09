@@ -3,12 +3,12 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Syarat & Ketentuan – EduPuan",
-  description: "Aturan memakai EduPuan: sifat layanan, batasan Puan AI, akun opsional, dan penggunaan yang dilarang.",
+  description: "Aturan memakai EduPuan: sifat layanan, batasan Puan AI, tanpa akun, dan penggunaan yang dilarang.",
 };
 
-// ⚠️ Samakan dengan email di halaman Kebijakan Privasi sebelum di-push
+// ⚠️ Samakan dengan email di halaman Kebijakan Privasi sebelum demo
 const EMAIL_KONTAK = "edupuan.kontak@gmail.com";
-const BERLAKU_SEJAK = "8 November 2026";
+const BERLAKU_SEJAK = "9 November 2026";
 
 function Bagian({ judul, children }: { judul: string; children: React.ReactNode }) {
   return (
@@ -32,6 +32,7 @@ export default function SyaratKetentuanPage() {
           <li>EduPuan memberi <strong>edukasi</strong>, bukan nasihat hukum atau keuangan yang mengikat.</li>
           <li>EduPuan <strong>tidak merekomendasikan pinjaman</strong> apa pun.</li>
           <li>Puan AI bisa keliru. Untuk keputusan penting, pastikan ke lembaga resmi.</li>
+          <li>EduPuan <strong>tidak memerlukan akun</strong>. Semua fitur bisa langsung dipakai.</li>
           <li>Dalam keadaan darurat, hubungi <strong>112</strong> atau <strong>Healing119 (119 ekstensi 8)</strong>.</li>
         </ul>
       </div>
@@ -61,6 +62,9 @@ export default function SyaratKetentuanPage() {
           <li>Puan AI menyusun jawaban dengan kecerdasan buatan berdasarkan sejumlah peraturan yang tersedia di sistemnya (antara lain POJK, SEOJK, dan UU Pelindungan Data Pribadi).</li>
           <li>Jawaban Puan <strong>bisa keliru, tidak lengkap, atau tidak sesuai dengan kondisimu</strong>. Puan juga tidak mengetahui semua peraturan yang berlaku.</li>
           <li>Untuk keputusan penting atau sengketa, hubungi lembaga berwenang seperti Kontak OJK 157, Lembaga Bantuan Hukum (LBH), atau advokat.</li>
+          <li>Jika kamu sedang butuh uang, Puan akan mengarahkan ke pilihan tanpa utang dan cara memeriksa penawaran. Puan <strong>tidak menyarankan aplikasi, bank, atau pemberi pinjaman tertentu</strong>.</li>
+          <li>Percakapan hanya tersimpan sementara di tab browsermu dan terhapus saat tab ditutup. Lihat{" "}<Link href="/kebijakan-privasi" className="font-semibold text-[#0d6e4b] underline">Kebijakan Privasi</Link>.</li>
+          <li>Tombol &quot;Apakah jawaban ini membantu?&quot; bersifat <strong>sukarela</strong>. Penilaianmu dicatat secara anonim untuk memperbaiki Puan.</li>
           <li>Puan bukan layanan darurat dan bukan pengganti tenaga profesional kesehatan jiwa.</li>
         </ul>
       </Bagian>
@@ -81,11 +85,11 @@ export default function SyaratKetentuanPage() {
         </p>
       </Bagian>
 
-      <Bagian judul="6. Akun (opsional)">
+      <Bagian judul="6. Tanpa akun dan data di perangkatmu">
         <ul className="list-disc space-y-1 pl-5">
-          <li>Akun hanya diperlukan jika kamu ingin menyimpan riwayat. Semua fitur tetap bisa dipakai tanpa akun.</li>
-          <li>Kamu bertanggung jawab menjaga kerahasiaan kata sandimu.</li>
-          <li>Kamu dapat menghapus riwayat kapan saja dan meminta penghapusan akun.</li>
+          <li>EduPuan tidak memakai akun. Kamu tidak perlu mendaftar atau memberikan email untuk memakai fitur apa pun.</li>
+          <li>Sebagian fitur, seperti Rangkum Utang, menyimpan data di browser perangkatmu. Jika perangkat dipakai bersama, hapus data tersebut setelah selesai, misalnya lewat tombol &quot;Hapus semua data&quot;.</li>
+          <li>File yang kamu unduh (misalnya PDF hasil Cek Penawaran atau Rangkum Utang) tersimpan di perangkatmu dan menjadi tanggung jawabmu untuk disimpan dengan aman.</li>
         </ul>
       </Bagian>
 
