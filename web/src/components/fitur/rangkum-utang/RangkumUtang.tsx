@@ -4,7 +4,8 @@
  * Fitur EduPuan: Rangkum Semua Utang
  * File ini lengkap dan berdiri sendiri: aturan, tampilan, dan gaya.
  * JANGAN diubah lewat prompt AI. Aturan di dalamnya sudah diuji sesuai spesifikasi.
- * Tambahan: tombol "Unduh rangkuman (PDF)" (viewReport + printReport + CSS @media print).
+ * Tambahan: tombol "Unduh rangkuman (PDF)" membuat file PDF langsung dengan jsPDF (unduhPdf),
+ * karena jendela cetak (window.print) sering hitam/kosong di HP. printReport tetap ada sebagai cadangan.
  * Tambahan: daftar diurutkan menurut pilihan pengguna (jatuh tempo / nominal), BUKAN urutan bayar.
  * Label tenggat tampil netral (LABEL_TAMPIL). Bagian DebtLogic TIDAK diubah.
  */
@@ -708,7 +709,7 @@ function mountRangkumUtang(root, onExit) {
       '<div class="hero" style="padding-bottom:0"><span class="eyebrow">Per ' + esc(L.formatDate(state.today)) + '</span>' +
       '<div class="row" style="justify-content:space-between"><h1>Rangkuman Utangmu</h1>' +
       '<button class="btn btn-ghost btn-sm" data-act="print" type="button">📄 Unduh rangkuman (PDF)</button></div>' +
-      '<p class="small muted print-hint">Unduh untuk menyimpan salinan di perangkatmu. Di jendela yang muncul, pilih &quot;Simpan sebagai PDF&quot;.</p></div>' +
+      '<p class="small muted print-hint">File PDF akan langsung terunduh ke perangkatmu. Simpan di tempat yang aman karena berisi data keuanganmu.</p></div>' +
       '<div class="two sum-two"><aside class="side">' +
       '<div class="stats">' +
       '<div class="stat stat-total"><span class="eyebrow">Total tagihan tercatat</span><div class="big num">' + rp(s.total) + '</div>' +
@@ -912,6 +913,72 @@ function mountRangkumUtang(root, onExit) {
     return h;
   }
 
+  /* ---------- Unduh PDF sungguhan (jsPDF), bekerja juga di HP ---------- */
+  var sedangMengunduh = false;
+  function unduhPdf() {
+    if (!state.debts.length) { toast('Belum ada tagihan untuk diunduh.'); return; }
+    if (sedangMengunduh) return;
+    sedangMengunduh = true;
+    toast('Menyiapkan PDF...');
+    import('@/features/pdfEduPuan').then(function (m) {
+      return m.mulaiPdf('Rangkuman Utang').then(function (p) {
+        var s = L.summarize(state.debts, state.today);
+        var sorted = urutkan(state.debts);
+        if (state.demo) p.paragraf('Ini data contoh. Angkanya bukan milikmu.', { tebal: true });
+        p.paragraf('Per ' + L.formatDate(state.today), { abu: true });
+
+        p.judul('Ringkasan');
+        p.tabel(null, [
+          ['Total tagihan tercatat (' + s.count + ' tagihan)', rp(s.total)],
+          ['Sudah jatuh tempo (' + s.overdue.count + ')', rp(s.overdue.sum)],
+          ['Jatuh tempo hari ini (' + s.today.count + ')', rp(s.today.sum)],
+          ['Jatuh tempo 1-3 hari (' + s.d1_3.count + ')', rp(s.d1_3.sum)],
+          ['Jatuh tempo 4-7 hari (' + s.d4_7.count + ')', rp(s.d4_7.sum)],
+          ['Lebih dari 7 hari (' + s.later.count + ')', rp(s.later.sum)],
+          ['Tanggal belum diketahui (' + s.unknown.count + ')', rp(s.unknown.sum)],
+          ['Perlu verifikasi', s.verifyCount + ' tagihan' + (s.disputedCount ? ' (' + s.disputedCount + ' tidak disetujui)' : '')]
+        ], { lebarKolom: { 1: 45 } });
+
+        p.judul('Daftar tagihan');
+        p.paragraf('Diurutkan berdasarkan: ' + URUTAN[state.sort].toLowerCase() + '. Urutan ini bukan saran urutan pembayaran.', { ukuran: 9, abu: true });
+        p.tabel(['No.', 'Penyedia', 'Jatuh tempo', 'Keterangan', 'Nominal'], sorted.map(function (d, i) {
+          var a = L.assess(d, state.today);
+          return [String(i + 1), d.provider, L.formatDate(d.dueDate) + '\n' + L.dueText(d, state.today),
+            LABEL_TAMPIL[a.bucket] + (a.verify ? '\nPerlu verifikasi' : ''), rp(d.amount)];
+        }), { lebarKolom: { 0: 10, 4: 30 } });
+
+        p.judul('Rincian dan langkah berikutnya');
+        sorted.forEach(function (d) {
+          var a = L.assess(d, state.today);
+          var legal = providerLegalStatus(d.provider);
+          var steps = [];
+          if (legal.key === 'illegal') steps.push({ title: 'Pinjaman terindikasi ilegal', text: 'Jangan transfer ke rekening pribadi penagih. Simpan semua bukti tagihan dan pesan, lalu laporkan melalui kanal resmi seperti Satgas PASTI atau OJK 157.' });
+          if (legal.key === 'unknown') steps.push({ title: 'Pastikan status legalitasnya', text: 'Nama ini tidak ada di data EduPuan. Cek langsung di ojk.go.id atau tanyakan ke WA OJK 081-157-157-157.' });
+          steps = steps.concat(a.actions);
+          p.paragraf(d.provider + '  -  ' + rp(d.amount), { tebal: true });
+          p.paragraf('Status legalitas: ' + legal.label + (legal.pt ? ' (' + legal.pt + ')' : '') +
+            '   |   Nominal sudah pasti? ' + STATUS_TAMPIL[d.status], { ukuran: 9, abu: true });
+          p.paragraf(a.reason, { ukuran: 9 });
+          if (d.note) p.paragraf('Catatanmu: ' + d.note, { ukuran: 9, abu: true });
+          p.poin(steps.map(function (x) { return x.title + '. ' + x.text; }), 9);
+        });
+
+        p.judul('Catatan');
+        p.poin([
+          'Urutan daftar hanya mengikuti pilihan pengurutan (jatuh tempo atau nominal). EduPuan tidak menentukan tagihan mana yang harus dibayar lebih dulu.',
+          'Jangan mengambil pinjaman baru untuk menutup pinjaman lama. Butuh bantuan? Kontak OJK 157 atau WhatsApp 081-157-157-157.',
+          'Dokumen ini dibuat di perangkatmu dari data yang kamu masukkan sendiri. EduPuan tidak menyimpan data ini di server. Simpan file ini di tempat yang aman. Ini bukan nasihat hukum atau keuangan.'
+        ], 9);
+        p.simpan(m.namaFilePdf('Rangkuman-Utang'));
+        toast('PDF terunduh. Cek folder Unduhan (Download).');
+      });
+    }).catch(function () {
+      // Cadangan: pakai jendela cetak browser
+      toast('PDF belum bisa dibuat di browser ini. Mencoba jendela cetak...');
+      printReport();
+    }).then(function () { sedangMengunduh = false; });
+  }
+
   var titleBeforePrint = null;
   function printReport() {
     if (!state.debts.length) { toast('Belum ada tagihan untuk diunduh.'); return; }
@@ -987,7 +1054,7 @@ function mountRangkumUtang(root, onExit) {
     else if (act === 'wipe-yes') { state.debts = []; state.demo = false; save(); toast('Semua data dihapus dari browser ini.'); go('home'); }
     else if (act === 'demo') { state.debts = demoData(); state.demo = true; save(); go('summary'); }
     else if (act === 'pick-provider') { pickProvider(b.getAttribute('data-name')); }
-    else if (act === 'print') { printReport(); }
+    else if (act === 'print') { unduhPdf(); }
   });
   on($('clearDemo'), 'click', function () { state.debts = []; state.demo = false; save(); toast('Data contoh dihapus.'); go('home'); });
 
@@ -1089,7 +1156,7 @@ function mountRangkumUtang(root, onExit) {
   return function () { cleanups.forEach(function (f) { f(); }); };
 }
 
-export default function RangkumUtangBaru({ onBack }: { onBack?: () => void }) {
+export default function RangkumUtang({ onBack }: { onBack?: () => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const backRef = useRef(onBack);
   backRef.current = onBack;
