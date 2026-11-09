@@ -528,10 +528,13 @@ export default function PuanFab() {
         type="button"
         onClick={() => setBuka((b) => !b)}
         aria-expanded={buka}
-        className="fixed bottom-7 right-7 z-[1000] flex items-center gap-2.5 rounded-[56px] bg-[#0d6e4b] py-2.5 pl-2 pr-5 shadow-[0_8px_28px_rgba(13,110,75,0.40),0_2px_8px_rgba(0,0,0,.12)] transition-transform hover:scale-105 max-md:bottom-4 max-md:right-4 max-md:py-2 max-md:pr-3.5"
+        aria-label={buka ? "Tutup chat Puan AI" : "Tanya Puan AI"}
+        title={buka ? "Tutup chat" : "Tanya Puan AI"}
+        className="fixed bottom-7 right-7 z-[1000] flex items-center gap-2.5 rounded-[56px] bg-[#0d6e4b] py-2.5 pl-2 pr-5 shadow-[0_8px_28px_rgba(13,110,75,0.40),0_2px_8px_rgba(0,0,0,.12)] transition-transform hover:scale-105 max-md:bottom-4 max-md:right-4 max-md:p-1.5"
       >
-        <Avatar kelas="h-[42px] w-[42px] max-md:h-[34px] max-md:w-[34px]" />
-        <span className="text-sm font-bold leading-none text-white max-md:text-xs">
+        <Avatar kelas="h-[42px] w-[42px] max-md:h-[44px] max-md:w-[44px]" />
+        {/* Di HP hanya avatar yang tampil supaya tombol tidak menutupi isi halaman */}
+        <span className="text-sm font-bold leading-none text-white max-md:sr-only">
           {buka ? "Tutup Chat" : "Tanya Puan AI"}
         </span>
       </button>
