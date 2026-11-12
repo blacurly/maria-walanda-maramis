@@ -212,3 +212,68 @@ create policy "Publik membaca penghubung yang aktif"
     exists (select 1 from public.lembaga l where l.id = lembaga_id and l.aktif)
     and exists (select 1 from public.situasi_darurat s where s.id = situasi_id and s.aktif)
   ); 
+
+  
+
+-- =====================================================================
+-- BAGIAN 3: SUMBER DATA PINJOL
+-- =====================================================================
+
+-- 3a. Sumber data resmi (direktori OJK, siaran pers Satgas PASTI) ------
+create table if not exists public.sumber_data (
+  id           bigint generated always as identity primary key,
+  nama         text not null unique check (length(trim(nama)) > 0),
+  penerbit     text not null check (length(trim(penerbit)) > 0),
+  tautan       text check (tautan is null or tautan ~ '^https://'),
+  dibuat_pada  timestamptz not null default now(),
+  diubah_pada  timestamptz not null default now()
+);
+
+drop trigger if exists sumber_data_diubah_pada on public.sumber_data;
+create trigger sumber_data_diubah_pada
+  before update on public.sumber_data
+  for each row execute function public.atur_diubah_pada();
+
+alter table public.sumber_data enable row level security;
+
+drop policy if exists "Publik membaca sumber data" on public.sumber_data;
+create policy "Publik membaca sumber data"
+  on public.sumber_data for select
+  to anon, authenticated
+  using (true);
+
+
+-- 3b. Isi 2 sumber yang sudah dipakai di tabel pinjol -----------------
+-- Teks "nama" HARUS sama persis dengan isi kolom pinjol.sumber yang lama.
+insert into public.sumber_data (nama, penerbit) values
+  ('OJK, Direktori LPBBTI Juli 2026',                  'Otoritas Jasa Keuangan (OJK)'),
+  ('Satgas PASTI, Lampiran Siaran Pers periode April 2026', 'Satgas PASTI')
+on conflict (nama) do nothing;
+
+
+-- 3c. Hubungkan tabel pinjol ke sumber_data ---------------------------
+-- Kolom lama "sumber" SENGAJA dipertahankan sampai tugas 3
+-- (halaman Cek Legalitas masih membacanya).
+alter table public.pinjol
+  add column if not exists sumber_id    bigint
+                           references public.sumber_data (id) on delete restrict,
+  add column if not exists dibuat_pada  timestamptz not null default now(),
+  add column if not exists diubah_pada  timestamptz not null default now();
+
+-- Isi sumber_id berdasarkan teks sumber yang lama
+update public.pinjol p
+set    sumber_id = s.id
+from   public.sumber_data s
+where  s.nama = p.sumber
+  and  p.sumber_id is null;
+
+-- Setelah terisi semua, sumber_id wajib ada.
+-- Kalau ada baris yang tidak cocok, perintah ini GAGAL (sengaja, sebagai alarm).
+alter table public.pinjol alter column sumber_id set not null;
+
+create index if not exists pinjol_sumber_idx on public.pinjol (sumber_id);
+
+drop trigger if exists pinjol_diubah_pada on public.pinjol;
+create trigger pinjol_diubah_pada
+  before update on public.pinjol
+  for each row execute function public.atur_diubah_pada();
