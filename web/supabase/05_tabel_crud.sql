@@ -108,3 +108,107 @@ create policy "Publik membaca rujukan artikel terbit"
       and a.diterbitkan_pada is not null
       and a.diterbitkan_pada <= now()
   ));
+
+ 
+
+-- =====================================================================
+-- BAGIAN 2: LEMBAGA BANTUAN & SITUASI DARURAT
+-- =====================================================================
+
+-- 2a. Jenis lembaga (kepolisian, layanan-perempuan, kesehatan-jiwa, darurat)
+create table if not exists public.jenis_lembaga (
+  id     smallint generated always as identity primary key,
+  kode   text not null unique check (kode ~ '^[a-z0-9]+(-[a-z0-9]+)*$'),
+  label  text not null check (length(trim(label)) > 0)
+);
+
+
+-- 2b. Lembaga bantuan: SATU baris = SATU cara menghubungi --------------
+create table if not exists public.lembaga (
+  id                bigint generated always as identity primary key,
+  nama              text not null unique check (length(trim(nama)) > 0),
+  penyelenggara     text,
+  jenis_lembaga_id  smallint not null
+                    references public.jenis_lembaga (id) on delete restrict,
+  kanal             text not null check (kanal in ('telepon', 'whatsapp', 'situs')),
+  nomor             text not null check (length(trim(nomor)) > 0),
+  tautan            text not null check (tautan ~ '^(tel:|https://)'),
+  aktif             boolean not null default true,
+  dibuat_pada       timestamptz not null default now(),
+  diubah_pada       timestamptz not null default now()
+);
+
+create index if not exists lembaga_jenis_idx on public.lembaga (jenis_lembaga_id);
+
+drop trigger if exists lembaga_diubah_pada on public.lembaga;
+create trigger lembaga_diubah_pada
+  before update on public.lembaga
+  for each row execute function public.atur_diubah_pada();
+
+
+-- 2c. Situasi darurat (ancaman, kbgo, kdrt, tekanan) ------------------
+create table if not exists public.situasi_darurat (
+  id           smallint generated always as identity primary key,
+  kode         text not null unique check (kode ~ '^[a-z0-9]+(-[a-z0-9]+)*$'),
+  ikon         text,
+  pilihan      text not null check (length(trim(pilihan)) > 0),
+  judul        text not null check (length(trim(judul)) > 0),
+  info         text not null check (length(trim(info)) > 0),
+  urutan       smallint not null default 0,
+  aktif        boolean not null default true,
+  dibuat_pada  timestamptz not null default now(),
+  diubah_pada  timestamptz not null default now()
+);
+
+drop trigger if exists situasi_darurat_diubah_pada on public.situasi_darurat;
+create trigger situasi_darurat_diubah_pada
+  before update on public.situasi_darurat
+  for each row execute function public.atur_diubah_pada();
+
+
+-- 2d. Penghubung lembaga <-> situasi (banyak-ke-banyak) ----------------
+create table if not exists public.lembaga_situasi (
+  situasi_id    smallint not null
+                references public.situasi_darurat (id) on delete cascade,
+  lembaga_id    bigint not null
+                references public.lembaga (id) on delete cascade,
+  urutan        smallint not null default 0,
+  label_khusus  text,          -- mis. "Polisi Unit Siber" untuk situasi KBGO
+  primary key (situasi_id, lembaga_id)
+);
+
+create index if not exists lembaga_situasi_lembaga_idx on public.lembaga_situasi (lembaga_id);
+
+
+-- 2e. Kunci akses: publik hanya membaca yang aktif ---------------------
+alter table public.jenis_lembaga   enable row level security;
+alter table public.lembaga         enable row level security;
+alter table public.situasi_darurat enable row level security;
+alter table public.lembaga_situasi enable row level security;
+
+drop policy if exists "Publik membaca jenis lembaga" on public.jenis_lembaga;
+create policy "Publik membaca jenis lembaga"
+  on public.jenis_lembaga for select
+  to anon, authenticated
+  using (true);
+
+drop policy if exists "Publik membaca lembaga aktif" on public.lembaga;
+create policy "Publik membaca lembaga aktif"
+  on public.lembaga for select
+  to anon, authenticated
+  using (aktif);
+
+drop policy if exists "Publik membaca situasi aktif" on public.situasi_darurat;
+create policy "Publik membaca situasi aktif"
+  on public.situasi_darurat for select
+  to anon, authenticated
+  using (aktif);
+
+drop policy if exists "Publik membaca penghubung yang aktif" on public.lembaga_situasi;
+create policy "Publik membaca penghubung yang aktif"
+  on public.lembaga_situasi for select
+  to anon, authenticated
+  using (
+    exists (select 1 from public.lembaga l where l.id = lembaga_id and l.aktif)
+    and exists (select 1 from public.situasi_darurat s where s.id = situasi_id and s.aktif)
+  ); 
