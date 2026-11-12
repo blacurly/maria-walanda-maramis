@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabase/publik";
 import { supabaseServer } from "@/lib/supabase/server";
 import type { KodeGalat } from "@/lib/api/galat";
 import { cekNama, saranNama, type HasilCek, type Pinjol } from "@/features/cek-legalitas/rules";
+import { LEGAL_PINJOL, ILEGAL_PINJOL, SUMBER_LEGAL, SUMBER_ILEGAL } from "@/data/dataPinjol";
 
 export type StatusPinjol = "legal" | "ilegal";
 
@@ -182,43 +183,66 @@ export async function ambilPinjol(id: number): Promise<DataPinjol> {
 // ── Cek legalitas di server ──
 // Aturan pencocokan (features/cek-legalitas/rules.ts) butuh seluruh daftar, jadi daftar disimpan
 // sementara di memori server selama 10 menit supaya tidak membaca 500+ baris di setiap ketikan.
-const SIMPAN_MS = 10 * 60 * 1000;
-let simpanan: { daftar: Pinjol[]; waktu: number } | null = null;
+// Kalau database tidak bisa dihubungi, dipakai DATA CADANGAN (data/dataPinjol.ts) — hanya di server,
+// sehingga daftar 500+ pinjol tidak pernah dikirim ke browser.
+const SIMPAN_MS = 10 * 60 * 1000; //       data dari database disimpan 10 menit
+const SIMPAN_CADANGAN_MS = 60 * 1000; //    data cadangan hanya 1 menit, lalu database dicoba lagi
+let simpanan: { daftar: Pinjol[]; waktu: number; dariDatabase: boolean } | null = null;
 
-async function semuaPinjol(): Promise<Pinjol[]> {
-  if (simpanan && Date.now() - simpanan.waktu < SIMPAN_MS) return simpanan.daftar;
+const CADANGAN: Pinjol[] = [
+  ...LEGAL_PINJOL.map((p) => ({ nama: p.nama, nama_perusahaan: p.pt, status: "legal" as const, alamat: p.alamat, sumber: SUMBER_LEGAL })),
+  ...ILEGAL_PINJOL.map((p) => ({ nama: p.nama, nama_perusahaan: null, status: "ilegal" as const, alamat: p.alamat, sumber: SUMBER_ILEGAL })),
+];
 
-  const { data, error } = await supabase
-    .from("pinjol")
-    .select("nama, nama_perusahaan, status, alamat, sumber_data(nama)")
-    .order("status")
-    .order("nama")
-    .limit(5000);
-  if (error) throw terjemahkan(error, "semuaPinjol");
+async function semuaPinjol(): Promise<{ daftar: Pinjol[]; dariDatabase: boolean }> {
+  if (simpanan && Date.now() - simpanan.waktu < (simpanan.dariDatabase ? SIMPAN_MS : SIMPAN_CADANGAN_MS)) {
+    return { daftar: simpanan.daftar, dariDatabase: simpanan.dariDatabase };
+  }
 
-  const daftar = (data as unknown as (Omit<Pinjol, "sumber"> & { sumber_data: { nama: string } | null })[]).map(
-    ({ sumber_data, ...p }) => ({ ...p, sumber: sumber_data?.nama ?? "" }),
-  );
-  simpanan = { daftar, waktu: Date.now() };
-  return daftar;
+  try {
+    const { data, error } = await supabase
+      .from("pinjol")
+      .select("nama, nama_perusahaan, status, alamat, sumber_data(nama)")
+      .order("status")
+      .order("nama")
+      .limit(5000);
+    if (error) throw error;
+    if (!data || data.length === 0) throw new Error("Tabel pinjol kosong");
+
+    const daftar = (data as unknown as (Omit<Pinjol, "sumber"> & { sumber_data: { nama: string } | null })[]).map(
+      ({ sumber_data, ...p }) => ({ ...p, sumber: sumber_data?.nama ?? "" }),
+    );
+    simpanan = { daftar, waktu: Date.now(), dariDatabase: true };
+    return { daftar, dariDatabase: true };
+  } catch (e) {
+    console.error("Daftar pinjol dari database gagal dibaca, memakai data cadangan:", e);
+    simpanan = { daftar: CADANGAN, waktu: Date.now(), dariDatabase: false };
+    return { daftar: CADANGAN, dariDatabase: false };
+  }
 }
 
 export function lupakanSimpanan() {
   simpanan = null;
 }
 
-export type HasilCekLegalitas = { hasil: HasilCek; saran: Pinjol[] };
+export type HasilCekLegalitas = { hasil: HasilCek; saran: Pinjol[]; dariDatabase: boolean };
 
 export async function cekLegalitas(nama: string): Promise<HasilCekLegalitas> {
-  const daftar = await semuaPinjol();
-  return { hasil: cekNama(nama, daftar), saran: saranNama(nama, daftar) };
+  const { daftar, dariDatabase } = await semuaPinjol();
+  return { hasil: cekNama(nama, daftar), saran: saranNama(nama, daftar), dariDatabase };
 }
 
-// Daftar sumber resmi yang dipakai (untuk ditampilkan di halaman Cek Legalitas).
-export async function daftarSumber(): Promise<{ id: number; nama: string; penerbit: string }[]> {
-  const { data, error } = await supabase.from("sumber_data").select("id, nama, penerbit").order("id");
-  if (error) throw terjemahkan(error, "daftarSumber");
-  return data ?? [];
+// Nama sumber resmi yang dipakai (untuk ditampilkan di halaman Cek Legalitas).
+export async function namaSumberResmi(): Promise<{ sumber: string[]; dariDatabase: boolean }> {
+  try {
+    const { data, error } = await supabase.from("sumber_data").select("nama").order("id");
+    if (error) throw error;
+    if (!data || data.length === 0) throw new Error("Tabel sumber_data kosong");
+    return { sumber: data.map((s) => s.nama), dariDatabase: true };
+  } catch (e) {
+    console.error("Sumber data gagal dibaca, memakai data cadangan:", e);
+    return { sumber: [SUMBER_LEGAL, SUMBER_ILEGAL], dariDatabase: false };
+  }
 }
 
 // ─────────────────────────────── MENULIS ───────────────────────────────
