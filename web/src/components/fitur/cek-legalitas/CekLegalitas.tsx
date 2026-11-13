@@ -7,6 +7,7 @@ import {
   LINK_OJK_BERIZIN, CONTOH_NAMA, KONTAK_OJK, CIRI_BERIZIN, RISIKO_ILEGAL,
   LANGKAH_ILEGAL, LANGKAH_TIDAK_DITEMUKAN,
 } from "@/features/cek-legalitas/data";
+import { TONE } from "@/lib/tone";
 
 const POPPINS = { fontFamily: "var(--font-poppins), sans-serif" };
 const KARTU = "rounded-2xl border border-gray-100 bg-white shadow-sm";
@@ -154,18 +155,18 @@ export default function CekLegalitas({ daftar, sumber, dariDatabase }: Props) {
               Daftar di halaman ini bisa tertinggal dari pembaruan terbaru. Untuk kepastian, tanyakan langsung ke kanal resmi OJK.
             </p>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {KONTAK_OJK.map((k) => (
-                <a
-                  key={k.label}
-                  href={k.href}
-                  {...(k.tabBaru ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="block rounded-xl border border-gray-100 bg-gray-50 p-4 transition-colors hover:bg-emerald-50"
-                >
-                  <span className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-gray-500">{k.label}</span>
-                  <span className="mb-1 block text-sm font-bold text-gray-900">{k.nilai}</span>
-                  <span className="block text-xs text-gray-400">{k.ket}</span>
-                </a>
-              ))}
+              {KONTAK_OJK.map((k) => {
+  const t = TONE[k.tone];
+  return (
+    <a key={k.label} href={k.href}
+      {...(k.tabBaru ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      className={`block rounded-xl border p-4 transition-colors ${t.kartu}`}>
+      <span className={`mb-1 block text-[11px] font-bold uppercase tracking-wide ${t.label}`}>{k.label}</span>
+      <span className="mb-1 block text-sm font-bold text-gray-900">{k.nilai}</span>
+      <span className="block text-xs text-gray-600">{k.ket}</span>
+    </a>
+  );
+})}
             </div>
           </div>
         )}
