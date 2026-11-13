@@ -5,8 +5,13 @@ import { GalatPuan, periksaPermintaanChat, tanyaPuan } from "@/lib/puan/klien";
 
 // POST /api/chat
 // Alur: baca kiriman → validasi → cek pembatas → tanya Puan → balas.
-// Cara memanggil Puan ada di lib/puan/klien.ts, format error di lib/api/galat.ts,
-// pembatas permintaan di lib/api/pembatas.ts.
+// Puan AI (RAG: e5-small + pgvector + Gemini) berjalan di lib/puan/ (pintu masuknya klien.ts),
+// format error di lib/api/galat.ts, pembatas permintaan di lib/api/pembatas.ts.
+
+// Model embedding membutuhkan Node.js (bukan Edge). Batas 60 detik: saat server baru bangun,
+// model perlu dimuat (±6 detik) lalu Gemini dipanggil dua kali.
+export const runtime = "nodejs";
+export const maxDuration = 60;
 
 export async function POST(req: Request) {
   const isi = await bacaJson(req);

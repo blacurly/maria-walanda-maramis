@@ -9,6 +9,7 @@
 --   potongan_pasal  : potongan kecil yang DICARI (CHILD) + embedding-nya
 --
 -- Embedding: intfloat/multilingual-e5-small → 384 angka per potongan.
+-- Diisi oleh skrip web/scripts/buat-indeks-puan.mjs; dicari oleh web/src/lib/puan/pencarian.ts.
 -- Aman dijalankan ulang (if not exists / create or replace / drop if exists).
 --
 -- AKSES: RLS aktif. Publik hanya boleh MEMBACA (isi peraturan adalah dokumen publik).
@@ -85,9 +86,11 @@ create table if not exists public.potongan_pasal (
 
 create index if not exists potongan_pasal_pasal_idx on public.potongan_pasal (pasal_id);
 
--- Indeks HNSW: pencarian vektor cepat berdasarkan jarak cosine.
-create index if not exists potongan_pasal_embedding_idx
-  on public.potongan_pasal using hnsw (embedding extensions.vector_cosine_ops);
+-- TANPA indeks HNSW (keputusan 13 Nov 2026): HNSW adalah pencarian PERKIRAAN (approximate).
+-- Untuk ±833 potongan, pencarian TEPAT (membandingkan semua baris) hanya ±3 milidetik dan hasilnya 100% akurat,
+-- sedangkan skor e5 antar-pasal sangat mepet sehingga perkiraan bisa menukar urutan pasal.
+-- Tambahkan kembali indeks HNSW bila jumlah potongan sudah puluhan ribu.
+drop index if exists public.potongan_pasal_embedding_idx;
 
 drop trigger if exists potongan_pasal_diubah_pada on public.potongan_pasal;
 create trigger potongan_pasal_diubah_pada
@@ -111,6 +114,68 @@ as $$
   from public.potongan_pasal p
   order by p.embedding operator(extensions.<=>) kueri
   limit least(greatest(jumlah, 1), 50);
+$$;
+
+
+-- 5b. Fungsi pencarian lengkap untuk Puan (parent-child), dipanggil dari web/src/lib/puan/pencarian.ts
+--    Sama dengan puan-ai/puan_rag/retrieval.py → Pencari.cari_dari_vektor(), tapi berjalan DI DATABASE
+--    supaya cukup SATU kali bolak-balik dari server Next.js ke Supabase.
+--      1) ambil k_child potongan paling mirip
+--      2) potongan dengan skor >= ambang → pasal induknya (tanpa dobel), maks. maks_utama   → peran 'utama'
+--      3) pasal yang dirujuk/terkait dari pasal utama → dinilai dari potongannya yang paling mirip,
+--         ambil maks_tambah teratas                                                          → peran 'rujukan'
+--    Hasil kosong = tidak ada pasal yang "nyambung" (di bawah ambang).
+create or replace function public.cari_pasal_puan(
+  kueri       extensions.vector(384),
+  ambang      real,
+  k_child     int default 8,
+  maks_utama  int default 3,
+  maks_tambah int default 2
+)
+returns table (pasal_id text, peran text, skor real, label text, lokasi text, teks text, penjelasan text)
+language sql
+stable
+security invoker
+set search_path = ''
+as $$
+  with teratas as (
+    select p.pasal_id, (1 - (p.embedding operator(extensions.<=>) kueri))::real as skor
+    from public.potongan_pasal p
+    order by p.embedding operator(extensions.<=>) kueri
+    limit least(greatest(k_child, 1), 50)
+  ),
+  utama as (
+    select t.pasal_id, max(t.skor) as skor
+    from teratas t
+    where t.skor >= ambang
+    group by t.pasal_id
+    order by max(t.skor) desc
+    limit least(greatest(maks_utama, 1), 10)
+  ),
+  kandidat as (
+    select distinct pt.tujuan_id as pasal_id
+    from public.pasal_tautan pt
+    join utama u on u.pasal_id = pt.pasal_id
+    where pt.tujuan_id not in (select u2.pasal_id from utama u2)
+  ),
+  tambahan as (
+    select k.pasal_id,
+           coalesce(max((1 - (c.embedding operator(extensions.<=>) kueri))::real), -1)::real as skor
+    from kandidat k
+    left join public.potongan_pasal c on c.pasal_id = k.pasal_id
+    group by k.pasal_id
+    order by 2 desc
+    limit least(greatest(maks_tambah, 0), 10)
+  ),
+  hasil as (
+    select u.pasal_id, 'utama'::text as peran, u.skor, 1 as urut from utama u
+    union all
+    select t.pasal_id, 'rujukan'::text, t.skor, 2 from tambahan t
+  )
+  select h.pasal_id, h.peran, h.skor, ps.label, ps.lokasi, ps.teks, ps.penjelasan
+  from hasil h
+  join public.pasal ps on ps.id = h.pasal_id
+  order by h.urut, h.skor desc;
 $$;
 
 
