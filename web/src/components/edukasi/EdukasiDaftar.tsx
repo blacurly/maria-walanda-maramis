@@ -3,19 +3,24 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ARTIKEL, TOPIK, labelTopik, type Topik } from "@/data/artikel";
+import { labelTopik, type Artikel, type Topik } from "@/data/artikel";
 import { VIDEO_EDUKASI } from "@/data/videoEdukasi";
 
 const POPPINS = { fontFamily: "var(--font-poppins), sans-serif" };
 
-export default function EdukasiDaftar() {
+type Props = {
+  daftarArtikel: Artikel[];                  // dari database (lib/artikel/layanan.ts), dikirim oleh halaman
+  daftarTopik: { id: Topik; label: string }[];
+};
+
+export default function EdukasiDaftar({ daftarArtikel, daftarTopik }: Props) {
   const [tab, setTab] = useState<"artikel" | "video">("artikel");
   const [topik, setTopik] = useState<Topik | "semua">("semua");
 
-  const artikel = ARTIKEL.filter((a) => topik === "semua" || a.topik === topik);
+  const artikel = daftarArtikel.filter((a) => topik === "semua" || a.topik === topik);
   const video = VIDEO_EDUKASI.filter((v) => topik === "semua" || v.topik === topik);
 
-  const pilihanTopik = [{ id: "semua" as const, label: "Semua" }, ...TOPIK];
+  const pilihanTopik = [{ id: "semua" as const, label: "Semua" }, ...daftarTopik];
 
   return (
     <div className="mx-auto max-w-5xl px-5 pb-20">
@@ -79,7 +84,7 @@ export default function EdukasiDaftar() {
                 <div className="flex flex-1 flex-col p-5">
                   <div className="mb-2 flex items-center gap-2 text-xs">
                     <span className="rounded-full bg-emerald-50 px-2.5 py-0.5 font-bold text-[#0d6e4b]">{a.kategori}</span>
-                    <span className="text-gray-400">{labelTopik(a.topik)}</span>
+                    <span className="text-gray-400">{a.topikLabel ?? labelTopik(a.topik)}</span>
                   </div>
                   <h2 className="mb-2 text-base font-bold leading-snug text-gray-900 group-hover:text-[#0d6e4b]" style={POPPINS}>
                     {a.judul}
