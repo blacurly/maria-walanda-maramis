@@ -19,6 +19,17 @@ Logika bisnis dan akses data ada di `web/src/lib/` (route hanya mengatur alur).
 | POST | `/api/pinjol` | Tambah pinjol | 🔑 Admin | 60 / 10 menit |
 | PATCH | `/api/pinjol/:id` | Ubah sebagian data pinjol | 🔑 Admin | 60 / 10 menit |
 | DELETE | `/api/pinjol/:id` | Hapus pinjol | 🔑 Admin | 60 / 10 menit |
+| GET | `/api/artikel` | Daftar artikel terbit + filter kategori + cari + halaman | Publik | 120 / 10 menit |
+| GET | `/api/artikel/:slug` | Satu artikel lengkap | Publik | 120 / 10 menit |
+| POST | `/api/artikel` | Tambah artikel (bawaan: draf) | 🔑 Admin | 60 / 10 menit |
+| PATCH | `/api/artikel/:slug` | Ubah sebagian / terbitkan artikel | 🔑 Admin | 60 / 10 menit |
+| DELETE | `/api/artikel/:slug` | Hapus artikel beserta rujukannya | 🔑 Admin | 60 / 10 menit |
+| GET | `/api/darurat` | Situasi darurat + kontak bantuannya | Publik | 120 / 10 menit |
+| GET | `/api/lembaga` | Daftar lembaga bantuan + filter jenis + cari + halaman | Publik | 120 / 10 menit |
+| GET | `/api/lembaga/:id` | Detail satu lembaga | Publik | 120 / 10 menit |
+| POST | `/api/lembaga` | Tambah lembaga (+ situasinya) | 🔑 Admin | 60 / 10 menit |
+| PATCH | `/api/lembaga/:id` | Ubah sebagian / nonaktifkan lembaga | 🔑 Admin | 60 / 10 menit |
+| DELETE | `/api/lembaga/:id` | Hapus lembaga | 🔑 Admin | 60 / 10 menit |
 
 Batas permintaan dihitung per alamat IP (disimpan sebagai *hash*, bukan IP asli) di tabel
 `pembatas_permintaan`. Pengaturannya ada di `web/src/lib/api/pembatas.ts`.
@@ -305,6 +316,175 @@ Mengubah **sebagian** kolom. Kirim hanya kolom yang ingin diubah (aturan sama de
 
 ---
 
+## Artikel edukasi
+
+Tabel: `artikel` + `kategori_artikel` + `rujukan_artikel`. Halaman `/`, `/edukasi`, dan `/edukasi/:slug`
+membaca dari tabel ini (cadangan: `data/artikel.ts`). Setelah tambah/ubah/hapus lewat API, halaman langsung diperbarui.
+
+**Objek artikel** (bentuknya sama dengan yang dipakai tampilan):
+
+```json
+{
+  "slug": "cara-lapor-pinjol",
+  "judul": "Cara melapor pinjol: ke mana dan apa yang perlu disiapkan",
+  "ringkasan": "...",
+  "topik": "hak-hukum",
+  "topikLabel": "Hak & Hukum",
+  "kategori": "Panduan",
+  "menit": 4,
+  "gambar": "https://images.unsplash.com/...",
+  "diperbarui": "November 2026",
+  "bagian": [ { "judul": "Siapkan bukti lebih dulu", "daftar": ["..."] } ],
+  "catatan": "...",
+  "fitur": { "label": "Susun laporan kronologimu", "href": "/sudah-terjerat/dokumentasi-lapor" },
+  "dasarHukum": ["POJK 22/2023 ..."],
+  "sumber": [ { "label": "OJK – ...", "url": "https://..." } ]
+}
+```
+
+Di endpoint **daftar**, `bagian`, `catatan`, `fitur`, `dasarHukum`, dan `sumber` tidak ikut (supaya ringan).
+
+### GET `/api/artikel`
+
+| Parameter | Wajib | Aturan | Bawaan |
+|---|---|---|---|
+| `kategori` | tidak | Kode kategori: `pinjaman`, `hak-hukum`, `penagihan` | (semua) |
+| `q` | tidak | Dicari di judul **atau** ringkasan, maksimal 100 huruf | (semua) |
+| `halaman` | tidak | Bilangan bulat ≥ 1 | `1` |
+| `per_halaman` | tidak | 1–50 | `10` |
+
+Hanya artikel yang **sudah terbit**. Balasan 200: `{ ok, data: [objek artikel], halaman, per_halaman, total, total_halaman }`.
+**Error:** 422, 429, 502.
+
+### GET `/api/artikel/:slug`
+
+Balasan 200: `{ "ok": true, "data": { objek artikel lengkap } }`.
+**Error:** 422 (slug tidak valid), 404 (tidak ada atau masih draf), 429, 502.
+
+### POST `/api/artikel` 🔑
+
+| Kolom | Tipe | Wajib | Aturan |
+|---|---|---|---|
+| `slug` | string | ya | Huruf kecil, angka, tanda hubung; maks. 80. **Tidak bisa diubah** setelah dibuat |
+| `judul` | string | ya | Maks. 150 huruf |
+| `ringkasan` | string | ya | Maks. 300 huruf |
+| `kategori` | string | ya | Kode kategori yang ada |
+| `menit_baca` | number | ya | 1–60 |
+| `gambar_url` | string | ya | `https://images.unsplash.com/...` (host yang diizinkan `next.config.ts`) |
+| `isi` | array | ya | 1–20 bagian: `{ "judul": "...", "paragraf": ["..."], "daftar": ["..."] }` (minimal salah satu) |
+| `bentuk` | string | tidak | `artikel` (bawaan) atau `panduan` |
+| `catatan` | string / null | tidak | Maks. 500 huruf |
+| `fitur` | objek / null | tidak | `{ "label": "...", "tautan": "/halaman-edupuan" }` |
+| `rujukan` | objek | tidak | `{ "dasar_hukum": ["..."], "sumber": [ { "teks": "...", "tautan": "https://..." } ] }`, maks. 20 |
+| `terbit` | boolean | tidak | `true` = langsung tampil. **Bawaan: draf** (tidak terlihat publik) |
+
+Balasan **201**: `{ ok, data: objek artikel }`.
+**Error:** 401, 400, 422, 409 (slug sudah dipakai), 429, 500, 502.
+
+### PATCH `/api/artikel/:slug` 🔑
+
+Kirim hanya kolom yang diubah (aturan sama dengan POST, kecuali `slug`). `"terbit": true` menerbitkan draf,
+`"terbit": false` menyembunyikan artikel. Kalau `rujukan` dikirim, seluruh rujukan lama **diganti**.
+
+Balasan 200: `{ ok, data: objek artikel }`. **Error:** 401, 400, 422, 404, 409, 429, 500, 502.
+
+### DELETE `/api/artikel/:slug` 🔑
+
+Rujukannya ikut terhapus (ON DELETE CASCADE). Balasan 200: `{ "ok": true }`. **Error:** 401, 422, 404, 429, 500, 502.
+
+---
+
+## Bantuan darurat & lembaga
+
+Tabel: `situasi_darurat` + `lembaga` + `jenis_lembaga` + `lembaga_situasi`. Halaman `/darurat` membaca dari tabel ini
+(cadangan: `data/kontakDarurat.ts`). Tombol darurat di bagian atas (110, 112, WA SAPA) sengaja tetap di kode karena isinya tetap.
+
+### GET `/api/darurat`
+
+Situasi darurat beserta kontaknya, sudah urut. Hanya situasi dan lembaga yang **aktif**.
+
+```json
+{
+  "ok": true,
+  "data": [
+    {
+      "id": "kbgo",
+      "ikon": "📵",
+      "pilihan": "Ancaman sebar foto atau pelecehan online (KBGO)",
+      "judul": "Ancaman sebar foto / pelecehan online",
+      "info": "Jangan hapus pesan atau foto sebagai bukti. ...",
+      "kontak": [
+        { "label": "SAPA 129 — Telepon", "nomor": "129", "href": "tel:129", "warna": "bg-purple-600" },
+        { "label": "Polisi Unit Siber", "nomor": "110", "href": "tel:110", "warna": "bg-red-600" }
+      ]
+    }
+  ],
+  "dariDatabase": true
+}
+```
+
+`warna` adalah urusan tampilan: tidak disimpan di database, ditentukan dari jenis lembaga + kanal.
+**Error:** 429.
+
+**Objek lembaga:**
+
+```json
+{
+  "id": 1,
+  "nama": "Polisi 110",
+  "penyelenggara": "Kepolisian Negara Republik Indonesia",
+  "kanal": "telepon",
+  "nomor": "110",
+  "tautan": "tel:110",
+  "aktif": true,
+  "jenis": { "kode": "kepolisian", "label": "Kepolisian" },
+  "situasi": [ { "kode": "kbgo", "urutan": 3, "label_khusus": "Polisi Unit Siber" } ]
+}
+```
+
+### GET `/api/lembaga`
+
+| Parameter | Wajib | Aturan | Bawaan |
+|---|---|---|---|
+| `jenis` | tidak | `kepolisian`, `layanan-perempuan`, `kesehatan-jiwa`, `darurat` | (semua) |
+| `q` | tidak | Dicari di nama **atau** penyelenggara, maksimal 100 huruf | (semua) |
+| `halaman` | tidak | Bilangan bulat ≥ 1 | `1` |
+| `per_halaman` | tidak | 1–100 | `20` |
+
+Balasan 200: `{ ok, data: [objek lembaga], halaman, per_halaman, total, total_halaman }`. **Error:** 422, 429, 502.
+
+### GET `/api/lembaga/:id`
+
+Balasan 200: `{ ok, data: objek lembaga }`. **Error:** 422, 404 (tidak ada atau nonaktif), 429, 502.
+
+### POST `/api/lembaga` 🔑
+
+| Kolom | Tipe | Wajib | Aturan |
+|---|---|---|---|
+| `nama` | string | ya | Unik, maks. 100 huruf |
+| `jenis` | string | ya | Kode jenis lembaga yang ada |
+| `kanal` | string | ya | `telepon`, `whatsapp`, atau `situs` |
+| `nomor` | string | ya | Yang ditampilkan, maks. 40 huruf (mis. `08111-129-129`) |
+| `tautan` | string | ya | `tel:<angka>` untuk telepon; `https://...` untuk whatsapp/situs |
+| `penyelenggara` | string / null | tidak | Maks. 150 huruf |
+| `aktif` | boolean | tidak | Bawaan `true` |
+| `situasi` | array | tidak | `[ { "kode": "kbgo", "urutan": 4, "label_khusus": "..." } ]` — di situasi mana lembaga ini muncul |
+
+Balasan **201**: `{ ok, data: objek lembaga }`. **Error:** 401, 400, 422 (termasuk kanal-tautan tidak cocok, situasi tidak ada), 409 (nama sudah ada), 429, 500, 502.
+
+### PATCH `/api/lembaga/:id` 🔑
+
+Kirim hanya kolom yang diubah. `"aktif": false` menyembunyikan lembaga dari halaman Darurat tanpa menghapusnya.
+Kalau `situasi` dikirim, seluruh pasangan situasi lama **diganti**.
+
+Balasan 200: `{ ok, data: objek lembaga }`. **Error:** 401, 400, 422, 404, 409, 429, 500, 502.
+
+### DELETE `/api/lembaga/:id` 🔑
+
+Pasangan situasinya ikut terhapus (ON DELETE CASCADE). Balasan 200: `{ "ok": true }`. **Error:** 401, 422, 404, 429, 500, 502.
+
+---
+
 ## Hasil uji (Thunder Client, 13 Nov 2026)
 
 | Permintaan | Status | Hasil |
@@ -320,5 +500,20 @@ Mengubah **sebagian** kolom. Kirim hanya kolom yang ingin diubah (aturan sama de
 | `DELETE /api/pinjol/526` | 200 | Terhapus |
 | `DELETE /api/pinjol/526` (ulang) | 404 | `TIDAK_DITEMUKAN` |
 | `GET /api/pinjol/526` | 404 | `TIDAK_DITEMUKAN` |
+| `POST /api/artikel` tanpa kunci | 401 | `TIDAK_DIIZINKAN` |
+| `POST /api/artikel` dengan kunci | 201 | Artikel `uji-artikel` dibuat sebagai **draf** |
+| `GET /api/artikel/uji-artikel` (draf) | 404 | Disembunyikan RLS dari publik |
+| `PATCH /api/artikel/uji-artikel` `{ "terbit": true }` | 200 | Langsung tampil di `/edukasi` (kartu ke-7) |
+| `GET /api/artikel/uji-artikel` (terbit) | 200 | Artikel lengkap + dasar hukum + sumber |
+| `DELETE /api/artikel/uji-artikel` | 200 | Hilang dari `/edukasi`; rujukan ikut terhapus |
+| `POST /api/lembaga` + situasi `kbgo` | 201 | Tombol baru muncul di `/darurat` → KBGO |
+| `GET /api/lembaga?q=uji` | 200 | 1 hasil (pencarian di server) |
+| `PATCH /api/lembaga/<id>` (bukan angka) | 422 | `DATA_TIDAK_VALID` |
+| `PATCH /api/lembaga/8` `{ "aktif": false }` | 200 | Tombol hilang dari `/darurat` |
+| `DELETE /api/lembaga/8` | 200 | Terhapus beserta pasangan situasinya |
 
-Data uji sudah dihapus; database kembali ke 524 pinjol.
+Semua data uji sudah dihapus; database kembali ke 524 pinjol, 6 artikel, dan 6 lembaga.
+
+**Temuan saat uji:** tanggal terbit artikel semula diambil dari jam komputer yang menjalankan Next.js.
+Di laptop dengan zona waktu Windows yang salah, artikel tercatat "terbit di masa depan" sehingga disembunyikan RLS.
+Diperbaiki: tanggal terbit kini diisi oleh database (`"now"`), sehingga tidak bergantung pada jam komputer.

@@ -19,6 +19,7 @@ export type Artikel = {
   judul: string;
   ringkasan: string;
   topik: Topik;
+  topikLabel?: string; // label kategori dari database (kalau ada)
   kategori: "Panduan" | "Artikel";
   menit: number;
   gambar: string;
@@ -26,7 +27,7 @@ export type Artikel = {
   bagian: Bagian[];
   catatan?: string;
   dasarHukum: string[];
-  fitur: { label: string; href: string };
+  fitur?: { label: string; href: string }; // tidak wajib: artikel dari database boleh tanpa ajakan fitur
   sumber: { label: string; url: string }[];
 };
 

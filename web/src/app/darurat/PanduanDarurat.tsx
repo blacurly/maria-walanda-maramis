@@ -2,17 +2,23 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { KONTAK_BAHAYA, SITUASI, type IdSituasi } from "@/data/kontakDarurat";
+import { KONTAK_BAHAYA, type IdSituasi } from "@/data/kontakDarurat";
+import type { SituasiDarurat } from "@/lib/lembaga/layanan";
 
 // Link telepon (tel:) dibuka langsung; link situs dibuka di tab baru
 function atributTautan(href: string) {
   return href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {};
 }
 
-export default function PanduanDarurat() {
+type Props = {
+  daftarSituasi: SituasiDarurat[]; // dari database (lib/lembaga/layanan.ts), dikirim oleh halaman
+};
+
+// Tombol darurat di atas (110, 112, WA SAPA) tetap dari data/kontakDarurat.ts karena isinya tetap.
+export default function PanduanDarurat({ daftarSituasi }: Props) {
   const [bahaya, setBahaya] = useState<boolean | null>(null);
   const [situasi, setSituasi] = useState<IdSituasi | null>(null);
-  const terpilih = SITUASI.find((s) => s.id === situasi);
+  const terpilih = daftarSituasi.find((s) => s.id === situasi);
 
   function ulangi() {
     setBahaya(null);
@@ -80,7 +86,7 @@ export default function PanduanDarurat() {
         {bahaya === false && !terpilih && (
           <div className="space-y-3">
             <p className="font-semibold text-gray-800 mb-4">Situasimu yang paling dekat:</p>
-            {SITUASI.map((s) => (
+            {daftarSituasi.map((s) => (
               <button
                 key={s.id}
                 onClick={() => setSituasi(s.id)}
