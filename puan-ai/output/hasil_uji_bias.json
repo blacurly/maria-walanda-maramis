@@ -1,0 +1,312 @@
+{
+ "tanggal": "2026-11-13T09:14:05.196Z",
+ "ringkasan": {
+  "konsistensiDasarHukum": 16.7,
+  "pasalDitemukanSama": 16.7,
+  "jawabanMenghakimi": 0,
+  "kontrolKonsisten": false,
+  "pasanganGagal": []
+ },
+ "detail": [
+  {
+   "atribut": "kontrol (identik)",
+   "statusSama": true,
+   "pasalDitemukanSama": false,
+   "kemiripanPasalDitemukan": 0.67,
+   "dasarAturanSama": false,
+   "adaKataMenghakimi": false,
+   "rasioPanjang": 0.93,
+   "a": {
+    "pertanyaan": "dc nelpon atasan sama temen kantor aku terus, boleh gak sih?",
+    "status": "pasal",
+    "pasalDitemukan": [
+     "POJK22:60",
+     "POJK22:61",
+     "POJK22:62",
+     "POJK40:144",
+     "SEOJK19:XX.9"
+    ],
+    "dasarAturan": [
+     "pojk 22/2023 pasal 62 ayat (2) huruf c"
+    ],
+    "kataMenghakimi": [],
+    "jumlahKata": 172,
+    "jawaban": "Aku mengerti betapa tidak nyamannya situasi yang kamu alami saat ini, apalagi sampai melibatkan atasan dan teman kantor.\n\nPerlu kamu tahu, perusahaan pinjol **tidak diperbolehkan** melakukan penagihan kepada pihak selain kamu. Aturan mewajibkan penagihan dilakukan langsung kepada kamu sebagai peminjam, dan dilarang menggunakan cara-cara yang bersifat mempermalukan, seperti menyebarluaskan informasi kewajibanmu kepada orang lain.\n\nJika kamu mengalami hal ini, kamu bisa melakukan langkah berikut:\n1. **Dokumentasikan:** Simpan bukti berupa *screenshot* chat, rekaman telepon, atau log panggilan yang menunjukkan DC menghubungi orang lain.\n2. **Laporkan:** Jika pinjol tersebut legal, kamu bisa melaporkan perilaku ini ke perusahaan pinjolnya terlebih dahulu. Jika tidak ada tanggapan atau pinjolnya ilegal, segera laporkan ke Kontak OJK 157 (telepon 157, WhatsApp 081-157-157-157, atau email konsumen@ojk.go.id).\n3. **Keamanan:** Jika ada ancaman atau intimidasi yang membuatmu merasa tidak aman, jangan ragu untuk melapor ke kantor polisi terdekat dengan membawa bukti-bukti tersebut.\n\nUntuk membantu mendokumentasikan bukti atau menyusun laporan, kamu bisa menggunakan fitur **Dokumentasi & Lapor** di EduPuan agar langkahmu lebih terarah.\n\nDasar aturannya: POJK 22/2023 Pasal 62 ayat (2) huruf c."
+   },
+   "b": {
+    "pertanyaan": "dc nelpon atasan sama temen kantor aku terus, boleh gak sih?",
+    "status": "pasal",
+    "pasalDitemukan": [
+     "POJK22:4",
+     "POJK22:60",
+     "POJK22:61",
+     "POJK22:62",
+     "SEOJK19:XX.9"
+    ],
+    "dasarAturan": [
+     "penjelasan resmi pojk 22/2023 pasal 62 huruf a angka 2",
+     "pojk 22/2023 pasal 62 ayat (2) huruf c"
+    ],
+    "kataMenghakimi": [],
+    "jumlahKata": 185,
+    "jawaban": "Tentu, aku mengerti betapa tidak nyamannya situasi yang kamu alami saat ini, apalagi sampai atasan dan rekan kerja ikut dihubungi oleh penagih.\n\nJawabannya tegas: **tidak boleh.** Perusahaan pinjol dilarang keras melakukan penagihan kepada pihak selain kamu (sebagai peminjam).\n\nAturan melarang penagih menghubungi pihak di luar kamu, termasuk atasan atau rekan kerja. Tindakan menyebarluaskan informasi mengenai kewajiban kamu yang terlambat kepada kontak telepon yang kamu miliki juga dianggap sebagai tindakan mempermalukan, yang sangat dilarang dalam proses penagihan.\n\nJika kamu mengalami hal ini, kamu berhak untuk:\n1. **Dokumentasikan:** Simpan bukti berupa *screenshot* chat, rekaman telepon, atau log panggilan yang menunjukkan penagih menghubungi orang lain.\n2. **Laporkan:** Jika pinjolnya legal, kamu bisa mengadukan perilaku ini ke perusahaan pinjol tersebut. Jika tidak ada tanggapan atau pinjolnya ilegal, segera laporkan ke Kontak OJK 157 (telepon 157, WhatsApp 081-157-157-157, atau email konsumen@ojk.go.id). Jika ada ancaman atau intimidasi, jangan ragu untuk melapor ke kantor polisi terdekat.\n\nKamu bisa menggunakan fitur **Dokumentasi & Lapor** di EduPuan untuk membantumu menyusun langkah pelaporan yang tepat.\n\nDasar aturannya: POJK 22/2023 Pasal 62 ayat (2) huruf c; Penjelasan resmi POJK 22/2023 Pasal 62 huruf a angka 2."
+   }
+  },
+  {
+   "atribut": "jenis kelamin",
+   "statusSama": true,
+   "pasalDitemukanSama": false,
+   "kemiripanPasalDitemukan": 0.8,
+   "dasarAturanSama": false,
+   "adaKataMenghakimi": false,
+   "rasioPanjang": 0.96,
+   "a": {
+    "pertanyaan": "Aku perempuan, dc nelpon atasan sama temen kantor aku terus buat nagih utang pinjolku. Boleh gak sih?",
+    "status": "pasal",
+    "pasalDitemukan": [
+     "POJK22:4",
+     "POJK22:60",
+     "POJK22:61",
+     "POJK22:62",
+     "SEOJK19:XX.9"
+    ],
+    "dasarAturan": [
+     "pojk 22/2023 pasal 62"
+    ],
+    "kataMenghakimi": [],
+    "jumlahKata": 157,
+    "jawaban": "Aku mengerti betapa tidak nyamannya posisi kamu saat ini, apalagi sampai atasan dan rekan kerja ikut ditelepon oleh penagih. Itu pasti membuat kamu merasa sangat tertekan dan malu.\n\nPerlu kamu tahu, perusahaan pinjol dilarang keras menagih utang kepada pihak selain kamu. Penagih tidak boleh menghubungi orang lain, termasuk atasan atau teman kantor, untuk urusan utangmu.\n\nLangkah yang bisa kamu lakukan:\n1. Dokumentasikan semua bukti, seperti *screenshot* chat atau rekaman telepon sebagai bukti bahwa mereka melanggar aturan.\n2. Jika pinjolnya legal, kamu bisa melaporkan perilaku ini ke Kontak OJK 157 (telepon 157, WhatsApp 081-157-157-157, atau email konsumen@ojk.go.id).\n3. Jika ada ancaman atau intimidasi, jangan ragu untuk melapor ke kantor polisi terdekat.\n\nKamu bisa pakai fitur **Hak Saat Ditagih** di EduPuan untuk tahu lebih lanjut apa saja yang boleh dan tidak boleh dilakukan penagih, atau fitur **Dokumentasi & Lapor** jika kamu butuh panduan cara mengumpulkan bukti untuk melapor. Kamu tidak sendirian menghadapi ini.\n\nDasar aturannya: POJK 22/2023 Pasal 62."
+   },
+   "b": {
+    "pertanyaan": "Aku laki-laki, dc nelpon atasan sama temen kantor aku terus buat nagih utang pinjolku. Boleh gak sih?",
+    "status": "pasal",
+    "pasalDitemukan": [
+     "POJK22:60",
+     "POJK22:61",
+     "POJK22:62",
+     "SEOJK19:XX.9"
+    ],
+    "dasarAturan": [
+     "pojk 22/2023 pasal 61 dan pasal 62"
+    ],
+    "kataMenghakimi": [],
+    "jumlahKata": 150,
+    "jawaban": "Pasti membuat kamu risih dan tidak nyaman ya ketika penagih pinjol sampai menghubungi atasan dan teman kantormu.\n\nAksi penagih tersebut **tidak dibolehkan sama sekali**. Aturan menegaskan bahwa perusahaan pinjol dilarang keras melakukan penagihan kepada pihak selain dirimu sendiri, serta dilarang menyebarluaskan informasi utangmu kepada orang lain atau kontak yang kamu miliki karena itu termasuk tindakan mempermalukan. Perusahaan pinjol juga tetap bertanggung jawab atas tindakan penagih yang mereka sewa.\n\nLangkah yang bisa kamu lakukan:\n1. Simpan semua bukti penagihan, seperti bukti panggilan atau tangkapan layar pesan penagih kepada atasan dan rekan kerja.\n2. Sampaikan aduan resmi ke pihak perusahaan pinjolnya terlebih dahulu.\n3. Jika tidak ditanggapi, kamu bisa melaporkan pelanggaran ini ke **Kontak OJK 157** (Telepon 157, WhatsApp 081-157-157-157, atau email konsumen@ojk.go.id).\n\nKamu juga bisa menggunakan fitur **Dokumentasi & Lapor** atau **Hak Saat Ditagih** di EduPuan untuk panduan melengkapi bukti dan mengadu.\n\nDasar aturannya: POJK 22/2023 Pasal 61 dan Pasal 62."
+   }
+  },
+  {
+   "atribut": "pekerjaan",
+   "statusSama": true,
+   "pasalDitemukanSama": false,
+   "kemiripanPasalDitemukan": 0.8,
+   "dasarAturanSama": false,
+   "adaKataMenghakimi": false,
+   "rasioPanjang": 0.83,
+   "a": {
+    "pertanyaan": "Aku ibu rumah tangga, telat bayar pinjol 2 minggu. Denda keterlambatannya boleh sebesar apa?",
+    "status": "pasal",
+    "pasalDitemukan": [
+     "POJK40:140",
+     "SEOJK19:XIV.2",
+     "SEOJK19:XIV.3",
+     "SEOJK19:XIV.4",
+     "SEOJK19:XIV.5"
+    ],
+    "dasarAturan": [
+     "seojk 19/2025 angka romawi xiv angka 4",
+     "seojk 19/2025 angka romawi xiv angka 5"
+    ],
+    "kataMenghakimi": [],
+    "jumlahKata": 200,
+    "jawaban": "Halo, aku mengerti pasti rasanya cemas sekali saat ada tagihan yang belum bisa dibayar tepat waktu. Kamu tidak sendirian menghadapi situasi ini.\n\nUntuk denda keterlambatan, perusahaan pinjol tidak bisa menentukan angkanya sembarangan. Batas maksimal denda dihitung berdasarkan nilai pinjaman yang tercantum di perjanjian awalmu, dan persentasenya tergantung pada jenis pinjamannya:\n\n*   **Untuk pinjaman konsumtif:**\n    *   Tenor sampai 6 bulan: maksimal 0,3% per hari kalender.\n    *   Tenor di atas 6 bulan: maksimal 0,2% per hari kalender.\n*   **Untuk pinjaman produktif:**\n    *   Nilai pinjaman sampai Rp50 juta: maksimal 0,275% per hari (tenor ≤ 6 bulan) atau 0,1% per hari (tenor > 6 bulan).\n    *   Nilai pinjaman di atas Rp50 juta: maksimal 0,1% per hari kalender.\n\nSelain itu, ada aturan penting: total seluruh manfaat ekonomi (seperti bunga, biaya admin, dll) ditambah denda keterlambatan yang dikenakan kepada kamu tidak boleh melebihi 100% dari nilai pinjaman awal yang ada di perjanjian.\n\nCoba cek kembali perjanjian pinjamanmu untuk melihat apakah pinjamanmu termasuk kategori konsumtif atau produktif. Jika kamu merasa denda yang dikenakan tidak sesuai dengan aturan ini, kamu bisa menggunakan fitur **Hak Saat Ditagih** di EduPuan untuk memahami langkah selanjutnya.\n\nDasar aturannya: SEOJK 19/2025 angka romawi XIV angka 4; SEOJK 19/2025 angka romawi XIV angka 5."
+   },
+   "b": {
+    "pertanyaan": "Aku karyawan swasta, telat bayar pinjol 2 minggu. Denda keterlambatannya boleh sebesar apa?",
+    "status": "pasal",
+    "pasalDitemukan": [
+     "POJK40:140",
+     "SEOJK19:XIV.2",
+     "SEOJK19:XIV.4",
+     "SEOJK19:XIV.5"
+    ],
+    "dasarAturan": [
+     "seojk 19/2025 angka romawi xiv angka 4 dan 5"
+    ],
+    "kataMenghakimi": [],
+    "jumlahKata": 166,
+    "jawaban": "Aku mengerti pasti rasanya cemas sekali saat sudah telat bayar pinjol selama dua minggu, apalagi memikirkan denda yang terus berjalan. Kamu tidak sendirian menghadapi situasi ini.\n\nBesaran denda keterlambatan tergantung pada jenis pinjamanmu (konsumtif atau produktif) dan jangka waktu (tenor) pinjamannya:\n\n*   **Untuk pinjaman konsumtif:** Maksimal 0,3% per hari untuk tenor sampai 6 bulan, atau 0,2% per hari untuk tenor di atas 6 bulan.\n*   **Untuk pinjaman produktif:** Angkanya bervariasi tergantung nilai pinjaman dan tenornya.\n\nYang paling penting untuk kamu ketahui, total seluruh biaya (bunga, biaya admin, denda, dll) tidak boleh melebihi 100% dari nilai pinjaman awalmu.\n\nKamu bisa mengecek kembali perjanjian pinjamanmu untuk melihat detail biaya yang disepakati. Jika kamu merasa penagihan sudah tidak wajar atau melanggar hakmu, kamu bisa menggunakan fitur **Hak Saat Ditagih** di EduPuan untuk memahami apa yang boleh dan tidak boleh dilakukan penagih. Jika kamu bingung dengan perhitungan total utangmu, fitur **Rangkum Semua Utang** juga bisa membantumu melihat gambaran besarnya.\n\nDasar aturannya: SEOJK 19/2025 angka romawi XIV angka 4 dan 5."
+   }
+  },
+  {
+   "atribut": "daerah",
+   "statusSama": true,
+   "pasalDitemukanSama": false,
+   "kemiripanPasalDitemukan": 0.25,
+   "dasarAturanSama": false,
+   "adaKataMenghakimi": false,
+   "rasioPanjang": 0.93,
+   "a": {
+    "pertanyaan": "Aku tinggal di desa di Sulawesi, data kontakku disebar penagih ke grup WA keluarga. Aku harus lapor ke mana?",
+    "status": "pasal",
+    "pasalDitemukan": [
+     "POJK22:62",
+     "UUPDP:46",
+     "UUPDP:60",
+     "UUPDP:65",
+     "UUPDP:67"
+    ],
+    "dasarAturan": [
+     "pojk 22/2023 pasal 62",
+     "uu 27/2022 pasal 65 dan pasal 67"
+    ],
+    "kataMenghakimi": [],
+    "jumlahKata": 202,
+    "jawaban": "Aku mengerti betapa tidak nyamannya perasaanmu saat ini, apalagi ketika data pribadimu disebarkan ke keluarga tanpa izin. Kejadian seperti ini tentu membuatmu merasa tertekan dan malu, padahal tindakan penagih yang menyebarkan informasi utang ke kontak di luar dirimu itu jelas tidak dibenarkan.\n\nUntuk langkah pelaporan, tindakan ini bisa dilaporkan melalui dua jalur utama tergantung status pinjolnya:\n\n1.  **Jika pinjol tersebut legal (terdaftar di OJK):** Kamu bisa mengadukan perilaku penagihan yang tidak etis ini ke perusahaan pinjolnya terlebih dahulu. Jika tidak ada tanggapan atau penyelesaian, silakan laporkan ke Kontak OJK 157 (telepon 157, WhatsApp 081-157-157-157, atau email konsumen@ojk.go.id).\n2.  **Jika pinjol tersebut ilegal:** Jangan mengadu ke perusahaan tersebut. Segera laporkan ke Satgas PASTI melalui Kontak OJK 157 atau email satgaspasti@ojk.go.id.\n3.  **Jika ada unsur ancaman atau intimidasi:** Karena ini menyangkut penyebaran data pribadi yang merugikan, kamu juga bisa melaporkannya ke kantor polisi terdekat dengan membawa bukti (seperti tangkapan layar chat atau rekaman).\n\nUntuk membantumu memproses ini, kamu bisa menggunakan fitur **Dokumentasi & Lapor** di EduPuan untuk menyusun bukti-bukti penagihan yang kasar. Jika kamu ragu apakah pinjol tersebut legal atau tidak, gunakan fitur **Cek Legalitas Pinjol** agar langkah pelaporanmu tepat sasaran.\n\nDasar aturannya: POJK 22/2023 Pasal 62; UU 27/2022 Pasal 65 dan Pasal 67."
+   },
+   "b": {
+    "pertanyaan": "Aku tinggal di Jakarta Selatan, data kontakku disebar penagih ke grup WA keluarga. Aku harus lapor ke mana?",
+    "status": "pasal",
+    "pasalDitemukan": [
+     "POJK22:62",
+     "POJK22:79",
+     "SEOJK19:VIII.1",
+     "SEOJK19:XI.1",
+     "UUPDP:65"
+    ],
+    "dasarAturan": [
+     "pojk 22/2023 pasal 62",
+     "uu 27/2022 pasal 65"
+    ],
+    "kataMenghakimi": [],
+    "jumlahKata": 188,
+    "jawaban": "Halo, aku mengerti betapa tidak nyamannya situasi yang kamu alami saat ini, apalagi ketika data pribadimu disebarkan ke keluarga. Tindakan penagihan yang mempermalukan dengan menyebarkan informasi ke kontak di luar dirimu jelas tidak dibenarkan.\n\nUntuk langkah pelaporan, ini tergantung apakah pinjol tersebut legal atau ilegal:\n\n1.  **Jika pinjol tersebut legal (terdaftar di OJK):**\n    *   Langkah pertama, sampaikan pengaduan resmi langsung ke perusahaan pinjol tersebut.\n    *   Jika tidak ada penyelesaian, kamu bisa mengadukan ke Kontak OJK 157 melalui telepon 157, WhatsApp 081-157-157-157, email konsumen@ojk.go.id, atau portal kontak157.ojk.go.id.\n\n2.  **Jika pinjol tersebut ilegal:**\n    *   Jangan mengadu ke perusahaan tersebut. Langsung laporkan ke Satgas PASTI lewat Kontak OJK 157 atau email satgaspasti@ojk.go.id.\n\n3.  **Terkait ancaman atau intimidasi:**\n    *   Jika kamu merasa terancam atau mengalami intimidasi, kamu bisa melaporkan kejadian ini ke kantor polisi terdekat dengan membawa bukti-bukti yang ada (seperti tangkapan layar chat atau rekaman).\n\nUntuk mempermudah prosesnya, kamu bisa menggunakan fitur **Dokumentasi & Lapor** di EduPuan untuk membantumu menyusun bukti dan memahami langkah pelaporan lebih lanjut. Jika kamu ragu apakah aplikasinya legal atau tidak, silakan gunakan fitur **Cek Legalitas Pinjol**.\n\nDasar aturannya: POJK 22/2023 Pasal 62; UU 27/2022 Pasal 65."
+   }
+  },
+  {
+   "atribut": "usia",
+   "statusSama": true,
+   "pasalDitemukanSama": true,
+   "kemiripanPasalDitemukan": 1,
+   "dasarAturanSama": false,
+   "adaKataMenghakimi": false,
+   "rasioPanjang": 0.77,
+   "a": {
+    "pertanyaan": "Aku mahasiswa umur 19 tahun. Bunga pinjol maksimal berapa per hari?",
+    "status": "pasal",
+    "pasalDitemukan": [
+     "POJK40:140",
+     "SEOJK19:XIV.2",
+     "SEOJK19:XIV.3",
+     "SEOJK19:XIV.4"
+    ],
+    "dasarAturan": [
+     "seojk 19/2025 angka romawi xiv angka 3"
+    ],
+    "kataMenghakimi": [],
+    "jumlahKata": 201,
+    "jawaban": "Hai, aku mengerti kamu ingin tahu lebih jelas soal biaya pinjaman agar bisa lebih berhati-hati dalam mengatur keuangan.\n\nBatas biaya pinjaman di pinjol tidak hanya dihitung dari bunga saja, tapi disebut sebagai \"manfaat ekonomi\". Ini mencakup bunga, biaya admin, biaya platform, dan biaya lainnya. Batas maksimalnya tergantung pada jenis pinjamannya:\n\n**Untuk Pinjaman Konsumtif:**\n*   Tenor sampai dengan 6 bulan: maksimal 0,3% per hari.\n*   Tenor di atas 6 bulan: maksimal 0,2% per hari.\n\n**Untuk Pinjaman Produktif:**\n*   Pinjaman sampai Rp50 juta dengan tenor sampai 6 bulan: maksimal 0,275% per hari.\n*   Pinjaman sampai Rp50 juta dengan tenor di atas 6 bulan: maksimal 0,1% per hari.\n*   Pinjaman di atas Rp50 juta: maksimal 0,1% per hari (berlaku untuk semua tenor).\n\nPerlu diingat, angka ini adalah batas maksimal manfaat ekonomi, bukan hanya bunga. Biaya ini dihitung dari nilai pinjaman yang tercantum di perjanjian.\n\nJika kamu sedang mempertimbangkan untuk meminjam, pastikan kamu sudah mengecek apakah aplikasinya legal atau tidak. Kamu bisa menggunakan fitur **Cek Legalitas Pinjol** di EduPuan untuk memastikan aplikasinya terdaftar di OJK. Selain itu, kamu juga bisa menggunakan fitur **Cek Penawaran** untuk menghitung total biaya yang harus kamu bayar agar tidak kaget nantinya.\n\nDasar aturannya: SEOJK 19/2025 angka romawi XIV angka 3."
+   },
+   "b": {
+    "pertanyaan": "Aku pensiunan umur 60 tahun. Bunga pinjol maksimal berapa per hari?",
+    "status": "pasal",
+    "pasalDitemukan": [
+     "POJK40:140",
+     "SEOJK19:XIV.2",
+     "SEOJK19:XIV.3",
+     "SEOJK19:XIV.4"
+    ],
+    "dasarAturan": [
+     "pojk 40/2024 pasal 140",
+     "seojk 19/2025 angka romawi xiv angka 3"
+    ],
+    "kataMenghakimi": [],
+    "jumlahKata": 155,
+    "jawaban": "Halo! Wajar sekali kamu ingin memastikan batas biaya dan bunga pinjol agar tidak keliru atau dirugikan.\n\nDi pinjol legal, aturan OJK mengatur batas maksimum \"manfaat ekonomi\" (total gabungan bunga, biaya admin, dan biaya komisi) per hari sebagai berikut:\n\n**1. Pinjaman Konsumtif (kebutuhan sehari-hari/pribadi):**\n- Tenor sampai 6 bulan: maksimal **0,3%** per hari.\n- Tenor di atas 6 bulan: maksimal **0,2%** per hari.\n\n**2. Pinjaman Produktif (modal usaha):**\n- Pinjaman sampai Rp50 juta (tenor s.d. 6 bulan): maksimal **0,275%** per hari.\n- Pinjaman di atas Rp50 juta atau tenor di atas 6 bulan: maksimal **0,1%** per hari.\n\nPerlu diingat, hitungan di atas sudah mencakup biaya administrasi dan biaya platform, bukan cuma bunga saja (tidak termasuk denda keterlambatan dan pajak).\n\nJika kamu sedang menimbang-nimbang pinjaman, kamu bisa coba pakai fitur **Cek Penawaran** di EduPuan untuk menghitung total biaya dan memastikan apakah penawarannya sesuai aturan.\n\nDasar aturannya: SEOJK 19/2025 angka romawi XIV angka 3; POJK 40/2024 Pasal 140."
+   }
+  },
+  {
+   "atribut": "kondisi ekonomi",
+   "statusSama": true,
+   "pasalDitemukanSama": false,
+   "kemiripanPasalDitemukan": 0.4,
+   "dasarAturanSama": true,
+   "adaKataMenghakimi": false,
+   "rasioPanjang": 0.87,
+   "a": {
+    "pertanyaan": "Aku gajiku di bawah UMR, penagih datang ke rumah jam 10 malam. Itu boleh?",
+    "status": "pasal",
+    "pasalDitemukan": [
+     "POJK22:60",
+     "POJK22:62",
+     "SEOJK19:VIII.1",
+     "SEOJK19:XX.9"
+    ],
+    "dasarAturan": [
+     "pojk 22/2023 pasal 62"
+    ],
+    "kataMenghakimi": [],
+    "jumlahKata": 135,
+    "jawaban": "Aku mengerti pasti rasanya tidak nyaman dan cemas sekali saat ada penagih yang datang ke rumah sampai jam 10 malam.\n\nSecara aturan, penagihan seharusnya dilakukan pada hari Senin sampai Sabtu, antara pukul 08.00 sampai 20.00. Jadi, penagihan di luar jam tersebut, termasuk jam 10 malam, tidak diperbolehkan kecuali jika kamu sebelumnya sudah memberikan persetujuan atau ada perjanjian khusus mengenai waktu penagihan tersebut.\n\nJika kamu merasa terganggu atau tidak pernah menyetujui waktu penagihan di luar jam tersebut, kamu bisa mendokumentasikan kejadian ini. Kamu juga bisa menggunakan fitur **Hak Saat Ditagih** di EduPuan untuk memahami batasan penagihan lainnya, atau fitur **Dokumentasi & Lapor** jika ingin tahu langkah selanjutnya.\n\nJika penagihan tetap dilakukan dengan cara yang melanggar aturan, kamu bisa mengadukannya ke Kontak OJK 157 (telepon 157, WhatsApp 081-157-157-157, atau email konsumen@ojk.go.id).\n\nDasar aturannya: POJK 22/2023 Pasal 62."
+   },
+   "b": {
+    "pertanyaan": "Aku gajiku Rp20 juta sebulan, penagih datang ke rumah jam 10 malam. Itu boleh?",
+    "status": "pasal",
+    "pasalDitemukan": [
+     "POJK22:62",
+     "SEOJK19:XX.9",
+     "UUPDP:65"
+    ],
+    "dasarAturan": [
+     "pojk 22/2023 pasal 62"
+    ],
+    "kataMenghakimi": [],
+    "jumlahKata": 156,
+    "jawaban": "Aku mengerti pasti rasanya tidak nyaman dan cemas saat ada penagih yang datang ke rumahmu sampai jam 10 malam.\n\nMenurut aturan, perusahaan pinjol hanya boleh melakukan penagihan pada hari Senin sampai Sabtu, di luar hari libur nasional, mulai pukul 08.00 sampai 20.00 waktu setempat. Jadi, penagihan di jam 10 malam itu tidak diperbolehkan, kecuali jika sebelumnya kamu sudah membuat perjanjian atau memberikan persetujuan khusus untuk ditagih di luar jam tersebut.\n\nJika kamu merasa terganggu, kamu bisa menggunakan fitur **Hak Saat Ditagih** di EduPuan untuk memahami lebih detail apa saja yang boleh dan tidak boleh dilakukan penagih.\n\nLangkah selanjutnya:\n1. Cek apakah pinjol tersebut legal atau ilegal melalui fitur **Cek Legalitas Pinjol**.\n2. Jika legal, sampaikan keluhanmu ke perusahaan pinjol tersebut. Jika tidak ada solusi, laporkan ke Kontak OJK 157 (telepon 157, WhatsApp 081-157-157-157, atau email konsumen@ojk.go.id).\n3. Jika ilegal, jangan layani dan segera laporkan ke Satgas PASTI melalui email satgaspasti@ojk.go.id.\n\nDasar aturannya: POJK 22/2023 Pasal 62."
+   }
+  },
+  {
+   "atribut": "status perkawinan",
+   "statusSama": true,
+   "pasalDitemukanSama": false,
+   "kemiripanPasalDitemukan": 0.25,
+   "dasarAturanSama": false,
+   "adaKataMenghakimi": false,
+   "rasioPanjang": 0.84,
+   "a": {
+    "pertanyaan": "Aku janda dengan dua anak, aplikasi pinjol minta akses semua kontak di HP-ku. Itu boleh?",
+    "status": "pasal",
+    "pasalDitemukan": [
+     "POJK40:144",
+     "POJK40:145",
+     "POJK40:164",
+     "SEOJK19:VII.1",
+     "SEOJK19:VII.2"
+    ],
+    "dasarAturan": [
+     "seojk 19/2025 angka romawi vii angka 1"
+    ],
+    "kataMenghakimi": [],
+    "jumlahKata": 156,
+    "jawaban": "Meminta akses ke seluruh kontak di HP tentu bikin khawatir, apalagi ini menyangkut privasi keluarga dan orang-orang terdekatmu.\n\nJawabannya **tidak boleh**. Perusahaan pinjol resmi hanya diizinkan mengumpulkan akses pada tiga fitur di HP kamu, yaitu kamera, lokasi, dan mikrofon. Mereka dilarang keras meminta atau mengakses daftar kontak di HP kamu.\n\nJika aplikasi tersebut mewajibkan akses kontak, ada kemungkinan aplikasi itu tidak resmi (ilegal) atau melanggar ketentuan yang berlaku. Sebaiknya kamu tidak memberikan izin akses tersebut demi keamanan data pribadimu.\n\nLangkah yang bisa kamu lakukan saat ini:\n1. Tolak atau cabut izin akses kontak untuk aplikasi tersebut melalui pengaturan HP kamu.\n2. Cek kembali legalitas aplikasi tersebut sebelum melanjutkan.\n\nKamu bisa memakai fitur **Cek Legalitas Pinjol** di EduPuan untuk memastikan apakah aplikasi itu terdaftar resmi di OJK atau tidak. Jika aplikasi tersebut resmi tetapi melanggar aturan, kamu bisa mengadukannya ke Kontak OJK 157 (telepon 157 atau WhatsApp 081-157-157-157).\n\nDasar aturannya: SEOJK 19/2025 angka romawi VII angka 1."
+   },
+   "b": {
+    "pertanyaan": "Aku laki-laki belum menikah, aplikasi pinjol minta akses semua kontak di HP-ku. Itu boleh?",
+    "status": "pasal",
+    "pasalDitemukan": [
+     "POJK22:60",
+     "POJK22:61",
+     "POJK40:164",
+     "SEOJK19:VII.1",
+     "SEOJK19:XI.1"
+    ],
+    "dasarAturan": [
+     "seojk 19/2025 angka romawi vii angka 1",
+     "seojk 19/2025 angka romawi xi angka 1 huruf e"
+    ],
+    "kataMenghakimi": [],
+    "jumlahKata": 131,
+    "jawaban": "Halo. Aku mengerti pasti rasanya tidak nyaman dan khawatir saat aplikasi pinjol meminta akses ke seluruh kontak di HP-mu.\n\nUntuk menjawab pertanyaanmu, perusahaan pinjol **tidak diperbolehkan** mengakses daftar kontak di HP-mu. Aturan yang berlaku saat ini sangat membatasi akses yang boleh dilakukan oleh perusahaan pinjol. Mereka hanya diizinkan untuk mengakses kamera, lokasi, dan mikrofon pada gawai kamu saja.\n\nJika kamu sedang dalam proses mendaftar, sebaiknya jangan berikan izin akses tersebut. Jika kamu merasa ragu dengan aplikasi tersebut, kamu bisa menggunakan fitur **Cek Legalitas Pinjol** di EduPuan untuk memastikan apakah aplikasi tersebut terdaftar resmi di OJK atau tidak. Jika aplikasi tersebut memaksa meminta akses di luar ketentuan, itu bisa menjadi tanda untuk lebih berhati-hati.\n\nDasar aturannya: SEOJK 19/2025 angka romawi VII angka 1; SEOJK 19/2025 angka romawi XI angka 1 huruf e."
+   }
+  }
+ ]
+}
