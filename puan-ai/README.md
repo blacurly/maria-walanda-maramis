@@ -28,17 +28,18 @@ python scripts/tanya.py --detail "dc nagih ke kantor aku, boleh gak?"
 uvicorn api.main:app --reload --port 8000   # API untuk web → http://localhost:8000/docs
 ```
 
-## Status
+## Status (final, 13 Nov 2026)
 
 | Bagian | Status |
 |---|---|
-| Knowledge base (248 parent / 694 child dicari) | ✅ identik dengan versi yang teruji di notebook lama |
-| Pencarian, embedding Gemini | ✅ teruji: **87,5% kena, MRR 0,80** (angka 100%, lintas dokumen 60% / ketat 40%) |
-| Opsi pecah daftar panjang per huruf | ⏳ siap, belum dievaluasi dengan Gemini |
-| Embedding multilingual-e5-small | ⏳ siap, belum dievaluasi; ambang 0,80 masih sementara |
-| System prompt (aturan A–E dilebur + aturan baru) | ⏳ perlu uji jawaban (`scripts/uji_jawaban.py`) dan tinjauan hukum |
-| Riwayat percakapan | ⏳ baru, belum diuji dengan Gemini |
-| API FastAPI | ✅ teruji dengan komponen tiruan (respons, validasi, kunci, CORS, error) |
+| Knowledge base (248 pasal / 833 potongan versi pecah huruf) | ✅ dipakai; versi pecah huruf dipilih lewat evaluasi (lebih baik di semua ukuran) |
+| Pencarian, embedding Gemini | ✅ **Kena 90%, MRR 0,79** (50 soal); angka sama persis setelah pindah ke pgvector |
+| Embedding multilingual-e5-small | ❌ dievaluasi 13 Nov: Kena 55%, di bawah target 85%, **tidak dipakai** |
+| System prompt + aturan kesetaraan | ✅ dipakai di Next.js (`web/src/lib/puan/prompt.ts`); diuji manual + uji bias (konsistensi dasar hukum 100%) |
+| Riwayat percakapan | ✅ dipakai (6 pesan terakhir); belum ada uji otomatis khusus percakapan lanjutan |
+| API FastAPI (`api/`) | ⛔ tidak dipakai lagi; digantikan `POST /api/chat` di Next.js |
+
+Rincian hasil uji: [`web/docs/ai.md`](../web/docs/ai.md) bagian 5.
 
 ## Dokumen
 
