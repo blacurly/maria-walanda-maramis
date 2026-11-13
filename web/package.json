@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@huggingface/transformers": "^4.3.1",
     "@supabase/supabase-js": "^2.119.0",
     "jspdf": "^4.2.1",
     "jspdf-autotable": "^5.0.9",
