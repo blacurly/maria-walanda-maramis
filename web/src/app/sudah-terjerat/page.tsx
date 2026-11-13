@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { TONE, type Tone } from "@/lib/tone";
 
 export const metadata: Metadata = {
   title: "Sudah Terjerat – EduPuan",
@@ -7,7 +8,17 @@ export const metadata: Metadata = {
     "Langkah konkret untuk yang sudah terlanjur berutang: analisis pesan penagih, hak saat ditagih, rangkum utang, dan cara melapor.",
 };
 
-const ALAT = [
+type Alat = {
+  href: string;
+  ikon: string;
+  judul: string;
+  isi: string;
+  ajakan: string;
+  mendesak: boolean;
+  tone: Tone;
+};
+
+const ALAT: Alat[] = [
   {
     href: "/sudah-terjerat/analisis-pesan",
     ikon: "📱",
@@ -15,6 +26,7 @@ const ALAT = [
     isi: "Tempel pesan penagih — identifikasi pelanggaran + template balasan.",
     ajakan: "Tempel pesan",
     mendesak: true,
+    tone: "rose",
   },
   {
     href: "/sudah-terjerat/hak-saat-ditagih",
@@ -23,6 +35,7 @@ const ALAT = [
     isi: "Checklist pelanggaran + template balasan siap salin.",
     ajakan: "Lihat hakku",
     mendesak: true,
+    tone: "rose",
   },
   {
     href: "/sudah-terjerat/dokumentasi-lapor",
@@ -31,6 +44,7 @@ const ALAT = [
     isi: "Panduan lapor ke OJK, Polisi, Komnas Perempuan.",
     ajakan: "Mulai lapor",
     mendesak: false,
+    tone: "sky",
   },
   {
     href: "/sudah-terjerat/rangkum-utang",
@@ -39,6 +53,7 @@ const ALAT = [
     isi: "Lihat total, tenggat, dan prioritas penanganan semua tagihanmu.",
     ajakan: "Rangkum utang",
     mendesak: false,
+    tone: "violet",
   },
   {
     href: "/sudah-terjerat/beritahu-keluarga",
@@ -47,6 +62,7 @@ const ALAT = [
     isi: "Template pesan siap kirim via WhatsApp.",
     ajakan: "Buat pesan",
     mendesak: false,
+    tone: "emerald",
   },
 ];
 
@@ -56,26 +72,27 @@ const KONTAK = [
   { label: "Kesehatan Jiwa", nomor: "119 ext 8", href: "tel:119" },
 ];
 
-function KartuAlat({ alat }: { alat: (typeof ALAT)[number] }) {
+function KartuAlat({ alat }: { alat: Alat }) {
+  const t = TONE[alat.tone];
   return (
     <Link
       href={alat.href}
-      className={`group flex w-full flex-col items-start rounded-xl border border-border bg-card p-5 text-left shadow-sm transition-all hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 active:translate-y-0 ${
+      className={`group flex w-full flex-col items-start rounded-xl border p-5 text-left shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:translate-y-0 ${t.kartu} ${
         alat.mendesak ? "sm:min-h-48" : "sm:min-h-44"
       }`}
     >
       {alat.ikon === "SOS" ? (
-        <span className="flex h-8 min-w-8 items-center justify-center rounded-md bg-red-500 px-1 text-xs font-black text-white">
-          SOS
+        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-rose-100">
+          <span className="rounded-md bg-red-600 px-1.5 py-0.5 text-xs font-black text-white">SOS</span>
         </span>
       ) : (
-        <span className="text-3xl leading-none" aria-hidden="true">
+        <span className={`flex h-12 w-12 items-center justify-center rounded-full text-2xl leading-none ${t.ikon}`} aria-hidden="true">
           {alat.ikon}
         </span>
       )}
       <span className="mt-4 text-base font-bold text-foreground">{alat.judul}</span>
       <span className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{alat.isi}</span>
-      <span className="mt-5 inline-flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-xs font-bold text-red-600 transition-colors group-hover:border-red-600 group-hover:bg-red-600 group-hover:text-white sm:mt-auto">
+      <span className={`mt-5 inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition-colors ${t.ajakan}`}>
         {alat.ajakan}
         <span aria-hidden="true">→</span>
       </span>
@@ -88,7 +105,7 @@ export default function SudahTerjeratPage() {
   const alatBerikutnya = ALAT.filter((a) => !a.mendesak);
 
   return (
-    <div className="min-h-full bg-gray-50">
+    <div className="min-h-full bg-[#F9FAFB]">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10">
         <h1 className="mb-1.5 text-2xl font-extrabold text-foreground sm:text-3xl">Pilih yang paling mendesak</h1>
         <p className="mb-7 text-sm text-muted-foreground">
