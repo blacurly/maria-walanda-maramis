@@ -11,6 +11,8 @@ type Aturan = { nama: string; batas: number; jendelaDetik: number };
 export const ATURAN = {
   chat: { nama: "chat", batas: 20, jendelaDetik: 600 }, //             20 pesan per 10 menit
   umpanBalik: { nama: "umpan-balik", batas: 30, jendelaDetik: 600 }, // 30 penilaian per 10 menit
+  baca: { nama: "baca", batas: 120, jendelaDetik: 600 }, //             120 permintaan baca data per 10 menit
+  admin: { nama: "admin", batas: 60, jendelaDetik: 600 }, //            60 permintaan tulis per 10 menit
 } satisfies Record<string, Aturan>;
 
 const BATAS_WAKTU_MS = 3_000;

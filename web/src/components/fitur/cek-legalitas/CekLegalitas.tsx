@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { cekNama, saranNama, namaSitus, type HasilCek, type Pinjol } from "@/features/cek-legalitas/rules";
+import { namaSitus, type HasilCek, type Pinjol } from "@/features/cek-legalitas/rules";
 import {
   LINK_OJK_BERIZIN, CONTOH_NAMA, KONTAK_OJK, CIRI_BERIZIN, RISIKO_ILEGAL,
   LANGKAH_ILEGAL, LANGKAH_TIDAK_DITEMUKAN,
@@ -29,31 +29,88 @@ function Daftar({ isi, warna }: { isi: string[]; warna: "hijau" | "merah" | "abu
 }
 
 type Props = {
-  daftar: Pinjol[];       // daftar pinjol dari database (atau data cadangan)
-  sumber: string[];       // sumber data, untuk ditampilkan
-  dariDatabase: boolean;  // false = database tidak bisa dihubungi, memakai cadangan
+  sumber: string[];       // nama sumber data resmi, untuk ditampilkan
+  dariDatabase: boolean;  // false = database tidak bisa dihubungi, server memakai data cadangan
 };
 
-export default function CekLegalitas({ daftar, sumber, dariDatabase }: Props) {
+// Balasan GET /api/pinjol/cek (lihat app/api/pinjol/cek/route.ts)
+type BalasanCek =
+  | { ok: true; hasil: HasilCek; saran: Pinjol[]; dariDatabase: boolean }
+  | { ok: false; kode: string; detail: string };
+
+async function mintaCek(nama: string, signal?: AbortSignal): Promise<BalasanCek> {
+  const r = await fetch(`/api/pinjol/cek?nama=${encodeURIComponent(nama)}`, { signal });
+  return (await r.json()) as BalasanCek;
+}
+
+export default function CekLegalitas({ sumber, dariDatabase }: Props) {
   const [query, setQuery] = useState("");
   const [dicek, setDicek] = useState("");
   const [hasil, setHasil] = useState<HasilCek | null>(null);
+  const [saranDari, setSaranDari] = useState<{ q: string; daftar: Pinjol[] }>({ q: "", daftar: [] });
   const [bukaSaran, setBukaSaran] = useState(false);
+  const [memuat, setMemuat] = useState(false);
+  const [pesanGalat, setPesanGalat] = useState("");
+  const [pakaiDatabase, setPakaiDatabase] = useState(dariDatabase);
+  const nomorCek = useRef(0); // supaya jawaban lama yang datang terlambat tidak menimpa yang baru
 
-  const saran = useMemo(() => saranNama(query, daftar), [query, daftar]);
+  // Saran nama saat mengetik: tunggu 300 ms setelah berhenti mengetik, baru tanya server.
+  // Saran hanya ditampilkan kalau memang untuk teks yang sedang diketik (bukan sisa ketikan lama).
+  const saran = bukaSaran && saranDari.q === query.trim() ? saranDari.daftar : [];
 
-  function jalankanCek(nama: string) {
-    if (!nama.trim()) return;
+  useEffect(() => {
+    const q = query.trim();
+    if (!bukaSaran || q.length < 2) return;
+    const batal = new AbortController();
+    const jeda = setTimeout(async () => {
+      try {
+        const b = await mintaCek(q, batal.signal);
+        if (b.ok) setSaranDari({ q, daftar: b.saran });
+      } catch {
+        // Saran hanya pelengkap: kalau gagal, cukup tidak ditampilkan.
+      }
+    }, 300);
+    return () => {
+      clearTimeout(jeda);
+      batal.abort();
+    };
+  }, [query, bukaSaran]);
+
+  async function jalankanCek(nama: string) {
+    const q = nama.trim();
     setQuery(nama);
-    setDicek(nama.trim());
-    setHasil(cekNama(nama, daftar));
     setBukaSaran(false);
+    setHasil(null);
+    if (q.length < 2) {
+      setPesanGalat("Ketik minimal 2 huruf nama aplikasi.");
+      return;
+    }
+
+    const nomor = ++nomorCek.current;
+    setMemuat(true);
+    setPesanGalat("");
+    try {
+      const b = await mintaCek(q);
+      if (nomor !== nomorCek.current) return;
+      if (b.ok) {
+        setDicek(q);
+        setHasil(b.hasil);
+        setPakaiDatabase(b.dariDatabase);
+      } else {
+        setPesanGalat(b.detail);
+      }
+    } catch {
+      if (nomor === nomorCek.current) setPesanGalat("Tidak bisa terhubung. Periksa internetmu lalu coba lagi.");
+    } finally {
+      if (nomor === nomorCek.current) setMemuat(false);
+    }
   }
 
   function ulangCek() {
     setQuery("");
     setDicek("");
     setHasil(null);
+    setPesanGalat("");
   }
 
   return (
@@ -80,6 +137,7 @@ export default function CekLegalitas({ daftar, sumber, dariDatabase }: Props) {
                     setQuery(e.target.value);
                     setBukaSaran(true);
                     setHasil(null);
+                    setPesanGalat("");
                   }}
                   onFocus={() => setBukaSaran(true)}
                   onBlur={() => setBukaSaran(false)}
@@ -118,9 +176,10 @@ export default function CekLegalitas({ daftar, sumber, dariDatabase }: Props) {
               </div>
               <button
                 onClick={() => jalankanCek(query)}
-                className="flex-shrink-0 whitespace-nowrap rounded-xl bg-[#379557] px-5 py-3 text-sm font-bold text-white hover:opacity-90"
+                disabled={memuat}
+                className="flex-shrink-0 whitespace-nowrap rounded-xl bg-[#379557] px-5 py-3 text-sm font-bold text-white hover:opacity-90 disabled:cursor-wait disabled:opacity-60"
               >
-                Cek sekarang
+                {memuat ? "Mengecek…" : "Cek sekarang"}
               </button>
             </div>
 
@@ -135,8 +194,8 @@ export default function CekLegalitas({ daftar, sumber, dariDatabase }: Props) {
           </div>
 
           <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-white/70">
-            <span className={`inline-block h-1.5 w-1.5 rounded-full ${dariDatabase ? "bg-emerald-400" : "bg-amber-400"}`} />
-            {!dariDatabase && <span>Data cadangan ·</span>}
+            <span className={`inline-block h-1.5 w-1.5 rounded-full ${pakaiDatabase ? "bg-emerald-400" : "bg-amber-400"}`} />
+            {!pakaiDatabase && <span>Data cadangan ·</span>}
             <span>Sumber: {sumber.join(" · ")}</span>
             <span>·</span>
             <a href={LINK_OJK_BERIZIN} target="_blank" rel="noopener noreferrer" className="underline hover:text-white">
@@ -147,8 +206,22 @@ export default function CekLegalitas({ daftar, sumber, dariDatabase }: Props) {
       </section>
 
       <div className="mx-auto max-w-5xl px-5 py-8">
+        {/* Gagal mengecek (misalnya terlalu sering atau gangguan server) */}
+        {pesanGalat && (
+          <div role="alert" className="mb-6 max-w-3xl rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-800">
+            {pesanGalat}
+          </div>
+        )}
+
+        {/* Sedang mengecek */}
+        {memuat && (
+          <p role="status" className="mb-6 max-w-3xl text-sm text-gray-500">
+            Mencocokkan nama dengan daftar OJK dan Satgas PASTI…
+          </p>
+        )}
+
         {/* Belum ada hasil: kontak OJK */}
-        {!hasil && (
+        {!hasil && !memuat && (
           <div className={`${KARTU} max-w-3xl p-6`}>
             <p className="mb-1 text-sm font-bold text-gray-800">Mau memastikan langsung ke OJK?</p>
             <p className="mb-5 text-xs text-gray-500">
