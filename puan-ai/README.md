@@ -1,5 +1,10 @@
 # Puan AI — Chatbot RAG EduPuan
 
+> **Catatan (13 Nov 2026):** Puan AI yang dipakai aplikasi sekarang berjalan **di dalam Next.js** (`web/src/lib/puan/`)
+> dengan vector database **Supabase pgvector**, bukan lewat layanan FastAPI di folder ini. Folder `puan-ai/` tetap dipakai
+> sebagai **laboratorium data**: teks peraturan, pembangunan knowledge base, dan evaluasi awal. Status dan angka di bawah
+> adalah catatan versi Python. Dokumentasi terbaru ada di [`web/docs/ai.md`](../web/docs/ai.md).
+
 Puan AI adalah teman curhat di **EduPuan** untuk perempuan yang mau pinjam, sudah terjerat, atau bingung soal pinjaman online.
 Jawabannya bersumber dari **4 peraturan resmi** (POJK 22/2023, POJK 40/2024, UU 27/2022 tentang PDP, SEOJK 19/SEOJK.06/2025)
 dengan metode **RAG parent-child**: ayat/huruf (child) dipakai untuk mencari, pasal utuh (parent) dipakai untuk menjawab.
