@@ -23,7 +23,7 @@ export default function Faq() {
         <div style={{ textAlign: "center", marginBottom: 48 }}>
           <p
             style={{
-              fontSize: 11,
+              fontSize: 16,
               fontWeight: 700,
               color: "#0d6e4b",
               letterSpacing: "0.14em",
@@ -55,9 +55,9 @@ export default function Faq() {
               <div
                 key={item.tanya}
                 style={{
-                  background: "#fff",
+                  background: "#F9FAFB",
                   borderRadius: 16,
-                  border: "1px solid #e5e7eb",
+                  border: "1px solid #BEE0D0",
                   overflow: "hidden",
                   boxShadow: "0 1px 4px rgba(0,0,0,.04)",
                 }}
@@ -86,7 +86,7 @@ export default function Faq() {
                       width: 28,
                       height: 28,
                       borderRadius: "50%",
-                      background: buka ? "#0d6e4b" : "#f3f4f6",
+                      background: buka ? "#0d6e4b" : "#fff",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -113,7 +113,7 @@ export default function Faq() {
                   </span>
                 </button>
                 {buka && (
-                  <div style={{ padding: "0 24px 20px", borderTop: "1px solid #f3f4f6" }}>
+                  <div style={{ padding: "0 24px 20px", borderTop: "1px solid #BEE0D0" }}>
                     <p style={{ fontSize: 14, color: "#4b5563", lineHeight: 1.8, marginTop: 16 }}>
                       {item.jawab}
                     </p>
