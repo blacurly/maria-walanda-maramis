@@ -22,8 +22,10 @@ export const PENGATURAN = {
 
   // ---- Gemini (lihat gemini.ts) ----
   modelTulisUlang: process.env.PUAN_MODEL_TULIS_ULANG || "gemini-3.1-flash-lite",
-  modelJawab: process.env.PUAN_MODEL_JAWAB || "gemini-3.6-flash",
-  modelCadangan: ["gemini-3.1-flash-lite"],
+    // flash-lite jadi model utama: uji di Vercel 13 Nov, 3.6-flash butuh > 22 dtk (waktu habis), flash-lite ±4 dtk.
+  modelJawab: process.env.PUAN_MODEL_JAWAB || "gemini-3.1-flash-lite",
+  // Cadangan kalau model utama sibuk. Model yang sama dengan model utama otomatis dilewati.
+  modelCadangan: ["gemini-3.1-flash-lite", "gemini-3.6-flash"],
   suhuJawab: 0.4,
   // Seberapa lama Gemini "berpikir" sebelum menulis: 'minimal' paling cepat, lalu 'low', 'medium', 'high'.
   berpikirTulisUlang: process.env.PUAN_BERPIKIR_TULIS_ULANG || "minimal",
