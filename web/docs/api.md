@@ -30,6 +30,16 @@ Logika bisnis dan akses data ada di `web/src/lib/` (route hanya mengatur alur).
 | POST | `/api/lembaga` | Tambah lembaga (+ situasinya) | 🔑 Admin | 60 / 10 menit |
 | PATCH | `/api/lembaga/:id` | Ubah sebagian / nonaktifkan lembaga | 🔑 Admin | 60 / 10 menit |
 | DELETE | `/api/lembaga/:id` | Hapus lembaga | 🔑 Admin | 60 / 10 menit |
+| POST | `/api/penawaran/cek` | Cek Penawaran: biaya vs batas OJK + kemampuan bayar | Publik | 120 / 10 menit\* |
+| POST | `/api/situasi` | Ceritakan Situasimu: arahan fitur + pihak berwenang | Publik | 120 / 10 menit\* |
+| GET | `/api/alternatif` | Daftar kategori + pertanyaan Cari Alternatif | Publik | 120 / 10 menit\* |
+| POST | `/api/alternatif` | Rekomendasi solusi tanpa berutang | Publik | 120 / 10 menit\* |
+
+\* Ketiga endpoint kalkulator berbagi satu kuota (`hitung`): 120 permintaan per 10 menit per pengunjung.
+
+Selain Route Handler di atas, ada satu **Server Action** (fungsi server yang dipanggil langsung dari komponen,
+tanpa URL): `nilaiJawabanPuan` di `web/src/lib/puan/aksi.ts`, dipakai tombol 👍/👎 di widget Puan.
+Lihat [Server Action](#server-action-nilaijawabanpuan).
 
 Batas permintaan dihitung per alamat IP (disimpan sebagai *hash*, bukan IP asli) di tabel
 `pembatas_permintaan`. Pengaturannya ada di `web/src/lib/api/pembatas.ts`.
@@ -85,14 +95,22 @@ Daftar kode resmi: `web/src/lib/api/galat.ts`.
 
 ### POST `/api/chat`
 
-Mengirim pertanyaan ke Puan AI (RAG berbasis pasal POJK/SEOJK/UU). Batas waktu menunggu: 45 detik.
+Mengirim pertanyaan ke Puan AI. Puan memakai **RAG**: pertanyaan ditulis ulang ke bahasa hukum, dicari pasalnya
+di vector database (Supabase pgvector), lalu Gemini menyusun jawaban **hanya** dari pasal yang ditemukan.
+Alur lengkap, model, dan hasil evaluasi: [Dokumentasi AI](./ai.md).
+
+- Berjalan di Node.js runtime dengan batas fungsi 60 detik (`maxDuration`). Seluruh proses (tulis ulang, cari pasal,
+  jawab, termasuk coba ulang dan model cadangan) dibatasi **50 detik**; lewat dari itu → `504 WAKTU_HABIS`.
+- Waktu jawab wajar 3–11 detik; saat layanan Gemini ramai bisa sampai ±30 detik.
+- Kunci Gemini hanya ada di server (`GEMINI_API_KEY`), tidak pernah dikirim ke browser.
+- Isi percakapan **tidak disimpan** di server.
 
 **Kiriman**
 
 | Kolom | Tipe | Wajib | Aturan |
 |---|---|---|---|
 | `pesan` | string | ya | Tidak kosong, maksimal 2000 huruf |
-| `riwayat` | array | tidak | Percakapan sebelumnya: `[{ "peran": "user" \| "puan", "teks": "..." }]`. Hanya 20 terakhir yang dipakai |
+| `riwayat` | array | tidak | Percakapan sebelumnya: `[{ "peran": "user" \| "puan", "teks": "..." }]`. Diterima maksimal 20 pesan terakhir (masing-masing maks. 4.000 huruf); 6 pesan terakhir ikut dikirim ke Gemini sebagai konteks |
 
 ```json
 {
@@ -116,12 +134,13 @@ Mengirim pertanyaan ke Puan AI (RAG berbasis pasal POJK/SEOJK/UU). Batas waktu m
 
 | Kolom | Arti |
 |---|---|
-| `jawaban` | Teks jawaban Puan |
+| `jawaban` | Teks jawaban Puan. Jawaban berbasis pasal diakhiri baris **"Dasar aturannya: …"** berisi pasal sumbernya |
 | `status` | `pasal` (dijawab dari pasal), `tidak_ada_pasal`, `butuh_dana`, atau `di_luar_topik` |
 | `krisis` | `true` kalau pesan menunjukkan kondisi darurat (tampilan menampilkan kontak bantuan) |
 | `topik`, `situasi` | Label anonim untuk statistik dan umpan balik |
 
-**Error:** 400, 422 (pesan kosong / terlalu panjang), 429, 500, 502 (termasuk jawaban kosong), 503, 504.
+**Error:** 400 (bukan JSON), 422 (pesan kosong / hanya spasi / lebih dari 2000 huruf), 429, 500 (kunci Gemini belum diatur),
+502 (gangguan, termasuk jawaban kosong), 503 (Gemini sibuk setelah coba ulang + model cadangan), 504 (lebih dari 50 detik).
 
 ### POST `/api/umpan-balik`
 
@@ -147,6 +166,19 @@ Menyimpan penilaian anonim "Apakah jawaban ini membantu?". Tidak menyimpan isi p
 ```
 
 **Error:** 400, 422, 429, 500, 502, 503, 504.
+
+### Server Action `nilaiJawabanPuan`
+
+Dipakai tombol 👍/👎 di widget Puan (`components/fitur/puan-chat/PuanFab.tsx`). Isinya sama dengan
+`POST /api/umpan-balik`: validasi yang sama, pembatas yang sama (30 / 10 menit), penyimpanan yang sama.
+Route `/api/umpan-balik` tetap ada untuk klien di luar web.
+
+```ts
+import { nilaiJawabanPuan } from "@/lib/puan/aksi";
+
+const hasil = await nilaiJawabanPuan({ nilai: 1, topik: "penagihan", situasi: "menghubungi_orang_lain", status: "pasal" });
+// { ok: true }  atau  { ok: false, pesan: "Data umpan balik tidak valid." }
+```
 
 ---
 
@@ -485,7 +517,158 @@ Pasangan situasinya ikut terhapus (ON DELETE CASCADE). Balasan 200: `{ "ok": tru
 
 ---
 
+---
+
+## Kalkulator
+
+Tiga fitur yang sebelumnya hanya dihitung di browser kini juga tersedia sebagai endpoint. Rumusnya **tidak ditulis ulang**:
+`web/src/lib/fitur/*` hanya memvalidasi kiriman dan menyusun balasan, lalu memanggil fungsi yang sama dengan halaman
+(`web/src/features/cek-penawaran/hitung.ts`, `features/bingung-mulai/rules.ts`, `features/cari-alternatif/rules.ts`).
+Data yang dikirim hanya dipakai untuk menghitung, **tidak disimpan**.
+
+### POST `/api/penawaran/cek`
+
+Memeriksa penawaran pinjol terhadap batas biaya OJK (SEOJK 19/SEOJK.06/2025) dan kemampuan bayar.
+
+**Kiriman** (semua angka dalam rupiah, bilangan bulat 0–10.000.000.000; boleh angka atau teks seperti `"3.000.000"`)
+
+| Kolom | Wajib | Keterangan |
+|---|---|---|
+| `jumlah_pinjaman` | ya | Nilai pendanaan di kontrak |
+| `uang_diterima` | ya | Uang yang benar-benar masuk (tidak boleh lebih besar dari `jumlah_pinjaman`) |
+| `total_kembali` | ya | Total yang dikembalikan tanpa denda (tidak boleh lebih kecil dari `jumlah_pinjaman`) |
+| `lama` | ya | Lama pinjaman, bilangan bulat (maks. 120 bulan / 3650 hari) |
+| `satuan_lama` | tidak | `bulan` (bawaan) atau `hari` |
+| `jenis` | tidak | `konsumtif` (bawaan) atau `produktif` |
+| `tujuan` | tidak | `harian`, `pendidikan`, `kesehatan`, `utang`, `usaha` |
+| `bunga`, `biaya_admin`, `biaya_layanan`, `biaya_lain`, `meterai_pajak` | tidak | Rincian biaya |
+| `denda`, `satuan_denda` | tidak | Contoh `"0,1"` + `pct` (persen/hari) atau `"5.000"` + `rp` |
+| `denda_ditagih` | tidak | Denda yang sudah ditagih |
+| `aplikasi_lain` | tidak | Jumlah pinjol lain yang aktif, 0–3 (3 = 3 atau lebih) |
+| `penghasilan`, `pengeluaran_wajib`, `cicilan_lain`, `cicilan_terbesar` | tidak | Untuk menilai kemampuan bayar (kosong = bagian ini dilewati) |
+
+```json
+{ "jumlah_pinjaman": 3000000, "uang_diterima": 2950000, "total_kembali": 3300000, "lama": 6,
+  "bunga": 300000, "biaya_admin": 50000, "denda": "0,1", "penghasilan": 6000000, "pengeluaran_wajib": 3500000 }
+```
+
+**Balasan 200** (diringkas)
+
+```json
+{
+  "ok": true,
+  "lampu": "hijau",
+  "vonis": { "label": "HIJAU · TIDAK DITEMUKAN MASALAH", "judul": "...", "teks": "...", "langkah_berikutnya": ["Lihat pilihan selain pinjol", "Cek legalitas aplikasi"] },
+  "jumlah_temuan": { "merah": 0, "kuning": 0, "lolos": 11 },
+  "temuan": {
+    "aturan_ojk": [ { "st": "ok", "title": "Manfaat ekonomi tidak melebihi batas", "detail": "Penawaran: 0,065%/hari. Batas: 0,3%/hari.", "dasar": "SEOJK 19/2025 Romawi XIV angka 1–3" }, "..." ],
+    "rekomendasi_edupuan": [ "..." ],
+    "kelengkapan_data": [ "..." ]
+  },
+  "angka": { "total_biaya": 350000, "manfaat_ekonomi": 350000, "persen_per_hari": 0.0648, "batas_per_hari": 0.3, "kategori": "Konsumtif, tenor sampai 6 bulan → batas 0,3%/hari", "lama_hari": 180 },
+  "cara_hitung": [ { "label": "1. Total biaya yang kamu tanggung", "val": "Total dibayar Rp3.300.000 − uang diterima Rp2.950.000 = Rp350.000" }, "..." ],
+  "catatan": "Perkiraan berdasarkan angka yang dimasukkan. Bukan nasihat keuangan atau hukum. ..."
+}
+```
+
+`lampu`: `hijau` (tidak ditemukan masalah), `kuning` (pertimbangkan kembali), `risiko` (melewati kemampuan bayar),
+`biaya` (melebihi batas biaya OJK).
+
+**Error:** 400, 422 (kolom wajib kosong, angka negatif/terlalu besar, pilihan tidak dikenal, uang masuk > pinjaman, total < pinjaman), 429.
+
+### POST `/api/situasi`
+
+"Ceritakan Situasimu": membaca cerita pengguna dengan **aturan kata kunci (bukan AI)**, lalu mengarahkan ke fitur
+EduPuan dan pihak berwenang. Deteksi darurat (ancaman, penyebaran data, kekerasan, menyakiti diri) selalu dijalankan.
+Isi cerita tidak disimpan dan tidak ditulis ke log server.
+
+**Kiriman:** `{ "cerita": "..." }`, minimal 15 dan maksimal 2000 karakter.
+
+**Balasan 200** (diringkas)
+
+```json
+{
+  "ok": true,
+  "darurat": false,
+  "jenis_darurat": null,
+  "tanggapan": "Ditagih terus-menerus itu melelahkan, ...",
+  "langkah": [ { "aksi": "Jangan panik dan jangan berjanji bayar di luar kemampuanmu", "alasan": "Penagih punya batasan. ..." } ],
+  "fitur": [ { "id": "hak-ditagih", "alasan": "Kamu menyebut soal penagih. ...", "nama": "Hak Saat Ditagih", "tautan": "/sudah-terjerat/hak-saat-ditagih" } ],
+  "pihak": [ { "id": "ojk", "alasan": "Cara penagihan yang melanggar bisa diadukan ke OJK.", "nama": "OJK (Kontak 157)", "kontak": [["Telepon", "157"], ["WhatsApp", "081 157 157 157"], ["Aduan online", "kontak157.ojk.go.id"]] } ],
+  "perlu_tanya": null,
+  "metode": "aturan"
+}
+```
+
+Kalau cerita belum cukup jelas, `perlu_tanya` berisi `{ "pertanyaan": "...", "pilihan": [...] }`.
+**Error:** 400, 422 (kosong, kurang dari 15, lebih dari 2000 karakter), 429.
+
+### GET `/api/alternatif`
+
+Daftar kategori (`pendidikan`, `tagihan`, `dasar`) beserta pertanyaan dan pilihan jawabannya.
+Balasan 200: `{ ok, data: [ { kategori, judul, deskripsi, pertanyaan: [ { kunci, teks, pilihan: [ { nilai, label } ] } ] } ] }`.
+
+### POST `/api/alternatif`
+
+Rekomendasi solusi tanpa menambah utang. **Semua** pertanyaan kategori wajib dijawab dengan pilihan yang tersedia
+(lihat `GET /api/alternatif`).
+
+| Kolom | Wajib | Keterangan |
+|---|---|---|
+| `kategori` | ya | `pendidikan`, `tagihan`, atau `dasar` |
+| `jawaban` | ya | Objek `{ kunci: nilai }`, misalnya `{ "level": "mhs", "need": "biaya", "deadline": "7d", "aid": "unknown" }` |
+| `putaran` | tidak | `0` (bawaan) = rekomendasi utama; `1`, `2`, ... = langkah berikutnya kalau belum berhasil |
+
+**Balasan 200** (diringkas)
+
+```json
+{
+  "ok": true,
+  "ringkasan": "Kamu mahasiswa aktif yang membutuhkan bantuan UKT dalam 7 hari.",
+  "darurat": false,
+  "utama": [ { "id": "kampusKeuangan", "judul": "Hubungi bagian keuangan kampus", "waktu": "segera", "keterangan_waktu": "...", "alasan": "...", "langkah": ["..."], "dokumen": "...", "batasan": "..." } ],
+  "berikutnya": [ ... ],
+  "habis": false,
+  "kategori_terkait": null
+}
+```
+
+**Error:** 400, 422 (kategori tidak dikenal, jawaban kurang atau di luar pilihan, putaran tidak sah), 429.
+
+---
+
 ## Hasil uji (Thunder Client, 13 Nov 2026)
+
+### Puan AI (laptop, Gemini asli)
+
+| Permintaan | Status | Hasil |
+|---|---|---|
+| `POST /api/chat` `{"pesan": "dc nagih ke kantor aku, boleh gak?"}` | 200 | Jawaban soal penagihan ke kantor, diakhiri "Dasar aturannya: …" (32 dtk; uji sebelumnya 7 dtk, Gemini sedang ramai) |
+| `POST /api/chat` `{"pesan": ""}` | 422 | `DATA_TIDAK_VALID` "Pesan tidak boleh kosong." |
+| `POST /api/chat` `{"pesan": "     "}` (spasi saja) | 422 | Sama: spasi dibuang dulu |
+| `POST /api/chat` pesan 2.001 huruf | 422 | "Pesanmu terlalu panjang…" |
+| `POST /api/chat` isi teks `halo` (bukan JSON) | 400 | `FORMAT_TIDAK_DIKENALI` |
+| `POST /api/chat` `{"pesan": "resep nasi goreng yang enak gimana?"}` | 200 | Menolak sopan (di luar topik), tidak memberi resep |
+| `POST /api/chat` pesan lanjutan + `riwayat` 2 pesan | 200 | Jawaban nyambung dengan percakapan sebelumnya |
+| `POST /api/umpan-balik` JSON rusak | 400 | `FORMAT_TIDAK_DIKENALI` |
+| `POST /api/umpan-balik` `{"nilai": 5, "topik": "penagihan"}` | 422 | `DATA_TIDAK_VALID` |
+| Server Action 👍 di widget (dengan `PUAN_CATAT_STATISTIK=1`) | — | Baris `umpan_balik_puan` bertambah 1 → 2 |
+
+### Kalkulator
+
+| Permintaan | Status | Hasil |
+|---|---|---|
+| `POST /api/penawaran/cek` skenario contoh 1 | 200 | `lampu: hijau`, sama dengan halaman Cek Penawaran |
+| `POST /api/penawaran/cek` uang masuk > pinjaman | 422 | "Uang yang masuk lebih besar dari jumlah pinjaman…" |
+| `POST /api/situasi` cerita utang 3 aplikasi + penagih meneror keluarga | 200 | Tanggapan + fitur + pihak, `metode: aturan` |
+| `POST /api/situasi` `{"cerita": "pinjol"}` | 422 | "minimal 15 karakter" |
+| `GET /api/alternatif` | 200 | 3 kategori + pertanyaan |
+| `POST /api/alternatif` jawaban kurang | 422 | Jawaban `need` wajib diisi |
+
+Uji tambahan otomatis: keenam skenario contoh Cek Penawaran memberi hasil API **identik** dengan rumus di halaman
+(lampu, manfaat ekonomi, jumlah temuan); permintaan ke-121 dalam 10 menit ke endpoint kalkulator dibalas `429` dengan header `Retry-After`.
+
+### CRUD pinjol, artikel, lembaga
 
 | Permintaan | Status | Hasil |
 |---|---|---|
