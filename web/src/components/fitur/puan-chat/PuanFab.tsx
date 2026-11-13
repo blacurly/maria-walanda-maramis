@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { nilaiJawabanPuan } from "@/lib/puan/aksi";
 
 // Tombol "Tanya Puan AI" + jendela chat yang melayang di pojok kanan bawah semua halaman.
 // Tampilan mengikuti prototype EduPuan; isinya tersambung ke /api/chat (Puan AI).
@@ -211,16 +212,13 @@ export default function PuanFab() {
   }
 
   // "Apakah jawaban ini membantu?": hanya nilai + label yang dikirim, tanpa isi chat.
+  // Dikirim lewat SERVER ACTION nilaiJawabanPuan (lib/puan/aksi.ts), bukan fetch ke URL API.
   // Tombol langsung berubah jadi ucapan terima kasih; kalau pengiriman gagal, pengguna tidak diganggu.
   function nilaiJawaban(indeks: number, nilai: 1 | -1) {
     const p = daftar[indeks];
     if (!p || p.peran !== "puan" || p.nilai || !p.topik || !p.situasi || !p.status) return;
     setDaftar((d) => d.map((m, i) => (i === indeks ? { ...m, nilai } : m)));
-    fetch("/api/umpan-balik", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nilai, topik: p.topik, situasi: p.situasi, status: p.status }),
-    }).catch(() => {});
+    nilaiJawabanPuan({ nilai, topik: p.topik, situasi: p.situasi, status: p.status }).catch(() => {});
   }
 
   // Fokus ke kolom ketik saat jendela dibuka
