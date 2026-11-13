@@ -1,36 +1,13 @@
-// Mengubah pertanyaan menjadi vektor (384 angka) dengan model open source multilingual-e5-small.
-// Model berjalan LANGSUNG di server Next.js (tanpa Python, tanpa API berbayar) lewat @huggingface/transformers.
+// Mengubah pertanyaan menjadi vektor (768 angka) dengan gemini-embedding-001.
 //
-// - Pertama kali dipakai, model (±120 MB) diunduh ke folder sementara, lalu disimpan di memori server.
-//   Di Vercel ini terjadi setiap server "bangun tidur" (uji 13 Nov: ±6 detik). Permintaan berikutnya ±35 ms.
-// - e5 WAJIB diberi awalan "query: " untuk pertanyaan (dokumen diberi "passage: " oleh skrip pembuat indeks).
-// - Satu teks per panggilan: dengan q8, embed sekaligus (batch) sedikit menggeser hasil (keputusan #23).
-import os from "node:os";
-import path from "node:path";
-import { env, pipeline } from "@huggingface/transformers";
-import { PENGATURAN } from "./pengaturan";
+// Kenapa Gemini, bukan model open source multilingual-e5-small? Keduanya diuji dengan 50 soal yang SAMA
+// (13 Nov 2026): Gemini Kena 90%, e5-small 55% (curhat santai hanya 25%). Target ≥ 85%.
+// Rinciannya di puan-ai/docs/03_keputusan_dan_hasil_uji.md.
+//
+// Vektor dokumen (833 potongan pasal) sudah tersimpan di pgvector; di sini hanya PERTANYAAN yang di-embed,
+// lewat API Gemini (±0,3 detik), tanpa model yang perlu dimuat di server.
+import { embedGemini } from "./gemini";
 
-// Di Vercel hanya folder sementara (/tmp) yang boleh ditulisi.
-env.cacheDir = path.join(os.tmpdir(), "edupuan-model");
-
-const muat = () => pipeline("feature-extraction", PENGATURAN.modelEmbedding, { dtype: "q8" });
-type Ekstraktor = Awaited<ReturnType<typeof muat>>;
-
-// Disimpan di globalThis supaya model tidak dimuat ulang setiap kali file berubah saat `npm run dev`.
-const simpanan = globalThis as unknown as { __puanEkstraktor?: Promise<Ekstraktor> };
-
-function ambilModel(): Promise<Ekstraktor> {
-  simpanan.__puanEkstraktor ??= muat().catch((e) => {
-    simpanan.__puanEkstraktor = undefined; // gagal (mis. unduhan putus): boleh dicoba lagi di permintaan berikutnya
-    throw e;
-  });
-  return simpanan.__puanEkstraktor;
-}
-
-export async function embedKueri(teks: string): Promise<number[]> {
-  const ekstrak = await ambilModel();
-  const hasil = await ekstrak("query: " + teks, { pooling: "mean", normalize: true });
-  const vektor = (hasil.tolist() as number[][])[0];
-  if (vektor.length !== 384) throw new Error(`Dimensi embedding ${vektor.length}, seharusnya 384`);
-  return vektor;
+export function embedKueri(teks: string, batasAkhir: number): Promise<number[]> {
+  return embedGemini(teks, { batasAkhir });
 }

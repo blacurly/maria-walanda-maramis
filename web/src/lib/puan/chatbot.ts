@@ -3,7 +3,7 @@
 //
 // pesan user
 //   → [1] tulis ulang jadi kueri hukum (Gemini flash-lite + kamus)     → DI_LUAR_TOPIK / BUTUH_DANA? langsung ke [4]
-//   → [2] cari pasal parent-child di pgvector (e5-small)               → tidak ada yang nyambung? ke [4]
+//   → [2] cari pasal parent-child di pgvector (embedding Gemini)       → tidak ada yang nyambung? ke [4]
 //   → [3] susun bahan bacaan berlabel sumber
 //   → [4] Gemini menjawab dengan system prompt + riwayat + bahan bacaan (+ catatan krisis bila perlu)
 //   → [5] catat rekap ANONIM (topik/situasi/status/krisis/durasi) ke Supabase, hanya jika diaktifkan
@@ -76,7 +76,7 @@ export async function jawab(pesan: string, riwayatMasuk: Pesan[] = []): Promise<
     topik = situasi = "di_luar_topik";
   } else {
     // pesan asli + kueri hukum dicari bersama: bahasa sehari-hari dan istilah hukum sama-sama terwakili
-    pasal = await cariPasal(pesan + "\n" + kueri);
+    pasal = await cariPasal(pesan + "\n" + kueri, batasAkhir);
     status = pasal.length ? "pasal" : "tidak_ada_pasal";
   }
   const t1 = performance.now();

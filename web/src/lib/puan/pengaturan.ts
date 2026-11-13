@@ -9,13 +9,13 @@ function angka(nama: string, bawaan: number): number {
 
 export const PENGATURAN = {
   // ---- Embedding (lihat embedding.ts) ----
-  modelEmbedding: "Xenova/multilingual-e5-small", // versi ONNX dari intfloat/multilingual-e5-small, 384 angka
+  modelEmbedding: "gemini-embedding-001",
+  dimensiEmbedding: 768, // harus sama dengan kolom potongan_pasal.embedding (vector(768))
 
   // ---- Pencarian pasal (lihat pencarian.ts dan fungsi SQL cari_pasal_puan) ----
   // Ambang kemiripan minimum agar potongan dianggap "nyambung" dengan pertanyaan.
-  // SEMENTARA 0,80: skor e5 sangat mepet (uji 13 Nov: pasal relevan ±0,815, pengecoh ±0,797).
-  // WAJIB dikalibrasi dengan uji 50 soal sebelum dianggap final.
-  ambang: angka("PUAN_AMBANG", 0.8),
+  // 0,60 = hasil kalibrasi uji 50 soal (teks tak berkaitan ≈ 0,52; resep nasi goreng 0,543 tertolak).
+  ambang: angka("PUAN_AMBANG", 0.6),
   kChild: 8, //     berapa potongan teratas yang dilihat
   maksUtama: 3, //  maksimal pasal utama
   maksTambah: 2, // maksimal pasal tambahan dari rujukan/terkait

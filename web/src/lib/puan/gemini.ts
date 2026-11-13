@@ -123,3 +123,49 @@ export async function tulisGemini(model: string, isi: IsiGemini, opsi: Opsi): Pr
   if (pernahWaktuHabis) throw new GeminiWaktuHabis("Gemini terlalu lama menjawab.");
   throw new GeminiSibuk("Semua model Gemini sedang sibuk.");
 }
+
+// ---------- Embedding (pertanyaan → vektor) ----------
+// gemini-embedding-001, 768 angka, taskType RETRIEVAL_QUERY untuk pertanyaan (dokumen memakai RETRIEVAL_DOCUMENT
+// saat skrip pembuat indeks berjalan). Hasil dinormalisasi (panjang 1), sama dengan versi Python.
+export async function embedGemini(
+  teks: string,
+  { batasAkhir, waktuMaksMs = 10_000 }: { batasAkhir: number; waktuMaksMs?: number },
+): Promise<number[]> {
+  const kunci = process.env.GEMINI_API_KEY;
+  if (!kunci) throw new GeminiBelumSiap("GEMINI_API_KEY belum diisi.");
+  const model = PENGATURAN.modelEmbedding;
+
+  for (let ke = 1; ke <= PENGATURAN.percobaanGemini; ke++) {
+    const sisa = batasAkhir - Date.now();
+    if (sisa < SISA_MINIMUM_MS) throw new GeminiWaktuHabis("Batas waktu total habis.");
+    try {
+      const r = await fetch(`${ALAMAT}/${model}:embedContent`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-goog-api-key": kunci },
+        body: JSON.stringify({
+          model: `models/${model}`,
+          content: { parts: [{ text: teks }] },
+          taskType: "RETRIEVAL_QUERY",
+          outputDimensionality: PENGATURAN.dimensiEmbedding,
+        }),
+        signal: AbortSignal.timeout(Math.min(waktuMaksMs, sisa)),
+        cache: "no-store",
+      });
+      const data = (await r.json().catch(() => ({}))) as { embedding?: { values?: number[] }; error?: { message?: string } };
+      if (!r.ok) throw new GalatHttp(r.status, data.error?.message ?? `HTTP ${r.status}`);
+      const v = data.embedding?.values ?? [];
+      if (v.length !== PENGATURAN.dimensiEmbedding) throw new Error(`Dimensi embedding ${v.length}, seharusnya ${PENGATURAN.dimensiEmbedding}`);
+      const panjang = Math.hypot(...v);
+      return v.map((x) => x / panjang);
+    } catch (e) {
+      if (e instanceof GalatHttp && (e.status === 401 || e.status === 403)) {
+        throw new GeminiBelumSiap("GEMINI_API_KEY ditolak oleh Google.");
+      }
+      if (e instanceof Error && e.name === "TimeoutError") throw new GeminiWaktuHabis("Embedding Gemini terlalu lama.");
+      if (!(e instanceof GalatHttp) || !STATUS_SIBUK.includes(e.status)) throw e;
+      console.warn(`Embedding Gemini sibuk (${pesanSingkat(e)}), percobaan ${ke}/${PENGATURAN.percobaanGemini}`);
+      if (ke < PENGATURAN.percobaanGemini) await tunggu(PENGATURAN.jedaGeminiMs * ke);
+    }
+  }
+  throw new GeminiSibuk("Embedding Gemini sedang sibuk.");
+}

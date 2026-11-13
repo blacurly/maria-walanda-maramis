@@ -2,7 +2,7 @@
 // Sama dengan puan-ai/puan_rag/retrieval.py, tetapi langkah 2–4 dikerjakan oleh fungsi SQL cari_pasal_puan
 // (web/supabase/08_pengetahuan_puan.sql), supaya cukup SATU kali bolak-balik ke database.
 //
-//   1. pertanyaan → vektor (embedding.ts)
+//   1. pertanyaan → vektor 768 angka (embedding.ts, gemini-embedding-001)
 //   2. 8 potongan paling mirip, yang skornya ≥ ambang → pasal induknya (maks. 3)        → peran 'utama'
 //   3. pasal yang dirujuk/terkait dari pasal utama, dinilai dari kemiripannya (maks. 2)  → peran 'rujukan'
 //   4. teks pasal-pasal itu disusun jadi BAHAN BACAAN berlabel sumber untuk Gemini
@@ -52,8 +52,8 @@ async function panggilRpc(nama: string, isi: Record<string, unknown>): Promise<u
 }
 
 // Mengembalikan pasal utama + rujukan. Daftar kosong = tidak ada pasal yang "nyambung" (di bawah ambang).
-export async function cariPasal(teks: string): Promise<PasalDitemukan[]> {
-  const vektor = await embedKueri(teks);
+export async function cariPasal(teks: string, batasAkhir: number): Promise<PasalDitemukan[]> {
+  const vektor = await embedKueri(teks, batasAkhir);
   const hasil = await panggilRpc("cari_pasal_puan", {
     kueri: JSON.stringify(vektor),
     ambang: PENGATURAN.ambang,

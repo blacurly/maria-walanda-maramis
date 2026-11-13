@@ -8,7 +8,8 @@
 --   pasal_tautan    : pasal yang saling merujuk (dalam dokumen) / terkait (antar-dokumen)
 --   potongan_pasal  : potongan kecil yang DICARI (CHILD) + embedding-nya
 --
--- Embedding: intfloat/multilingual-e5-small → 384 angka per potongan.
+-- Embedding: gemini-embedding-001 → 768 angka per potongan (keputusan 13 Nov 2026, dipilih lewat uji 50 soal:
+--            Gemini Kena 90% vs multilingual-e5-small 55%; lihat puan-ai/docs/03_keputusan_dan_hasil_uji.md).
 -- Diisi oleh skrip web/scripts/buat-indeks-puan.mjs; dicari oleh web/src/lib/puan/pencarian.ts.
 -- Aman dijalankan ulang (if not exists / create or replace / drop if exists).
 --
@@ -78,17 +79,30 @@ create table if not exists public.potongan_pasal (
   penjelasan   text not null default '',
   -- Sidik (hash) teks yang di-embed: kalau teks tidak berubah, embedding tidak dibuat ulang.
   sidik        text not null check (sidik ~ '^[0-9a-f]{16}$'),
-  model        text not null default 'multilingual-e5-small',
-  embedding    extensions.vector(384) not null,
+  model        text not null default 'gemini-embedding-001',
+  embedding    extensions.vector(768) not null,
   dibuat_pada  timestamptz not null default now(),
   diubah_pada  timestamptz not null default now()
 );
+
+-- Migrasi 13 Nov 2026: kolom embedding lama berisi 384 angka (e5-small) → 768 angka (Gemini).
+-- Vektor lama tidak bisa diubah ukurannya, jadi potongan dikosongkan lalu diisi ulang oleh
+-- web/scripts/buat-indeks-puan.mjs. Tabel pasal, tautan, dan dokumen TIDAK disentuh.
+do $$
+begin
+  if (select a.atttypmod from pg_attribute a
+      where a.attrelid = 'public.potongan_pasal'::regclass and a.attname = 'embedding') <> 768 then
+    delete from public.potongan_pasal;
+    alter table public.potongan_pasal alter column embedding type extensions.vector(768);
+    alter table public.potongan_pasal alter column model set default 'gemini-embedding-001';
+  end if;
+end $$;
 
 create index if not exists potongan_pasal_pasal_idx on public.potongan_pasal (pasal_id);
 
 -- TANPA indeks HNSW (keputusan 13 Nov 2026): HNSW adalah pencarian PERKIRAAN (approximate).
 -- Untuk ±833 potongan, pencarian TEPAT (membandingkan semua baris) hanya ±3 milidetik dan hasilnya 100% akurat,
--- sedangkan skor e5 antar-pasal sangat mepet sehingga perkiraan bisa menukar urutan pasal.
+-- sedangkan skor antar-pasal bisa mepet sehingga perkiraan dapat menukar urutan pasal.
 -- Tambahkan kembali indeks HNSW bila jumlah potongan sudah puluhan ribu.
 drop index if exists public.potongan_pasal_embedding_idx;
 
@@ -101,7 +115,7 @@ create trigger potongan_pasal_diubah_pada
 -- 5. Fungsi pencarian: potongan paling mirip dengan pertanyaan ---------
 --    skor = kemiripan cosine (1 = identik, 0 = tidak berhubungan).
 --    Ambang ("nyambung atau tidak") diputuskan di aplikasi (lib/puan).
-create or replace function public.cari_potongan(kueri extensions.vector(384), jumlah int default 8)
+create or replace function public.cari_potongan(kueri extensions.vector(768), jumlah int default 8)
 returns table (id text, pasal_id text, skor real)
 language sql
 stable
@@ -126,7 +140,7 @@ $$;
 --         ambil maks_tambah teratas                                                          → peran 'rujukan'
 --    Hasil kosong = tidak ada pasal yang "nyambung" (di bawah ambang).
 create or replace function public.cari_pasal_puan(
-  kueri       extensions.vector(384),
+  kueri       extensions.vector(768),
   ambang      real,
   k_child     int default 8,
   maks_utama  int default 3,
@@ -202,4 +216,4 @@ create policy "Publik membaca potongan pasal"
   on public.potongan_pasal for select to anon, authenticated using (true);
 
 comment on table public.potongan_pasal is
-  'Potongan pasal yang dicari Puan AI (RAG). embedding = multilingual-e5-small (384), teks diawali "passage: " saat di-embed.';
+  'Potongan pasal yang dicari Puan AI (RAG). embedding = gemini-embedding-001 (768, RETRIEVAL_DOCUMENT, dinormalisasi).';
