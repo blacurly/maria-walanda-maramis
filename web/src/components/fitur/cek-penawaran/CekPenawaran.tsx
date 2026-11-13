@@ -8,6 +8,7 @@
  */
 import React, { useState } from "react";
 import Link from "next/link";
+import TombolTanyaPuan from "@/components/fitur/puan-chat/TombolTanyaPuan";
 import {
   hitung, teksVonis, langkahHitung, simulasiTelat, simulasiGaliLubang,
   SKENARIO, inputSkenario, DEFAULT_INPUT, rp, pc, fb, num, show,
@@ -19,7 +20,6 @@ const TAUTAN = {
   pilihanSelainPinjol: "/mau-pinjam/cari-alternatif",
   cekLegalitas: "/mau-pinjam/cek-legalitas",
   caraMelaporkan: "/sudah-terjerat/dokumentasi-lapor",
-  tanyaPuanAI: "/bingung-mulai",
   sudahTerjerat: "/sudah-terjerat",
 };
 
@@ -163,7 +163,6 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
     "Lihat pilihan selain pinjol": TAUTAN.pilihanSelainPinjol,
     "Cek legalitas aplikasi": TAUTAN.cekLegalitas,
     "Pelajari cara melaporkan": TAUTAN.caraMelaporkan,
-    "Tanya Puan AI": TAUTAN.tanyaPuanAI,
   };
   const jenisList: { k: Jenis; label: string; desc: string; ex: string }[] = [
     { k: "produktif", label: "Produktif", desc: "Untuk usaha atau kegiatan yang menghasilkan pendapatan.", ex: "Contoh: modal usaha, stok dagangan, alat kerja." },
@@ -606,15 +605,21 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
                 <div style={{ ...resultCard, gap: 12 }}>
                   <h3 style={h3}>Langkah berikutnya</h3>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-                    {v.ctas.map((label, i) => (
-                      <Link
-                        key={label}
-                        href={ctaHref[label] || "/"}
-                        style={{ display: "inline-flex", alignItems: "center", minHeight: 46, padding: "0 18px", borderRadius: 12, fontWeight: 700, fontSize: 14, textDecoration: "none", ...(i === 0 ? { background: C.green, color: C.white } : { background: C.white, color: C.green, border: `1.5px solid ${C.green}` }) }}
-                      >
-                        {label}
-                      </Link>
-                    ))}
+                    {v.ctas.map((label, i) => {
+                      const gaya: React.CSSProperties = { display: "inline-flex", alignItems: "center", minHeight: 46, padding: "0 18px", borderRadius: 12, fontWeight: 700, fontSize: 14, textDecoration: "none", cursor: "pointer", fontFamily: "inherit", ...(i === 0 ? { background: C.green, color: C.white, border: "none" } : { background: C.white, color: C.green, border: `1.5px solid ${C.green}` }) };
+                      // "Tanya Puan AI" membuka jendela chat Puan (lewat PuanContext) dengan pertanyaan awal sesuai hasil cek
+                      if (label === "Tanya Puan AI")
+                        return (
+                          <TombolTanyaPuan key={label} style={gaya} pertanyaan="Aku baru cek penawaran pinjol dan hasilnya disarankan untuk dipertimbangkan kembali. Apa saja yang perlu aku perhatikan sebelum memutuskan?">
+                            {label}
+                          </TombolTanyaPuan>
+                        );
+                      return (
+                        <Link key={label} href={ctaHref[label] || "/"} style={gaya}>
+                          {label}
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
 

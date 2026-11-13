@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { nilaiJawabanPuan } from "@/lib/puan/aksi";
+import { usePuan } from "./PuanContext";
 
 // Tombol "Tanya Puan AI" + jendela chat yang melayang di pojok kanan bawah semua halaman.
 // Tampilan mengikuti prototype EduPuan; isinya tersambung ke /api/chat (Puan AI).
@@ -172,9 +173,10 @@ function Avatar({ kelas }: { kelas: string }) {
 }
 
 export default function PuanFab() {
-  const [buka, setBuka] = useState(false);
+  // Buka/tutup jendela dan isi kolom ketik disimpan di PuanContext, supaya tombol "Tanya Puan AI"
+  // di halaman lain (TombolTanyaPuan.tsx) bisa membuka chat ini dengan pertanyaan awal.
+  const { buka, tutupPuan, alihkanPuan, ketikan, setKetikan } = usePuan();
   const [daftar, setDaftar] = useState<Pesan[]>([]);
-  const [ketikan, setKetikan] = useState("");
   const [memuat, setMemuat] = useState(false);
   const [galat, setGalat] = useState<string | null>(null);
   const [pesanGagal, setPesanGagal] = useState<string | null>(null);
@@ -322,7 +324,7 @@ export default function PuanFab() {
             )}
             <button
               type="button"
-              onClick={() => setBuka(false)}
+              onClick={tutupPuan}
               aria-label="Tutup chat"
               className="flex h-7 w-7 items-center justify-center rounded-full bg-white/15 text-sm text-white"
             >
@@ -381,6 +383,7 @@ export default function PuanFab() {
                   <div className="max-w-[85%] rounded-[16px_16px_16px_4px] bg-gray-100 px-[13px] py-[9px] text-[13px] leading-normal text-gray-900 [overflow-wrap:anywhere]">
                     <IsiJawaban teks={p.teks} />
                   </div>
+                  <p className="text-[10px] text-gray-400">Jawaban AI · bisa keliru, cek dasar aturannya</p>
                   {!p.krisis && p.topik && p.situasi && p.status && (
                     <div className="flex items-center gap-1.5 text-[11px] text-gray-500">
                       {p.nilai ? (
@@ -418,7 +421,7 @@ export default function PuanFab() {
                           <Link
                             key={f.href}
                             href={f.href}
-                            onClick={() => setBuka(false)}
+                            onClick={tutupPuan}
                             className="rounded-full border-[1.5px] border-[#0d6e4b] bg-white px-[11px] py-[5px] text-xs font-semibold text-[#0d6e4b] transition-colors hover:bg-[#0d6e4b] hover:text-white"
                           >
                             {f.nama} →
@@ -513,7 +516,7 @@ export default function PuanFab() {
               Edukasi, bukan nasihat hukum final. Jangan tulis nomor KTP, rekening, atau kata sandi. Pesan diproses
               layanan AI pihak ketiga (Google Gemini). Percakapan hanya tersimpan sementara di tab ini dan terhapus saat
               tab ditutup, tidak disimpan di server EduPuan.{" "}
-              <Link href="/kebijakan-privasi" onClick={() => setBuka(false)} className="underline hover:text-[#0d6e4b]">
+              <Link href="/kebijakan-privasi" onClick={tutupPuan} className="underline hover:text-[#0d6e4b]">
                 Kebijakan Privasi
               </Link>
             </p>
@@ -524,7 +527,7 @@ export default function PuanFab() {
       {/* Tombol melayang */}
       <button
         type="button"
-        onClick={() => setBuka((b) => !b)}
+        onClick={alihkanPuan}
         aria-expanded={buka}
         aria-label={buka ? "Tutup chat Puan AI" : "Tanya Puan AI"}
         title={buka ? "Tutup chat" : "Tanya Puan AI"}
