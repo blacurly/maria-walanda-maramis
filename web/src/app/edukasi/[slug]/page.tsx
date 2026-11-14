@@ -3,35 +3,41 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Poppins } from "next/font/google";
-import { ARTIKEL, cariArtikel, labelTopik } from "@/data/artikel";
+import { labelTopik } from "@/data/artikel";
+import { ambilArtikel, semuaArtikel } from "@/lib/artikel/layanan";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["700", "800"], variable: "--font-poppins" });
 const POPPINS = { fontFamily: "var(--font-poppins), sans-serif" };
 
 type Props = { params: Promise<{ slug: string }> };
 
-// Siapkan semua halaman artikel sejak awal (6 slug → 6 halaman)
-export function generateStaticParams() {
-  return ARTIKEL.map((a) => ({ slug: a.slug }));
+// Ambil ulang dari database paling lama setiap 1 jam (dan langsung, setelah admin mengubah artikel lewat API)
+export const revalidate = 3600;
+
+// Siapkan halaman artikel yang sudah terbit sejak awal. Artikel baru tetap bisa dibuka (dibuat saat pertama diminta).
+export async function generateStaticParams() {
+  const { artikel } = await semuaArtikel();
+  return artikel.map((a) => ({ slug: a.slug }));
 }
 
 // Judul tab dan deskripsi mengikuti artikelnya
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const a = cariArtikel(slug);
+  const a = await ambilArtikel(slug);
   if (!a) return { title: "Artikel tidak ditemukan – EduPuan" };
   return { title: `${a.judul} – EduPuan`, description: a.ringkasan };
 }
 
 export default async function ArtikelPage({ params }: Props) {
   const { slug } = await params;
-  const a = cariArtikel(slug);
+  const a = await ambilArtikel(slug);
   if (!a) notFound();
 
   // 3 artikel lain: utamakan yang topiknya sama
+  const { artikel: semua } = await semuaArtikel();
   const lainnya = [
-    ...ARTIKEL.filter((x) => x.slug !== a.slug && x.topik === a.topik),
-    ...ARTIKEL.filter((x) => x.slug !== a.slug && x.topik !== a.topik),
+    ...semua.filter((x) => x.slug !== a.slug && x.topik === a.topik),
+    ...semua.filter((x) => x.slug !== a.slug && x.topik !== a.topik),
   ].slice(0, 3);
 
   return (
@@ -44,7 +50,7 @@ export default async function ArtikelPage({ params }: Props) {
       <div className="mb-3 flex flex-wrap items-center gap-2 text-xs">
         <span className="rounded-full bg-emerald-50 px-2.5 py-0.5 font-bold text-[#0d6e4b]">{a.kategori}</span>
         <span className="text-gray-400">
-          {labelTopik(a.topik)} · {a.menit} menit baca · Diperbarui {a.diperbarui}
+          {a.topikLabel ?? labelTopik(a.topik)} · {a.menit} menit baca · Diperbarui {a.diperbarui}
         </span>
       </div>
       <h1 className="mb-3 text-3xl font-extrabold leading-tight text-gray-900" style={POPPINS}>
@@ -86,12 +92,14 @@ export default async function ArtikelPage({ params }: Props) {
       )}
 
       {/* ── Ajakan ke fitur terkait ── */}
-      <div className="mt-8 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-emerald-50 p-5">
-        <p className="text-sm font-medium text-emerald-900">Coba fitur terkait</p>
-        <Link href={a.fitur.href} className="rounded-xl bg-[#0d6e4b] px-5 py-2.5 text-sm font-bold text-white hover:opacity-90">
-          {a.fitur.label} →
-        </Link>
-      </div>
+      {a.fitur && (
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-emerald-50 p-5">
+          <p className="text-sm font-medium text-emerald-900">Coba fitur terkait</p>
+          <Link href={a.fitur.href} className="rounded-xl bg-[#0d6e4b] px-5 py-2.5 text-sm font-bold text-white hover:opacity-90">
+            {a.fitur.label} →
+          </Link>
+        </div>
+      )}
 
       {/* ── Dasar hukum & sumber ── */}
       {a.dasarHukum.length > 0 && (
@@ -142,7 +150,7 @@ export default async function ArtikelPage({ params }: Props) {
               <div className="min-w-0">
                 <p className="text-sm font-semibold leading-snug text-gray-900">{x.judul}</p>
                 <p className="mt-1 text-xs text-gray-400">
-                  {labelTopik(x.topik)} · {x.menit} menit baca
+                  {x.topikLabel ?? labelTopik(x.topik)} · {x.menit} menit baca
                 </p>
               </div>
             </Link>

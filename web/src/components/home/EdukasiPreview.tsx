@@ -3,19 +3,24 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ARTIKEL, TOPIK, labelTopik, type Topik } from "@/data/artikel";
+import { labelTopik, type Artikel, type Topik } from "@/data/artikel";
 import { VIDEO_EDUKASI } from "@/data/videoEdukasi";
 
 type PilihanTopik = Topik | "semua";
 
-export default function EdukasiPreview() {
+type Props = {
+  daftarArtikel: Artikel[];                  // dari database (lib/artikel/layanan.ts), dikirim oleh halaman Beranda
+  daftarTopik: { id: Topik; label: string }[];
+};
+
+export default function EdukasiPreview({ daftarArtikel, daftarTopik }: Props) {
   const [topik, setTopik] = useState<PilihanTopik>("semua");
 
-  const daftar = ARTIKEL.filter((a) => topik === "semua" || a.topik === topik);
+  const daftar = daftarArtikel.filter((a) => topik === "semua" || a.topik === topik);
   const [utama, ...lainnya] = daftar;
   const samping = lainnya.slice(0, 3);
   const video = VIDEO_EDUKASI.slice(0, 4);
-  const pilihan = [{ id: "semua" as const, label: "Semua" }, ...TOPIK];
+  const pilihan = [{ id: "semua" as const, label: "Semua" }, ...daftarTopik];
 
   return (
     <section className="bg-white border-t border-gray-100 py-10 sm:py-14">
@@ -64,7 +69,7 @@ export default function EdukasiPreview() {
                   </span>
                   <h3 className="text-white font-bold text-lg leading-snug max-w-md">{utama.judul}</h3>
                   <p className="text-white/80 text-xs mt-1.5">
-                    {labelTopik(utama.topik)} · {utama.menit} menit baca
+                    {utama.topikLabel ?? labelTopik(utama.topik)} · {utama.menit} menit baca
                   </p>
                 </div>
               </div>
@@ -89,7 +94,7 @@ export default function EdukasiPreview() {
                         {a.judul}
                       </p>
                       <p className="text-[10px] text-gray-400 mt-1">
-                        {labelTopik(a.topik)} · {a.menit} menit baca
+                        {a.topikLabel ?? labelTopik(a.topik)} · {a.menit} menit baca
                       </p>
                     </div>
                   </Link>

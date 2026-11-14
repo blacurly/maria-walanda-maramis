@@ -72,6 +72,15 @@
   .ea-cat { grid-template-columns: auto minmax(0, 1fr); }
   .ea-cat-go { grid-column: 1 / -1; justify-content: flex-end; }
 }
+/* Kartu berwarna per kategori: pendidikan = biru, tagihan = kuning, dasar = hijau */
+.ea-cat[data-tone="pendidikan"] { --t-bg: #eff8ff; --t-line: #b9e3f4; --t-ico: #d6eefb; --t-solid: #0b5873; }
+.ea-cat[data-tone="tagihan"]    { --t-bg: #fffbeb; --t-line: #fcd9a0; --t-ico: #fdecc3; --t-solid: #b45309; }
+.ea-cat[data-tone="dasar"]      { --t-bg: #e8f5ee; --t-line: #a7d8bf; --t-ico: #cdebdc; --t-solid: #14704a; }
+.ea-cat[data-tone] { background: var(--t-bg); border-color: var(--t-line); }
+.ea-cat[data-tone]:hover { border-color: var(--t-solid); }
+.ea-cat[data-tone] .ea-cat-ico { background: var(--t-ico); }
+.ea-cat[data-tone] .ea-cat-go { color: var(--t-solid); }
+.ea-cat[data-tone] .ea-cat-go span { background: var(--t-solid); }
 .ea-home-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 22px; font-size: 14px; color: var(--ea-muted); }
 
 /* ---------- Pertanyaan (satu halaman) ---------- */

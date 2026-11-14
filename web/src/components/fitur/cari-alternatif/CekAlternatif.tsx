@@ -51,10 +51,11 @@ export default function CekAlternatif({ onExit, logo, hideHeader }: CekAlternati
   }
 
   useEffect(() => {
-    if (!scrollTarget) return;
-    document.getElementById(scrollTarget)?.scrollIntoView({ behavior: "smooth", block: "start" });
-    setScrollTarget(null);
-  }, [scrollTarget]);
+  if (!scrollTarget) return;
+  document.getElementById(scrollTarget)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const t = setTimeout(() => setScrollTarget(null), 0);
+  return () => clearTimeout(t);
+}, [scrollTarget]);
 
   function back() {
     if (screen === "home") return onExit?.();
@@ -81,7 +82,7 @@ export default function CekAlternatif({ onExit, logo, hideHeader }: CekAlternati
         {(Object.keys(CATEGORIES) as CategoryKey[]).map(k => {
           const c = CATEGORIES[k];
           return (
-            <button key={k} type="button" className="ea-cat" onClick={() => startCategory(k)}>
+            <button key={k} type="button" className="ea-cat" data-tone={k} onClick={() => startCategory(k)}>
               <div className="ea-cat-ico" aria-hidden="true">{c.icon}</div>
               <div><h3>{c.title}</h3><p>{c.desc}</p></div>
               <div className="ea-cat-go">Cari Solusi <span aria-hidden="true">→</span></div>
@@ -324,7 +325,7 @@ export default function CekAlternatif({ onExit, logo, hideHeader }: CekAlternati
         <div className="ea-qtop"><button type="button" className="ea-ghost" onClick={back}>← Kembali</button></div>
         <div className="ea-eyebrow">Direktori</div>
         <h1 className="ea-h1">Sumber bantuan resmi</h1>
-        <p className="ea-lead">Status pendaftaran hanya ditulis "dibuka" jika jadwalnya terverifikasi dari situs resmi.</p>
+        <p className="ea-lead">Status pendaftaran hanya ditulis &quot;dibuka&quot; jika jadwalnya terverifikasi dari situs resmi.</p>
         <div className="ea-filters">
           {F.map(([k, l]) => (
             <button key={k} type="button" className="ea-chip" aria-pressed={dirFilter === k} onClick={() => setDirFilter(k)}>{l}</button>

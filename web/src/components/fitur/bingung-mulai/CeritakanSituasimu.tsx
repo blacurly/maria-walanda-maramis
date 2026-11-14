@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { analisisCerita, FEATURES, PIHAK, type Hasil } from "@/features/bingung-mulai/rules";
+import { TONE, TONE_FITUR } from "@/lib/tone";
 
 const POPPINS = { fontFamily: "var(--font-poppins), sans-serif" };
 const MAX = 2000;
@@ -138,7 +139,7 @@ export default function CeritakanSituasimu() {
           ) : (
             <>
               {hasil.tanggapan && (
-                <div className="flex flex-col gap-2 rounded-r-2xl border border-l-4 border-gray-100 border-l-[#0d6e4b] bg-white px-5 py-4 shadow-sm">
+                <div className="flex flex-col gap-2 rounded-r-2xl border border-l-4 border-emerald-200 border-l-emerald-700 bg-emerald-50 px-5 py-4 shadow-sm">
                   <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">Tanggapan untukmu</p>
                   <p className="text-base">{hasil.tanggapan}</p>
                 </div>
@@ -152,7 +153,7 @@ export default function CeritakanSituasimu() {
                   <ol className="flex flex-col gap-2.5">
                     {hasil.langkah.map((l, i) => (
                       <li key={l.aksi} className="flex gap-3 rounded-2xl border border-gray-100 bg-white px-4 py-3.5 shadow-sm">
-                        <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-emerald-50 font-semibold text-[#0d6e4b]">
+                        <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-emerald-700 text-white">
                           {i + 1}
                         </span>
                         <div className="min-w-0">
@@ -171,19 +172,20 @@ export default function CeritakanSituasimu() {
                     Fitur EduPuan yang bisa membantu
                   </h2>
                   <div className="grid gap-3 sm:grid-cols-2">
-                    {hasil.fitur.map((f) => (
-                      <div key={f.id} className="flex min-w-0 flex-col gap-2 rounded-2xl border border-gray-100 bg-white p-4 shadow-sm">
-                        <Tag ungu={false}>Fitur EduPuan</Tag>
-                        <h3 className="font-semibold">{FEATURES[f.id].name}</h3>
-                        <p className="text-sm">{f.alasan || FEATURES[f.id].desc}</p>
-                        <Link
-                          href={FEATURES[f.id].href}
-                          className="mt-auto self-start rounded-xl bg-[#0d6e4b] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0a5c3e]"
-                        >
-                          Buka fitur →
-                        </Link>
-                      </div>
-                    ))}
+                    {hasil.fitur.map((f) => {
+                    const t = TONE[TONE_FITUR[f.id] ?? "emerald"];
+                       return (
+                    <div key={f.id} className={`group flex min-w-0 flex-col gap-2 rounded-2xl border p-4 shadow-sm ${t.kartu}`}>
+                    <Tag ungu={false}>Fitur EduPuan</Tag>
+                    <h3 className="font-semibold">{FEATURES[f.id].name}</h3>
+                    <p className="text-sm">{f.alasan || FEATURES[f.id].desc}</p>
+                    <Link href={FEATURES[f.id].href}
+                    className={`mt-auto self-start rounded-xl px-4 py-2 text-sm font-semibold transition-colors ${t.ajakan}`}>
+                     Buka fitur →
+                    </Link>
+                    </div>
+                    );
+                  })}
                   </div>
                 </section>
               )}
