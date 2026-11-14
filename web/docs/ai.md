@@ -41,6 +41,7 @@ flowchart TD
 | Gemini (tulis, embedding) | `lib/puan/gemini.ts`, `embedding.ts` | coba ulang saat sibuk, model cadangan, batas waktu total |
 | Pencarian pasal | `lib/puan/pencarian.ts` + SQL `cari_pasal_puan` | satu kali bolak-balik ke database |
 | Rekap anonim & label | `lib/puan/statistik.ts` | hanya aktif jika `PUAN_CATAT_STATISTIK=1` |
+| Umpan balik 👍/👎 dari widget chat | `lib/puan/aksi.ts` (**Server Action** `nilaiJawabanPuan`) | dipanggil langsung dari `PuanFab.tsx`; validasi + pembatas sama dengan `POST /api/umpan-balik` |
 | Semua angka pengaturan | `lib/puan/pengaturan.ts` | ambang, jumlah pasal, model, batas waktu |
 
 **Status jawaban** (dikirim ke web, dipakai untuk tampilan dan rekap): `pasal` (ada dasar hukum), `tidak_ada_pasal`
