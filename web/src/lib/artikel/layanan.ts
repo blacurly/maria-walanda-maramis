@@ -10,7 +10,7 @@ import { ARTIKEL as CADANGAN, TOPIK, type Artikel, type Bagian, type Topik } fro
 export type Kategori = { id: Topik; label: string };
 
 export type HasilDaftarArtikel = {
-  data: Artikel[];
+  data: ArtikelRingkas[];
   halaman: number;
   per_halaman: number;
   total: number;
@@ -58,6 +58,26 @@ function keArtikel(b: BarisDb): Artikel {
     fitur: b.fitur_label && b.fitur_tautan ? { label: b.fitur_label, href: b.fitur_tautan } : undefined,
     dasarHukum: rujukan.filter((r) => r.jenis === "dasar_hukum").map((r) => r.teks),
     sumber: rujukan.filter((r) => r.jenis === "sumber" && r.tautan).map((r) => ({ label: r.teks, url: r.tautan! })),
+  };
+}
+
+// Bentuk RINGKAS untuk endpoint daftar: hanya kolom yang memang diambil (KOLOM_RINGKAS).
+// Isi lengkap (bagian, catatan, fitur, dasarHukum, sumber) hanya ada di GET /api/artikel/:slug,
+// supaya daftar tidak menampilkan kolom kosong yang membingungkan.
+export type ArtikelRingkas = Pick<Artikel, "slug" | "judul" | "ringkasan" | "topik" | "topikLabel" | "kategori" | "menit" | "gambar" | "diperbarui">;
+
+function keRingkas(b: BarisDb): ArtikelRingkas {
+  const a = keArtikel(b);
+  return {
+    slug: a.slug,
+    judul: a.judul,
+    ringkasan: a.ringkasan,
+    topik: a.topik,
+    topikLabel: a.topikLabel,
+    kategori: a.kategori,
+    menit: a.menit,
+    gambar: a.gambar,
+    diperbarui: a.diperbarui,
   };
 }
 
@@ -131,7 +151,7 @@ export async function daftarArtikel(p: ParameterDaftarArtikel): Promise<HasilDaf
 
   const total = count ?? 0;
   return {
-    data: (data as unknown as BarisDb[]).map(keArtikel),
+    data: (data as unknown as BarisDb[]).map(keRingkas),
     halaman: p.halaman,
     per_halaman: p.perHalaman,
     total,
