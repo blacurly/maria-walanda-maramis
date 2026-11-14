@@ -35,7 +35,9 @@ export const PENGATURAN = {
   // Batas waktu. Fungsi /api/chat di Vercel dibatasi 60 detik (maxDuration), jadi SELURUH proses
   // (tulis ulang + cari pasal + jawab, termasuk coba ulang dan model cadangan) harus selesai dalam 50 detik.
   batasTotalMs: 50_000,
-  waktuTulisUlangMs: 12_000, // maks. satu panggilan tulis ulang (jawabannya pendek)
+  // Maks. satu panggilan tulis ulang. Normalnya selesai ±1 dtk (jawabannya pendek). Diturunkan dari 12 dtk (14 Nov):
+  // di production flash-lite kadang macet, dan menunggu 12 dtk penuh sebelum pindah ke model cadangan membuat jawaban ±20 dtk.
+  waktuTulisUlangMs: 6_000,
   waktuJawabMs: 22_000, //      maks. satu panggilan menyusun jawaban; sisa waktunya (±14 dtk) untuk model cadangan
 
   // ---- Percakapan ----

@@ -11,7 +11,7 @@ import kamus from "./kamus_istilah.json";
 import { tulisGemini, type IsiGemini } from "./gemini";
 import { cariPasal, daftarSumber, susunBahan, type PasalDitemukan } from "./pencarian";
 import { PENGATURAN } from "./pengaturan";
-import { CATATAN_KRISIS, KATA_KRISIS, LABEL_BAHAN, SYSTEM_PROMPT_PUAN, instruksiTulisUlang } from "./prompt";
+import { CATATAN_KRISIS, JAWABAN_DI_LUAR_TOPIK, KATA_KRISIS, LABEL_BAHAN, SYSTEM_PROMPT_PUAN, instruksiTulisUlang } from "./prompt";
 import { catat, pisahkanLabel, teksDaftarLabel, type Status } from "./statistik";
 
 export type Pesan = { peran: "user" | "puan"; teks: string };
@@ -85,22 +85,28 @@ export async function jawab(pesan: string, riwayatMasuk: Pesan[] = []): Promise<
   const bahan = status === "pasal" ? susunBahan(pasal) : LABEL_BAHAN[status as keyof typeof LABEL_BAHAN];
   const krisis = adaTandaKrisis(pesan);
 
-  // [4] Gemini menjawab
-  const isi: IsiGemini = riwayat.map((m) => ({
-    role: m.peran === "user" ? "user" : "model",
-    parts: [{ text: m.teks }],
-  }));
-  isi.push({
-    role: "user",
-    parts: [{ text: `PESAN USER:\n${pesan}\n\nBAHAN BACAAN:\n${bahan}` + (krisis ? CATATAN_KRISIS : "") }],
-  });
-  const jawaban = await tulisGemini(PENGATURAN.modelJawab, isi, {
-    sistem: SYSTEM_PROMPT_PUAN,
-    suhu: PENGATURAN.suhuJawab,
-    berpikir: PENGATURAN.berpikirJawab,
-    batasAkhir,
-    waktuMaksMs: PENGATURAN.waktuJawabMs,
-  });
+  // [4] Gemini menjawab. Pengecualian: pesan di luar topik (tanpa tanda krisis) dibalas teks tetap,
+  //     tanpa memanggil Gemini, supaya instan dan konsisten.
+  let jawaban: string;
+  if (status === "di_luar_topik" && !krisis) {
+    jawaban = JAWABAN_DI_LUAR_TOPIK;
+  } else {
+    const isi: IsiGemini = riwayat.map((m) => ({
+      role: m.peran === "user" ? "user" : "model",
+      parts: [{ text: m.teks }],
+    }));
+    isi.push({
+      role: "user",
+      parts: [{ text: `PESAN USER:\n${pesan}\n\nBAHAN BACAAN:\n${bahan}` + (krisis ? CATATAN_KRISIS : "") }],
+    });
+    jawaban = await tulisGemini(PENGATURAN.modelJawab, isi, {
+      sistem: SYSTEM_PROMPT_PUAN,
+      suhu: PENGATURAN.suhuJawab,
+      berpikir: PENGATURAN.berpikirJawab,
+      batasAkhir,
+      waktuMaksMs: PENGATURAN.waktuJawabMs,
+    });
+  }
 
   const durasi = performance.now() - t0;
   // Hanya angka waktu dan status: isi pesan TIDAK pernah ditulis ke log.

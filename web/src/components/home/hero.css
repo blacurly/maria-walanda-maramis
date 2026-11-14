@@ -273,6 +273,13 @@
     gap: 36px;
   }
   .ep-hero-copy { max-width: 620px; }
+  /* Di layar sempit teks berada tepat di atas foto: foto dilapisi warna terang supaya tulisan tetap terbaca (kontras). */
+  .ep-home-hero {
+    background-image:
+      linear-gradient(180deg, rgba(255, 249, 244, .90) 0%, rgba(255, 249, 244, .78) 55%, rgba(255, 249, 244, .55) 100%),
+      url("/ilustrasi/hero.jpg");
+  }
+  .ep-hero-description { color: #1f2a27; font-weight: 500; }
 }
 
 @media (max-width: 767px) {
