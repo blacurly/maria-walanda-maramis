@@ -1,7 +1,7 @@
 # 03 — Keputusan Desain & Hasil Uji
 
 Catatan **kenapa** Puan AI dibangun seperti ini, apa buktinya, dan apa yang belum beres.
-Bagian 5 berisi pertanyaan yang kemungkinan besar ditanyakan juri/mentor beserta jawabannya.
+Bagian 6 berisi pertanyaan yang kemungkinan besar ditanyakan juri/mentor beserta jawabannya.
 
 ---
 
@@ -19,16 +19,22 @@ Bagian 5 berisi pertanyaan yang kemungkinan besar ditanyakan juri/mentor beserta
 | 8 | Rujukan dalam dokumen otomatis + **24 tautan antar-dokumen manual** | aturan pinjol tersebar (POJK 40 ↔ SEOJK 19 ↔ POJK 22 ↔ UU PDP). Tautan dibuat **per angka**, karena tautan per bagian sempat membuat POJK22:62 punya ±20 tautan | tanpa tautan (soal lintas dokumen meleset) |
 | 9 | **Ayat sanksi tidak ikut dicari** (tetap ada di teks parent); pasal pidana khusus tetap dicari | ayat "PUJK yang melanggar... dikenai sanksi" mirip satu sama lain dan menyedot pertanyaan apa pun | mencari semua ayat |
 | 10 | **Tulis ulang + kamus 28 istilah**; yang dicari = pesan asli + kueri hukum | user menulis "dc", "galbay", "diteror", sedangkan pasal menulis "penagihan", "wanprestasi", "terus menerus yang bersifat mengganggu" | mencari pesan mentah saja |
-| 11 | Embedding `gemini-embedding-001` (768 dimensi), **ambang 0,60** | teks tak berkaitan ≈ 0,52; resep nasi goreng 0,543 (tertolak). Selisihnya tipis, jadi penolakan topik terutama mengandalkan `DI_LUAR_TOPIK` dari tulis ulang | — (e5 sekarang didukung sebagai pembanding, lihat #19) |
+| 11 | Embedding `gemini-embedding-001` (768 dimensi), **ambang 0,60** | teks tak berkaitan ≈ 0,52; resep nasi goreng 0,543 (tertolak). Selisihnya tipis, jadi penolakan topik terutama mengandalkan `DI_LUAR_TOPIK` dari tulis ulang | — (**diganti oleh #22**) |
 | 12 | 8 child → maks. 3 parent utama + 2 tambahan | uji 2: menambah jatah tidak menaikkan skor (lihat 3.3), tapi bahan bacaan +25–48% | 4–5 parent utama |
 | 13 | Jawab: `gemini-3.6-flash` suhu 0,4; tulis ulang: `gemini-3.1-flash-lite` suhu 0 | tulis ulang harus konsisten; jawaban boleh sedikit luwes agar hangat | — |
 | 14 | System prompt dengan aturan **A–E** hasil evaluasi uji coba pertama | uji jawaban pertama: curhat malah dijawab daftar aturan; soal waris menambahkan klaim asuransi "wajib" yang tidak akurat + mengutip Pasal 144 yang tidak relevan; format "SEOJK Bab VIII" keliru | — |
 | 15 | Coba ulang + model cadangan saat Gemini 503/429 | error 503 benar-benar terjadi saat uji | gagal langsung |
 | 16 | Kata kunci krisis → aturan keselamatan + Healing119 (119 ext 8) | curhat pinjol bisa menyentuh keputusasaan; keselamatan di atas segalanya | — |
 | 17 | **Riwayat percakapan** (6 pesan terakhir; tulis ulang memakai 2 pesan user terakhir) | pertanyaan lanjutan "terus aku harus gimana?" tidak bisa dipahami tanpa konteks | stateless total |
-| 18 | Indeks disimpan sebagai **file** dan dimuat ke memori FastAPI; Supabase pgvector opsional | 694 vektor dicari < 1 milidetik; lebih sedikit bagian yang bisa rusak | langsung pgvector (lebih rumit, belum perlu) |
+| 18 | ~~Indeks disimpan sebagai **file** dan dimuat ke memori FastAPI; Supabase pgvector opsional~~ **Diganti oleh #21** | (lama) 694 vektor dicari < 1 milidetik | — |
 | 19 | **Dukungan dua model embedding** (Gemini & multilingual-e5-small) | arsitektur tim menyebut e5; perlu dibandingkan dengan data, bukan asumsi | memilih salah satu tanpa uji |
 | 20 | **Opsi pecah daftar panjang per huruf** (≥80 kata & ≥5 butir), diputuskan lewat evaluasi | uji 2 menemukan "chunk magnet": POJK40:144(2) dan POJK40:158 muncul di banyak soal yang tidak relevan | menambal 2 pasal saja (itu sama dengan "menyontek kunci jawaban") |
+| 21 | **Vector DB = Supabase pgvector** (`web/supabase/08_pengetahuan_puan.sql`: `dokumen_hukum`, `pasal`, `pasal_tautan`, `potongan_pasal` + `vector(384)` + indeks HNSW cosine + fungsi `cari_potongan`), dan **Puan pindah dari FastAPI ke Next.js** (`web/src/lib/puan`) | mentor: file indeks + numpy "belum cukup", wajib vector database (FAISS/Chroma/pgvector); panduan teknis: backend di dalam proyek Next.js | FAISS/Chroma (butuh server terpisah); tetap FastAPI |
+| 22 | ~~**Embedding = `multilingual-e5-small`** dijalankan langsung di Next.js lewat `@huggingface/transformers@4.3.1` (`Xenova/multilingual-e5-small`, `dtype: q8`), awalan `query: ` / `passage: `. Gemini hanya untuk LLM~~ **Diganti oleh #25** | mentor: "disarankan open source"; uji coba 13 Nov 2026 berhasil di laptop & Vercel (lihat 3.4) | Gemini embedding 768 dimensi (cadangan bila e5 bermasalah) |
+| 23 | Semua teks di-embed **satu per satu** (indeks & pertanyaan) | dengan `q8`, embed sekaligus (batch) bergeser hingga 0,0138 per angka karena *padding*; satu per satu menjamin indeks dan kueri konsisten | embed batch |
+| 24 | ~~Model e5 diunduh saat server bangun~~ (tidak berlaku lagi setelah #25) | — | — |
+| 25 | **Embedding = `gemini-embedding-001` (768) di pgvector** (13 Nov 2026). Vektor 833 potongan diimpor dari indeks Gemini yang sudah ada (`indeks_gemini_pecah/vektor.npy`, sidik cocok 833/833) oleh `web/scripts/buat-indeks-puan.mjs`; pertanyaan di-embed lewat API (RETRIEVAL_QUERY); ambang 0,60 | **Uji 50 soal dengan kueri tulis ulang yang sama**: e5-small + pgvector Kena **55%** (curhat santai 25%, MRR 0,45, pasal "magnet" UUPDP:60/58 dan pasal definisi; ambang tidak bisa memisahkan soal relevan 0,786 vs luar cakupan 0,834) vs Gemini **90%**. Target ≥ 85%. Mentor membolehkan model API. Bonus: fungsi /api/chat turun dari 105 MB ke 1,8 MB, tanpa cold start memuat model | tetap e5 (di bawah target); hybrid e5 + kata kunci (hasil belum pasti, waktu 7 hari); model open source besar (terlalu berat untuk Vercel) |
+| 26 | **Aturan kesetaraan [H]** di system prompt + identitas dibuang dari kueri tulis ulang (13 Nov 2026) | Uji bias pasangan kontrafaktual: isi hukum benar, tetapi pengguna desa/perempuan/janda mendapat bantuan kurang lengkap (tanpa OJK 157, asumsi "ibu yang berjuang"). Sesudah perbaikan: konsistensi dasar hukum inti 83% → 100%, OJK 157 untuk "lapor ke mana" desa/Jakarta: tidak/ya → ya/ya | mencari hanya dengan kueri bersih (butuh evaluasi ulang 50 soal) → ditunda, dicatat sebagai pengembangan lanjutan |
 
 ---
 
@@ -44,6 +50,7 @@ Bagian 5 berisi pertanyaan yang kemungkinan besar ditanyakan juri/mentor beserta
 | SEOJK bagian XX awalnya dibuang | aturan penagihan (angka 8–10) & pengalihan portofolio (4–7) hilang | diubah jadi diambil |
 | Tautan level bagian membanjiri POJK22:62 | tambahan pasal acak | tautan dibuat per angka |
 | **22 ayat sanksi POJK 22 lolos dari penandaan** ("dapat dikenai sanksi sesuai...", "tidak memenuhi pelaksanaan sanksi...") | soal 38 kalah oleh ayat sanksi | pola sanksi diperluas (uji 2) |
+| Di Vercel, mesin onnxruntime tidak ikut terbawa (ditemukan lewat simulasi build) | `Cannot find module` saat Puan dipanggil | `outputFileTracingIncludes` (lihat 3.4) |
 
 Catatan dari dokumen asli: SEOJK XX angka 9 merujuk "angka 7", kemungkinan salah ketik di dokumen OJK (maksudnya angka 8).
 
@@ -58,7 +65,7 @@ Catatan dari dokumen asli: SEOJK XX angka 9 merujuk "angka 7", kemungkinan salah
 - **Kena**: minimal satu pasal kunci ikut terambil. Target ≥ 85%.
 - **MRR** (*Mean Reciprocal Rank*, "rata-rata kebalikan peringkat"): 1,00 berarti kunci selalu di urutan pertama.
 
-### 3.1 Uji 1 (pencarian)
+### 3.1 Uji 1 (pencarian, embedding Gemini)
 
 | Jenis | Kena |
 |---|---|
@@ -95,15 +102,37 @@ Pelajaran:
 2. Menambah jatah pasal tidak sepadan (+1 soal dengan bahan +48%), jadi tetap 8/3.
 3. **Ukuran ketat lintas dokumen hanya 40%.** Inilah kelemahan utama: user sering hanya mendapat separuh gambaran hukumnya.
 
-### 3.4 Yang BELUM diuji (harus dijalankan di Colab, notebook bagian D–E)
+### 3.4 Uji coba e5-small di Next.js/Vercel (13 Nov 2026)
 
-- [x] Versi **pecah huruf** vs biasa (`evaluasi.py --pecah 0 1`), diuji 8 Nov 2026 di laptop (Gemini, 8/3):
+| Tahap | Hasil |
+|---|---|
+| Node.js (laptop) | jalan; 384 dimensi; embed 3 teks 19 ms |
+| Uji urutan (4 pertanyaan × 6 potongan parafrase, 2 pengecoh) | **peringkat 1 benar 4/4**, tetapi skor mepet (benar 0,837 / pasal lain 0,817 / resep rendang 0,797) → **ambang lama 0,80 hampir meloloskan pengecoh; kalibrasi ambang wajib dengan pasal asli** |
+| Batch vs satu per satu | selisih maks. 0,0138 → keputusan #23 |
+| Di dalam Next.js (laptop) | jalan; muat dari cache 1,5 dtk; embed 18–56 ms |
+| Vercel preview (branch `spike/e5-vercel` di repo deploy, sementara) | jalan; **cold start 6,23 dtk** (termasuk unduh model); embed hangat 35 ms; fungsi berjalan di iad1 (Washington) |
+| Indeks asli (13 Nov, `web/scripts/buat-indeks-puan.mjs`) | 4 dokumen, 248 pasal, 139 tautan, 833 potongan masuk pgvector; `cari_potongan` diuji langsung di SQL Editor (potongan sendiri skor 1,000) |
+| Uji cari pertanyaan **mentah** "apakah penagih pinjol boleh menghubungi keluarga saya?" (tanpa tulis ulang) | 8 besar: 65.1, 60.1, 64.1, **62.2.a (peringkat 4)**, 34.2, 61.1, 66.2, 64.3; skor 0,813–0,819 (sangat mepet). Kunci ideal POJK22:62.2.c tidak di 8 besar; Pasal 62 menjadi parent ke-4 → **terpotong oleh batas 3 parent**. Perlu dibuktikan apakah tulis ulang + tautan menolongnya; uji 50 soal e5 menentukan apakah e5 dipertahankan atau kembali ke embedding Gemini |
+
+Pengaturan wajib (ditemukan lewat simulasi build Vercel, lalu terbukti di preview):
+- `serverExternalPackages: ["@huggingface/transformers"]` di `next.config.ts`.
+- `outputFileTracingIncludes` untuk route Puan: `onnxruntime-common/**`, `onnxruntime-node/package.json`, `onnxruntime-node/dist/*.js`, dan biner Linux x64 (`libonnxruntime.so.1`, `onnxruntime_binding.node`). Transformers memuat onnxruntime-node lewat `createRequire`, yang tidak terlacak oleh Next.js.
+- `web/.npmrc` berisi `onnxruntime-node-install=skip`, supaya `npm install` di Linux tidak mengunduh biner CUDA (ratusan MB).
+
+Koneksi laptop (hotspot seluler) ke Supabase sesekali di-reset (ECONNRESET); skrip indeks memakai `fetch` dengan coba ulang maks. 3x (semua operasinya idempoten).
+
+Catatan: fungsi berjalan di **iad1**. Bila Supabase berada di Singapura, pertimbangkan region fungsi `sin1` supaya kueri database Puan tidak bolak-balik ke AS.
+
+### 3.5 Yang BELUM diuji
+
+- [x] Versi **pecah huruf** vs biasa, diuji 8 Nov 2026 di laptop (Gemini, 8/3):
       biasa Kena 87,5% · MRR 0,78 · Lintas ≥1 60% · Lintas semua 40% · bahan 1.326 kata;
       pecah huruf Kena 90,0% · MRR 0,79 · Lintas ≥1 70% · Lintas semua 40% · bahan 1.260 kata.
-      **Keputusan: pakai pecah huruf (`PUAN_PECAH_HURUF=1`).** Lebih baik di semua ukuran, bahan lebih ringkas;
+      **Keputusan: pakai pecah huruf** (`knowledge_base_pecah.json`, 833 child dicari). Lebih baik di semua ukuran, bahan lebih ringkas;
       contoh nyata: "dc nagih ke kantor" kini menemukan POJK 22/2023 Pasal 62 ayat (2) huruf e.
-- [ ] **e5** vs Gemini, termasuk kalibrasi ambang e5 (ambang 0,80 di config masih tebakan sementara)
-- [ ] **Uji jawaban lengkap** 15 soal (`uji_jawaban.py`) dengan system prompt versi baru (lihat bagian 4)
+- [x] e5-small diuji 50 soal (13 Nov): Kena 55% → **tidak dipakai**, kembali ke embedding Gemini (keputusan #25)
+- [ ] Ulang uji 50 soal untuk **Gemini + pgvector** (`node scripts/evaluasi-puan.mjs`), harus menyamai 90% versi file numpy
+- [ ] **Uji jawaban lengkap** 15 soal dengan system prompt versi baru (lihat bagian 4)
 - [ ] Percakapan lanjutan dengan riwayat (fitur baru)
 
 ---
@@ -132,11 +161,12 @@ Perubahan ini muncul dari temuan evaluasi, tapi **belum diuji** dengan jawaban G
 1. **Soal uji dan kamus dibuat oleh pihak yang sama** (Claude), sehingga ada risiko soal ditulis dengan kata-kata yang memang dikenali kamus,
    dan skor 87,5% bisa lebih tinggi dari kenyataan. Saran: minta 1–2 anggota tim menulis 10 soal baru tanpa melihat kamus.
 2. **40 soal itu kecil**: 1 soal = 2,5%. Selisih 87,5% dengan target 85% hanya 1 soal.
-3. **Kena ≠ jawaban benar.** Pasal yang tepat bisa terambil tapi jawabannya tetap keliru. Itulah gunanya `uji_jawaban.py`.
+3. **Kena ≠ jawaban benar.** Pasal yang tepat bisa terambil tapi jawabannya tetap keliru. Itulah gunanya uji jawaban.
 4. Tulis ulang oleh Gemini bisa sedikit berbeda antar-panggilan, walaupun suhunya 0.
 5. **Kebaruan aturan**: angka bunga/denda dan UU PDP harus dicek ulang sebelum demo (lihat dokumen 04).
 6. **Privasi**: Gemini tier gratis dapat memakai data untuk pengembangan Google. Curhat user itu sensitif.
-7. Embedder e5 dan semua perubahan prompt versi ini belum diuji.
+7. e5 baru diuji secara teknis (jalan di Vercel, urutan 4/4 pada data kecil). Kualitas pencarian dengan 50 soal uji dan semua perubahan prompt versi ini belum diuji.
+8. Saat server baru bangun, model e5 diunduh dari Hugging Face. Bila Hugging Face sedang gangguan, Puan gagal di permintaan itu (mitigasi: model ikut deploy, keputusan #24).
 
 ---
 
@@ -146,8 +176,12 @@ Perubahan ini muncul dari temuan evaluasi, tapi **belum diuji** dengan jawaban G
 Pasal hukum panjang. Kalau dipotong per jumlah karakter, ayat terpotong di tengah. Kalau satu pasal jadi satu potongan, pencariannya kabur.
 Child (ayat) dipakai untuk mencari dengan tepat, parent (pasal utuh) untuk menjawab dengan lengkap. Contohnya POJK 22 Pasal 62.
 
+**"Kenapa pgvector dan e5-small?"**
+pgvector adalah vector database di Supabase yang sudah kami pakai, jadi data pasal, embedding, dan aturan aksesnya (RLS) ada di satu tempat tanpa server tambahan.
+e5-small adalah model open source multibahasa yang mendukung bahasa Indonesia dan cukup kecil untuk dijalankan langsung di server Next.js (embed ±35 ms).
+
 **"Bagaimana kalian tahu jawabannya akurat?"**
-Ada dua lapis. (1) Pencarian diuji dengan 50 soal berkunci pasal: 87,5% kena, angka 100%. (2) Jawaban diuji manual oleh anggota tim
+Ada dua lapis. (1) Pencarian diuji dengan 50 soal berkunci pasal: 87,5% kena, angka 100% (embedding lama; diulang dengan e5). (2) Jawaban diuji manual oleh anggota tim
 berlatar hukum, dengan kriteria utama **0 pasal/angka karangan**. Jawaban selalu menyebut dasar pasalnya, jadi bisa dicek siapa pun.
 
 **"Kalau AI tidak tahu?"**
@@ -162,8 +196,7 @@ API mengirim `krisis: true` supaya web bisa menampilkan kartu bantuan.
 Model umum bisa memberi angka bunga yang sudah kedaluwarsa atau pasal yang tidak ada, dengan nada yakin. Kami mengikat jawaban pada teks peraturan resmi.
 
 **"Apa kelemahannya?"**
-Soal lintas dokumen baru 40% lengkap, dan soal uji dibuat internal. Kami sedang menguji pemecahan daftar panjang dan model e5,
-dan ingin menambah soal uji dari pengguna nyata.
+Soal lintas dokumen baru 40% lengkap, dan soal uji dibuat internal. Ambang e5 masih harus dikalibrasi, dan kami ingin menambah soal uji dari pengguna nyata.
 
 **"Data user aman?"**
 Server tidak menyimpan percakapan (riwayat dikirim dari browser). Untuk produksi, tier berbayar Gemini dan Kebijakan Privasi yang menyebut pemrosesan pihak ketiga.

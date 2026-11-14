@@ -1,0 +1,436 @@
+{
+ "_keterangan": "Salinan JSON dari soal_uji_puan_ai.xlsx (kolom No, Jenis, Pertanyaan, Kunci pasal) untuk web/scripts/evaluasi-puan.mjs. Sumber utama tetap file .xlsx.",
+ "soal": [
+  {
+   "no": 1,
+   "jenis": "Curhat santai",
+   "pertanyaan": "dc nelpon atasan sama temen kantor aku terus, malu banget rasanya",
+   "kunci": [
+    "POJK22:62",
+    "SEOJK19:VIII.1"
+   ]
+  },
+  {
+   "no": 2,
+   "jenis": "Curhat santai",
+   "pertanyaan": "fotoku diedit terus disebar ke grup wa keluarga sama dc, aku harus gimana",
+   "kunci": [
+    "POJK22:62",
+    "UUPDP:65",
+    "UUPDP:67"
+   ]
+  },
+  {
+   "no": 3,
+   "jenis": "Curhat santai",
+   "pertanyaan": "ditelpon dc bisa 20 kali sehari sampe aku gak bisa kerja",
+   "kunci": [
+    "POJK22:62"
+   ]
+  },
+  {
+   "no": 4,
+   "jenis": "Curhat santai",
+   "pertanyaan": "aku diancam mau didatengin ke rumah rame-rame kalo gak bayar hari ini",
+   "kunci": [
+    "POJK22:62"
+   ]
+  },
+  {
+   "no": 5,
+   "jenis": "Curhat santai",
+   "pertanyaan": "dc nagih jam 11 malem, emang boleh ya?",
+   "kunci": [
+    "POJK22:62"
+   ]
+  },
+  {
+   "no": 6,
+   "jenis": "Curhat santai",
+   "pertanyaan": "temen aku dijadiin kontak darurat terus malah dia yang ditagih, padahal dia gak tau apa-apa",
+   "kunci": [
+    "SEOJK19:VIII.1",
+    "SEOJK19:VIII.2"
+   ]
+  },
+  {
+   "no": 7,
+   "jenis": "Curhat santai",
+   "pertanyaan": "tiba-tiba ada sms nawarin pinjol padahal aku gak pernah daftar",
+   "kunci": [
+    "POJK22:39",
+    "POJK40:158"
+   ]
+  },
+  {
+   "no": 8,
+   "jenis": "Curhat santai",
+   "pertanyaan": "aplikasi pinjolnya minta akses semua kontak sama galeri hp aku",
+   "kunci": [
+    "SEOJK19:VII.1",
+    "POJK40:164"
+   ]
+  },
+  {
+   "no": 9,
+   "jenis": "Curhat santai",
+   "pertanyaan": "aku pinjem 1 juta tapi yang cair cuma 800 ribu, potongannya gede banget",
+   "kunci": [
+    "SEOJK19:XIV.2",
+    "SEOJK19:XIV.3",
+    "POJK40:140"
+   ]
+  },
+  {
+   "no": 10,
+   "jenis": "Curhat santai",
+   "pertanyaan": "tiba-tiba yang nagih perusahaan lain, katanya utangku udah dialihkan",
+   "kunci": [
+    "POJK22:52",
+    "SEOJK19:XX.4",
+    "SEOJK19:XX.5"
+   ]
+  },
+  {
+   "no": 11,
+   "jenis": "Curhat santai",
+   "pertanyaan": "aku udah lunas tapi data aku masih disimpen dan masih dichat terus, bisa minta dihapus gak",
+   "kunci": [
+    "UUPDP:8",
+    "UUPDP:43",
+    "POJK40:165",
+    "SEOJK19:VII.10"
+   ]
+  },
+  {
+   "no": 12,
+   "jenis": "Curhat santai",
+   "pertanyaan": "aku udah komplain ke pinjolnya tapi dicuekin aja",
+   "kunci": [
+    "POJK22:74",
+    "POJK22:75",
+    "POJK22:82",
+    "POJK22:96"
+   ]
+  },
+  {
+   "no": 13,
+   "jenis": "Bahasa hukum",
+   "pertanyaan": "Apa saja hak konsumen di sektor jasa keuangan?",
+   "kunci": [
+    "POJK22:92"
+   ]
+  },
+  {
+   "no": 14,
+   "jenis": "Bahasa hukum",
+   "pertanyaan": "Apakah perusahaan pinjaman boleh mengenakan biaya untuk layanan pengaduan?",
+   "kunci": [
+    "POJK22:67",
+    "POJK40:158"
+   ]
+  },
+  {
+   "no": 15,
+   "jenis": "Bahasa hukum",
+   "pertanyaan": "Bagaimana penyelesaian sengketa jika pengaduan tidak diselesaikan oleh perusahaan?",
+   "kunci": [
+    "POJK22:82",
+    "POJK22:96"
+   ]
+  },
+  {
+   "no": 16,
+   "jenis": "Bahasa hukum",
+   "pertanyaan": "Apa kewajiban perusahaan pinjol sebelum konsumen menandatangani perjanjian?",
+   "kunci": [
+    "POJK22:45",
+    "POJK40:146",
+    "POJK22:30"
+   ]
+  },
+  {
+   "no": 17,
+   "jenis": "Bahasa hukum",
+   "pertanyaan": "Apakah perusahaan pinjol boleh bekerja sama dengan pihak ketiga untuk melakukan penagihan?",
+   "kunci": [
+    "POJK22:61",
+    "POJK40:56",
+    "SEOJK19:XX.8"
+   ]
+  },
+  {
+   "no": 18,
+   "jenis": "Bahasa hukum",
+   "pertanyaan": "Informasi apa saja yang wajib ditampilkan di aplikasi pinjol?",
+   "kunci": [
+    "POJK40:142",
+    "SEOJK19:VI.1"
+   ]
+  },
+  {
+   "no": 19,
+   "jenis": "Bahasa hukum",
+   "pertanyaan": "Apa saja hak pemilik data pribadi menurut undang-undang?",
+   "kunci": [
+    "UUPDP:5",
+    "UUPDP:6",
+    "UUPDP:7",
+    "UUPDP:8",
+    "UUPDP:9",
+    "UUPDP:10",
+    "UUPDP:11",
+    "UUPDP:12",
+    "UUPDP:13"
+   ]
+  },
+  {
+   "no": 20,
+   "jenis": "Bahasa hukum",
+   "pertanyaan": "Klausul baku apa saja yang dilarang dalam perjanjian dengan konsumen?",
+   "kunci": [
+    "POJK22:46"
+   ]
+  },
+  {
+   "no": 21,
+   "jenis": "Bahasa hukum",
+   "pertanyaan": "Apakah OJK dapat mengajukan gugatan untuk membela konsumen?",
+   "kunci": [
+    "POJK22:98",
+    "POJK22:99"
+   ]
+  },
+  {
+   "no": 22,
+   "jenis": "Angka",
+   "pertanyaan": "bunga maksimal pinjol buat pinjaman konsumtif per hari berapa?",
+   "kunci": [
+    "SEOJK19:XIV.3",
+    "POJK40:140"
+   ]
+  },
+  {
+   "no": 23,
+   "jenis": "Angka",
+   "pertanyaan": "denda keterlambatan pinjol maksimal berapa persen per hari?",
+   "kunci": [
+    "SEOJK19:XIV.4"
+   ]
+  },
+  {
+   "no": 24,
+   "jenis": "Angka",
+   "pertanyaan": "total bunga sama denda boleh sampai berapa dari nilai pinjaman?",
+   "kunci": [
+    "SEOJK19:XIV.5"
+   ]
+  },
+  {
+   "no": 25,
+   "jenis": "Angka",
+   "pertanyaan": "maksimal pinjaman di pinjol berapa?",
+   "kunci": [
+    "SEOJK19:X.1",
+    "POJK40:137"
+   ]
+  },
+  {
+   "no": 26,
+   "jenis": "Angka",
+   "pertanyaan": "berapa lama perusahaan harus menyelesaikan pengaduan tertulis?",
+   "kunci": [
+    "POJK22:75"
+   ]
+  },
+  {
+   "no": 27,
+   "jenis": "Angka",
+   "pertanyaan": "kalau aku ngadu lewat telepon, harus selesai dalam berapa hari?",
+   "kunci": [
+    "POJK22:74"
+   ]
+  },
+  {
+   "no": 28,
+   "jenis": "Angka",
+   "pertanyaan": "kalau data aku bocor, berapa lama perusahaan wajib ngasih tau?",
+   "kunci": [
+    "UUPDP:46"
+   ]
+  },
+  {
+   "no": 29,
+   "jenis": "Angka",
+   "pertanyaan": "berapa hukuman buat orang yang nyebarin data pribadi orang lain?",
+   "kunci": [
+    "UUPDP:67"
+   ]
+  },
+  {
+   "no": 30,
+   "jenis": "Angka",
+   "pertanyaan": "setelah tanda tangan perjanjian, ada masa jeda berapa hari?",
+   "kunci": [
+    "POJK22:51"
+   ]
+  },
+  {
+   "no": 31,
+   "jenis": "Lintas dokumen",
+   "pertanyaan": "DC nyebarin data utang aku ke semua kontak, itu melanggar aturan apa aja dan bisa dipidana gak?",
+   "kunci": [
+    "POJK22:62",
+    "UUPDP:65",
+    "UUPDP:67"
+   ]
+  },
+  {
+   "no": 32,
+   "jenis": "Lintas dokumen",
+   "pertanyaan": "pinjol ambil data kontak hp tanpa izin, aturannya apa?",
+   "kunci": [
+    "POJK40:164",
+    "SEOJK19:VII.1",
+    "UUPDP:20"
+   ]
+  },
+  {
+   "no": 33,
+   "jenis": "Lintas dokumen",
+   "pertanyaan": "bunga pinjol dibatasi oleh aturan apa saja?",
+   "kunci": [
+    "POJK40:140",
+    "SEOJK19:XIV.3"
+   ]
+  },
+  {
+   "no": 34,
+   "jenis": "Lintas dokumen",
+   "pertanyaan": "yang nagih orang dari pihak ketiga, perusahaan pinjolnya tetap tanggung jawab gak?",
+   "kunci": [
+    "POJK22:61",
+    "POJK40:56",
+    "SEOJK19:IV.11"
+   ]
+  },
+  {
+   "no": 35,
+   "jenis": "Lintas dokumen",
+   "pertanyaan": "pinjolnya izinnya dicabut, utangku gimana?",
+   "kunci": [
+    "POJK40:96",
+    "SEOJK19:XX.4"
+   ]
+  },
+  {
+   "no": 36,
+   "jenis": "Lintas dokumen",
+   "pertanyaan": "aku mau data aku dihapus dari pinjol setelah lunas, dasar hukumnya apa?",
+   "kunci": [
+    "UUPDP:8",
+    "UUPDP:43",
+    "POJK40:165"
+   ]
+  },
+  {
+   "no": 37,
+   "jenis": "Lintas dokumen",
+   "pertanyaan": "kontak darurat boleh ditagih gak?",
+   "kunci": [
+    "SEOJK19:VIII.1",
+    "POJK22:62"
+   ]
+  },
+  {
+   "no": 38,
+   "jenis": "Lintas dokumen",
+   "pertanyaan": "pinjol menyebarkan data pribadi nasabah, sanksinya dari OJK dan pidananya apa?",
+   "kunci": [
+    "POJK22:22",
+    "UUPDP:57",
+    "UUPDP:67"
+   ]
+  },
+  {
+   "no": 39,
+   "jenis": "Lintas dokumen",
+   "pertanyaan": "perjanjian pinjol harus memuat apa saja dan apakah aku harus paham isinya?",
+   "kunci": [
+    "POJK40:145",
+    "POJK40:146",
+    "POJK22:45"
+   ]
+  },
+  {
+   "no": 40,
+   "jenis": "Lintas dokumen",
+   "pertanyaan": "kalau pinjol gak jelasin biayanya di awal, aku bisa ngadu ke mana?",
+   "kunci": [
+    "POJK22:29",
+    "POJK22:96",
+    "POJK22:82"
+   ]
+  },
+  {
+   "no": 41,
+   "jenis": "Di luar cakupan",
+   "pertanyaan": "resep rendang yang enak gimana?",
+   "kunci": []
+  },
+  {
+   "no": 42,
+   "jenis": "Di luar cakupan",
+   "pertanyaan": "rekomendasi film horor yang seru dong",
+   "kunci": []
+  },
+  {
+   "no": 43,
+   "jenis": "Di luar cakupan",
+   "pertanyaan": "cara bikin CV yang menarik gimana?",
+   "kunci": []
+  },
+  {
+   "no": 44,
+   "jenis": "Di luar cakupan",
+   "pertanyaan": "cuaca hari ini gimana ya?",
+   "kunci": []
+  },
+  {
+   "no": 45,
+   "jenis": "Di luar cakupan",
+   "pertanyaan": "tips biar tidur nyenyak dong",
+   "kunci": []
+  },
+  {
+   "no": 46,
+   "jenis": "Di luar cakupan",
+   "pertanyaan": "kalau aku meninggal, utang pinjolku diwarisin ke anak gak?",
+   "kunci": []
+  },
+  {
+   "no": 47,
+   "jenis": "Di luar cakupan",
+   "pertanyaan": "cara ngajuin KUR di bank gimana?",
+   "kunci": []
+  },
+  {
+   "no": 48,
+   "jenis": "Di luar cakupan",
+   "pertanyaan": "gadai emas di pegadaian aturannya gimana?",
+   "kunci": []
+  },
+  {
+   "no": 49,
+   "jenis": "Di luar cakupan",
+   "pertanyaan": "aku bisa dipenjara gak kalau gak bayar pinjol?",
+   "kunci": []
+  },
+  {
+   "no": 50,
+   "jenis": "Di luar cakupan",
+   "pertanyaan": "gimana cara bikin perusahaan pinjol sendiri?",
+   "kunci": []
+  }
+ ]
+}
