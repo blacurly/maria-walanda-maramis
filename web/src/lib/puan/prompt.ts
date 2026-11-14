@@ -159,6 +159,14 @@ export const LABEL_BAHAN = {
     "Ikuti aturan KALAU TIDAK TAHU: akui belum punya informasinya dan arahkan ke pihak yang tepat.)",
 } as const;
 
+// Balasan tetap untuk pesan DI LUAR TOPIK (tanpa memanggil Gemini): instan, selalu sopan, selalu konsisten.
+// Sengaja tidak memaksa ke topik pinjaman dan tidak mengasumsikan pengguna punya utang.
+// Tidak dipakai bila pesan mengandung tanda krisis: pesan seperti itu tetap dijawab Gemini dengan aturan KESELAMATAN.
+export const JAWABAN_DI_LUAR_TOPIK =
+  "Hai, makasih sudah mampir! 😊 Aku Puan, teman tanya seputar pinjaman online: hak saat ditagih, bunga dan biaya, " +
+  "data pribadi, cek legalitas aplikasi, atau ke mana melapor. Untuk pertanyaan di luar itu aku belum bisa bantu ya. " +
+  "Kalau ada yang mengganjal soal pinjol, cerita saja, aku dengarkan.";
+
 export const CATATAN_KRISIS = "\n\n[CATATAN SISTEM: pesan ini mengandung tanda krisis. Terapkan aturan KESELAMATAN.]";
 
 // Kata/frasa tanda krisis. Kalau ditemukan, Puan menerapkan aturan KESELAMATAN dan web menampilkan info Healing119.
