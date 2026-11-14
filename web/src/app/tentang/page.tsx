@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import TombolTanyaPuan from "@/components/fitur/puan-chat/TombolTanyaPuan";
 import { Fraunces } from "next/font/google";
 import "./tentang.css";
 
@@ -230,9 +231,9 @@ export default function TentangPage() {
                 sederhana dan mengarahkan ke alat yang tepat.
               </p>
             </div>
-            <Link href="/bingung-mulai" className="btn b3">
+            <TombolTanyaPuan className="btn b3 cursor-pointer">
               Tanya Puan AI <Panah />
-            </Link>
+            </TombolTanyaPuan>
           </div>
         </div>
       </section>
