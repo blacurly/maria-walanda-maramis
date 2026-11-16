@@ -115,7 +115,8 @@
 .ep-tentang .btn { display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 24px; border-radius: 999px; font-weight: 600; font-size: 15px; }
 .ep-tentang .btn svg { width: 18px; height: 18px; }
 .ep-tentang .b1 { background: #fff; color: var(--g); }
-.ep-tentang .b2 { border: 1.5px solid rgba(255, 255, 255, 0.4); color: #fff; }
+.ep-tentang .b2 { background: #e4dafd; color: #3b2a7a; border: 1.5px solid #e4dafd; }
+.ep-tentang .b2:hover { background: #d3c4fa; border-color: #d3c4fa; }
 .ep-tentang .b3 { background: var(--p); color: #fff; }
 
 /* Tablet & HP */
@@ -140,3 +141,16 @@
   .ep-tentang .ai { flex-direction: column; align-items: flex-start; }
   .ep-tentang .ai .btn { margin-left: 0; }
 }
+
+.ep-tentang .b2 { border-color: rgba(255, 255, 255, .7); }
+.ep-tentang .b2:hover { background: rgba(255, 255, 255, .12); }
+.ep-tentang .btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.ep-tentang .note a { text-decoration: underline; word-break: break-all; }
+@media (max-width: 560px) {
+  .ep-tentang .cta { padding: 32px 24px; border-radius: 22px; }
+  .ep-tentang .cta h2 { font-size: 26px; }
+  .ep-tentang .btns { width: 100%; flex-direction: column; }
+  .ep-tentang .btn { width: 100%; justify-content: center; }
+}
+.ep-tentang .btn { transition: background .15s, transform .15s; cursor: pointer; }
+.ep-tentang .b2:active { transform: scale(.97); }
