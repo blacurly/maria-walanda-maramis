@@ -5,8 +5,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { labelTopik, type Artikel, type Topik } from "@/data/artikel";
 import { VIDEO_EDUKASI } from "@/data/videoEdukasi";
+import { TONE, type Tone } from "@/lib/tone";
 
 const POPPINS = { fontFamily: "var(--font-poppins), sans-serif" };
+
+// Warna per topik: Semua hijau, Pinjaman biru, Hak & Hukum ungu, Penagihan merah muda
+const TONE_TOPIK: Record<string, Tone> = {
+  semua: "emerald",
+  pinjaman: "sky",
+  "hak-hukum": "violet",
+  penagihan: "rose",
+};
 
 type Props = {
   daftarArtikel: Artikel[];                  // dari database (lib/artikel/layanan.ts), dikirim oleh halaman
@@ -26,24 +35,25 @@ export default function EdukasiDaftar({ daftarArtikel, daftarTopik }: Props) {
     <div className="mx-auto max-w-5xl px-5 pb-20">
       {/* Filter topik */}
       <div className="mb-6 flex flex-wrap justify-center gap-2">
-        {pilihanTopik.map((t) => (
-          <button
-            key={t.id}
-            onClick={() => setTopik(t.id)}
-            className={`rounded-full border-[1.5px] px-5 py-2 text-sm font-semibold transition-all ${
-              topik === t.id
-                ? "border-[#0d6e4b] bg-[#0d6e4b] text-white"
-                : "border-gray-300 bg-white text-gray-700 hover:border-gray-400"
-            }`}
-          >
-            {t.label}
-          </button>
-        ))}
+        {pilihanTopik.map((t) => {
+          const tn = TONE.emerald;
+          return (
+            <button
+              key={t.id}
+              onClick={() => setTopik(t.id)}
+              className={`rounded-full border-[1.5px] px-5 py-2 text-sm font-semibold transition-all ${
+                topik === t.id ? `border-transparent shadow-sm ${tn.ajakan}` : `${tn.kartu} ${tn.label}`
+              }`}
+            >
+              {t.label}
+            </button>
+          );
+        })}
       </div>
 
       {/* Tab Artikel / Video */}
       <div className="mb-10 flex justify-center">
-        <div className="flex gap-1 rounded-full bg-gray-100 p-1" role="tablist">
+        <div className="flex gap-1 rounded-full bg-[#e6f3ee] p-1" role="tablist">
           {([["artikel", "Artikel"], ["video", "Video"]] as const).map(([id, label]) => (
             <button
               key={id}
@@ -51,7 +61,7 @@ export default function EdukasiDaftar({ daftarArtikel, daftarTopik }: Props) {
               aria-selected={tab === id}
               onClick={() => setTab(id)}
               className={`rounded-full px-9 py-2 text-sm transition-all ${
-                tab === id ? "bg-white font-bold text-gray-900 shadow-sm" : "font-medium text-gray-500"
+                tab === id ? "bg-white font-bold text-[#034d38] shadow-sm" : "font-medium text-[#5f7d72]"
               }`}
             >
               {label}
@@ -66,34 +76,37 @@ export default function EdukasiDaftar({ daftarArtikel, daftarTopik }: Props) {
           <p className="mt-16 text-center text-gray-400">Belum ada artikel untuk topik ini.</p>
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {artikel.map((a) => (
-              <Link
-                key={a.slug}
-                href={`/edukasi/${a.slug}`}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
-              >
-                <div className="relative aspect-[16/9] bg-gray-100">
-                  <Image
-                    src={a.gambar}
-                    alt=""
-                    fill
-                    sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-                <div className="flex flex-1 flex-col p-5">
-                  <div className="mb-2 flex items-center gap-2 text-xs">
-                    <span className="rounded-full bg-emerald-50 px-2.5 py-0.5 font-bold text-[#0d6e4b]">{a.kategori}</span>
-                    <span className="text-gray-400">{a.topikLabel ?? labelTopik(a.topik)}</span>
+            {artikel.map((a) => {
+              const tn = TONE[TONE_TOPIK[a.topik] ?? "emerald"];
+              return (
+                <Link
+                  key={a.slug}
+                  href={`/edukasi/${a.slug}`}
+                  className="group flex flex-col overflow-hidden rounded-2xl border border-[#e3ede9] bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(4,103,75,0.12)]"
+                >
+                  <div className="relative aspect-video bg-[#e6f3ee]">
+                    <Image
+                      src={a.gambar}
+                      alt=""
+                      fill
+                      sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
+                      className="object-cover"
+                    />
                   </div>
-                  <h2 className="mb-2 text-base font-bold leading-snug text-gray-900 group-hover:text-[#0d6e4b]" style={POPPINS}>
-                    {a.judul}
-                  </h2>
-                  <p className="mb-4 line-clamp-3 text-sm text-gray-500">{a.ringkasan}</p>
-                  <p className="mt-auto text-xs text-gray-400">{a.menit} menit baca</p>
-                </div>
-              </Link>
-            ))}
+                  <div className="flex flex-1 flex-col p-5">
+                    <div className="mb-2 flex items-center gap-2 text-xs">
+                      <span className={`rounded-full px-2.5 py-0.5 font-bold ${tn.ikon} ${tn.label}`}>{a.kategori}</span>
+                      <span className="text-[#5f7d72]">{a.topikLabel ?? labelTopik(a.topik)}</span>
+                    </div>
+                    <h2 className="mb-2 text-base font-bold leading-snug text-[#1f2e28] group-hover:text-[#04674b]" style={POPPINS}>
+                      {a.judul}
+                    </h2>
+                    <p className="mb-4 line-clamp-3 text-sm text-[#5f7d72]">{a.ringkasan}</p>
+                    <p className="mt-auto text-xs text-[#5f7d72]">{a.menit} menit baca</p>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         ))}
 
