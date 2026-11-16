@@ -5,6 +5,7 @@ import Image from "next/image";
 import TombolTanyaPuan from "@/components/fitur/puan-chat/TombolTanyaPuan";
 import { Fraunces } from "next/font/google";
 import "./tentang.css";
+import { EMAIL_KONTAK, LINK_GMAIL } from "@/lib/kontak";
 
 const fraunces = Fraunces({ subsets: ["latin"], weight: "600", variable: "--font-fraunces" });
 
@@ -337,6 +338,7 @@ export default function TentangPage() {
                 keuangan profesional. Untuk pengaduan resmi, hubungi lembaga berwenang:
               </p>
               <div className="contacts">
+                <p>Pertanyaan atau masukan untuk EduPuan? Tulis ke <a href={LINK_GMAIL} target="_blank" rel="noopener noreferrer"><b>{EMAIL_KONTAK}</b></a>.</p>
                 <span>OJK: 157</span>
                 <span>Komnas Perempuan</span>
                 <span>patrolisiber.id</span>
@@ -352,9 +354,10 @@ export default function TentangPage() {
               <Link href="/#mulai-dari-sini" className="btn b1">
                 Pilih Kondisimu <Panah />
               </Link>
-              <Link href="#kontak" className="btn b2">
-                Kontak Kami
-              </Link>
+              <a href={LINK_GMAIL} target="_blank" rel="noopener noreferrer" className="btn b2">
+              <Ikon><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></Ikon>
+                 Kontak Kami
+              </a>
             </div>
           </div>
         </div>
