@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import Link from "next/link";
 import Alert from "@/components/ui/Alert";
@@ -36,7 +37,10 @@ export default function MauPinjamPage() {
   return (
     <div className="min-h-full bg-gray-50">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10">
-        <h1 className="text-3xl font-extrabold text-gray-900 mb-2">Sebelum pinjam, cek dulu.</h1>
+        <h1 className="text-3xl font-extrabold text-gray-900 mb-2">
+          Sebelum pinjam, cek dulu.
+        </h1>
+
         <p className="text-gray-500 mb-8">
           Pinjaman terbaik adalah yang tidak perlu diambil. Kalau memang perlu, pastikan kamu sudah tahu
           risikonya.
@@ -45,20 +49,38 @@ export default function MauPinjamPage() {
         <div className="grid md:grid-cols-3 gap-5">
           {ALAT.map((a) => {
             const t = TONE[a.tone];
+
             return (
               <Link
                 key={a.href}
                 href={a.href}
                 className={`group flex flex-col rounded-2xl border-2 p-6 transition-all hover:-translate-y-0.5 hover:shadow-md active:scale-[.98] ${t.kartu}`}
               >
+                {/* Ikon */}
                 <span
                   className={`mb-4 flex h-14 w-14 items-center justify-center rounded-full text-3xl ${t.ikon}`}
                   aria-hidden="true"
                 >
                   {a.ikon}
                 </span>
-                <div className="mb-1.5 text-base font-bold text-gray-900">{a.judul}</div>
-                <div className="text-sm leading-relaxed text-gray-600">{a.isi}</div>
+
+                {/* Judul berbentuk kapsul */}
+                <h2
+                  className={`mb-3 w-fit rounded-full px-4 py-2 text-base font-bold text-white ${
+                    a.tone === "emerald"
+                      ? "bg-[#25865B]"
+                      : a.tone === "sky"
+                        ? "bg-[#397FB8]"
+                        : "bg-[#C05200]"
+                  }`}
+                >
+                  {a.judul}
+                </h2>
+
+                {/* Deskripsi */}
+                <div className="text-sm leading-relaxed text-gray-600">
+                  {a.isi}
+                </div>
               </Link>
             );
           })}
