@@ -17,7 +17,7 @@ export default function Faq() {
     <section
       id="faq"
       className="scroll-mt-28"
-      style={{ background: "#f9fafb", borderTop: "1px solid #f3f4f6", padding: "72px 0" }}
+      style={{ background: "#f9fafb", borderTop: "1px solid #a7d8bf", padding: "72px 0" }}
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-10">
         <div style={{ textAlign: "center", marginBottom: 48 }}>
@@ -55,9 +55,9 @@ export default function Faq() {
               <div
                 key={item.tanya}
                 style={{
-                  background: "#F9FAFB",
+                  background: "#e8f5ee",
                   borderRadius: 16,
-                  border: "1px solid #BEE0D0",
+                  border: "1px solid #a7d8bf",
                   overflow: "hidden",
                   boxShadow: "0 1px 4px rgba(0,0,0,.04)",
                 }}
@@ -86,7 +86,7 @@ export default function Faq() {
                       width: 28,
                       height: 28,
                       borderRadius: "50%",
-                      background: buka ? "#0d6e4b" : "#fff",
+                      background: buka ? "#14704a" : "#cdebdc",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -97,7 +97,7 @@ export default function Faq() {
                     <svg
                       viewBox="0 0 24 24"
                       fill="none"
-                      stroke={buka ? "#fff" : "#6b7280"}
+                      stroke={buka ? "#fff" : "#14704a"}
                       strokeWidth="2.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
