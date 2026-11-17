@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import KartuFitur from "@/components/ui/KartuFitur";
-import { TONE, type Tone } from "@/lib/tone";
+import type { Tone } from "@/lib/tone";
 
 export const metadata: Metadata = {
   title: "Sudah Terjerat – EduPuan",
