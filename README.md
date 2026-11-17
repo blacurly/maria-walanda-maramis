@@ -13,7 +13,7 @@ Konten disusun untuk tiga kondisi: **mau pinjam**, **sudah terjerat**, dan **bin
 
 | | |
 |---|---|
-| 🌐 Website | _diisi saat rilis ke production_ |
+| 🌐 Website | [edupuan.vercel.app](https://edupuan.vercel.app) |
 | 📄 Dokumentasi API | [`web/docs/api.md`](web/docs/api.md) |
 | 🗄️ ERD database | [`web/docs/erd.md`](web/docs/erd.md) |
 | 🤖 Dokumentasi AI | [`web/docs/ai.md`](web/docs/ai.md) |
@@ -43,6 +43,7 @@ Konten disusun untuk tiga kondisi: **mau pinjam**, **sudah terjerat**, dan **bin
 | **Bingung mulai** | `/bingung-mulai` | Ceritakan situasi dengan bahasa sendiri, lalu diarahkan ke fitur dan pihak yang tepat |
 | **Darurat** | `/darurat` | Nomor yang bisa langsung dihubungi saat menghadapi ancaman penagih, kekerasan, atau tekanan berat |
 | **Edukasi** | `/edukasi` | Artikel literasi keuangan dan hukum pinjol |
+| **FAQ** | `/faq` | Jawaban singkat untuk pertanyaan yang paling sering muncul seputar pinjol |
 | **Puan AI** | tombol chat di semua halaman | Tanya jawab seputar pinjol dengan sumber pasal |
 
 ## Teknologi
@@ -50,9 +51,10 @@ Konten disusun untuk tiga kondisi: **mau pinjam**, **sudah terjerat**, dan **bin
 | Lapisan | Teknologi |
 |---|---|
 | Front-end & back-end | **Next.js 16** (App Router, Route Handler, Server Action), **React 19**, **TypeScript**, **Tailwind CSS v4** |
+| Komponen UI | **shadcn/ui** (Radix UI) + ikon lucide-react |
 | Database | **Supabase PostgreSQL** + Row Level Security (RLS) |
 | Vector database | **pgvector** (di Supabase yang sama) |
-| AI | **Google Gemini**: `gemini-3.1-flash-lite` (menjawab), `gemini-embedding-001` (embedding) |
+| AI | **Google Gemini**: `gemini-3.1-flash-lite` (menjawab, cadangan `gemini-3.6-flash`), `gemini-embedding-001` (embedding) |
 | Ekspor dokumen | jsPDF |
 | Hosting | **Vercel** |
 
@@ -74,7 +76,7 @@ flowchart LR
 - **Satu aplikasi Next.js** berisi halaman (front-end) dan API (back-end). Semuanya di-deploy sebagai satu proyek Vercel.
 - **Kunci rahasia hanya di server.** Browser hanya memegang kunci *publishable* Supabase, yang dibatasi RLS sehingga hanya bisa membaca data publik.
 - **Semua endpoint dibatasi** jumlah permintaannya per pengunjung. Endpoint tambah, ubah, dan hapus butuh kunci admin.
-- Detail endpoint ada di [`web/docs/api.md`](web/docs/api.md). Detail 16 tabel database, relasi, normalisasi, dan 69 uji RLS ada di [`web/docs/erd.md`](web/docs/erd.md).
+- Detail 24 endpoint ada di [`web/docs/api.md`](web/docs/api.md). Detail 16 tabel database, relasi, normalisasi, dan 69 uji RLS ada di [`web/docs/erd.md`](web/docs/erd.md).
 
 ## Fitur AI: Puan AI
 
@@ -200,6 +202,7 @@ npx --yes tsx@4.20.6 scripts/uji-bias-puan.ts       # uji bias (memakai kuota Ge
    Gunakan `ADMIN_API_KEY` **yang berbeda** dari laptop.
 4. **Production branch: `master`**. Branch lain otomatis mendapat *Preview deployment*.
 5. Endpoint `/api/chat` memakai Node.js runtime dengan batas 60 detik (`maxDuration`), sudah diatur di kode.
+6. **Settings → Functions → Function Region: Mumbai (`bom1`)**, satu wilayah dengan database Supabase supaya respons lebih cepat.
 
 ## Alur kerja GitHub
 
