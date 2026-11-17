@@ -6,6 +6,7 @@ import Link from "next/link";
 import { labelTopik, type Artikel, type Topik } from "@/data/artikel";
 import { VIDEO_EDUKASI } from "@/data/videoEdukasi";
 import { TONE, type Tone } from "@/lib/tone";
+import { Badge } from "@/components/ui/badge";
 
 const POPPINS = { fontFamily: "var(--font-poppins), sans-serif" };
 
@@ -95,7 +96,7 @@ export default function EdukasiDaftar({ daftarArtikel, daftarTopik }: Props) {
                   </div>
                   <div className="flex flex-1 flex-col p-5">
                     <div className="mb-2 flex items-center gap-2 text-xs">
-                      <span className={`rounded-full px-2.5 py-0.5 font-bold ${tn.ikon} ${tn.label}`}>{a.kategori}</span>
+                      <Badge className={`border-transparent px-2.5 font-bold ${tn.ikon} ${tn.label}`}>{a.kategori}</Badge>
                       <span className="text-[#5f7d72]">{a.topikLabel ?? labelTopik(a.topik)}</span>
                     </div>
                     <h2 className="mb-2 text-base font-bold leading-snug text-[#1f2e28] group-hover:text-[#04674b]" style={POPPINS}>

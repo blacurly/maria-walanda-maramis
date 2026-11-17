@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { TONE, type Tone } from "@/lib/tone";
+import KartuFitur from "@/components/ui/KartuFitur";
+import type { Tone } from "@/lib/tone";
 
 export const metadata: Metadata = {
   title: "Sudah Terjerat – EduPuan",
@@ -73,30 +73,21 @@ const KONTAK = [
 ];
 
 function KartuAlat({ alat }: { alat: Alat }) {
-  const t = TONE[alat.tone];
   return (
-    <Link
+    <KartuFitur
       href={alat.href}
-      className={`group flex w-full flex-col items-start rounded-xl border p-5 text-left shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:translate-y-0 ${t.kartu} ${
-        alat.mendesak ? "sm:min-h-48" : "sm:min-h-44"
-      }`}
-    >
-      {alat.ikon === "SOS" ? (
-        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-rose-100">
+      tone={alat.tone}
+      judul={alat.judul}
+      isi={alat.isi}
+      ajakan={alat.ajakan}
+      ikon={
+        alat.ikon === "SOS" ? (
           <span className="rounded-md bg-red-600 px-1.5 py-0.5 text-xs font-black text-white">SOS</span>
-        </span>
-      ) : (
-        <span className={`flex h-12 w-12 items-center justify-center rounded-full text-2xl leading-none ${t.ikon}`} aria-hidden="true">
-          {alat.ikon}
-        </span>
-      )}
-      <span className="mt-4 text-base font-bold text-foreground">{alat.judul}</span>
-      <span className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{alat.isi}</span>
-      <span className={`mt-5 inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition-colors ${t.ajakan}`}>
-        {alat.ajakan}
-        <span aria-hidden="true">→</span>
-      </span>
-    </Link>
+        ) : (
+          alat.ikon
+        )
+      }
+    />
   );
 }
 
