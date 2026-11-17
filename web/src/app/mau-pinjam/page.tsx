@@ -1,8 +1,7 @@
-
 import type { Metadata } from "next";
-import Link from "next/link";
 import Alert from "@/components/ui/Alert";
-import { TONE, type Tone } from "@/lib/tone";
+import KartuFitur from "@/components/ui/KartuFitur";
+import type { Tone } from "@/lib/tone";
 
 export const metadata: Metadata = {
   title: "Mau Pinjam – EduPuan",
@@ -47,43 +46,17 @@ export default function MauPinjamPage() {
         </p>
 
         <div className="grid md:grid-cols-3 gap-5">
-          {ALAT.map((a) => {
-            const t = TONE[a.tone];
-
-            return (
-              <Link
-                key={a.href}
-                href={a.href}
-                className={`group flex flex-col rounded-2xl border-2 p-6 transition-all hover:-translate-y-0.5 hover:shadow-md active:scale-[.98] ${t.kartu}`}
-              >
-                {/* Ikon */}
-                <span
-                  className={`mb-4 flex h-14 w-14 items-center justify-center rounded-full text-3xl ${t.ikon}`}
-                  aria-hidden="true"
-                >
-                  {a.ikon}
-                </span>
-
-                {/* Judul berbentuk kapsul */}
-                <h2
-                  className={`mb-3 w-fit rounded-full px-4 py-2 text-base font-bold text-white ${
-                    a.tone === "emerald"
-                      ? "bg-[#25865B]"
-                      : a.tone === "sky"
-                        ? "bg-[#397FB8]"
-                        : "bg-[#C05200]"
-                  }`}
-                >
-                  {a.judul}
-                </h2>
-
-                {/* Deskripsi */}
-                <div className="text-sm leading-relaxed text-gray-600">
-                  {a.isi}
-                </div>
-              </Link>
-            );
-          })}
+          {ALAT.map((a) => (
+            <KartuFitur
+              key={a.href}
+              href={a.href}
+              ikon={a.ikon}
+              judul={a.judul}
+              isi={a.isi}
+              tone={a.tone}
+              varian="kapsul"
+            />
+          ))}
         </div>
 
         <div className="mt-6">
