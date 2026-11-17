@@ -21,18 +21,21 @@ export default function PageBar() {
       <BackButton href={induk} ariaLabel={`Kembali ke ${PETA_HALAMAN[induk].judul}`} />
 
         <nav aria-label="Breadcrumb" className="min-w-0 flex-1 overflow-x-auto">
-          <ol className="flex min-w-max items-center gap-2 text-sm sm:text-base">
+          {/* Di HP hanya "Beranda › Halaman ini" yang tampil (tingkat tengah disembunyikan),
+              supaya nama halaman tidak terpotong. Di layar lebar semua tingkat tampil. */}
+          <ol className="flex min-w-0 items-center gap-2 text-sm sm:min-w-max sm:text-base">
             {jalur.map((a, i) => {
               const terakhir = i === jalur.length - 1;
+              const tengah = i > 0 && !terakhir;
               return (
-                <li key={a} className="flex items-center gap-2 min-w-0">
+                <li key={a} className={`${tengah ? "hidden sm:flex" : "flex"} min-w-0 items-center gap-2`}>
                   {i > 0 && (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true">
                       <polyline points="9 18 15 12 9 6" />
                     </svg>
                   )}
                   {terakhir ? (
-                    <span aria-current="page" className="max-w-44 truncate font-semibold text-foreground sm:max-w-none">
+                    <span aria-current="page" className="truncate font-semibold text-foreground">
                       {PETA_HALAMAN[a].judul}
                     </span>
                   ) : (

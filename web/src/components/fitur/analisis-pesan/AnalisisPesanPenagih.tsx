@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 
+// Batas panjang pesan yang dianalisis (pesan penagih biasanya hanya beberapa kalimat)
+const MAKS_PESAN = 2000;
+
 /* =========================================================
    Analisis Pesan Penagih — EduPuan
    Cara kerja: aturan kata (tanpa AI), dibaca per kalimat,
@@ -241,9 +244,14 @@ export default function AnalisisPesanPenagih({ onBack, onSemuaHak, onDokumentasi
           <textarea
             id="app-msg"
             value={msg}
+            maxLength={MAKS_PESAN}
+            aria-describedby="app-msg-hitung"
             onChange={(e) => onChange(e.target.value)}
             placeholder={'Contoh: "Kalau tidak bayar hari ini akan saya sebarkan ke semua kontak kamu dan keluarga kamu!"'}
           />
+          <p id="app-msg-hitung" className="app-muted" style={{ margin: "4px 0 0", fontSize: 12, textAlign: "right" }}>
+            {msg.length.toLocaleString("id-ID")} / {MAKS_PESAN.toLocaleString("id-ID")} karakter
+          </p>
           <button className="app-btn" type="button" disabled={!msg.trim()} onClick={analyze}>Analisis Pesan →</button>
           <details className="app-rules">
             <summary>Lihat aturan yang dipakai</summary>
@@ -291,7 +299,7 @@ export default function AnalisisPesanPenagih({ onBack, onSemuaHak, onDokumentasi
                             <strong>{h.rule.name}</strong>
                             {cond && <span className="app-tag">Ancaman bersyarat</span>}
                           </div>
-                          {cond && <p>Kalimatnya memakai kata "tidak", tapi disertai syarat. Ini tetap bentuk ancaman.</p>}
+                          {cond && <p>Kalimatnya memakai kata “tidak”, tapi disertai syarat. Ini tetap bentuk ancaman.</p>}
                           {h.items.map((i, k) => (
                             <div className="app-quote" key={k}>“<Highlight sentence={i.sentence} marks={i.marks} />”</div>
                           ))}

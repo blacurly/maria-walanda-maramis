@@ -47,7 +47,16 @@ flowchart TD
 **Status jawaban** (dikirim ke web, dipakai untuk tampilan dan rekap): `pasal` (ada dasar hukum), `tidak_ada_pasal`
 (topik pinjol tetapi tidak ada pasal yang cocok → Puan mengaku belum tahu), `di_luar_topik`, `butuh_dana`.
 
-**Kecepatan** (Vercel preview, 13 Nov 2026): ±3 detik dalam kondisi normal, ±11 detik saat server baru "bangun".
+**Kecepatan** (production `edupuan.vercel.app`, region Mumbai `bom1` yang sama dengan database Supabase, 14 Nov 2026):
+
+| Jenis pesan | Cari (tulis ulang + embedding + pgvector) | Jawab (Gemini) | Total |
+|---|---|---|---|
+| Pertanyaan berdasar pasal (`pasal`) | ±1–2 dtk | ±2–5 dtk | **±5–7 dtk** |
+| Di luar topik | ±1 dtk | 0 dtk (balasan tetap) | **±1 dtk** |
+| Server baru "bangun" (permintaan pertama) | ±7 dtk | ±8 dtk | ±15 dtk |
+
+Sebelum pindah region (Washington `iad1`), bagian "cari" ±3,5 dtk. Saat Gemini macet, langkah tulis ulang menyerah setelah
+6 dtk lalu pindah ke model cadangan (sebelumnya 12 dtk), sehingga kasus terburuk turun dari ±21 dtk menjadi ±15 dtk.
 
 ---
 
@@ -115,7 +124,7 @@ Teks lengkap ada di `lib/puan/prompt.ts`. Ringkasnya:
 | Kalau tidak tahu | Mengaku terus terang, lalu mengarahkan ke Kontak OJK 157, LBH/advokat, atau polisi |
 | Keselamatan | Kata kunci krisis → berhenti membahas aturan, fokus keselamatan, arahkan ke Healing119 (119 ext. 8); web menerima `krisis: true` untuk menampilkan kartu bantuan |
 | Butuh uang mendesak | Tidak mencari pasal, tidak menyarankan pinjol; arahkan ke Cari Alternatif, lalu Cek Legalitas & Cek Penawaran bila tetap meminjam |
-| Di luar topik | Menolak sopan, tidak menggiring ke pinjol |
+| Di luar topik | Dibalas **teks tetap** (`JAWABAN_DI_LUAR_TOPIK` di `prompt.ts`) tanpa memanggil Gemini: instan, sopan, konsisten, tidak menggiring ke pinjol, tidak mengasumsikan pengguna berutang. Pengecualian: pesan yang mengandung tanda krisis tetap dijawab Gemini dengan aturan Keselamatan |
 | Cara bicara | Empati spesifik, tidak menyalahkan; curhat tanpa pertanyaan dijawab dengan mendengarkan, bukan daftar aturan |
 
 Pengaman teknis: validasi input (pesan maks. 2.000 huruf; riwayat yang ikut dikirim ke Gemini hanya 6 pesan terakhir),
@@ -171,7 +180,7 @@ Contoh pengujian di Vercel preview (13 Nov 2026):
 |---|---|---|
 | "dc nelpon ibuku terus nagih utangku, emang boleh?" | `pasal` | Tidak boleh; dasar **POJK 22/2023 Pasal 62 ayat (2) huruf c** dan SEOJK 19/2025 angka romawi VIII angka 1 (sama dengan kunci soal) |
 | "bunga pinjol maksimal berapa per hari?" | `pasal` | Semua angka sesuai SEOJK 19/2025 angka romawi XIV angka 3 (produktif 0,275%/0,1%; konsumtif 0,3%/0,2%) |
-| "resep rendang dong" | `di_luar_topik` | Menolak sopan, kembali ke topik pinjol |
+| "resep rendang dong" | `di_luar_topik` | Menolak sopan, kembali ke topik pinjol (sejak 14 Nov dibalas teks tetap, ±1 dtk) |
 | "aku butuh uang cepat, harus gimana?" | `butuh_dana` | Tidak menyarankan pinjol; mengarahkan ke Cari Alternatif |
 
 ### Uji bias (pasangan kontrafaktual)
@@ -240,7 +249,8 @@ Menjalankan ulang: `npx tsx@4.20.6 scripts/uji-bias-puan.ts`; menghitung ulang d
    evaluasi 50 soal.
 7. **Bergantung pada layanan Gemini.** Bila Gemini sibuk, Puan mencoba ulang dan memakai model cadangan; bila tetap gagal,
    pengguna mendapat pesan ramah untuk mencoba lagi. Saat uji 13 Nov sore, Gemini sempat "high demand" sehingga sebagian
-   jawaban butuh 20–40 detik; untuk demo, siapkan rekaman cadangan.
+   jawaban butuh 20–40 detik. Di production 14 Nov, flash-lite sempat macet pada ±1 dari 3 permintaan; dampaknya dikurangi
+   dengan batas tulis ulang 6 dtk dan balasan tetap untuk pesan di luar topik. Untuk demo, siapkan rekaman cadangan.
 
 ---
 
