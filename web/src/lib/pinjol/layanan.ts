@@ -5,7 +5,7 @@ import { supabase } from "@/lib/supabase/publik";
 import { supabaseServer } from "@/lib/supabase/server";
 import type { KodeGalat } from "@/lib/api/galat";
 import { cekNama, saranNama, type HasilCek, type Pinjol } from "@/features/cek-legalitas/rules";
-import { LEGAL_PINJOL, ILEGAL_PINJOL, SUMBER_LEGAL, SUMBER_ILEGAL } from "@/data/dataPinjol";
+import { LEGAL_PINJOL, ILEGAL_PINJOL, SUMBER_LEGAL, SUMBER_ILEGAL, DATA_PINJOL_PER } from "@/data/dataPinjol";
 
 export type StatusPinjol = "legal" | "ilegal";
 
@@ -223,6 +223,19 @@ async function semuaPinjol(): Promise<{ daftar: Pinjol[]; dariDatabase: boolean 
 
 export function lupakanSimpanan() {
   simpanan = null;
+}
+
+// Daftar NAMA pinjol yang ringkas (tanpa alamat) untuk fitur yang butuh saran nama dan deteksi status
+// secara langsung saat pengguna mengetik: Hak Saat Ditagih, Rangkum Utang, Dokumentasi & Lapor.
+// Sumbernya database yang sama dengan Cek Legalitas, jadi perubahan lewat API CRUD langsung ikut terpakai.
+// Alamat pinjol ilegal tidak ikut dikirim.
+export type DaftarNamaPinjol = { legal: { nama: string; pt: string }[]; ilegal: string[]; per: string; dariDatabase: boolean };
+
+export async function daftarNamaPinjol(): Promise<DaftarNamaPinjol> {
+  const { daftar, dariDatabase } = await semuaPinjol();
+  const legal = daftar.filter((p) => p.status === "legal").map((p) => ({ nama: p.nama, pt: p.nama_perusahaan ?? "" }));
+  const ilegal = Array.from(new Set(daftar.filter((p) => p.status === "ilegal").map((p) => p.nama)));
+  return { legal, ilegal, per: DATA_PINJOL_PER, dariDatabase };
 }
 
 export type HasilCekLegalitas = { hasil: HasilCek; saran: Pinjol[]; dariDatabase: boolean };

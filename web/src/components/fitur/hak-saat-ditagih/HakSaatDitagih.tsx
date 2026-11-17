@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { LEGAL_PINJOL, ILEGAL_NAMES } from "@/data/dataPinjol"
+import { useDaftarNama } from "@/lib/pinjol/daftarNama"
 
 // ─── Dasar hukum (diverifikasi Oktober 2026) ─────────────────────────────────
 // type "ojk" = Pasal 62 POJK 22/2023 → hanya mengikat PUJK (pinjol legal)
@@ -85,11 +85,6 @@ const ITEMS: Item[] = [
 
 type Status = "legal" | "ilegal" | "unknown" | null
 
-// Daftar saran nama tanpa duplikat (data ilegal bisa memuat nama yang sama berkali-kali)
-const SARAN_NAMA = Array.from(
-  new Set([...LEGAL_PINJOL.map((x) => x.nama), ...ILEGAL_NAMES]),
-)
-
 const norm = (s: string) =>
   s.trim().toLowerCase().replace(/[-\s]+/g, " ")
 
@@ -150,17 +145,26 @@ export default function HakSaatDitagih() {
   const [app, setApp] = useState("")
   const [checked, setChecked] = useState<string[]>([])
   const [copied, setCopied] = useState<string | null>(null)
+  // Daftar nama pinjol dari database (GET /api/pinjol/nama), sama dengan data Cek Legalitas
+  const { data: daftar, siap, gagal } = useDaftarNama()
+
+  // Daftar saran nama tanpa duplikat (data ilegal bisa memuat nama yang sama berkali-kali)
+  const saranNama = useMemo(
+    () => Array.from(new Set([...daftar.legal.map((x) => x.nama), ...daftar.ilegal])),
+    [daftar],
+  )
 
   // ── Langkah 1: deteksi status dari data Cek Legalitas ──
   const detected = useMemo(() => {
     const q = norm(app)
     if (!q) return { status: null as Status, name: "" }
-    const legal = LEGAL_PINJOL.find((x) => norm(x.nama) === q)
+    if (!siap) return { status: null as Status, name: "" }
+    const legal = daftar.legal.find((x) => norm(x.nama) === q)
     if (legal) return { status: "legal" as Status, name: legal.nama }
-    const ilegal = ILEGAL_NAMES.find((x) => norm(x) === q)
+    const ilegal = daftar.ilegal.find((x) => norm(x) === q)
     if (ilegal) return { status: "ilegal" as Status, name: ilegal }
     return { status: "unknown" as Status, name: app.trim() }
-  }, [app])
+  }, [app, daftar, siap])
 
   const status = detected.status
   const legal = status === "legal"
@@ -229,11 +233,16 @@ export default function HakSaatDitagih() {
                 onChange={(e) => setApp(e.target.value)}
               />
               <datalist id="hsd-apps">
-                {SARAN_NAMA.map((nama) => (
+                {saranNama.map((nama) => (
                   <option key={nama} value={nama} />
                 ))}
               </datalist>
               {status && <div className={`status ${status}`}>{statusText}</div>}
+              {gagal && (
+                <p className="hint" role="status">
+                  Data legalitas belum bisa dimuat. Cek nama aplikasinya di halaman Cek Legalitas Pinjol.
+                </p>
+              )}
             </section>
 
             <section className="card">

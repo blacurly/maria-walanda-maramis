@@ -1,17 +1,16 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import { LEGAL_PINJOL, ILEGAL_NAMES, DATA_PINJOL_PER } from "@/data/dataPinjol"
+import { useDaftarNama, type DaftarNama } from "@/lib/pinjol/daftarNama"
 
 /* =============================================================================
    DOKUMENTASI & LAPOR — EduPuan
    Alur 3 langkah: 1) Tulis kronologi → 2) Hasil laporan → 3) Panduan melapor
    Status legalitas dideteksi otomatis dari data fitur Cek Legalitas
-   (LEGAL_PINJOL & ILEGAL_NAMES di src/lib/dataPinjol).
+   (database, lewat GET /api/pinjol/nama — lihat src/lib/pinjol/daftarNama.ts).
    ============================================================================= */
 
 // Samakan dengan tanggal update data di fitur Cek Legalitas setiap kali datanya diperbarui.
-const OJK_DATA_ASOF = DATA_PINJOL_PER
 
 type Status = "legal" | "ilegal" | "tidak-tahu"
 type Entry = {
@@ -188,16 +187,16 @@ const fmtShort = (d: string) =>
 const sortEntries = (e: Entry[]) =>
   [...e].sort((a, b) => (a.tgl + a.jam).localeCompare(b.tgl + b.jam))
 
-function detectApp(input: string): Detect {
+function detectApp(input: string, daftar: DaftarNama): Detect {
   const q = norm(input)
   if (q.length < 3) return { state: "empty" }
-  const exact = LEGAL_PINJOL.find(
+  const exact = daftar.legal.find(
     (x) => norm(x.nama) === q || (x.pt && norm(x.pt) === q),
   )
   if (exact) return { state: "legal", nama: exact.nama, pt: exact.pt }
-  const ilegal = ILEGAL_NAMES.find((x) => norm(x) === q)
+  const ilegal = daftar.ilegal.find((x) => norm(x) === q)
   if (ilegal) return { state: "ilegal-list", nama: ilegal }
-  const near = LEGAL_PINJOL.find(
+  const near = daftar.legal.find(
     (x) =>
       norm(x.nama).includes(q) ||
       q.includes(norm(x.nama)) ||
@@ -244,7 +243,10 @@ export default function DokumentasiLapor({
   const nextId = useRef(3)
   const docRef = useRef<HTMLDivElement>(null)
 
-  const det = useMemo(() => detectApp(app), [app])
+  // Daftar nama pinjol dari database (GET /api/pinjol/nama), sama dengan data Cek Legalitas
+  const { data: daftar, siap } = useDaftarNama()
+  const OJK_DATA_ASOF = daftar.per || "data terbaru"
+  const det = useMemo<Detect>(() => (siap ? detectApp(app, daftar) : { state: "empty" }), [app, daftar, siap])
   const status: Status =
     det.state === "legal"
       ? "legal"
@@ -539,7 +541,7 @@ export default function DokumentasiLapor({
                   onChange={(e) => setApp(e.target.value)}
                 />
                 <datalist id="dl-ojk-list">
-                  {LEGAL_PINJOL.map((x) => (
+                  {daftar.legal.map((x) => (
                     <option key={x.nama} value={x.nama}>
                       {x.pt}
                     </option>
