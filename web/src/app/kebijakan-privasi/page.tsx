@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 // ⚠️ Ganti dengan email kontak resmi tim EduPuan sebelum demo
 const EMAIL_KONTAK = "edupuan.kontak@gmail.com";
-const BERLAKU_SEJAK = "9 November 2026";
+const BERLAKU_SEJAK = "18 November 2026";
 
 function Bagian({ judul, children }: { judul: string; children: React.ReactNode }) {
   return (
@@ -45,10 +45,12 @@ export default function KebijakanPrivasiPage() {
 
       <Bagian judul="2. Data yang kami proses">
         <p>
-          <strong>a. Data yang kamu masukkan di fitur.</strong> Data di fitur seperti Rangkum Utang, Cek Penawaran, Analisis Pesan
-          Penagih, dan Cek Legalitas diproses di browser perangkatmu dan tidak kami kirim ke server.
+          <strong>a. Data yang kamu masukkan di fitur.</strong> Data di fitur Rangkum Utang, Cek Penawaran, Analisis Pesan
+          Penagih, Ceritakan Situasimu, Hak Saat Ditagih, dan Dokumentasi &amp; Lapor diproses di browser perangkatmu dan tidak
+          kami kirim ke server.
         </p>
         <ul className="list-disc space-y-1 pl-5">
+          <li><strong>Cek Legalitas Pinjol</strong> mengirim <strong>nama aplikasi</strong> yang kamu ketik, dan <strong>Cari Alternatif</strong> mengirim <strong>pilihan jawabanmu</strong> (misalnya jenjang sekolah atau jenis kebutuhan), ke server EduPuan untuk dicocokkan dengan data resmi dan disusun rekomendasinya. Data itu hanya dipakai saat itu juga, <strong>tidak disimpan dan tidak dicatat</strong>.</li>
           <li><strong>Rangkum Utang</strong> menyimpan daftar tagihanmu di penyimpanan browser (localStorage) di perangkat itu, supaya tidak hilang saat halaman ditutup. Kamu bisa menghapusnya kapan saja lewat tombol &quot;Hapus semua data&quot;.</li>
           <li><strong>Cek Penawaran</strong> tidak menyimpan angka yang kamu masukkan. Angka itu hilang saat halaman ditutup.</li>
           <li>Jika kamu memakai tombol <strong>Unduh PDF</strong>, file disimpan di perangkatmu sendiri. Simpan file itu di tempat yang aman karena berisi data keuanganmu.</li>

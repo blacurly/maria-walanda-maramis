@@ -66,5 +66,6 @@ export function rekomendasiAlternatif(kategori: CategoryKey, jawaban: Answers, p
     berikutnya: halaman.next.map(rinci),
     habis: halaman.exhausted,
     kategori_terkait: hasil.crossLink,
+    sumber: hasil.sources, // id lembaga di direktori bantuan resmi (features/cari-alternatif/data.ts)
   };
 }
