@@ -188,6 +188,9 @@ export default function PuanFab() {
 
   // Saat pertama dimuat: ambil percakapan yang tersimpan di tab ini
   useEffect(() => {
+    // sessionStorage baru bisa dibaca di browser setelah komponen tampil; membacanya saat render
+    // membuat tampilan server dan browser berbeda (hydration mismatch). Jadi setState di sini disengaja.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDaftar(bacaTersimpan());
     setSiap(true);
   }, []);

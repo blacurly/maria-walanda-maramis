@@ -50,6 +50,7 @@ export default function BeritahuKeluarga() {
               id="bk-nama"
               type="text"
               value={nama}
+              maxLength={40}
               onChange={(e) => setNama(e.target.value)}
               placeholder="Nama kamu"
               className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm outline-none focus:border-[#0d6e4b]"
