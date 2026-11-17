@@ -526,6 +526,14 @@ Tiga fitur yang sebelumnya hanya dihitung di browser kini juga tersedia sebagai 
 (`web/src/features/cek-penawaran/hitung.ts`, `features/bingung-mulai/rules.ts`, `features/cari-alternatif/rules.ts`).
 Data yang dikirim hanya dipakai untuk menghitung, **tidak disimpan**.
 
+| Endpoint | Dipakai halaman? | Alasan |
+|---|---|---|
+| `POST /api/alternatif` | ✅ **Cari Alternatif**: rekomendasi dihitung di server; teks kartu tetap dari `data.ts` di halaman | Isinya hanya pilihan jawaban (tidak sensitif) |
+| `POST /api/penawaran/cek` | ❌ Halaman tetap menghitung di perangkat (hasil berubah langsung saat mengetik) | **Privasi**: angka pinjaman dan penghasilan tidak perlu keluar dari perangkat (sesuai Kebijakan Privasi) |
+| `POST /api/situasi` | ❌ Halaman tetap memproses di perangkat | **Privasi**: cerita pengguna bisa sangat pribadi (misalnya kekerasan) |
+
+Endpoint yang tidak dipakai halaman tetap tersedia untuk klien lain dan sudah diuji memberi hasil **identik** dengan halaman.
+
 ### POST `/api/penawaran/cek`
 
 Memeriksa penawaran pinjol terhadap batas biaya OJK (SEOJK 19/SEOJK.06/2025) dan kemampuan bayar.
@@ -629,7 +637,8 @@ Rekomendasi solusi tanpa menambah utang. **Semua** pertanyaan kategori wajib dij
   "utama": [ { "id": "kampusKeuangan", "judul": "Hubungi bagian keuangan kampus", "waktu": "segera", "keterangan_waktu": "...", "alasan": "...", "langkah": ["..."], "dokumen": "...", "batasan": "..." } ],
   "berikutnya": [ ... ],
   "habis": false,
-  "kategori_terkait": null
+  "kategori_terkait": null,
+  "sumber": ["kipk", "bu"]
 }
 ```
 
