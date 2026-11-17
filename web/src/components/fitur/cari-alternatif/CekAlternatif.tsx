@@ -9,6 +9,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { ACTIONS, DIRECTORY, STATUS_LABEL, TEMPLATES, VERIFIED, type DirCategory, type DirectoryItem } from "@/features/cari-alternatif/data";
 import { CATEGORIES, page, recommend, type Answers, type CategoryKey, type RecommendResult } from "@/features/cari-alternatif/rules";
 import "./cek-alternatif.css";
+import BackButton from "@/components/ui/BackButton";
 
 type Screen = "home" | "q" | "result" | "dir";
 
@@ -111,7 +112,7 @@ export default function CekAlternatif({ onExit, logo, hideHeader }: CekAlternati
     return (
       <>
         <div className="ea-qtop">
-          <button type="button" className="ea-ghost" onClick={back}>← Kembali</button>
+          <BackButton onClick={back} />
           <span className="ea-stepnum">{done} dari {qs.length} terjawab</span>
         </div>
         <div className="ea-progress" aria-hidden="true"><div style={{ width: `${(done / qs.length) * 100}%` }} /></div>
