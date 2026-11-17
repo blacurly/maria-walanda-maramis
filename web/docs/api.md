@@ -15,6 +15,7 @@ Logika bisnis dan akses data ada di `web/src/lib/` (route hanya mengatur alur).
 | POST | `/api/umpan-balik` | Menilai jawaban Puan (membantu / belum) | Publik | 30 / 10 menit |
 | GET | `/api/pinjol` | Daftar pinjol + cari + filter + halaman | Publik | 120 / 10 menit |
 | GET | `/api/pinjol/cek` | Cek legalitas satu nama aplikasi | Publik | 120 / 10 menit |
+| GET | `/api/pinjol/nama` | Daftar nama pinjol ringkas (saran nama + deteksi status di 3 fitur) | Publik | 120 / 10 menit |
 | GET | `/api/pinjol/:id` | Detail satu pinjol | Publik | 120 / 10 menit |
 | POST | `/api/pinjol` | Tambah pinjol | 🔑 Admin | 60 / 10 menit |
 | PATCH | `/api/pinjol/:id` | Ubah sebagian data pinjol | 🔑 Admin | 60 / 10 menit |
@@ -280,6 +281,17 @@ Contoh: `GET /api/pinjol/cek?nama=Kredit%20Pintar`
 `saran`: maksimal 5 nama berizin + 3 nama ilegal yang memuat kata yang diketik.
 
 **Error:** 422 (kurang dari 2 atau lebih dari 100 huruf), 429.
+
+### GET `/api/pinjol/nama`
+
+Daftar **nama** pinjol berizin OJK (+ nama perusahaan) dan nama pinjol ilegal, ringkas, tanpa alamat. Dipakai fitur yang
+menyarankan nama dan mendeteksi status langsung saat pengguna mengetik: **Hak Saat Ditagih**, **Rangkum Utang**, dan
+**Dokumentasi & Lapor** (`web/src/lib/pinjol/daftarNama.ts`, diambil sekali per kunjungan). Sumbernya database yang sama
+dengan Cek Legalitas, sehingga perubahan lewat API CRUD langsung ikut terpakai. Balasan disimpan CDN 10 menit.
+
+```json
+{ "ok": true, "per": "Juli 2026", "legal": [ { "nama": "AdaKami", "pt": "PT Pembiayaan Digital Indonesia" } ], "ilegal": [ "..." ] }
+```
 
 ### GET `/api/pinjol/:id`
 

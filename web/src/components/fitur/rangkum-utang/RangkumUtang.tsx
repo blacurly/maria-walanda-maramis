@@ -12,7 +12,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { LEGAL_PINJOL, ILEGAL_NAMES } from "@/data/dataPinjol";
+import { muatDaftarNama } from "@/lib/pinjol/daftarNama";
 
 const FONT_HREF = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap";
 
@@ -504,6 +504,10 @@ function mountRangkumUtang(root, onExit) {
   const STATUS_TAMPIL = { checked: 'Ya, sudah pasti', unverified: 'Belum yakin', disputed: 'Aku tidak setuju' };
   const state = { debts: [], demo: false, view: 'home', id: null, filter: 'all', sort: 'due', confirmDelete: false, today: L.todayKey() };
   const app = $('app');
+  // Daftar nama pinjol dari database (GET /api/pinjol/nama), diisi setelah termuat; selama memuat, status = "Tidak ditemukan"
+  let LEGAL_PINJOL = [];
+  let ILEGAL_NAMES = [];
+  let dibongkar = false;
 
   /* ---------- Penyimpanan lokal ---------- */
   function load() {
@@ -1161,7 +1165,17 @@ function mountRangkumUtang(root, onExit) {
   state.view = state.debts.length ? 'summary' : 'home';
   render();
 
-  return function () { cleanups.forEach(function (f) { f(); }); };
+  // Setelah daftar nama pinjol termuat, gambar ulang supaya status legalitas tagihan tampil.
+  // Saat pengguna sedang mengisi formulir, tidak digambar ulang (isian tidak boleh hilang);
+  // saran dan status di formulir sudah memakai daftar terbaru saat pengguna mengetik.
+  muatDaftarNama().then(function (d) {
+    if (!d || dibongkar) return;
+    LEGAL_PINJOL = d.legal;
+    ILEGAL_NAMES = d.ilegal;
+    if (state.view !== 'form') render();
+  });
+
+  return function () { dibongkar = true; cleanups.forEach(function (f) { f(); }); };
 }
 
 export default function RangkumUtang({ onBack }: { onBack?: () => void }) {
