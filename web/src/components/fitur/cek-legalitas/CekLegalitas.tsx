@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { namaSitus, type HasilCek, type Pinjol } from "@/features/cek-legalitas/rules";
 import {
-  LINK_OJK_BERIZIN, CONTOH_NAMA, KONTAK_OJK, CIRI_BERIZIN, RISIKO_ILEGAL,
+  LINK_OJK_BERIZIN, linkCekWaOjk, CONTOH_NAMA, KONTAK_OJK, CIRI_BERIZIN, RISIKO_ILEGAL,
   LANGKAH_ILEGAL, LANGKAH_TIDAK_DITEMUKAN,
 } from "@/features/cek-legalitas/data";
 import { TONE } from "@/lib/tone";
@@ -286,8 +286,8 @@ export default function CekLegalitas({ sumber, dariDatabase }: Props) {
               <Daftar isi={CIRI_BERIZIN} warna="hijau" />
               <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-gray-100 pt-4">
                 <button onClick={ulangCek} className="text-xs text-gray-400 underline hover:text-gray-600">Cek pinjol lain</button>
-                <a href={LINK_OJK_BERIZIN} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-[#0d6e4b] hover:underline">
-                  Konfirmasi di situs OJK →
+                <a href={linkCekWaOjk(hasil.data.nama)} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-[#0d6e4b] hover:underline">
+                  Konfirmasi ke Kontak OJK (WhatsApp) →
                 </a>
               </div>
             </div>
@@ -321,7 +321,7 @@ export default function CekLegalitas({ sumber, dariDatabase }: Props) {
             </p>
             <div className="flex flex-wrap gap-2">
               <button onClick={ulangCek} className="rounded-xl bg-[#0d6e4b] px-5 py-2.5 text-sm font-bold text-white hover:opacity-90">← Coba nama lain</button>
-              <a href={LINK_OJK_BERIZIN} target="_blank" rel="noopener noreferrer" className="rounded-xl border-2 border-[#0d6e4b] bg-white px-5 py-2.5 text-sm font-bold text-[#0d6e4b] hover:bg-emerald-50">Cek ke OJK ↗</a>
+              <a href={linkCekWaOjk(dicek)} target="_blank" rel="noopener noreferrer" className="rounded-xl border-2 border-[#0d6e4b] bg-white px-5 py-2.5 text-sm font-bold text-[#0d6e4b] hover:bg-emerald-50">Tanya OJK via WhatsApp ↗</a>
             </div>
           </div>
         )}
@@ -370,7 +370,7 @@ export default function CekLegalitas({ sumber, dariDatabase }: Props) {
             <div className="mb-5"><Daftar isi={LANGKAH_TIDAK_DITEMUKAN} warna="abu" /></div>
             <div className="flex flex-wrap gap-2">
               <button onClick={ulangCek} className="rounded-xl bg-[#0d6e4b] px-5 py-2.5 text-sm font-bold text-white hover:opacity-90">← Coba nama lain</button>
-              <a href={LINK_OJK_BERIZIN} target="_blank" rel="noopener noreferrer" className="rounded-xl border-2 border-[#0d6e4b] bg-white px-5 py-2.5 text-sm font-bold text-[#0d6e4b] hover:bg-emerald-50">Cek ke OJK ↗</a>
+              <a href={linkCekWaOjk(dicek)} target="_blank" rel="noopener noreferrer" className="rounded-xl border-2 border-[#0d6e4b] bg-white px-5 py-2.5 text-sm font-bold text-[#0d6e4b] hover:bg-emerald-50">Tanya OJK via WhatsApp ↗</a>
             </div>
           </div>
         )}

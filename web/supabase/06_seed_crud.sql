@@ -116,7 +116,7 @@ select a.id, v.jenis, v.teks, v.tautan, v.urutan
 from public.artikel a
 cross join (values
   ('dasar_hukum', 'POJK 40/2024 tentang Layanan Pendanaan Bersama Berbasis Teknologi Informasi (LPBBTI)', null, 1),
-  ('sumber', 'OJK – Daftar penyelenggara pinjaman daring berizin', 'https://www.ojk.go.id/id/kanal/iknb/financial-technology/Pages/Penyelenggara-Fintech-Lending-Berizin-dan-Terdaftar-di-OJK.aspx', 1),
+  ('sumber', 'OJK – Direktori penyelenggara pindar (LPBBTI) berizin', 'https://ojk.go.id/id/kanal/iknb/data-dan-statistik/direktori/fintech/Default.aspx', 1),
   ('sumber', 'OJK – POJK 40/2024 tentang LPBBTI', 'https://ojk.go.id/id/regulasi/Pages/POJK-40-Tahun-2024-Layanan-Pendanaan-Bersama-Berbasis-Teknologi-Informasi.aspx', 2)
 ) as v(jenis, teks, tautan, urutan)
 where a.slug = 'pinjol-legal-vs-ilegal'
