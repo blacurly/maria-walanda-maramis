@@ -1,8 +1,18 @@
 // Teks dan kontak untuk fitur Cek Legalitas
 import type { Tone } from "@/lib/tone";
 
+// Halaman direktori resmi OJK (daftar terbaru per bulan). Halaman lama "Penyelenggara-Fintech-Lending-..." sudah 404.
 export const LINK_OJK_BERIZIN =
-  "https://www.ojk.go.id/id/kanal/iknb/financial-technology/Pages/Penyelenggara-Fintech-Lending-Berizin-dan-Terdaftar-di-OJK.aspx";
+  "https://ojk.go.id/id/kanal/iknb/data-dan-statistik/direktori/fintech/Default.aspx";
+
+// Tombol "Cek ke OJK": membuka WhatsApp Kontak OJK (081 157 157 157) dengan pesan yang sudah berisi nama aplikasinya.
+export function linkCekWaOjk(nama: string): string {
+  const n = nama.trim();
+  const pesan = n
+    ? `Halo Kontak OJK, saya ingin mengecek apakah aplikasi pinjaman "${n}" terdaftar dan berizin di OJK. Terima kasih.`
+    : "Halo Kontak OJK, saya ingin mengecek legalitas sebuah aplikasi pinjaman online. Terima kasih.";
+  return `https://wa.me/6281157157157?text=${encodeURIComponent(pesan)}`;
+}
 
 export const CONTOH_NAMA = ["AdaKami", "Indodana", "Uang Cepat"];
 

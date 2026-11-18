@@ -88,8 +88,8 @@ export const ARTIKEL: Artikel[] = [
     fitur: { label: "Cek legalitas pinjol", href: "/mau-pinjam/cek-legalitas" },
     sumber: [
       {
-        label: "OJK – Daftar penyelenggara pinjaman daring berizin",
-        url: "https://www.ojk.go.id/id/kanal/iknb/financial-technology/Pages/Penyelenggara-Fintech-Lending-Berizin-dan-Terdaftar-di-OJK.aspx",
+        label: "OJK – Direktori penyelenggara pindar (LPBBTI) berizin",
+        url: "https://ojk.go.id/id/kanal/iknb/data-dan-statistik/direktori/fintech/Default.aspx",
       },
       {
         label: "OJK – POJK 40/2024 tentang LPBBTI",
