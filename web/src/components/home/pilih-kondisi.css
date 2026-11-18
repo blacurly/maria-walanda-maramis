@@ -41,7 +41,8 @@
 
 .ep-kondisi .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* minmax(0, 1fr): kolom boleh menyempit, supaya kartu tidak melebar keluar layar di tablet */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
 }
 
@@ -145,9 +146,13 @@
 /* ── Tablet & HP ── */
 @media (max-width: 1023px) {
   .ep-kondisi .wrap { padding: 0 24px; }
+  /* Tablet: 3 kolom sempit, jadi isi kartu disusun atas-bawah */
+  .ep-kartu { flex-direction: column; }
 }
 
 @media (max-width: 767px) {
   .ep-kondisi .wrap { padding: 0 16px; }
   .ep-kondisi .grid { grid-template-columns: 1fr; gap: 14px; }
+  /* HP: 1 kolom lebar, kembali ke susunan kiri-kanan */
+  .ep-kartu { flex-direction: row; }
 }

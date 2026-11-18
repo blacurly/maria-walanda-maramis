@@ -199,19 +199,19 @@ export default function CeritakanSituasimu() {
                     {hasil.pihak.map((p) => {
                       const P = PIHAK[p.id];
                       return (
-                        <div key={p.id} className="flex min-w-0 flex-col gap-2 rounded-2xl border border-gray-100 bg-white p-4 shadow-sm">
+                        <div key={p.id} className={`flex min-w-0 flex-col gap-2 rounded-2xl border p-4 shadow-sm ${TONE.violet.kartu}`}>
                           <Tag ungu>Pihak berwenang</Tag>
                           <h3 className="font-semibold">{P.name}</h3>
                           <p className="text-sm">{p.alasan || P.untuk}</p>
                           <div className="flex flex-col gap-1.5">
                             {P.kontak.map(([k, v]) => (
-                              <div key={k + v} className="flex min-w-0 flex-wrap items-center gap-2 rounded-lg bg-gray-50 px-2.5 py-1.5 text-sm">
+                              <div key={k + v} className="flex min-w-0 flex-wrap items-center gap-2 rounded-lg bg-white/80 px-2.5 py-1.5 text-sm">
                                 <span className="text-gray-500">{k}</span>
                                 <b className="select-all break-words">{v}</b>
                                 {/[\d.]/.test(v) && (
                                   <button
                                     onClick={() => salin(v)}
-                                    className="ml-auto rounded-md border border-gray-200 bg-white px-2 py-1 text-xs font-semibold text-[#0d6e4b]"
+                                    className="ml-auto rounded-md border border-violet-200 bg-white px-2 py-1 text-xs font-semibold text-violet-800"
                                   >
                                     {disalin === v ? "Disalin" : "Salin"}
                                   </button>

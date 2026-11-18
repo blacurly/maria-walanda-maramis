@@ -7,10 +7,22 @@
  */
 import { useEffect, useState, type ReactNode } from "react";
 import { ACTIONS, DIRECTORY, STATUS_LABEL, TEMPLATES, VERIFIED, type DirCategory, type DirectoryItem } from "@/features/cari-alternatif/data";
-import { CATEGORIES, page, recommend, type Answers, type CategoryKey, type RecommendResult } from "@/features/cari-alternatif/rules";
+import { CATEGORIES, type Answers, type CategoryKey, type RecommendResult } from "@/features/cari-alternatif/rules";
 import "./cek-alternatif.css";
+import BackButton from "@/components/ui/BackButton";
 
 type Screen = "home" | "q" | "result" | "dir";
+
+// Balasan POST /api/alternatif yang dipakai halaman ini (lihat docs/api.md bagian Kalkulator)
+type BalasanAlternatif = {
+  ringkasan: string;
+  darurat: boolean;
+  utama: { id: string; alasan: string }[];
+  berikutnya: { id: string; alasan: string }[];
+  habis: boolean;
+  kategori_terkait: CategoryKey | null;
+  sumber: string[];
+};
 
 const TIMING = {
   segera: ["ea-t-segera", "Bisa hari ini"],
@@ -39,6 +51,36 @@ export default function CekAlternatif({ onExit, logo, hideHeader }: CekAlternati
   const [shownTpl, setShownTpl] = useState<Record<string, boolean>>({});
   const [copyMsg, setCopyMsg] = useState<Record<string, string>>({});
   const [scrollTarget, setScrollTarget] = useState<string | null>(null);
+
+  // Rekomendasi dihitung di SERVER (POST /api/alternatif), memakai aturan yang sama (features/cari-alternatif/rules.ts).
+  // Teks kartu (judul, langkah, dokumen) tetap dari data.ts di halaman. Hasil disimpan per "kunci" (kategori + jawaban +
+  // putaran); selama kunci saat ini belum punya hasil, halaman menampilkan tanda memuat.
+  const kunciHasil = screen === "result" && cat ? JSON.stringify([cat, answers, round]) : null;
+  const [hasilApi, setHasilApi] = useState<{ kunci: string; data?: BalasanAlternatif; galat?: string } | null>(null);
+  const [cobaLagi, setCobaLagi] = useState(0);
+  useEffect(() => {
+    if (!kunciHasil) return;
+    const [kategori, jawaban, putaran] = JSON.parse(kunciHasil) as [CategoryKey, Answers, number];
+    const batal = new AbortController();
+    fetch("/api/alternatif", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ kategori, jawaban, putaran }),
+      signal: batal.signal,
+    })
+      .then(async (r) => {
+        const j = await r.json().catch(() => null);
+        if (!r.ok || !j?.ok) throw new Error(j?.detail || "Rekomendasi belum bisa dimuat.");
+        return j as BalasanAlternatif;
+      })
+      .then((data) => setHasilApi({ kunci: kunciHasil, data }))
+      .catch((e: Error) => {
+        // TypeError = koneksi terputus (pesan bawaan browser berbahasa Inggris, jadi diganti pesan sendiri)
+        const pesan = e instanceof TypeError || !e.message ? "Rekomendasi belum bisa dimuat." : e.message;
+        if (!batal.signal.aborted) setHasilApi({ kunci: kunciHasil, galat: pesan });
+      });
+    return () => batal.abort();
+  }, [kunciHasil, cobaLagi]);
 
   const scrollTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -111,7 +153,7 @@ export default function CekAlternatif({ onExit, logo, hideHeader }: CekAlternati
     return (
       <>
         <div className="ea-qtop">
-          <button type="button" className="ea-ghost" onClick={back}>← Kembali</button>
+          <BackButton onClick={back} />
           <span className="ea-stepnum">{done} dari {qs.length} terjawab</span>
         </div>
         <div className="ea-progress" aria-hidden="true"><div style={{ width: `${(done / qs.length) * 100}%` }} /></div>
@@ -221,8 +263,32 @@ export default function CekAlternatif({ onExit, logo, hideHeader }: CekAlternati
 
   /* ---------- HASIL ---------- */
   const renderResult = () => {
-    const res = recommend(cat!, answers);
-    const pg = page(res, round);
+    const muat = !hasilApi || hasilApi.kunci !== kunciHasil;
+    if (muat || !hasilApi.data) {
+      return (
+        <div className="ea-section" aria-live="polite" aria-busy={muat}>
+          {muat ? (
+            <div className="ea-note">Menyusun rekomendasi untukmu…</div>
+          ) : (
+            <div className="ea-note" role="alert">
+              {hasilApi.galat} Periksa koneksi internetmu, lalu{" "}
+              <button type="button" className="ea-linkbtn" onClick={() => { setHasilApi(null); setCobaLagi((n) => n + 1); }}>coba lagi</button>.
+            </div>
+          )}
+        </div>
+      );
+    }
+    const api = hasilApi.data;
+    const res: RecommendResult = {
+      summary: api.ringkasan,
+      ranked: [],
+      mainCount: api.utama.length,
+      sources: api.sumber,
+      emergency: api.darurat,
+      crossLink: api.kategori_terkait,
+      reasons: Object.fromEntries([...api.utama, ...api.berikutnya].map((x) => [x.id, x.alasan])),
+    };
+    const pg = { main: api.utama.map((x) => x.id), next: api.berikutnya.map((x) => x.id), exhausted: api.habis };
     const first = pg.main[0] ? ACTIONS[pg.main[0]] : null;
     const srcs = res.sources.map(id => DIRECTORY.find(d => d.id === id)).filter((d): d is DirectoryItem => !!d);
     const finished = pg.exhausted || pg.main.length === 0;

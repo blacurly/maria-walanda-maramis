@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 const MENU = [
   { key: "beranda", label: "Beranda", href: "/" },
   { key: "edukasi", label: "Edukasi", href: "/edukasi" },
-  { key: "faq", label: "FAQ", href: "/#faq" },
+  { key: "faq", label: "FAQ", href: "/faq" },
   { key: "tentang", label: "Tentang", href: "/tentang" },
 ];
 
@@ -40,6 +40,7 @@ function cariMenuAktif(pathname: string) {
   if (pathname === "/") return "beranda";
   if (pathname.startsWith("/edukasi")) return "edukasi";
   if (pathname.startsWith("/tentang")) return "tentang";
+  if (pathname.startsWith("/faq")) return "faq";
   return "";
 }
 

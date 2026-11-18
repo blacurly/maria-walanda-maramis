@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { LINK_GMAIL } from "@/lib/kontak";
 
 // Ganti "#" dengan alamat akun media sosial EduPuan
 const SOSMED = { instagram: "#", tiktok: "#", youtube: "#", linkedin: "#" };
@@ -20,14 +21,14 @@ const KOLOM = [
       { href: "/edukasi", label: "Artikel & Tips" },
       { href: "/edukasi", label: "Risiko Pinjol" },
       { href: "/sudah-terjerat/hak-saat-ditagih", label: "Hak & Hukum" },
-      { href: "/#faq", label: "FAQ" },
+      { href: "/faq", label: "FAQ" },
     ],
   },
   {
     judul: "Tentang",
     link: [
       { href: "/tentang", label: "Tentang Kami" },
-      { href: "/tentang#kontak", label: "Kontak" },
+      { href: LINK_GMAIL, label: "Kontak", luar: true },
     ],
   },
 ];
@@ -98,9 +99,11 @@ export default function Footer() {
                 <ul>
                   {k.link.map((l) => (
                     <li key={l.label}>
-                      <Link href={l.href} className="lk">
-                        {l.label}
-                      </Link>
+                      {"luar" in l && l.luar ? (
+                        <a href={l.href} target="_blank" rel="noopener noreferrer" className="lk">{l.label}</a>
+                      ) : (
+                        <Link href={l.href} className="lk">{l.label}</Link>
+                      )}
                     </li>
                   ))}
                 </ul>

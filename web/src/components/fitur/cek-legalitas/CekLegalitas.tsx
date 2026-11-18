@@ -18,7 +18,7 @@ function Daftar({ isi, warna }: { isi: string[]; warna: "hijau" | "merah" | "abu
     <ul className="space-y-2">
       {isi.map((s, i) => (
         <li key={s} className="flex items-start gap-2.5 text-sm text-gray-600">
-          <span className={`mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full text-[11px] font-bold ${bulat}`}>
+          <span className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-bold ${bulat}`}>
             {warna === "hijau" ? "✓" : warna === "merah" ? "!" : i + 1}
           </span>
           {s}
@@ -163,7 +163,7 @@ export default function CekLegalitas({ sumber, dariDatabase }: Props) {
                           {s.nama_perusahaan && <span className="block truncate text-xs text-gray-400">{s.nama_perusahaan}</span>}
                         </span>
                         <span
-                          className={`ml-3 flex-shrink-0 rounded-full px-2.5 py-1 text-xs font-bold ${
+                          className={`ml-3 shrink-0 rounded-full px-2.5 py-1 text-xs font-bold ${
                             s.status === "legal" ? "bg-emerald-100 text-emerald-700" : "bg-red-100 text-red-700"
                           }`}
                         >
@@ -177,7 +177,7 @@ export default function CekLegalitas({ sumber, dariDatabase }: Props) {
               <button
                 onClick={() => jalankanCek(query)}
                 disabled={memuat}
-                className="flex-shrink-0 whitespace-nowrap rounded-xl bg-[#379557] px-5 py-3 text-sm font-bold text-white hover:opacity-90 disabled:cursor-wait disabled:opacity-60"
+                className="shrink-0 whitespace-nowrap rounded-xl bg-[#379557] px-5 py-3 text-sm font-bold text-white hover:opacity-90 disabled:cursor-wait disabled:opacity-60"
               >
                 {memuat ? "Mengecek…" : "Cek sekarang"}
               </button>
@@ -222,8 +222,8 @@ export default function CekLegalitas({ sumber, dariDatabase }: Props) {
 
         {/* Belum ada hasil: kontak OJK */}
         {!hasil && !memuat && (
-          <div className={`${KARTU} max-w-3xl p-6`}>
-            <p className="mb-1 text-sm font-bold text-gray-800">Mau memastikan langsung ke OJK?</p>
+           <div className="max-w-3xl rounded-2xl border-2 border-[#04674b] bg-white p-6 shadow-sm">
+           <p className="mb-1 text-sm font-bold text-gray-800">Mau memastikan langsung ke OJK?</p>
             <p className="mb-5 text-xs text-gray-500">
               Daftar di halaman ini bisa tertinggal dari pembaruan terbaru. Untuk kepastian, tanyakan langsung ke kanal resmi OJK.
             </p>
@@ -274,7 +274,7 @@ export default function CekLegalitas({ sumber, dariDatabase }: Props) {
                   ["Sumber", hasil.data.sumber],
                 ].map(([l, v]) => (
                   <div key={l} className="flex gap-3">
-                    <dt className="w-28 flex-shrink-0 text-gray-400">{l}</dt>
+                    <dt className="w-28 shrink-0 text-gray-400">{l}</dt>
                     <dd className="font-medium text-gray-800">{v}</dd>
                   </div>
                 ))}

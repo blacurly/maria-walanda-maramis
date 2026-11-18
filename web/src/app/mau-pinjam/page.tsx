@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Alert from "@/components/ui/Alert";
-import { TONE, type Tone } from "@/lib/tone";
+import KartuFitur from "@/components/ui/KartuFitur";
+import type { Tone } from "@/lib/tone";
 
 export const metadata: Metadata = {
   title: "Mau Pinjam – EduPuan",
@@ -36,32 +36,27 @@ export default function MauPinjamPage() {
   return (
     <div className="min-h-full bg-gray-50">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10">
-        <h1 className="text-3xl font-extrabold text-gray-900 mb-2">Sebelum pinjam, cek dulu.</h1>
+        <h1 className="text-3xl font-extrabold text-gray-900 mb-2">
+          Sebelum pinjam, cek dulu.
+        </h1>
+
         <p className="text-gray-500 mb-8">
           Pinjaman terbaik adalah yang tidak perlu diambil. Kalau memang perlu, pastikan kamu sudah tahu
           risikonya.
         </p>
 
         <div className="grid md:grid-cols-3 gap-5">
-          {ALAT.map((a) => {
-            const t = TONE[a.tone];
-            return (
-              <Link
-                key={a.href}
-                href={a.href}
-                className={`group flex flex-col rounded-2xl border-2 p-6 transition-all hover:-translate-y-0.5 hover:shadow-md active:scale-[.98] ${t.kartu}`}
-              >
-                <span
-                  className={`mb-4 flex h-14 w-14 items-center justify-center rounded-full text-3xl ${t.ikon}`}
-                  aria-hidden="true"
-                >
-                  {a.ikon}
-                </span>
-                <div className="mb-1.5 text-base font-bold text-gray-900">{a.judul}</div>
-                <div className="text-sm leading-relaxed text-gray-600">{a.isi}</div>
-              </Link>
-            );
-          })}
+          {ALAT.map((a) => (
+            <KartuFitur
+              key={a.href}
+              href={a.href}
+              ikon={a.ikon}
+              judul={a.judul}
+              isi={a.isi}
+              tone={a.tone}
+              varian="kapsul"
+            />
+          ))}
         </div>
 
         <div className="mt-6">

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PETA_HALAMAN, jalurHalaman } from "@/data/petaHalaman";
+import BackButton from "@/components/ui/BackButton";
 
 export default function PageBar() {
   const alamat = usePathname();
@@ -17,31 +18,24 @@ export default function PageBar() {
   return (
     <div className="border-b border-border bg-card">
       <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:gap-6 sm:px-6 lg:px-10">
-        <Link
-          href={induk}
-          className="inline-flex h-11 flex-shrink-0 items-center gap-2 rounded-full border border-primary bg-card px-4 text-sm font-semibold text-primary transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 sm:px-5"
-          aria-label={`Kembali ke ${PETA_HALAMAN[induk].judul}`}
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5" aria-hidden="true">
-            <line x1="19" y1="12" x2="5" y2="12" />
-            <polyline points="12 19 5 12 12 5" />
-          </svg>
-          <span>Kembali</span>
-        </Link>
+      <BackButton href={induk} ariaLabel={`Kembali ke ${PETA_HALAMAN[induk].judul}`} />
 
         <nav aria-label="Breadcrumb" className="min-w-0 flex-1 overflow-x-auto">
-          <ol className="flex min-w-max items-center gap-2 text-sm sm:text-base">
+          {/* Di HP hanya "Beranda › Halaman ini" yang tampil (tingkat tengah disembunyikan),
+              supaya nama halaman tidak terpotong. Di layar lebar semua tingkat tampil. */}
+          <ol className="flex min-w-0 items-center gap-2 text-sm sm:min-w-max sm:text-base">
             {jalur.map((a, i) => {
               const terakhir = i === jalur.length - 1;
+              const tengah = i > 0 && !terakhir;
               return (
-                <li key={a} className="flex items-center gap-2 min-w-0">
+                <li key={a} className={`${tengah ? "hidden sm:flex" : "flex"} min-w-0 items-center gap-2`}>
                   {i > 0 && (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 flex-shrink-0 text-muted-foreground" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true">
                       <polyline points="9 18 15 12 9 6" />
                     </svg>
                   )}
                   {terakhir ? (
-                    <span aria-current="page" className="max-w-44 truncate font-semibold text-foreground sm:max-w-none">
+                    <span aria-current="page" className="truncate font-semibold text-foreground">
                       {PETA_HALAMAN[a].judul}
                     </span>
                   ) : (

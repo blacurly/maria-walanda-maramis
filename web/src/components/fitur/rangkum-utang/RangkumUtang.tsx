@@ -12,7 +12,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { LEGAL_PINJOL, ILEGAL_NAMES } from "@/data/dataPinjol";
+import { muatDaftarNama } from "@/lib/pinjol/daftarNama";
 
 const FONT_HREF = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap";
 
@@ -286,29 +286,29 @@ const MARKUP = `<header class="topbar"><div class="top">
 /* ===== Logika Rangkum Semua Utang (berbasis aturan, tanpa AI) =====
    Semua fungsi murni: tidak menyentuh DOM atau penyimpanan, supaya mudah diuji
    dan dipindahkan ke framework apa pun. */
-var DebtLogic = (function () {
-  var TYPES = { pinjol: 'Pinjol', paylater: 'Paylater', digital: 'Pinjaman digital lainnya', lainnya: 'Lainnya' };
-  var STATUS = { checked: 'Sudah diperiksa', unverified: 'Belum diverifikasi', disputed: 'Sedang disengketakan' };
-  var MAX_AMOUNT = 100000000000; // Rp100 miliar, batas wajar untuk menolak salah ketik
+const DebtLogic = (function () {
+  const TYPES = { pinjol: 'Pinjol', paylater: 'Paylater', digital: 'Pinjaman digital lainnya', lainnya: 'Lainnya' };
+  const STATUS = { checked: 'Sudah diperiksa', unverified: 'Belum diverifikasi', disputed: 'Sedang disengketakan' };
+  const MAX_AMOUNT = 100000000000; // Rp100 miliar, batas wajar untuk menolak salah ketik
 
   function pad(n) { return (n < 10 ? '0' : '') + n; }
 
   // Tanggal lokal pengguna dalam format YYYY-MM-DD
   function todayKey(now) {
-    var d = now || new Date();
+    const d = now || new Date();
     return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
   }
 
   function isValidDateKey(s) {
     if (typeof s !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(s)) return false;
-    var p = s.split('-').map(Number);
+    const p = s.split('-').map(Number);
     if (p[0] < 2000 || p[0] > 2100) return false;
-    var d = new Date(Date.UTC(p[0], p[1] - 1, p[2]));
+    const d = new Date(Date.UTC(p[0], p[1] - 1, p[2]));
     return d.getUTCFullYear() === p[0] && d.getUTCMonth() === p[1] - 1 && d.getUTCDate() === p[2];
   }
 
   function dayNumber(key) {
-    var p = key.split('-').map(Number);
+    const p = key.split('-').map(Number);
     return Math.round(Date.UTC(p[0], p[1] - 1, p[2]) / 86400000);
   }
 
@@ -317,14 +317,14 @@ var DebtLogic = (function () {
 
   // Menerima "1500000", "1.500.000", "Rp 1.500.000". Tidak menerima desimal atau negatif.
   function parseAmount(raw) {
-    var s = String(raw == null ? '' : raw).trim();
+    let s = String(raw == null ? '' : raw).trim();
     if (s === '') return { ok: false, error: 'Isi nominal tagihan.' };
     s = s.replace(/^rp\.?\s*/i, '').replace(/\s/g, '');
     if (/^-/.test(s)) return { ok: false, error: 'Nominal tidak boleh negatif.' };
     if (!/^\d{1,3}(\.\d{3})*$/.test(s) && !/^\d+$/.test(s)) {
       return { ok: false, error: 'Tulis nominal dengan angka saja, misalnya 1500000 atau 1.500.000.' };
     }
-    var n = Number(s.replace(/\./g, ''));
+    const n = Number(s.replace(/\./g, ''));
     if (!isFinite(n)) return { ok: false, error: 'Nominal tidak valid.' };
     if (n > MAX_AMOUNT) return { ok: false, error: 'Nominal terlalu besar. Periksa lagi jumlah angkanya.' };
     return { ok: true, value: n };
@@ -332,15 +332,15 @@ var DebtLogic = (function () {
 
   // Validasi satu entri dari formulir. Mengembalikan { ok, errors, debt }
   function validateDebt(input) {
-    var errors = {};
-    var provider = String(input.provider || '').trim();
+    const errors = {};
+    const provider = String(input.provider || '').trim();
     if (!provider) errors.provider = 'Isi nama penyedia atau layanan.';
     else if (provider.length > 60) errors.provider = 'Nama penyedia maksimal 60 karakter.';
 
-    var amount = parseAmount(input.amount);
+    const amount = parseAmount(input.amount);
     if (!amount.ok) errors.amount = amount.error;
 
-    var due = null;
+    let due = null;
     if (!input.dueUnknown) {
       if (!input.dueDate) errors.dueDate = 'Pilih tanggal jatuh tempo, atau centang "Belum tahu".';
       else if (!isValidDateKey(input.dueDate)) errors.dueDate = 'Tanggal tidak valid.';
@@ -349,17 +349,17 @@ var DebtLogic = (function () {
 
     if (!STATUS[input.status]) errors.status = 'Pilih status informasi tagihan.';
 
-    var paid = null;
+    let paid = null;
     if (String(input.paid || '').trim() !== '') {
-      var p = parseAmount(input.paid);
+      const p = parseAmount(input.paid);
       if (!p.ok) errors.paid = p.error.replace('nominal tagihan', 'jumlah yang sudah dibayar');
       else paid = p.value;
     }
 
-    var note = String(input.note || '').trim();
+    const note = String(input.note || '').trim();
     if (note.length > 500) errors.note = 'Catatan maksimal 500 karakter.';
 
-    var ok = Object.keys(errors).length === 0;
+    const ok = Object.keys(errors).length === 0;
     return {
       ok: ok,
       errors: errors,
@@ -380,7 +380,7 @@ var DebtLogic = (function () {
   // Kelompok waktu
   function timeBucket(debt, today) {
     if (!debt.dueDate) return 'unknown';
-    var d = daysUntil(debt.dueDate, today);
+    const d = daysUntil(debt.dueDate, today);
     if (d < 0) return 'overdue';
     if (d === 0) return 'today';
     if (d <= 3) return 'd1_3';
@@ -388,7 +388,7 @@ var DebtLogic = (function () {
     return 'later';
   }
 
-  var LABELS = {
+  const LABELS = {
     overdue: { key: 'handle', text: 'Segera tangani' },
     today: { key: 'handle', text: 'Segera tangani' },
     d1_3: { key: 'prepare', text: 'Segera persiapkan' },
@@ -401,7 +401,7 @@ var DebtLogic = (function () {
 
   function dueText(debt, today) {
     if (!debt.dueDate) return 'Tanggal jatuh tempo belum diketahui';
-    var d = daysUntil(debt.dueDate, today);
+    const d = daysUntil(debt.dueDate, today);
     if (d < 0) return 'Sudah lewat ' + (-d) + ' hari';
     if (d === 0) return 'Jatuh tempo hari ini';
     return 'Jatuh tempo ' + d + ' hari lagi';
@@ -409,10 +409,10 @@ var DebtLogic = (function () {
 
   // Label + alasan + tindakan berikutnya untuk satu tagihan
   function assess(debt, today) {
-    var bucket = timeBucket(debt, today);
-    var label = LABELS[bucket];
-    var verify = needsVerification(debt);
-    var reason;
+    const bucket = timeBucket(debt, today);
+    const label = LABELS[bucket];
+    const verify = needsVerification(debt);
+    let reason;
     switch (bucket) {
       case 'overdue': reason = 'Tanggal jatuh tempo sudah lewat ' + (-daysUntil(debt.dueDate, today)) + ' hari, jadi kewajiban dan konsekuensi keterlambatannya perlu segera diperiksa.'; break;
       case 'today': reason = 'Tagihan ini jatuh tempo hari ini, jadi perlu segera diperiksa.'; break;
@@ -427,7 +427,7 @@ var DebtLogic = (function () {
         : ' Nominalnya belum diverifikasi, jadi perlu dipastikan dulu sebelum keputusan pembayaran dibuat.';
     }
 
-    var actions = [];
+    const actions = [];
     if (verify) actions.push({ title: 'Verifikasi tagihan', text: 'Periksa rincian tagihan melalui kanal resmi penyedia. Pastikan jumlah yang diminta, rincian biaya, pembayaran yang sudah diterima, dan tanggal jatuh tempo. Minta rincian tertulis dan simpan bukti komunikasi.' });
     if (bucket === 'overdue' || bucket === 'today') actions.push({ title: 'Tagihan sudah jatuh tempo', text: 'Periksa jumlah kewajiban yang masih tercatat dan konsekuensi keterlambatan. Hubungi penyedia melalui kanal resmi untuk menanyakan pilihan penyelesaian yang tersedia.' });
     if (bucket === 'd1_3' || bucket === 'd4_7') actions.push({ title: 'Tagihan segera jatuh tempo', text: 'Pastikan nominal dan tenggat. Periksa kemampuan membayar dan hubungi penyedia lebih awal jika kamu memperkirakan tidak dapat memenuhi pembayaran.' });
@@ -441,7 +441,7 @@ var DebtLogic = (function () {
   // Ringkasan dari semua entri aktif. "paid" hanya catatan dan tidak dikurangkan:
   // nominal tagihan saat ini sudah memperhitungkan pembayaran.
   function summarize(debts, today) {
-    var s = {
+    const s = {
       count: debts.length, total: 0,
       overdue: { count: 0, sum: 0 }, today: { count: 0, sum: 0 },
       d1_3: { count: 0, sum: 0 }, d4_7: { count: 0, sum: 0 },
@@ -450,7 +450,7 @@ var DebtLogic = (function () {
     };
     debts.forEach(function (d) {
       s.total += d.amount;
-      var b = timeBucket(d, today);
+      const b = timeBucket(d, today);
       s[b].count++; s[b].sum += d.amount;
       if (needsVerification(d)) s.verifyCount++;
       if (d.status === 'disputed') s.disputedCount++;
@@ -461,12 +461,12 @@ var DebtLogic = (function () {
 
   // Urutan daftar: urgensi waktu dulu; dalam kelompok yang sama, tagihan yang perlu
   // diverifikasi naik karena butuh tindak lanjut lebih dulu (bukan karena harus dibayar lebih dulu).
-  var RANK = { overdue: 0, today: 0, d1_3: 1, d4_7: 2, later: 3, unknown: 4 };
+  const RANK = { overdue: 0, today: 0, d1_3: 1, d4_7: 2, later: 3, unknown: 4 };
   function sortDebts(debts, today) {
     return debts.slice().sort(function (a, b) {
-      var ra = RANK[timeBucket(a, today)], rb = RANK[timeBucket(b, today)];
+      const ra = RANK[timeBucket(a, today)], rb = RANK[timeBucket(b, today)];
       if (ra !== rb) return ra - rb;
-      var va = needsVerification(a) ? 0 : 1, vb = needsVerification(b) ? 0 : 1;
+      const va = needsVerification(a) ? 0 : 1, vb = needsVerification(b) ? 0 : 1;
       if (va !== vb) return va - vb;
       if (a.dueDate && b.dueDate && a.dueDate !== b.dueDate) return a.dueDate < b.dueDate ? -1 : 1;
       return a.provider.localeCompare(b.provider, 'id');
@@ -479,8 +479,8 @@ var DebtLogic = (function () {
 
   function formatDate(key) {
     if (!key) return 'Belum tahu';
-    var b = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
-    var p = key.split('-').map(Number);
+    const b = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+    const p = key.split('-').map(Number);
     return p[2] + ' ' + b[p[1] - 1] + ' ' + p[0];
   }
 
@@ -495,54 +495,58 @@ var DebtLogic = (function () {
 
 /* ===== Tampilan & interaksi ===== */
 function mountRangkumUtang(root, onExit) {
-  var L = DebtLogic;
-  var $ = function (id) { return root.querySelector('#' + id); };
-  var cleanups = [];
+  const L = DebtLogic;
+  const $ = function (id) { return root.querySelector('#' + id); };
+  const cleanups = [];
   function on(t, ev, fn) { t.addEventListener(ev, fn); cleanups.push(function () { t.removeEventListener(ev, fn); }); }
-  var KEY = 'edupuan.rangkumUtang.v1';
+  const KEY = 'edupuan.rangkumUtang.v1';
   // Label status yang tampil ke pengguna (lebih sederhana dari L.STATUS)
-  var STATUS_TAMPIL = { checked: 'Ya, sudah pasti', unverified: 'Belum yakin', disputed: 'Aku tidak setuju' };
-  var state = { debts: [], demo: false, view: 'home', id: null, filter: 'all', sort: 'due', confirmDelete: false, today: L.todayKey() };
-  var app = $('app');
+  const STATUS_TAMPIL = { checked: 'Ya, sudah pasti', unverified: 'Belum yakin', disputed: 'Aku tidak setuju' };
+  const state = { debts: [], demo: false, view: 'home', id: null, filter: 'all', sort: 'due', confirmDelete: false, today: L.todayKey() };
+  const app = $('app');
+  // Daftar nama pinjol dari database (GET /api/pinjol/nama), diisi setelah termuat; selama memuat, status = "Tidak ditemukan"
+  let LEGAL_PINJOL = [];
+  let ILEGAL_NAMES = [];
+  let dibongkar = false;
 
   /* ---------- Penyimpanan lokal ---------- */
   function load() {
     try {
-      var raw = localStorage.getItem(KEY);
-      if (raw) { var d = JSON.parse(raw); state.debts = Array.isArray(d.debts) ? d.debts : []; state.demo = !!d.demo; }
-    } catch (e) { /* penyimpanan tidak tersedia: tetap jalan di memori */ }
+      const raw = localStorage.getItem(KEY);
+      if (raw) { const d = JSON.parse(raw); state.debts = Array.isArray(d.debts) ? d.debts : []; state.demo = !!d.demo; }
+    } catch { /* penyimpanan tidak tersedia: tetap jalan di memori */ }
   }
   function save() {
-    try { localStorage.setItem(KEY, JSON.stringify({ debts: state.debts, demo: state.demo })); } catch (e) {}
+    try { localStorage.setItem(KEY, JSON.stringify({ debts: state.debts, demo: state.demo })); } catch {}
   }
   function uid() { return 'd' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function rp(n) { return L.formatRp(n); }
-  function addDays(n) { var d = new Date(); d.setDate(d.getDate() + n); return L.todayKey(d); }
+  function addDays(n) { const d = new Date(); d.setDate(d.getDate() + n); return L.todayKey(d); }
 
-  var toastTimer;
-  var providerDropOpen = false;
-  var providerSuggestionIndex = -1;
+  let toastTimer;
+  let providerDropOpen = false;
+  let providerSuggestionIndex = -1;
   function toast(msg) {
-    var t = $('toast'); t.textContent = msg; t.hidden = false;
+    const t = $('toast'); t.textContent = msg; t.hidden = false;
     clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.hidden = true; }, 2600);
   }
 
   function go(view, id) {
     state.view = view; state.id = id || null; state.confirmDelete = false;
     render(); window.scrollTo(0, 0);
-    var h = app.querySelector('h1'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+    const h = app.querySelector('h1'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
   }
 
   /* ---------- Komponen ---------- */
   // Label tenggat yang tampil ke pengguna: hanya menjelaskan waktu, tidak menyuruh membayar.
   // Warna (key) tetap dari DebtLogic.
-  var LABEL_TAMPIL = {
+  const LABEL_TAMPIL = {
     overdue: 'Lewat jatuh tempo', today: 'Jatuh tempo hari ini', d1_3: 'Jatuh tempo 1–3 hari',
     d4_7: 'Jatuh tempo 4–7 hari', later: 'Jatuh tempo > 7 hari', unknown: 'Tanggal belum diketahui'
   };
-  var URUTAN = {
+  const URUTAN = {
     due: 'Jatuh tempo terdekat',
     besar: 'Nominal terbesar',
     kecil: 'Nominal terkecil'
@@ -562,7 +566,7 @@ function mountRangkumUtang(root, onExit) {
   }
 
   function chips(a) {
-    var h = '<span class="chip ' + a.label.key + '">' + esc(LABEL_TAMPIL[a.bucket]) + '</span>';
+    let h = '<span class="chip ' + a.label.key + '">' + esc(LABEL_TAMPIL[a.bucket]) + '</span>';
     if (a.verify) h += '<span class="chip verify">Perlu verifikasi</span>';
     return h;
   }
@@ -572,15 +576,15 @@ function mountRangkumUtang(root, onExit) {
   }
 
   function providerLegalStatus(value) {
-    var q = normalizeProviderName(value);
+    const q = normalizeProviderName(value);
     if (!q) return { key: 'unknown', label: 'Tidak ditemukan', pt: '' };
-    var legal = LEGAL_PINJOL.find(function (x) {
-      var n = x.nama.toLowerCase();
+    const legal = LEGAL_PINJOL.find(function (x) {
+      const n = x.nama.toLowerCase();
       return n.includes(q) || q.includes(n);
     });
     if (legal) return { key: 'legal', label: 'Terdaftar OJK', pt: legal.pt };
-    var illegal = ILEGAL_NAMES.find(function (x) {
-      var n = x.toLowerCase().replace(/[-\s]+/g, ' ');
+    const illegal = ILEGAL_NAMES.find(function (x) {
+      const n = x.toLowerCase().replace(/[-\s]+/g, ' ');
       return n.includes(q) || q.includes(n);
     });
     if (illegal) return { key: 'illegal', label: 'Terindikasi ilegal', pt: '' };
@@ -588,7 +592,7 @@ function mountRangkumUtang(root, onExit) {
   }
 
   function providerSuggestions(value) {
-    var q = String(value || '').trim().toLowerCase();
+    const q = String(value || '').trim().toLowerCase();
     if (q.length < 2) return [];
     return LEGAL_PINJOL.filter(function (x) { return x.nama.toLowerCase().includes(q); }).slice(0, 5)
       .map(function (x) { return { name: x.nama, pt: x.pt, key: 'legal' }; })
@@ -598,7 +602,7 @@ function mountRangkumUtang(root, onExit) {
   }
 
   function legalStatusHtml(status, fullLabel, showPt) {
-    var label = status.label;
+    let label = status.label;
     if (fullLabel && status.key === 'legal') label = 'Terdaftar di OJK';
     if (fullLabel && status.key === 'unknown') label = 'Tidak ditemukan di data EduPuan. Cek langsung di ojk.go.id atau WA OJK 081-157-157-157.';
     return '<span class="legal-status ' + status.key + '"><b>' + esc(label) + '</b>' +
@@ -618,10 +622,10 @@ function mountRangkumUtang(root, onExit) {
   }
 
   function updateProviderAssistance() {
-    var input = $('f-provider'), list = $('providerSuggestions'), statusBox = $('providerLegalStatus');
+    const input = $('f-provider'), list = $('providerSuggestions'), statusBox = $('providerLegalStatus');
     if (!input || !list || !statusBox) return;
-    var value = input.value;
-    var suggestions = providerSuggestions(value);
+    const value = input.value;
+    const suggestions = providerSuggestions(value);
     if (providerSuggestionIndex >= suggestions.length) providerSuggestionIndex = suggestions.length - 1;
     if (!providerDropOpen || !suggestions.length) {
       list.hidden = true;
@@ -643,7 +647,7 @@ function mountRangkumUtang(root, onExit) {
   }
 
   function pickProvider(name) {
-    var input = $('f-provider');
+    const input = $('f-provider');
     if (!input) return;
     input.value = name;
     providerDropOpen = false;
@@ -653,8 +657,8 @@ function mountRangkumUtang(root, onExit) {
   }
 
   function debtCard(d) {
-    var a = L.assess(d, state.today);
-    var legal = providerLegalStatus(d.provider);
+    const a = L.assess(d, state.today);
+    const legal = providerLegalStatus(d.provider);
     return '<article class="debt ' + a.label.key + '">' +
       '<div class="debt-head"><div><div class="rank">' + legalStatusHtml(legal, false, false) + '</div><div class="debt-name">' + esc(d.provider) + '</div></div>' +
       '<div class="debt-amt">' + rp(d.amount) + '</div></div>' +
@@ -669,7 +673,7 @@ function mountRangkumUtang(root, onExit) {
 
   /* ---------- Halaman awal ---------- */
   function viewHome() {
-    var has = state.debts.length > 0;
+    const has = state.debts.length > 0;
     return '<div class="two home-two"><section class="view hero">' +
       '<span class="eyebrow">Untuk yang sudah punya tagihan</span>' +
       '<h1>Rangkum Semua Utangmu</h1>' +
@@ -695,17 +699,17 @@ function mountRangkumUtang(root, onExit) {
         '<div class="empty"><h2>Belum ada tagihan yang dicatat</h2><p class="muted">Tambahkan tagihan pertamamu untuk melihat total dan tenggat semua tagihanmu.</p>' +
         '<button class="btn btn-primary" data-act="add" type="button">Tambah Utang</button></div></section>';
     }
-    var s = L.summarize(state.debts, state.today);
-    var sorted = urutkan(state.debts);
-    var shown = sorted.filter(function (d) {
-      var b = L.timeBucket(d, state.today);
+    const s = L.summarize(state.debts, state.today);
+    const sorted = urutkan(state.debts);
+    const shown = sorted.filter(function (d) {
+      const b = L.timeBucket(d, state.today);
       if (state.filter === 'overdue') return b === 'overdue';
       if (state.filter === 'soon') return b === 'today' || b === 'd1_3' || b === 'd4_7';
       if (state.filter === 'verify') return L.needsVerification(d);
       return true;
     });
 
-    var h = '<section class="view">' +
+    let h = '<section class="view">' +
       '<div class="hero" style="padding-bottom:0"><span class="eyebrow">Per ' + esc(L.formatDate(state.today)) + '</span>' +
       '<div class="row" style="justify-content:space-between"><h1>Rangkuman Utangmu</h1>' +
       '<button class="btn btn-ghost btn-sm" data-act="print" type="button">📄 Unduh rangkuman (PDF)</button></div>' +
@@ -727,12 +731,12 @@ function mountRangkumUtang(root, onExit) {
       (s.soon.count ? '<div><button class="btn btn-ghost btn-sm" data-act="filter" data-f="soon" type="button">Lihat daftar</button></div>' : '') + '</div>' +
       '</div>';
 
-    var flags = [];
+    const flags = [];
     if (s.verifyCount) flags.push('<span class="chip verify">' + s.verifyCount + ' perlu verifikasi' + (s.disputedCount ? ' (' + s.disputedCount + ' disengketakan)' : '') + '</span>');
     if (s.unknown.count) flags.push('<span class="chip unknown">' + s.unknown.count + ' tanggal belum diketahui</span>');
     if (flags.length) h += '<div class="flags">' + flags.join('') + '</div>';
 
-    var listHtml = '<section class="section main-sec">' +
+    const listHtml = '<section class="section main-sec">' +
       '<div class="mini-total" aria-hidden="true"><span>Total tercatat <b class="num">' + rp(s.total) + '</b></span><span class="muted">' + s.count + ' tagihan' + (s.overdue.count ? ' · ' + s.overdue.count + ' lewat tempo' : '') + '</span></div>' +
       '<div class="row" style="justify-content:space-between"><h2>Daftar tagihan</h2>' +
       '<button class="btn btn-primary btn-sm" data-act="add" type="button">+ Tambah Utang</button></div>' +
@@ -769,19 +773,19 @@ function mountRangkumUtang(root, onExit) {
 
   /* ---------- Formulir ---------- */
   function viewForm(errors, values) {
-    var d = values || (state.id ? state.debts.filter(function (x) { return x.id === state.id; })[0] : null) || {};
-    var editing = !!state.id;
-    var e = errors || {};
+    const d = values || (state.id ? state.debts.filter(function (x) { return x.id === state.id; })[0] : null) || {};
+    const editing = !!state.id;
+    let e = errors || {};
     function err(k) { return e[k] ? '<p class="err" id="err-' + k + '">' + esc(e[k]) + '</p>' : ''; }
     function inv(k) { return e[k] ? ' invalid' : ''; }
     function amt(v) { return v === null || v === undefined || v === '' ? '' : (typeof v === 'number' ? v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') : v); }
-    var dueUnknown = values ? !!values.dueUnknown : (editing && !d.dueDate);
-    var statusVal = d.status || '';
+    const dueUnknown = values ? !!values.dueUnknown : (editing && !d.dueDate);
+    const statusVal = d.status || '';
 
     // Teks tampilan saja. Nilai yang disimpan tetap checked / unverified / disputed sesuai DebtLogic.
     if (e.status) e = Object.assign({}, e, { status: 'Pilih salah satu jawaban.' });
-    var statusDesc = { checked: 'Sama dengan rincian resmi di aplikasi', unverified: 'Belum dicek, atau angkanya berbeda-beda', disputed: 'Menurutku jumlahnya tidak sesuai' };
-    var statusOpts = Object.keys(L.STATUS).map(function (k) {
+    const statusDesc = { checked: 'Sama dengan rincian resmi di aplikasi', unverified: 'Belum dicek, atau angkanya berbeda-beda', disputed: 'Menurutku jumlahnya tidak sesuai' };
+    const statusOpts = Object.keys(L.STATUS).map(function (k) {
       return '<label class="opt"><input type="radio" name="status" value="' + k + '"' + (statusVal === k ? ' checked' : '') + '><span>' + STATUS_TAMPIL[k] + '<small>' + statusDesc[k] + '</small></span></label>';
     }).join('');
 
@@ -808,21 +812,21 @@ function mountRangkumUtang(root, onExit) {
   }
 
   function updateAutoStatus() {
-    var box = $('autoStatus'); if (!box) return;
-    var unk = $('f-dueUnknown').checked;
-    var due = $('f-due');
+    const box = $('autoStatus'); if (!box) return;
+    const unk = $('f-dueUnknown').checked;
+    const due = $('f-due');
     due.disabled = unk;
-    var txt;
+    let txt;
     if (unk) txt = 'Status waktu: <b>Belum diketahui</b>. Tagihan ini tidak akan dihitung sebagai jatuh tempo.';
     else if (due.value && L.isValidDateKey(due.value)) {
-      var n = L.daysUntil(due.value, state.today);
+      const n = L.daysUntil(due.value, state.today);
       txt = 'Status waktu: <b>' + (n < 0 ? 'Sudah jatuh tempo' : 'Belum jatuh tempo') + '</b> · ' + esc(L.dueText({ dueDate: due.value }, state.today)) + '.';
     } else txt = 'Status waktu dihitung otomatis dari tanggal.';
     box.innerHTML = txt;
   }
 
   function readForm(form) {
-    var fd = new FormData(form);
+    const fd = new FormData(form);
     return {
       id: state.id, provider: fd.get('provider'), type: 'pinjol', amount: fd.get('amount'),
       dueDate: form.elements.dueDate.value, dueUnknown: form.elements.dueUnknown.checked,
@@ -833,11 +837,11 @@ function mountRangkumUtang(root, onExit) {
 
   /* ---------- Detail ---------- */
   function viewDetail() {
-    var d = state.debts.filter(function (x) { return x.id === state.id; })[0];
+    const d = state.debts.filter(function (x) { return x.id === state.id; })[0];
     if (!d) return '<section class="view hero"><h1>Tagihan tidak ditemukan</h1><p class="muted">Tagihan ini mungkin sudah dihapus.</p><div><button class="btn btn-primary" data-act="summary" type="button">Kembali ke rangkuman</button></div></section>';
-    var a = L.assess(d, state.today);
-    var legal = providerLegalStatus(d.provider);
-    var legalActions = [];
+    const a = L.assess(d, state.today);
+    const legal = providerLegalStatus(d.provider);
+    const legalActions = [];
     if (legal.key === 'illegal') legalActions.push({ title: 'Pinjaman terindikasi ilegal', text: 'Jangan transfer ke rekening pribadi penagih. Simpan semua bukti tagihan dan pesan, lalu laporkan melalui kanal resmi seperti Satgas PASTI atau OJK 157.' });
     if (legal.key === 'unknown') legalActions.push({ title: 'Pastikan status legalitasnya', text: 'Nama ini tidak ada di data EduPuan. Cek langsung di ojk.go.id atau tanyakan ke WA OJK 081-157-157-157.' });
     return '<section class="view stack" style="padding-top:16px">' +
@@ -864,11 +868,11 @@ function mountRangkumUtang(root, onExit) {
   /* ---------- Laporan untuk dicetak / disimpan sebagai PDF ---------- */
   // Memakai DebtLogic yang sama dengan tampilan layar, jadi isinya selalu cocok dengan rangkuman.
   function viewReport() {
-    var s = L.summarize(state.debts, state.today);
-    var sorted = urutkan(state.debts);
-    var dibuat = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+    const s = L.summarize(state.debts, state.today);
+    const sorted = urutkan(state.debts);
+    const dibuat = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
 
-    var h = '<div class="p-head"><div class="p-brand">EduPuan</div><h1>Rangkuman Utang</h1>' +
+    let h = '<div class="p-head"><div class="p-brand">EduPuan</div><h1>Rangkuman Utang</h1>' +
       '<p class="muted">Per ' + esc(L.formatDate(state.today)) + ' · Dibuat ' + esc(dibuat) + '</p></div>';
     if (state.demo) h += '<p class="p-demo"><b>Ini data contoh.</b> Angkanya bukan milikmu.</p>';
 
@@ -885,15 +889,15 @@ function mountRangkumUtang(root, onExit) {
 
     h += '<h2>Daftar tagihan</h2><p class="small muted">Diurutkan berdasarkan: ' + esc(URUTAN[state.sort]).toLowerCase() + '. Urutan ini bukan saran urutan pembayaran.</p><table><thead><tr><th>No.</th><th>Penyedia</th><th>Jatuh tempo</th><th>Label</th><th class="r">Nominal</th></tr></thead><tbody>' +
       sorted.map(function (d, i) {
-        var a = L.assess(d, state.today);
+        const a = L.assess(d, state.today);
         return '<tr><td>' + (i + 1) + '</td><td>' + esc(d.provider) + '</td><td>' + esc(L.formatDate(d.dueDate)) + '<br><span class="muted">' + esc(L.dueText(d, state.today)) + '</span></td>' +
           '<td>' + chips(a) + '</td><td class="r">' + rp(d.amount) + '</td></tr>';
       }).join('') + '</tbody></table>';
 
-    h += '<h2>Rincian dan langkah berikutnya</h2>' + sorted.map(function (d, i) {
-      var a = L.assess(d, state.today);
-      var legal = providerLegalStatus(d.provider);
-      var steps = [];
+    h += '<h2>Rincian dan langkah berikutnya</h2>' + sorted.map(function (d) {
+      const a = L.assess(d, state.today);
+      const legal = providerLegalStatus(d.provider);
+      let steps = [];
       if (legal.key === 'illegal') steps.push({ title: 'Pinjaman terindikasi ilegal', text: 'Jangan transfer ke rekening pribadi penagih. Simpan semua bukti tagihan dan pesan, lalu laporkan melalui kanal resmi seperti Satgas PASTI atau OJK 157.' });
       if (legal.key === 'unknown') steps.push({ title: 'Pastikan status legalitasnya', text: 'Nama ini tidak ada di data EduPuan. Cek langsung di ojk.go.id atau tanyakan ke WA OJK 081-157-157-157.' });
       steps = steps.concat(a.actions);
@@ -914,7 +918,7 @@ function mountRangkumUtang(root, onExit) {
   }
 
   /* ---------- Unduh PDF sungguhan (jsPDF), bekerja juga di HP ---------- */
-  var sedangMengunduh = false;
+  let sedangMengunduh = false;
   function unduhPdf() {
     if (!state.debts.length) { toast('Belum ada tagihan untuk diunduh.'); return; }
     if (sedangMengunduh) return;
@@ -922,8 +926,8 @@ function mountRangkumUtang(root, onExit) {
     toast('Menyiapkan PDF...');
     import('@/features/pdfEduPuan').then(function (m) {
       return m.mulaiPdf('Rangkuman Utang').then(function (p) {
-        var s = L.summarize(state.debts, state.today);
-        var sorted = urutkan(state.debts);
+        const s = L.summarize(state.debts, state.today);
+        const sorted = urutkan(state.debts);
         if (state.demo) p.paragraf('Ini data contoh. Angkanya bukan milikmu.', { tebal: true });
         p.paragraf('Per ' + L.formatDate(state.today), { abu: true });
 
@@ -942,16 +946,16 @@ function mountRangkumUtang(root, onExit) {
         p.judul('Daftar tagihan');
         p.paragraf('Diurutkan berdasarkan: ' + URUTAN[state.sort].toLowerCase() + '. Urutan ini bukan saran urutan pembayaran.', { ukuran: 9, abu: true });
         p.tabel(['No.', 'Penyedia', 'Jatuh tempo', 'Keterangan', 'Nominal'], sorted.map(function (d, i) {
-          var a = L.assess(d, state.today);
+          const a = L.assess(d, state.today);
           return [String(i + 1), d.provider, L.formatDate(d.dueDate) + '\n' + L.dueText(d, state.today),
             LABEL_TAMPIL[a.bucket] + (a.verify ? '\nPerlu verifikasi' : ''), rp(d.amount)];
         }), { lebarKolom: { 0: 10, 4: 30 } });
 
         p.judul('Rincian dan langkah berikutnya');
         sorted.forEach(function (d) {
-          var a = L.assess(d, state.today);
-          var legal = providerLegalStatus(d.provider);
-          var steps = [];
+          const a = L.assess(d, state.today);
+          const legal = providerLegalStatus(d.provider);
+          let steps = [];
           if (legal.key === 'illegal') steps.push({ title: 'Pinjaman terindikasi ilegal', text: 'Jangan transfer ke rekening pribadi penagih. Simpan semua bukti tagihan dan pesan, lalu laporkan melalui kanal resmi seperti Satgas PASTI atau OJK 157.' });
           if (legal.key === 'unknown') steps.push({ title: 'Pastikan status legalitasnya', text: 'Nama ini tidak ada di data EduPuan. Cek langsung di ojk.go.id atau tanyakan ke WA OJK 081-157-157-157.' });
           steps = steps.concat(a.actions);
@@ -979,7 +983,7 @@ function mountRangkumUtang(root, onExit) {
     }).then(function () { sedangMengunduh = false; });
   }
 
-  var titleBeforePrint = null;
+  let titleBeforePrint = null;
   function printReport() {
     if (!state.debts.length) { toast('Belum ada tagihan untuk diunduh.'); return; }
     $('printReport').innerHTML = viewReport();
@@ -993,25 +997,25 @@ function mountRangkumUtang(root, onExit) {
 
   // Tanda "masih ada tagihan di bawah" pada area gulir daftar
   function wireList() {
-    var box = $('listScroll'), cnt = $('listCount');
+    const box = $('listScroll'), cnt = $('listCount');
     if (!box) return;
-    var base = cnt ? cnt.textContent : '';
+    const base = cnt ? cnt.textContent : '';
     function upd() {
-      var scrollable = box.scrollHeight > box.clientHeight + 2;
-      var more = scrollable && box.scrollTop + box.clientHeight < box.scrollHeight - 8;
+      const scrollable = box.scrollHeight > box.clientHeight + 2;
+      const more = scrollable && box.scrollTop + box.clientHeight < box.scrollHeight - 8;
       box.classList.toggle('more', more);
       if (cnt) cnt.textContent = base + (more ? ' · gulir daftar untuk melihat lainnya' : '');
     }
     box.addEventListener('scroll', upd, { passive: true });
     upd();
   }
-  on(window, 'resize', function () { if (state.view === 'summary') { var b = $('listScroll'); if (b) b.dispatchEvent(new Event('scroll')); } });
+  on(window, 'resize', function () { if (state.view === 'summary') { const b = $('listScroll'); if (b) b.dispatchEvent(new Event('scroll')); } });
 
   /* ---------- Render ---------- */
   function render(formErrors, formValues) {
     $('demoBanner').hidden = !(state.demo && state.debts.length);
-    var backLabel = { home: 'Kembali ke beranda EduPuan', summary: 'Kembali ke halaman awal fitur', form: state.id ? 'Kembali ke detail tagihan' : 'Kembali', detail: 'Kembali ke rangkuman' }[state.view];
-    var bb = $('backBtn'); bb.setAttribute('aria-label', backLabel); bb.title = backLabel;
+    const backLabel = { home: 'Kembali ke beranda EduPuan', summary: 'Kembali ke halaman awal fitur', form: state.id ? 'Kembali ke detail tagihan' : 'Kembali', detail: 'Kembali ke rangkuman' }[state.view];
+    const bb = $('backBtn'); bb.setAttribute('aria-label', backLabel); bb.title = backLabel;
     if (state.view === 'home') app.innerHTML = viewHome();
     else if (state.view === 'summary') { app.innerHTML = viewSummary(); wireList(); }
     else if (state.view === 'form') { app.innerHTML = viewForm(formErrors, formValues); providerDropOpen = false; providerSuggestionIndex = -1; updateAutoStatus(); updateProviderAssistance(); }
@@ -1027,9 +1031,17 @@ function mountRangkumUtang(root, onExit) {
   }
 
   /* ---------- Event ---------- */
+  // Kotak konfirmasi hapus muncul di bawah tombol, sering di luar layar sehingga tombol Hapus terasa "tidak berfungsi".
+  // Setelah kotak tampil, gulir ke kotak itu dan fokuskan tombol "Ya, hapus" (juga memudahkan pengguna keyboard).
+  function showConfirm(act) {
+    const k = app.querySelector('.confirm'); if (!k) return;
+    k.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    const y = k.querySelector('[data-act="' + act + '"]'); if (y) y.focus({ preventScroll: true });
+  }
+
   on(root, 'click', function (ev) {
-    var b = ev.target.closest('[data-act]'); if (!b) return;
-    var act = b.getAttribute('data-act'), id = b.getAttribute('data-id');
+    const b = ev.target.closest('[data-act]'); if (!b) return;
+    const act = b.getAttribute('data-act'), id = b.getAttribute('data-id');
     if (act === 'back') {
       if (state.view === 'form') go(state.id ? 'detail' : (state.debts.length ? 'summary' : 'home'), state.id);
       else if (state.view === 'detail') go('summary');
@@ -1042,9 +1054,9 @@ function mountRangkumUtang(root, onExit) {
     else if (act === 'edit') go('form', id);
     else if (act === 'detail') go('detail', id);
     else if (act === 'cancel-form') go(state.id ? 'detail' : (state.debts.length ? 'summary' : 'home'), state.id);
-    else if (act === 'filter') { state.filter = b.getAttribute('data-f'); state.view = 'summary'; render(); if (window.innerWidth < 900) { var l = app.querySelector('.filters'); if (l) l.scrollIntoView({ block: 'start', behavior: 'smooth' }); } }
-    else if (act === 'del') { state.confirmDelete = true; render(); }
-    else if (act === 'wipe') { state.confirmDelete = 'all'; render(); }
+    else if (act === 'filter') { state.filter = b.getAttribute('data-f'); state.view = 'summary'; render(); if (window.innerWidth < 900) { const l = app.querySelector('.filters'); if (l) l.scrollIntoView({ block: 'start', behavior: 'smooth' }); } }
+    else if (act === 'del') { state.confirmDelete = true; render(); showConfirm('del-yes'); }
+    else if (act === 'wipe') { state.confirmDelete = 'all'; render(); showConfirm('wipe-yes'); }
     else if (act === 'cancel-del') { state.confirmDelete = false; render(); }
     else if (act === 'del-yes') {
       state.debts = state.debts.filter(function (x) { return x.id !== state.id; });
@@ -1060,19 +1072,19 @@ function mountRangkumUtang(root, onExit) {
 
   on(root, 'change', function (ev) {
     if (ev.target.id === 'f-dueUnknown' || ev.target.id === 'f-due') updateAutoStatus();
-    if (ev.target.id === 'f-sort') { state.sort = ev.target.value; render(); var sel = $('f-sort'); if (sel) sel.focus(); }
+    if (ev.target.id === 'f-sort') { state.sort = ev.target.value; render(); const sel = $('f-sort'); if (sel) sel.focus(); }
   });
   // Titik pemisah ribuan otomatis saat mengetik nominal (5000000 -> 5.000.000).
   // Posisi kursor dijaga supaya tidak meloncat ke akhir saat mengedit di tengah angka.
   function formatRibuan(el) {
-    var pos = el.selectionStart == null ? el.value.length : el.selectionStart;
-    var angkaSebelumKursor = el.value.slice(0, pos).replace(/\D/g, '').length;
-    var angka = el.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '');
-    var hasil = angka.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    const pos = el.selectionStart == null ? el.value.length : el.selectionStart;
+    const angkaSebelumKursor = el.value.slice(0, pos).replace(/\D/g, '').length;
+    const angka = el.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '');
+    const hasil = angka.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     el.value = hasil;
-    var i = 0, terlewati = 0;
+    let i = 0, terlewati = 0;
     while (i < hasil.length && terlewati < angkaSebelumKursor) { if (hasil[i] !== '.') terlewati++; i++; }
-    try { el.setSelectionRange(i, i); } catch (e) {}
+    try { el.setSelectionRange(i, i); } catch {}
   }
 
   on(root, 'input', function (ev) {
@@ -1092,7 +1104,7 @@ function mountRangkumUtang(root, onExit) {
   });
   on(root, 'keydown', function (ev) {
     if (ev.target.id !== 'f-provider') return;
-    var items = providerSuggestions(ev.target.value);
+    const items = providerSuggestions(ev.target.value);
     if (ev.key === 'Escape') {
       providerDropOpen = false;
       providerSuggestionIndex = -1;
@@ -1124,11 +1136,11 @@ function mountRangkumUtang(root, onExit) {
   on(root, 'submit', function (ev) {
     if (ev.target.id !== 'debtForm') return;
     ev.preventDefault();
-    var input = readForm(ev.target);
-    var r = L.validateDebt(input);
+    const input = readForm(ev.target);
+    const r = L.validateDebt(input);
     if (!r.ok) {
       render(r.errors, input);
-      var first = app.querySelector('[aria-invalid="true"], .field.invalid input');
+      const first = app.querySelector('[aria-invalid="true"], .field.invalid input');
       if (first) first.focus();
       return;
     }
@@ -1145,21 +1157,34 @@ function mountRangkumUtang(root, onExit) {
   });
 
   // Perbarui label saat tanggal berganti (lewat tengah malam atau kembali ke tab)
-  function refreshDay() { var k = L.todayKey(); if (k !== state.today) { state.today = k; if (state.view !== 'form') render(); else updateAutoStatus(); } }
-  var timer = setInterval(refreshDay, 60000); cleanups.push(function () { clearInterval(timer); clearTimeout(toastTimer); });
+  function refreshDay() { const k = L.todayKey(); if (k !== state.today) { state.today = k; if (state.view !== 'form') render(); else updateAutoStatus(); } }
+  const timer = setInterval(refreshDay, 60000); cleanups.push(function () { clearInterval(timer); clearTimeout(toastTimer); });
   on(document, 'visibilitychange', function () { if (!document.hidden) refreshDay(); });
 
   load();
   state.view = state.debts.length ? 'summary' : 'home';
   render();
 
-  return function () { cleanups.forEach(function (f) { f(); }); };
+  // Setelah daftar nama pinjol termuat, gambar ulang supaya status legalitas tagihan tampil.
+  // Saat pengguna sedang mengisi formulir, tidak digambar ulang (isian tidak boleh hilang);
+  // saran dan status di formulir sudah memakai daftar terbaru saat pengguna mengetik.
+  muatDaftarNama().then(function (d) {
+    if (!d || dibongkar) return;
+    LEGAL_PINJOL = d.legal;
+    ILEGAL_NAMES = d.ilegal;
+    if (state.view !== 'form') render();
+  });
+
+  return function () { dibongkar = true; cleanups.forEach(function (f) { f(); }); };
 }
 
 export default function RangkumUtang({ onBack }: { onBack?: () => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const backRef = useRef(onBack);
-  backRef.current = onBack;
+  // Perbarui ref setelah render (bukan saat render) supaya selalu memakai fungsi onBack terbaru
+  useEffect(() => {
+    backRef.current = onBack;
+  }, [onBack]);
 
   useEffect(() => {
     if (!document.querySelector('link[data-ru-font]')) {

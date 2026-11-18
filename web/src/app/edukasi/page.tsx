@@ -17,16 +17,18 @@ export default async function EdukasiPage() {
   const [{ artikel }, kategori] = await Promise.all([semuaArtikel(), daftarKategori()]);
 
   return (
-    <main className={poppins.variable}>
-      <header className="mx-auto max-w-3xl px-5 pb-8 pt-12 text-center">
-        <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-[#0d6e4b]">Literasi finansial</p>
+    <main className={`${poppins.variable} bg-white`}>
+      <header className="bg-linear-to-b from-[#f1f8f5] to-white px-5 pb-10 pt-14 text-center">
+        <p className="mb-4 inline-block rounded-full bg-[#e6f3ee] px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#04674b]">
+          Literasi finansial
+        </p>
         <h1
-          className="mb-3 text-3xl font-extrabold leading-tight text-gray-900 sm:text-4xl"
-          style={{ fontFamily: "var(--font-poppins), sans-serif" }}
+          className="mx-auto mb-4 max-w-3xl text-3xl font-semibold leading-tight text-[#034d38] sm:text-5xl"
+          style={{ fontFamily: "var(--font-fraunces), Georgia, serif" }}
         >
           Artikel & Video Edukasi
         </h1>
-        <p className="mx-auto max-w-lg text-sm text-gray-500">
+        <p className="mx-auto max-w-lg text-base text-[#5f7d72]">
           Perluas pemahamanmu soal pinjaman online, hak-hakmu, dan cara melindungi diri.
         </p>
       </header>
