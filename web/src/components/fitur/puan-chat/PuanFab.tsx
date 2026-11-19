@@ -386,7 +386,10 @@ export default function PuanFab() {
                   <div className="max-w-[85%] rounded-[16px_16px_16px_4px] bg-gray-100 px-[13px] py-[9px] text-[13px] leading-normal text-gray-900 [overflow-wrap:anywhere]">
                     <IsiJawaban teks={p.teks} />
                   </div>
-                  <p className="text-[10px] text-gray-400">Jawaban AI · bisa keliru, cek dasar aturannya</p>
+                    <p className="flex items-center gap-1.5 text-xs text-gray-600">
+                    <span className="rounded-full bg-violet-100 px-2 py-0.5 text-[11px] font-bold text-violet-800">AI</span>
+                    Dijawab oleh AI, bisa keliru. Cek dasar aturannya.
+                  </p>
                   {!p.krisis && p.topik && p.situasi && p.status && (
                     <div className="flex items-center gap-1.5 text-[11px] text-gray-500">
                       {p.nilai ? (
@@ -515,7 +518,7 @@ export default function PuanFab() {
                 ➤
               </button>
             </div>
-            <p className="mt-1.5 text-[10px] leading-snug text-gray-400">
+            <p className="mt-1.5 text-xs leading-snug text-gray-600">
               Edukasi, bukan nasihat hukum final. Jangan tulis nomor KTP, rekening, atau kata sandi. Pesan diproses
               layanan AI pihak ketiga (Google Gemini). Percakapan hanya tersimpan sementara di tab ini dan terhapus saat
               tab ditutup, tidak disimpan di server EduPuan.{" "}
