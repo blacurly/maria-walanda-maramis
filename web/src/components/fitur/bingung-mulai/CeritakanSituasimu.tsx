@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { analisisCerita, FEATURES, PIHAK, type Hasil } from "@/features/bingung-mulai/rules";
 import { TONE, TONE_FITUR } from "@/lib/tone";
+import { useNotifikasi } from "@/context/NotifikasiContext";
 
 const POPPINS = { fontFamily: "var(--font-poppins), sans-serif" };
 const MAX = 2000;
@@ -21,6 +22,7 @@ export default function CeritakanSituasimu() {
   const [hasil, setHasil] = useState<Hasil | null>(null);
   const [disalin, setDisalin] = useState<string | null>(null);
   const [galat, setGalat] = useState("");
+  const { tampilkan } = useNotifikasi();
 
   function analisis(text: string) {
     if (text.trim().length < MIN) {
@@ -47,6 +49,7 @@ export default function CeritakanSituasimu() {
     try {
       await navigator.clipboard.writeText(v);
       setDisalin(v);
+      tampilkan("Disalin");
       setTimeout(() => setDisalin(null), 1500);
     } catch {
       // Clipboard ditolak: teks tetap bisa diblok manual

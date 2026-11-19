@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react"
 import { useDaftarNama } from "@/lib/pinjol/daftarNama"
+import { useNotifikasi } from "@/context/NotifikasiContext"
 
 // ─── Dasar hukum (diverifikasi Oktober 2026) ─────────────────────────────────
 // type "ojk" = Pasal 62 POJK 22/2023 → hanya mengikat PUJK (pinjol legal)
@@ -145,6 +146,7 @@ export default function HakSaatDitagih() {
   const [app, setApp] = useState("")
   const [checked, setChecked] = useState<string[]>([])
   const [copied, setCopied] = useState<string | null>(null)
+  const { tampilkan } = useNotifikasi()
   // Daftar nama pinjol dari database (GET /api/pinjol/nama), sama dengan data Cek Legalitas
   const { data: daftar, siap, gagal } = useDaftarNama()
 
@@ -177,6 +179,7 @@ export default function HakSaatDitagih() {
     try {
       await navigator.clipboard.writeText(it.tpl)
       setCopied(it.id)
+      tampilkan("Templat disalin")
     } catch {
       setCopied("gagal-" + it.id)
     }

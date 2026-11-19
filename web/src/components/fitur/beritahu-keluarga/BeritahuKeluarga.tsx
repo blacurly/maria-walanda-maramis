@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useNotifikasi } from "@/context/NotifikasiContext";
 import {
   PILIHAN_SITUASI,
   buatPesan,
@@ -13,6 +14,7 @@ export default function BeritahuKeluarga() {
   const [gaya, setGaya] = useState<Gaya>("singkat");
   const [nama, setNama] = useState("");
   const [disalin, setDisalin] = useState(false);
+  const { tampilkan } = useNotifikasi();
 
   const pesan = situasi ? buatPesan(situasi, gaya, nama) : null;
 
@@ -21,6 +23,7 @@ export default function BeritahuKeluarga() {
     try {
       await navigator.clipboard.writeText(pesan);
       setDisalin(true);
+      tampilkan("Pesan disalin");
       setTimeout(() => setDisalin(false), 2000);
     } catch {
       // Browser menolak akses salin: pengguna masih bisa blok teks lalu Ctrl+C
