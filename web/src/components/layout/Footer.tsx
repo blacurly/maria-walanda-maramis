@@ -3,7 +3,12 @@ import Image from "next/image";
 import { LINK_GMAIL } from "@/lib/kontak";
 
 // Ganti "#" dengan alamat akun media sosial EduPuan
-const SOSMED = { instagram: "#", tiktok: "#", youtube: "#", linkedin: "#" };
+const SOSMED = {
+  instagram: "https://instagram.com",
+  tiktok: "https://tiktok.com",
+  youtube: "https://youtube.com",
+  linkedin: "https://linkedin.com",
+};
 
 const KOLOM = [
   {
