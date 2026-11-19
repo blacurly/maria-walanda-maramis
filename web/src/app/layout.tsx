@@ -6,6 +6,7 @@ import PageBar from "@/components/layout/PageBar";
 import Footer from "@/components/layout/Footer";
 import PuanFab from "@/components/fitur/puan-chat/PuanFab";
 import { PuanProvider } from "@/components/fitur/puan-chat/PuanContext";
+import { NotifikasiProvider } from "@/context/NotifikasiContext";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -27,12 +28,15 @@ export default function RootLayout({
     <html lang="id" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         {/* PuanProvider: React Context untuk jendela chat Puan, bisa dibuka dari halaman mana pun */}
-        <PuanProvider>
-          <Navbar />
-          <PageBar />
-          <div className="flex-1">{children}</div>
-          <Footer />
-          <PuanFab />
+          <PuanProvider>
+          {/* NotifikasiProvider: Context kedua, state terpisah untuk pesan singkat (mis. "Pesan disalin") */}
+          <NotifikasiProvider>
+            <Navbar />
+            <PageBar />
+            <div className="flex-1">{children}</div>
+            <Footer />
+            <PuanFab />
+          </NotifikasiProvider>
         </PuanProvider>
       </body>
     </html>
