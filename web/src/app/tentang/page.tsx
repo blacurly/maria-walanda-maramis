@@ -8,6 +8,14 @@ import "./tentang.css";
 import { EMAIL_KONTAK, LINK_GMAIL } from "@/lib/kontak";
 
 const fraunces = Fraunces({ subsets: ["latin"], weight: "600", variable: "--font-fraunces" });
+const LEMBAGA = [
+  { label: "OJK: 157", href: "tel:157" },
+  { label: "Komnas Perempuan", href: "https://komnasperempuan.go.id" },
+  { label: "patrolisiber.id", href: "https://patrolisiber.id" },
+];
+
+const PILL =
+  "inline-flex min-h-9 items-center justify-center rounded-full border border-amber-300 bg-amber-100 px-3.5! py-1.5! text-[13px] font-semibold text-amber-900 no-underline! transition-colors hover:bg-amber-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 focus-visible:ring-offset-2 active:scale-[.98]";
 
 export const metadata: Metadata = {
   title: "Tentang – EduPuan",
@@ -337,12 +345,25 @@ export default function TentangPage() {
                 dengan penyedia pinjaman mana pun, dan informasi di sini bukan pengganti nasihat hukum atau
                 keuangan profesional. Untuk pengaduan resmi, hubungi lembaga berwenang:
               </p>
-              <div className="contacts">
-                <p>Pertanyaan atau masukan untuk EduPuan? Tulis ke <a href={LINK_GMAIL} target="_blank" rel="noopener noreferrer"><b>{EMAIL_KONTAK}</b></a>.</p>
-                <span>OJK: 157</span>
-                <span>Komnas Perempuan</span>
-                <span>patrolisiber.id</span>
-              </div>
+              <div className="mt-0! flex flex-wrap items-center gap-x-3 gap-y-2">
+  <p className="m-0!">
+    Pertanyaan atau masukan untuk EduPuan? Tulis ke{" "}
+    <a href={LINK_GMAIL} target="_blank" rel="noopener noreferrer">
+      <b>{EMAIL_KONTAK}</b>
+    </a>
+    .
+  </p>
+  {LEMBAGA.map((l) => (
+    <a
+      key={l.label}
+      href={l.href}
+      className={PILL}
+      {...(l.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+    >
+      {l.label}
+    </a>
+  ))}
+            </div>
             </div>
           </div>
           <div className="cta">
