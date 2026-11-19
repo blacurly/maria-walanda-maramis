@@ -60,15 +60,32 @@ const GLOBAL_CSS = `
 .ep-cek a{color:#12714B}.ep-cek a:hover{color:#0D4F35}
 .ep-cek .ep-in{width:100%;box-sizing:border-box;height:48px;border:1px solid #CBD6D0;border-radius:12px;padding:0 14px;font:500 16px var(--font-jakarta),sans-serif;color:#14211B;background:#fff}
 .ep-cek .ep-in:focus{outline:2px solid #12714B;outline-offset:1px;border-color:#12714B}
+.ep-cek .ep-in[aria-invalid="true"]{border-color:#B42318}
 .ep-cek button{font-family:var(--font-jakarta),sans-serif;cursor:pointer}
 `;
 
 /* ---------------- komponen kecil ---------------- */
-function NumInput(props: { id: string; value: number; onChange: (n: number) => void; placeholder: string; ariaLabel?: string }) {
+function NumInput(props: { id: string; value: number; onChange: (n: number) => void; placeholder: string; ariaLabel?: string; invalid?: boolean }) {
   return (
-    <input id={props.id} aria-label={props.ariaLabel} className="ep-in" inputMode="numeric" placeholder={props.placeholder}
+    <input id={props.id} aria-label={props.ariaLabel} aria-invalid={props.invalid ? true : undefined} aria-describedby={props.invalid ? "err-" + props.id : undefined}
+      className="ep-in" inputMode="numeric" placeholder={props.placeholder}
       value={show(props.value)} onChange={(e) => props.onChange(num(e.target.value))} />
   );
+}
+
+/* Pesan validasi di bawah isian: tampil saat angka tidak masuk akal */
+function PesanGalat(props: { id: string; teks?: string }) {
+  if (!props.teks) return null;
+  return <span id={"err-" + props.id} role="alert" style={{ fontSize: 13, fontWeight: 600, color: "#B42318" }}>{props.teks}</span>;
+}
+
+/* Pemeriksaan isian sederhana (bukan perhitungan; perhitungan tetap di hitung.ts) */
+function periksaIsian(s: InputPenawaran): { d?: string; t?: string; ten?: string } {
+  const e: { d?: string; t?: string; ten?: string } = {};
+  if (s.p > 0 && s.d > s.p) e.d = "Uang yang masuk tidak mungkin lebih besar dari jumlah pinjaman. Cek lagi angkanya.";
+  if (s.d > 0 && s.t > 0 && s.t < s.d) e.t = "Total yang dikembalikan lebih kecil dari uang yang kamu terima. Cek lagi angkanya.";
+  if (s.p > 0 && s.t > 0 && s.ten === 0) e.ten = "Isi masa pinjaman supaya hasilnya bisa dihitung.";
+  return e;
 }
 
 function Field(props: { id: string; label: string; hint?: string; children: React.ReactNode }) {
@@ -133,6 +150,7 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
   const pickScen = (id: number) => { setS(inputSkenario(id)); setScen(id); setShowAll(false); setShowCalc(false); setLateSel(30); setLateCustom(0); };
 
   const h = hitung(s);
+  const galat = periksaIsian(s);
   const v = teksVonis(h);
   const produktif = s.jenis === "produktif";
   const bulan = s.unit === "bulan";
@@ -323,20 +341,23 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
                 <NumInput id="f-p" value={s.p} onChange={(n) => set({ p: n })} placeholder="contoh: 5.000.000" />
               </Field>
               <Field id="f-d" label="Berapa uang yang masuk ke rekeningmu?" hint="Setelah dipotong biaya di awal. Kalau tidak ada potongan, isi sama dengan jumlah pinjaman.">
-                <NumInput id="f-d" value={s.d} onChange={(n) => set({ d: n })} placeholder="contoh: 4.800.000" />
+                <NumInput id="f-d" value={s.d} invalid={!!galat.d} onChange={(n) => set({ d: n })} placeholder="contoh: 4.800.000" />
+                <PesanGalat id="f-d" teks={galat.d} />
               </Field>
               <Field id="f-t" label="Berapa total yang harus dikembalikan?" hint='Semua yang dibayar sampai lunas, tanpa denda. Disebut juga "total tagihan".'>
-                <NumInput id="f-t" value={s.t} onChange={(n) => set({ t: n })} placeholder="contoh: 5.500.000" />
+                <NumInput id="f-t" value={s.t} invalid={!!galat.t} onChange={(n) => set({ t: n })} placeholder="contoh: 5.500.000" />
+               <PesanGalat id="f-t" teks={galat.t} />
               </Field>
               <div style={fld}>
                 <label htmlFor="f-ten" style={lbl}>Berapa lama masa pinjaman?</label>
                 <div style={{ display: "flex", gap: 10 }}>
-                  <NumInput id="f-ten" value={s.ten} onChange={(n) => set({ ten: n })} placeholder="contoh: 6" />
+                  <NumInput id="f-ten" value={s.ten} invalid={!!galat.ten} onChange={(n) => set({ ten: n })} placeholder="contoh: 6" />
                   <div role="group" aria-label="Satuan" style={{ display: "flex", border: `1px solid ${C.line2}`, borderRadius: 12, overflow: "hidden", flexShrink: 0 }}>
                     <button type="button" onClick={() => set({ unit: "hari" })} style={seg(!bulan)}>hari</button>
                     <button type="button" onClick={() => set({ unit: "bulan" })} style={seg(bulan)}>bulan</button>
                   </div>
                 </div>
+                <PesanGalat id="f-ten" teks={galat.ten} />
                 <span style={hint}>Dihitung dalam hari kalender. 1 bulan = 30 hari, sama seperti contoh hitungan di SEOJK.</span>
               </div>
               <Field id="f-cmax" label="Cicilan terbesar dalam satu bulan (opsional)" hint="Lihat jadwal cicilan. Isi jika cicilannya tidak sama tiap bulan, misalnya bulan terakhir lebih besar. Kosongkan jika cicilannya rata.">
