@@ -304,7 +304,7 @@ export default function PuanFab() {
       {buka && (
         <section
           aria-label="Chat Tanya Puan AI"
-          className="fixed bottom-[90px] right-7 z-[999] flex max-h-[min(520px,calc(100dvh-214px))] w-[360px] max-w-[calc(100vw-32px)] flex-col overflow-hidden rounded-[20px] bg-white shadow-[0_20px_60px_rgba(0,0,0,.18),0_4px_16px_rgba(0,0,0,.10)] max-md:bottom-[76px] max-md:left-4 max-md:right-4 max-md:w-auto max-md:max-w-none max-md:max-h-[calc(100dvh-172px)]"
+          className="fixed bottom-[90px] right-7 z-[999] flex max-h-[min(520px,calc(100dvh-214px))] w-[360px] max-w-[calc(100vw-32px)] lg:min-h-[min(480px,calc(100dvh-214px))] lg:max-h-[min(600px,calc(100dvh-214px))] lg:w-[420px] flex-col overflow-hidden rounded-[20px] bg-white shadow-[0_20px_60px_rgba(0,0,0,.18),0_4px_16px_rgba(0,0,0,.10)] max-md:bottom-[76px] max-md:left-4 max-md:right-4 max-md:w-auto max-md:max-w-none max-md:max-h-[calc(100dvh-172px)]"
         >
           {/* Kepala */}
           <header className="flex shrink-0 items-center gap-2.5 bg-[#0d6e4b] px-4 py-3.5">
