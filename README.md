@@ -236,7 +236,7 @@ master        ← production (yang tampil di Vercel)
 
 | Nama | Peran |
 |---|---|
-| Nama anggota 1 | _diisi_ |
-| Nama anggota 2 | _diisi_ |
-| Nama anggota 3 | _diisi_ |
-| Nama anggota 4 | _diisi_ |
+| Nur Vita Sari                  | Frontend |
+| Izza Halim                     | Backend dan AI (Gemini embedding) dan integrasi database ke repo |
+| Jelita Ekaseptiani Narentar    | Database (Supabase) |
+| Sitti Meautiah Devi Amelia Jan | Pengujian AI/embedding dan review PR |
