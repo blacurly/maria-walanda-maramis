@@ -29,8 +29,8 @@ const C = {
   line: "#DDE5E0", line2: "#CBD6D0", soft: "#EEF2EF", green: "#12714B", greenDark: "#0D4F35",
   greenSoft: "#E8F3EC", red: "#B42318", amber: "#C98A00",
 };
-const FONT_HEAD = "var(--font-poppins), sans-serif"
-const FONT_BODY = "var(--font-inter), sans-serif"
+const FONT_HEAD = "var(--font-poppins), sans-serif";
+const FONT_BODY = "var(--font-inter), sans-serif";
 
 /* ---------------- gaya berulang ---------------- */
 const card: React.CSSProperties = { background: C.white, border: `1px solid ${C.line}`, borderRadius: 16, padding: "clamp(16px, 4vw, 24px)", display: "flex", flexDirection: "column", gap: 16 };
@@ -359,7 +359,7 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
                     <button type="button" onClick={() => set({ unit: "bulan" })} style={seg(bulan)}>bulan</button>
                   </div>
                 </div>
-                                <span style={hint}>Dihitung dalam hari kalender. 1 bulan = 30 hari, sama seperti contoh hitungan di SEOJK.</span>
+              <span style={hint}>Dihitung dalam hari kalender. 1 bulan = 30 hari, sama seperti contoh hitungan di SEOJK.</span>
               </div>
               <Field id="f-cmax" label="Cicilan terbesar dalam satu bulan (opsional)" hint="Lihat jadwal cicilan. Isi jika cicilannya tidak sama tiap bulan, misalnya bulan terakhir lebih besar. Kosongkan jika cicilannya rata.">
                 <NumInput id="f-cmax" value={s.cmax} onChange={(n) => set({ cmax: n })} placeholder="contoh: 0" />
