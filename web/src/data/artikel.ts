@@ -115,17 +115,18 @@ export const ARTIKEL: Artikel[] = [
         ],
       },
       {
-        judul: "Batas biaya dari OJK (berlaku sejak 2026)",
+        judul: "Batas biaya dari OJK (SEOJK 19/2025)",
         daftar: [
-          "Pinjaman konsumtif: manfaat ekonomi paling tinggi 0,1% per hari.",
-          "Pinjaman produktif (untuk usaha): paling tinggi 0,067% per hari.",
+          "Pinjaman konsumtif: manfaat ekonomi paling tinggi 0,3% per hari untuk tenor sampai 6 bulan, dan 0,2% per hari untuk tenor di atas 6 bulan.",
+          "Pinjaman produktif (untuk usaha) sampai Rp50 juta: paling tinggi 0,275% per hari untuk tenor sampai 6 bulan, dan 0,1% per hari untuk tenor di atas 6 bulan. Di atas Rp50 juta: 0,1% per hari.",
+          "Denda keterlambatan punya batas per hari yang sama dengan batas di atas.",
           "Total manfaat ekonomi ditambah denda tidak boleh lebih dari 100% nilai pinjaman di perjanjian.",
         ],
       },
       {
         judul: "Contoh hitungan",
         paragraf: [
-          "Kamu meminjam Rp1.000.000 untuk kebutuhan pribadi selama 30 hari. Biaya paling tinggi: 0,1% × 30 hari = 3%, atau Rp30.000. Jadi kalau membayar tepat waktu, total yang kamu kembalikan paling banyak sekitar Rp1.030.000. Kalau sebuah penawaran meminta jauh lebih besar, ada yang tidak beres.",
+          "Kamu meminjam Rp1.000.000 untuk kebutuhan pribadi selama 30 hari. Biaya paling tinggi: 0,3% × 30 hari = 9%, atau Rp90.000. Jadi kalau membayar tepat waktu, total yang kamu kembalikan paling banyak sekitar Rp1.090.000. Kalau sebuah penawaran meminta lebih besar dari itu, penawaran tersebut melewati batas OJK.",
           "Kalau terlambat, denda mulai berjalan. Tetapi seluruh bunga, biaya, dan denda tetap tidak boleh melebihi Rp1.000.000 (100% dari pokok pinjaman).",
         ],
       },
@@ -146,12 +147,12 @@ export const ARTIKEL: Artikel[] = [
     fitur: { label: "Hitung penawaranmu di Cek Penawaran", href: "/mau-pinjam/cek-penawaran" },
     sumber: [
       {
-        label: "detikFinance – Bunga pinjol turun bertahap hingga 0,1% per hari",
-        url: "https://finance.detik.com/fintech/d-7030676/bunga-pinjol-bakal-turun-bertahap-hingga-jadi-0-1-hari",
+        label: "OJK – SEOJK 19/SEOJK.06/2025 tentang Penyelenggaraan LPBBTI",
+        url: "https://ojk.go.id/id/regulasi/Pages/SEOJK-19-SEOJK06-2025-Penyelenggaraan-LPBBTI.aspx",
       },
       {
-        label: "Investortrust – Aturan baru pinjol: bunga, denda, dan simulasinya",
-        url: "https://investortrust.id/financial/23551/ojk-terbitkan-aturan-baru-pinjol-segini-besaran-bunga-denda-dan-simulasinya",
+        label: "Bisnis.com – OJK soal aturan batas maksimal bunga pinjol (Agustus 2025)",
+        url: "https://finansial.bisnis.com/read/20250811/563/1901174/ojk-sebut-aturan-batas-maksimal-bunga-pinjol-bikin-perusahaan-makin-cuan",
       },
     ],
   },
