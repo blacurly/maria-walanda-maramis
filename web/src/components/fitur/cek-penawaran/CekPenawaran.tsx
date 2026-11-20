@@ -61,14 +61,31 @@ const GLOBAL_CSS = `
 .ep-cek .ep-in{width:100%;box-sizing:border-box;height:48px;border:1px solid #CBD6D0;border-radius:12px;padding:0 14px;font:500 16px var(--font-inter),sans-serif;color:#14211B;background:#fff}
 .ep-cek .ep-in:focus{outline:2px solid #12714B;outline-offset:1px;border-color:#12714B}
 .ep-cek button{font-family:var(--font-inter),sans-serif;cursor:pointer}
+.ep-cek .ep-in[aria-invalid="true"]{border-color:#B42318}
 `;
 
 /* ---------------- komponen kecil ---------------- */
-function NumInput(props: { id: string; value: number; onChange: (n: number) => void; placeholder: string; ariaLabel?: string }) {
+function NumInput(props: { id: string; value: number; onChange: (n: number) => void; placeholder: string; ariaLabel?: string; invalid?: boolean; onBlur?: () => void }) {
   return (
-    <input id={props.id} aria-label={props.ariaLabel} className="ep-in" inputMode="numeric" placeholder={props.placeholder}
-      value={show(props.value)} onChange={(e) => props.onChange(num(e.target.value))} />
+    <input id={props.id} aria-label={props.ariaLabel} aria-invalid={props.invalid ? true : undefined} aria-describedby={props.invalid ? "err-" + props.id : undefined}
+      className="ep-in" inputMode="numeric" placeholder={props.placeholder}
+      value={show(props.value)} onChange={(e) => props.onChange(num(e.target.value))} onBlur={props.onBlur} />
   );
+}
+
+/* Pesan validasi di bawah isian: tampil saat angka tidak masuk akal */
+function PesanGalat(props: { id: string; teks?: string }) {
+  if (!props.teks) return null;
+  return <span id={"err-" + props.id} role="alert" style={{ fontSize: 13, fontWeight: 600, color: "#B42318" }}>{props.teks}</span>;
+}
+
+/* Pemeriksaan isian sederhana (bukan perhitungan; perhitungan tetap di hitung.ts) */
+function periksaIsian(s: InputPenawaran): { d?: string; t?: string } {
+  const e: { d?: string; t?: string } = {};
+  // Aturan sama persis dengan hitung.ts (errs). Masa pinjaman kosong sudah ditangani panel hasil ("Lengkapi dulu").
+  if (s.p > 0 && s.d > 0 && s.d > s.p) e.d = "Uang yang masuk lebih besar dari jumlah pinjaman. Biasanya sama atau lebih kecil. Coba cek lagi.";
+  if (s.p > 0 && s.t > 0 && s.t < s.p) e.t = "Total yang dikembalikan lebih kecil dari jumlah pinjaman. Coba cek lagi.";
+  return e;
 }
 
 function Field(props: { id: string; label: string; hint?: string; children: React.ReactNode }) {
@@ -133,6 +150,9 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
   const pickScen = (id: number) => { setS(inputSkenario(id)); setScen(id); setShowAll(false); setShowCalc(false); setLateSel(30); setLateCustom(0); };
 
   const h = hitung(s);
+  const galat = periksaIsian(s);
+  // Pesan kolom baru tampil setelah pengguna selesai mengisi kolom itu (pindah ke kolom lain), bukan saat masih mengetik
+  const [sentuh, setSentuh] = useState<{ d?: boolean; t?: boolean }>({});
   const v = teksVonis(h);
   const produktif = s.jenis === "produktif";
   const bulan = s.unit === "bulan";
@@ -323,10 +343,12 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
                 <NumInput id="f-p" value={s.p} onChange={(n) => set({ p: n })} placeholder="contoh: 5.000.000" />
               </Field>
               <Field id="f-d" label="Berapa uang yang masuk ke rekeningmu?" hint="Setelah dipotong biaya di awal. Kalau tidak ada potongan, isi sama dengan jumlah pinjaman.">
-                <NumInput id="f-d" value={s.d} onChange={(n) => set({ d: n })} placeholder="contoh: 4.800.000" />
+                <NumInput id="f-d" value={s.d} invalid={!!galat.d && !!sentuh.d} onBlur={() => setSentuh((x) => ({ ...x, d: true }))} onChange={(n) => set({ d: n })} placeholder="contoh: 4.800.000" />
+                <PesanGalat id="f-d" teks={sentuh.d ? galat.d : undefined} />
               </Field>
               <Field id="f-t" label="Berapa total yang harus dikembalikan?" hint='Semua yang dibayar sampai lunas, tanpa denda. Disebut juga "total tagihan".'>
-                <NumInput id="f-t" value={s.t} onChange={(n) => set({ t: n })} placeholder="contoh: 5.500.000" />
+                <NumInput id="f-t" value={s.t} invalid={!!galat.t && !!sentuh.t} onBlur={() => setSentuh((x) => ({ ...x, t: true }))} onChange={(n) => set({ t: n })} placeholder="contoh: 5.500.000" />
+               <PesanGalat id="f-t" teks={sentuh.t ? galat.t : undefined} />
               </Field>
               <div style={fld}>
                 <label htmlFor="f-ten" style={lbl}>Berapa lama masa pinjaman?</label>
@@ -337,7 +359,7 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
                     <button type="button" onClick={() => set({ unit: "bulan" })} style={seg(bulan)}>bulan</button>
                   </div>
                 </div>
-                <span style={hint}>Dihitung dalam hari kalender. 1 bulan = 30 hari, sama seperti contoh hitungan di SEOJK.</span>
+                                <span style={hint}>Dihitung dalam hari kalender. 1 bulan = 30 hari, sama seperti contoh hitungan di SEOJK.</span>
               </div>
               <Field id="f-cmax" label="Cicilan terbesar dalam satu bulan (opsional)" hint="Lihat jadwal cicilan. Isi jika cicilannya tidak sama tiap bulan, misalnya bulan terakhir lebih besar. Kosongkan jika cicilannya rata.">
                 <NumInput id="f-cmax" value={s.cmax} onChange={(n) => set({ cmax: n })} placeholder="contoh: 0" />
@@ -440,7 +462,7 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
               <div style={{ background: C.white, border: `2px dashed ${C.line2}`, borderRadius: 16, padding: "40px 28px", display: "flex", flexDirection: "column", gap: 12 }}>
                 <strong style={{ fontFamily: FONT_HEAD, fontSize: 20 }}>Hasil akan muncul di sini</strong>
                 {h.missing.length > 0 && <p style={{ margin: 0, color: C.muted }}>Lengkapi dulu: {h.missing.join(", ")}.</p>}
-                {h.errs.map((e, i) => <p key={i} style={{ margin: 0, color: C.red, fontWeight: 600 }}>{e}</p>)}
+                {h.errs.length > 0 && <p style={{ margin: 0, color: C.red, fontWeight: 600 }}>Ada angka yang perlu dicek. Lihat pesan merah di kolom isian.</p>}
               </div>
             )}
 

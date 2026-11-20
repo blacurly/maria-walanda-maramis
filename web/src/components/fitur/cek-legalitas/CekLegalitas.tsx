@@ -8,6 +8,7 @@ import {
   LANGKAH_ILEGAL, LANGKAH_TIDAK_DITEMUKAN,
 } from "@/features/cek-legalitas/data";
 import { TONE } from "@/lib/tone";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const POPPINS = { fontFamily: "var(--font-poppins), sans-serif" };
 const KARTU = "rounded-2xl border border-gray-100 bg-white shadow-sm";
@@ -215,10 +216,12 @@ export default function CekLegalitas({ sumber, dariDatabase }: Props) {
 
         {/* Sedang mengecek */}
         {memuat && (
-          <p role="status" className="mb-6 max-w-3xl text-sm text-gray-500">
-            Mencocokkan nama dengan daftar OJK dan Satgas PASTI…
-          </p>
-        )}
+  <div role="status" aria-live="polite" className="mb-6 max-w-3xl space-y-3">
+    <p className="text-sm text-gray-500">Mencocokkan nama dengan daftar OJK dan Satgas PASTI…</p>
+    <Skeleton className="h-24 w-full rounded-2xl" />
+    <Skeleton className="h-4 w-2/3" />
+  </div>
+)}
 
         {/* Belum ada hasil: kontak OJK */}
         {!hasil && !memuat && (
