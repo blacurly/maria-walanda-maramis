@@ -29,8 +29,9 @@ Konten disusun untuk tiga kondisi: **mau pinjam**, **sudah terjerat**, dan **bin
 5. [Struktur folder](#struktur-folder)
 6. [Menjalankan di komputer sendiri](#menjalankan-di-komputer-sendiri)
 7. [Deployment (Vercel)](#deployment-vercel)
-8. [Alur kerja GitHub](#alur-kerja-github)
-9. [Tim](#tim)
+8. [Aset gambar](#aset-gambar)
+9. [Alur kerja GitHub](#alur-kerja-github)
+10. [Tim](#tim)
 
 ---
 
@@ -203,6 +204,16 @@ npx --yes tsx@4.20.6 scripts/uji-bias-puan.ts       # uji bias (memakai kuota Ge
 4. **Production branch: `master`**. Branch lain otomatis mendapat *Preview deployment*.
 5. Endpoint `/api/chat` memakai Node.js runtime dengan batas 60 detik (`maxDuration`), sudah diatur di kode.
 6. **Settings → Functions → Function Region: Mumbai (`bom1`)**, satu wilayah dengan database Supabase supaya respons lebih cepat.
+
+## Aset gambar
+
+| File | Sumber |
+|---|---|
+| `web/public/ilustrasi/hero.jpg` | Dibuat dengan AI generatif oleh tim |
+| `web/public/ilustrasi/kartu-mau-pinjam.png`, `kartu-sudah-terjerat.png`, `kartu-bingung-mulai.png` | Dibuat dengan AI generatif oleh tim |
+| `web/public/ilustrasi/puan-avatar.png`, `web/public/puan-avatar.jpg` | Dibuat dengan AI generatif oleh tim |
+
+Gambar-gambar ini tidak diambil dari situs atau sumber berhak cipta lain.
 
 ## Alur kerja GitHub
 
