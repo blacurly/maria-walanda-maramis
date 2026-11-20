@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Poppins, Fraunces } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import PageBar from "@/components/layout/PageBar";
@@ -12,6 +12,8 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
 });
+const poppins = Poppins({ subsets: ["latin"], weight: ["600", "700", "800"], variable: "--font-poppins" });
+const fraunces = Fraunces({ subsets: ["latin"], weight: "600", variable: "--font-fraunces" });
 
 export const metadata: Metadata = {
   title: "EduPuan – Lebih Paham, Lebih Bijak",
@@ -25,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className={`${inter.variable} h-full antialiased`}>
+    <html lang="id" className={`${inter.variable} ${poppins.variable} ${fraunces.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         {/* PuanProvider: React Context untuk jendela chat Puan, bisa dibuka dari halaman mana pun */}
           <PuanProvider>
