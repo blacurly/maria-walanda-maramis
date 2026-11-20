@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
-import { Sora, Plus_Jakarta_Sans } from "next/font/google";
 import CekPenawaran from "@/components/fitur/cek-penawaran/CekPenawaran";
 
-const sora = Sora({ subsets: ["latin"], weight: ["600", "700", "800"], variable: "--font-sora" });
-const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-jakarta" });
 
 export const metadata: Metadata = {
   title: "Cek Penawaran – EduPuan",
@@ -19,7 +16,7 @@ export default async function CekPenawaranPage({
   const { demo } = await searchParams;
 
   return (
-    <div className={`${sora.variable} ${jakarta.variable}`}>
+    <div>
       <CekPenawaran modeDemo={demo === "1"} />
     </div>
   );

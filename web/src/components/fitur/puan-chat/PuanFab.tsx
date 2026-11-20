@@ -304,7 +304,7 @@ export default function PuanFab() {
       {buka && (
         <section
           aria-label="Chat Tanya Puan AI"
-          className="fixed bottom-[90px] right-7 z-[999] flex max-h-[min(520px,calc(100dvh-214px))] w-[360px] max-w-[calc(100vw-32px)] flex-col overflow-hidden rounded-[20px] bg-white shadow-[0_20px_60px_rgba(0,0,0,.18),0_4px_16px_rgba(0,0,0,.10)] max-md:bottom-[76px] max-md:left-4 max-md:right-4 max-md:w-auto max-md:max-w-none max-md:max-h-[calc(100dvh-172px)]"
+          className="fixed bottom-[90px] right-7 z-[999] flex max-h-[min(520px,calc(100dvh-214px))] w-[360px] max-w-[calc(100vw-32px)] lg:min-h-[min(480px,calc(100dvh-214px))] lg:max-h-[min(600px,calc(100dvh-214px))] lg:w-[420px] flex-col overflow-hidden rounded-[20px] bg-white shadow-[0_20px_60px_rgba(0,0,0,.18),0_4px_16px_rgba(0,0,0,.10)] max-md:bottom-[76px] max-md:left-4 max-md:right-4 max-md:w-auto max-md:max-w-none max-md:max-h-[calc(100dvh-172px)]"
         >
           {/* Kepala */}
           <header className="flex shrink-0 items-center gap-2.5 bg-[#0d6e4b] px-4 py-3.5">
@@ -386,7 +386,10 @@ export default function PuanFab() {
                   <div className="max-w-[85%] rounded-[16px_16px_16px_4px] bg-gray-100 px-[13px] py-[9px] text-[13px] leading-normal text-gray-900 [overflow-wrap:anywhere]">
                     <IsiJawaban teks={p.teks} />
                   </div>
-                  <p className="text-[10px] text-gray-400">Jawaban AI · bisa keliru, cek dasar aturannya</p>
+                    <p className="flex items-center gap-1.5 text-xs text-gray-600">
+                    <span className="rounded-full bg-violet-100 px-2 py-0.5 text-[11px] font-bold text-violet-800">AI</span>
+                    Dijawab oleh AI, bisa keliru. Cek dasar aturannya.
+                  </p>
                   {!p.krisis && p.topik && p.situasi && p.status && (
                     <div className="flex items-center gap-1.5 text-[11px] text-gray-500">
                       {p.nilai ? (
@@ -515,7 +518,7 @@ export default function PuanFab() {
                 ➤
               </button>
             </div>
-            <p className="mt-1.5 text-[10px] leading-snug text-gray-400">
+            <p className="mt-1.5 text-xs leading-snug text-gray-600">
               Edukasi, bukan nasihat hukum final. Jangan tulis nomor KTP, rekening, atau kata sandi. Pesan diproses
               layanan AI pihak ketiga (Google Gemini). Percakapan hanya tersimpan sementara di tab ini dan terhapus saat
               tab ditutup, tidak disimpan di server EduPuan.{" "}

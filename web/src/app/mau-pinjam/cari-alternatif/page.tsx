@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import CekAlternatif from "@/components/fitur/cari-alternatif/CekAlternatif";
 
-const poppins = Poppins({ subsets: ["latin"], weight: ["700", "800"], variable: "--font-poppins" });
 
 export const metadata: Metadata = {
   title: "Cek Alternatif Lain – EduPuan",
@@ -12,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function CariAlternatifPage() {
   return (
-    <div className={poppins.variable}>
+    <div>
       <CekAlternatif hideHeader />
     </div>
   );

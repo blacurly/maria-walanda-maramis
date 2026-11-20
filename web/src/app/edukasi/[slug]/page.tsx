@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Poppins } from "next/font/google";
 import { labelTopik } from "@/data/artikel";
 import { ambilArtikel, semuaArtikel } from "@/lib/artikel/layanan";
 
-const poppins = Poppins({ subsets: ["latin"], weight: ["700", "800"], variable: "--font-poppins" });
 const POPPINS = { fontFamily: "var(--font-poppins), sans-serif" };
 
 type Props = { params: Promise<{ slug: string }> };
+
+
 
 // Ambil ulang dari database paling lama setiap 1 jam (dan langsung, setelah admin mengubah artikel lewat API)
 export const revalidate = 3600;
@@ -41,7 +41,7 @@ export default async function ArtikelPage({ params }: Props) {
   ].slice(0, 3);
 
   return (
-    <main className={`${poppins.variable} mx-auto max-w-2xl px-5 pb-20 pt-8`}>
+    <main className="mx-auto max-w-2xl px-5 pb-20 pt-8">
       <Link href="/edukasi" className="mb-6 inline-block text-sm font-semibold text-[#0d6e4b] hover:underline">
         ← Semua artikel
       </Link>
@@ -58,7 +58,7 @@ export default async function ArtikelPage({ params }: Props) {
       </h1>
       <p className="mb-6 text-gray-500">{a.ringkasan}</p>
 
-      <div className="relative mb-8 aspect-[16/9] overflow-hidden rounded-2xl bg-gray-100">
+      <div className="relative mb-8 aspect-video overflow-hidden rounded-2xl bg-gray-100">
         <Image src={a.gambar} alt="" fill priority sizes="(min-width: 672px) 672px, 100vw" className="object-cover" />
       </div>
 
@@ -144,7 +144,7 @@ export default async function ArtikelPage({ params }: Props) {
               href={`/edukasi/${x.slug}`}
               className="flex items-center gap-4 rounded-xl border border-gray-100 bg-white p-3 transition-colors hover:border-emerald-200"
             >
-              <div className="relative h-16 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100">
+              <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-lg bg-gray-100">
                 <Image src={x.gambar} alt="" fill sizes="96px" className="object-cover" />
               </div>
               <div className="min-w-0">
