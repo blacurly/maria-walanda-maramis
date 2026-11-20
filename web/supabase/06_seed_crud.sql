@@ -126,7 +126,7 @@ insert into public.rujukan_artikel (artikel_id, jenis, teks, tautan, urutan)
 select a.id, v.jenis, v.teks, v.tautan, v.urutan
 from public.artikel a
 cross join (values
-  ('dasar_hukum', 'SEOJK 19/SEOJK.06/2023 tentang Penyelenggaraan LPBBTI', null, 1),
+  ('dasar_hukum', 'SEOJK 19/SEOJK.06/2025 tentang Penyelenggaraan LPBBTI', null, 1),
   ('dasar_hukum', 'POJK 40/2024 tentang LPBBTI', null, 2),
   ('sumber', 'detikFinance – Bunga pinjol turun bertahap hingga 0,1% per hari', 'https://finance.detik.com/fintech/d-7030676/bunga-pinjol-bakal-turun-bertahap-hingga-jadi-0-1-hari', 1),
   ('sumber', 'Investortrust – Aturan baru pinjol: bunga, denda, dan simulasinya', 'https://investortrust.id/financial/23551/ojk-terbitkan-aturan-baru-pinjol-segini-besaran-bunga-denda-dan-simulasinya', 2)

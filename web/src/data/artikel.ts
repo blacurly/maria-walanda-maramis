@@ -140,7 +140,7 @@ export const ARTIKEL: Artikel[] = [
     ],
     catatan: "Batas ini hanya berlaku untuk pinjol berizin. Pinjol ilegal tidak mengikuti aturan apa pun.",
     dasarHukum: [
-      "SEOJK 19/SEOJK.06/2023 tentang Penyelenggaraan LPBBTI",
+      "SEOJK 19/SEOJK.06/2025 tentang Penyelenggaraan LPBBTI",
       "POJK 40/2024 tentang LPBBTI",
     ],
     fitur: { label: "Hitung penawaranmu di Cek Penawaran", href: "/mau-pinjam/cek-penawaran" },
