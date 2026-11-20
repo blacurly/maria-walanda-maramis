@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import CekLegalitas from "@/components/fitur/cek-legalitas/CekLegalitas";
 import { namaSumberResmi } from "@/lib/pinjol/layanan";
 
-const poppins = Poppins({ subsets: ["latin"], weight: ["800"], variable: "--font-poppins" });
 
 export const metadata: Metadata = {
   title: "Cek Legalitas Pinjol – EduPuan",
@@ -19,7 +17,7 @@ export default async function CekLegalitasPage() {
   const { sumber, dariDatabase } = await namaSumberResmi();
 
   return (
-    <div className={poppins.variable}>
+    <div>
       <CekLegalitas sumber={sumber} dariDatabase={dariDatabase} />
     </div>
   );

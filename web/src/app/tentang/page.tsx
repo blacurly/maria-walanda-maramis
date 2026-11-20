@@ -3,11 +3,10 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import TombolTanyaPuan from "@/components/fitur/puan-chat/TombolTanyaPuan";
-import { Fraunces } from "next/font/google";
 import "./tentang.css";
 import { EMAIL_KONTAK, LINK_GMAIL } from "@/lib/kontak";
 
-const fraunces = Fraunces({ subsets: ["latin"], weight: "600", variable: "--font-fraunces" });
+
 const LEMBAGA = [
   { label: "OJK: 157", href: "tel:157" },
   { label: "Komnas Perempuan", href: "https://komnasperempuan.go.id" },
@@ -135,7 +134,7 @@ const MAKNA_LOGO = [
 
 export default function TentangPage() {
   return (
-    <div className={`ep-tentang ${fraunces.variable}`}>
+    <div className="ep-tentang">
       {/* Hero */}
       <header className="hero">
         <div className="wrap hero-grid">
