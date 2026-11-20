@@ -213,7 +213,11 @@ npx --yes tsx@4.20.6 scripts/uji-bias-puan.ts       # uji bias (memakai kuota Ge
 | `web/public/ilustrasi/kartu-mau-pinjam.png`, `kartu-sudah-terjerat.png`, `kartu-bingung-mulai.png` | Dibuat dengan AI generatif oleh tim |
 | `web/public/ilustrasi/puan-avatar.png`, `web/public/puan-avatar.jpg` | Dibuat dengan AI generatif oleh tim |
 
-Gambar-gambar ini tidak diambil dari situs atau sumber berhak cipta lain.
+Gambar-gambar di atas tidak diambil dari situs atau sumber berhak cipta lain.
+
+Foto sampul artikel Edukasi diambil dari [Unsplash](https://unsplash.com) dan dipakai sesuai
+[Unsplash License](https://unsplash.com/license) (gratis, boleh dipakai tanpa izin khusus). Alamat fotonya tercantum di
+`web/src/data/artikel.ts` dan `web/supabase/06_seed_crud.sql`.
 
 ## Alur kerja GitHub
 
