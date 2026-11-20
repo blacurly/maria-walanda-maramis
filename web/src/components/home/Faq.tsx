@@ -2,14 +2,15 @@
 
 import { useState } from "react";
 import { FAQ } from "@/data/faq";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 export default function Faq() {
-  const [terbuka, setTerbuka] = useState<number | null>(null);
+  
   const [tampilSemua, setTampilSemua] = useState(false);
   const faqTampil = tampilSemua ? FAQ : FAQ.slice(0, 4);
 
   function gantiTampilSemua() {
-    if (tampilSemua && terbuka !== null && terbuka >= 4) setTerbuka(null);
+    
     setTampilSemua(!tampilSemua);
   }
 
@@ -48,81 +49,22 @@ export default function Faq() {
           </p>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          {faqTampil.map((item, i) => {
-            const buka = terbuka === i;
-            return (
-              <div
-                key={item.tanya}
-                style={{
-                  background: "#e8f5ee",
-                  borderRadius: 16,
-                  border: "1px solid #a7d8bf",
-                  overflow: "hidden",
-                  boxShadow: "0 1px 4px rgba(0,0,0,.04)",
-                }}
-              >
-                <button
-                  onClick={() => setTerbuka(buka ? null : i)}
-                  aria-expanded={buka}
-                  style={{
-                    width: "100%",
-                    textAlign: "left",
-                    padding: "20px 24px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    gap: 16,
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                >
-                  <span style={{ fontWeight: 600, fontSize: 15, color: "#111827", lineHeight: 1.45, flex: 1 }}>
-                    {item.tanya}
-                  </span>
-                  <span
-                    style={{
-                      width: 28,
-                      height: 28,
-                      borderRadius: "50%",
-                      background: buka ? "#14704a" : "#cdebdc",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                      transition: "background .2s",
-                    }}
-                  >
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke={buka ? "#fff" : "#14704a"}
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      style={{
-                        width: 14,
-                        height: 14,
-                        transition: "transform .2s",
-                        transform: buka ? "rotate(180deg)" : "rotate(0deg)",
-                      }}
-                    >
-                      <polyline points="6 9 12 15 18 9" />
-                    </svg>
-                  </span>
-                </button>
-                {buka && (
-                  <div style={{ padding: "0 24px 20px", borderTop: "1px solid #BEE0D0" }}>
-                    <p style={{ fontSize: 14, color: "#4b5563", lineHeight: 1.8, marginTop: 16 }}>
-                      {item.jawab}
-                    </p>
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
+        <Accordion type="single" collapsible className="gap-3">
+  {faqTampil.map((item) => (
+    <AccordionItem
+      key={item.tanya}
+      value={item.tanya}
+      className="overflow-hidden rounded-2xl border border-[#a7d8bf] bg-[#e8f5ee] shadow-sm not-last:border-b"
+    >
+      <AccordionTrigger className="px-6 py-5 text-[15px] font-semibold leading-snug text-gray-900 hover:no-underline">
+        {item.tanya}
+      </AccordionTrigger>
+      <AccordionContent className="border-t border-[#BEE0D0] px-6 pb-5 pt-4 text-sm leading-[1.8] text-gray-600">
+        {item.jawab}
+      </AccordionContent>
+    </AccordionItem>
+  ))}
+</Accordion>
 
         <div className="mt-6 flex justify-center">
           <button
