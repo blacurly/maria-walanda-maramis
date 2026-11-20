@@ -29,8 +29,8 @@ const C = {
   line: "#DDE5E0", line2: "#CBD6D0", soft: "#EEF2EF", green: "#12714B", greenDark: "#0D4F35",
   greenSoft: "#E8F3EC", red: "#B42318", amber: "#C98A00",
 };
-const FONT_HEAD = "var(--font-sora), sans-serif";
-const FONT_BODY = "var(--font-jakarta), sans-serif";
+const FONT_HEAD = "var(--font-poppins), sans-serif";
+const FONT_BODY = "var(--font-inter), sans-serif";
 
 /* ---------------- gaya berulang ---------------- */
 const card: React.CSSProperties = { background: C.white, border: `1px solid ${C.line}`, borderRadius: 16, padding: "clamp(16px, 4vw, 24px)", display: "flex", flexDirection: "column", gap: 16 };
@@ -58,10 +58,10 @@ const seg = (on: boolean): React.CSSProperties => ({ minHeight: 46, padding: "0 
 /* ---------------- CSS kecil (input & tautan) ---------------- */
 const GLOBAL_CSS = `
 .ep-cek a{color:#12714B}.ep-cek a:hover{color:#0D4F35}
-.ep-cek .ep-in{width:100%;box-sizing:border-box;height:48px;border:1px solid #CBD6D0;border-radius:12px;padding:0 14px;font:500 16px var(--font-jakarta),sans-serif;color:#14211B;background:#fff}
+.ep-cek .ep-in{width:100%;box-sizing:border-box;height:48px;border:1px solid #CBD6D0;border-radius:12px;padding:0 14px;font:500 16px var(--font-inter),sans-serif;color:#14211B;background:#fff}
 .ep-cek .ep-in:focus{outline:2px solid #12714B;outline-offset:1px;border-color:#12714B}
+.ep-cek button{font-family:var(--font-inter),sans-serif;cursor:pointer}
 .ep-cek .ep-in[aria-invalid="true"]{border-color:#B42318}
-.ep-cek button{font-family:var(--font-jakarta),sans-serif;cursor:pointer}
 `;
 
 /* ---------------- komponen kecil ---------------- */
@@ -359,7 +359,7 @@ export default function CekPenawaran(props: { modeDemo?: boolean; skenarioAwal?:
                     <button type="button" onClick={() => set({ unit: "bulan" })} style={seg(bulan)}>bulan</button>
                   </div>
                 </div>
-                                <span style={hint}>Dihitung dalam hari kalender. 1 bulan = 30 hari, sama seperti contoh hitungan di SEOJK.</span>
+              <span style={hint}>Dihitung dalam hari kalender. 1 bulan = 30 hari, sama seperti contoh hitungan di SEOJK.</span>
               </div>
               <Field id="f-cmax" label="Cicilan terbesar dalam satu bulan (opsional)" hint="Lihat jadwal cicilan. Isi jika cicilannya tidak sama tiap bulan, misalnya bulan terakhir lebih besar. Kosongkan jika cicilannya rata.">
                 <NumInput id="f-cmax" value={s.cmax} onChange={(n) => set({ cmax: n })} placeholder="contoh: 0" />

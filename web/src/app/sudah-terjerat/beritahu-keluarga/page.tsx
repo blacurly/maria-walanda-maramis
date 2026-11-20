@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import BeritahuKeluarga from "@/components/fitur/beritahu-keluarga/BeritahuKeluarga";
 
-const poppins = Poppins({ subsets: ["latin"], weight: ["800"], variable: "--font-poppins" });
 
 export const metadata: Metadata = {
   title: "Beritahu Keluarga – EduPuan",
@@ -12,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function BeritahuKeluargaPage() {
   return (
-    <div className={poppins.variable}>
+    <div>
       <BeritahuKeluarga />
     </div>
   );
